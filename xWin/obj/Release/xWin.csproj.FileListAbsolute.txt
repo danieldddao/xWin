@@ -1,5 +1,0 @@
-D:\Dropbox\UIowa\Spring 2017\SWEP\Team4\xWin\xWin\bin\Release\xWin.exe.config
-D:\Dropbox\UIowa\Spring 2017\SWEP\Team4\xWin\xWin\bin\Release\xWin.exe
-D:\Dropbox\UIowa\Spring 2017\SWEP\Team4\xWin\xWin\bin\Release\xWin.pdb
-D:\Dropbox\UIowa\Spring 2017\SWEP\Team4\xWin\xWin\obj\Release\xWin.exe
-D:\Dropbox\UIowa\Spring 2017\SWEP\Team4\xWin\xWin\obj\Release\xWin.pdb
