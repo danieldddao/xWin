@@ -17,6 +17,7 @@
 ## C# useful links
 * [Drawing stuff on windows GUI](https://msdn.microsoft.com/en-us/library/system.drawing(v=vs.110).aspx)
 * [c# tutorial](https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx)
+* [SharpDX-XInput](http://sharpdx.org)
 
 
 ## General useful links
@@ -30,3 +31,5 @@
 * [integration testing](https://msdn.microsoft.com/en-us/library/ff647876.aspx)
 * [performance testing](http://stackoverflow.com/questions/3927/what-are-some-good-net-profilers)
 * acceptance, installation testing: by hand and not limited to just c# also cucumber is a thing
+* [Mocking Framework](http://nsubstitute.github.io)
+
