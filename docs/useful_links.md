@@ -2,6 +2,7 @@
 
 ## Generl C# useful links
 * [Drawing stuff on windows GUI](https://msdn.microsoft.com/en-us/library/system.drawing(v=vs.110).aspx)
+* [c# tutorial](https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx)
 * [SharpDX-XInput](http://sharpdx.org)
 * [Adding references to a Visual Studio project](http://stackoverflow.com/questions/2157133/how-do-i-add-an-assembly-to-a-visual-studio-project-and-reference-it)
 
