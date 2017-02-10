@@ -62,10 +62,7 @@ message Configuration {
   enum ControllerSticks {
     LEFTSTICK = 0;
     RIGHTSTICK = 1;
-  }
-  
-  //enum 
-  
+  }  
   
   message Stick {
     ControllerSticks s = 1;
@@ -73,19 +70,7 @@ message Configuration {
     bool move_mouse = 2;
   }
   
-  message Binding {
-    ControllerButton b = 1;
-    bool active = 2;
-  }
-  
-  //map<ControllerButton,Binding> ButtonMap = 1;
-  //compiler doesn't let enum's be keys
-  message ButtonMapEntry {
-    ControllerButton key = 1;
-    Binding value = 2;
-  }
-    
-  Stick mouse_control = 1
+  Stick mouse_control = 1;
   
   bool invert_UD_mouse = 2;
   bool invert_LR_mouse = 3;
@@ -94,3 +79,4 @@ message Configuration {
   ControllerButton right_click = 6;
   
 }
+  

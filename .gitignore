@@ -18,6 +18,8 @@ xWin/xWin/bld/
 xWin/xWin/[Bb]in/
 xWin/xWin/[Oo]bj/
 xWin/xWin/[Ll]og/
+proto/test/test/[Bb]in/
+proto/test/test/[Oo]bj/
 
 # .NET Core
 xWin/xWin/project.lock.json
