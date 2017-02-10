@@ -7,99 +7,110 @@ using SharpDX.XInput;
 
 namespace xWin.Library
 {
-	class XController
-	{
+    public class XController
+    {
         Controller controller;
 
-        internal XController(Controller c)
+        public XController()
+        {
+            this.controller = new Controller(UserIndex.One);
+        }
+
+        public XController(Controller c)
         {
             this.controller = c;
         }
 
-        public bool isConnected()
+        public virtual bool IsConnected()
         {
             return controller.IsConnected;
         }
 
-        public bool isButtonAPressed()
+        public virtual bool IsDisconnected()
+        {
+            return !controller.IsConnected;
+
+        }
+
+        public virtual bool IsButtonAPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A);
         }
 
-        public bool isButtonBPressed()
+        public virtual bool IsButtonBPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.B);
         }
 
-        public bool isButtonXPressed()
+        public virtual bool IsButtonXPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.X);
         }
 
-        public bool isButtonYPressed()
+        public virtual bool IsButtonYPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Y);
         }
 
-        public bool isButtonBackPressed()
+        public virtual bool IsButtonBackPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Back);
         }
 
-        public bool isButtonDPadDownPressed()
+        public virtual bool IsButtonDPadDownPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadDown);
         }
 
-        public bool isButtonDPadUpPressed()
+        public virtual bool IsButtonDPadUpPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadUp);
         }
 
-        public bool isButtonDPadLeftPressed()
+        public virtual bool IsButtonDPadLeftPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft);
         }
 
-        public bool isButtonDPadRightPressed()
+        public virtual bool IsButtonDPadRightPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadRight);
         }
 
-        public bool isButtonLeftShoulderPressed()
+        public virtual bool IsButtonLeftShoulderPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder);
         }
 
-        public bool isButtonRightShoulderPressed()
+        public virtual bool IsButtonRightShoulderPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder);
         }
 
-        public bool isButtonLeftThumbPressed()
+        public virtual bool IsButtonLeftThumbPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb);
         }
 
-        public bool isButtonRightThumbPressed()
+        public virtual bool IsButtonRightThumbPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightThumb);
         }
 
-        public bool isButtonStartPressed()
+        public virtual bool IsButtonStartPressed()
         {
             State s = controller.GetState();
             return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Start);

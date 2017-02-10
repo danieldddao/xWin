@@ -18,7 +18,6 @@
 * [Drawing stuff on windows GUI](https://msdn.microsoft.com/en-us/library/system.drawing(v=vs.110).aspx)
 * [SharpDX-XInput](http://sharpdx.org)
 
-
 ## General useful links
 * TODO
 
@@ -30,7 +29,13 @@
 [integration testing](https://msdn.microsoft.com/en-us/library/ff647876.aspx)
 [performance testing](http://stackoverflow.com/questions/3927/what-are-some-good-net-profilers)
 acceptance, installation testing: by hand and not limited to just c# also cucumber is a thing
-[Mocking Framework](http://nsubstitute.github.io)
+
+## Testing Tools:
+* MSTest
+* Cucumber - [SpecFlow] (http://specflow.org): 
+	Specflow for Visual Studio, NUnit Test Adapter: Tools -> Extensions and Updates
+	SpecFlow and SpecFlow.NUnit: Nuget Packages
+* Mocking Framework [Moq](https://github.com/moq/moq4)
 
 #custom setting storage possibility
 [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview)

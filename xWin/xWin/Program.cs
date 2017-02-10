@@ -17,65 +17,65 @@ namespace xWin
             while(!Console.KeyAvailable)
             {
                 Thread.Sleep(200);
-                if (c.isConnected())
+                if (c.IsConnected())
                 {
                     if (!msg) {
                         Console.WriteLine("Controller Connected!");
                         msg = true;
                     }
-                    if (c.isButtonAPressed())
+                    if (c.IsButtonAPressed())
                     {
                         Console.WriteLine("Button A pressed!");
                     }
-                    if (c.isButtonBPressed())
+                    if (c.IsButtonBPressed())
                     {
                         Console.WriteLine("Button B pressed!");
                     }
-                    if (c.isButtonXPressed())
+                    if (c.IsButtonXPressed())
                     {
                         Console.WriteLine("Button X pressed!");
                     }
-                    if (c.isButtonYPressed())
+                    if (c.IsButtonYPressed())
                     {
                         Console.WriteLine("Button Y pressed!");
                     }
-                    if (c.isButtonBackPressed())
+                    if (c.IsButtonBackPressed())
                     {
                         Console.WriteLine("Button Back pressed!");
                     }
-                    if (c.isButtonDPadDownPressed())
+                    if (c.IsButtonDPadDownPressed())
                     {
                         Console.WriteLine("Button DPadDown pressed!");
                     }
-                    if (c.isButtonDPadUpPressed())
+                    if (c.IsButtonDPadUpPressed())
                     {
                         Console.WriteLine("Button DPadUp pressed!");
                     }
-                    if (c.isButtonDPadLeftPressed())
+                    if (c.IsButtonDPadLeftPressed())
                     {
                         Console.WriteLine("Button DPadLeft pressed!");
                     }
-                    if (c.isButtonDPadRightPressed())
+                    if (c.IsButtonDPadRightPressed())
                     {
                         Console.WriteLine("Button DPadRight pressed!");
                     }
-                    if (c.isButtonLeftShoulderPressed())
+                    if (c.IsButtonLeftShoulderPressed())
                     {
                         Console.WriteLine("Button LeftShoulder pressed!");
                     }
-                    if (c.isButtonRightShoulderPressed())
+                    if (c.IsButtonRightShoulderPressed())
                     {
                         Console.WriteLine("Button RightShoulder pressed!");
                     }
-                    if (c.isButtonLeftThumbPressed())
+                    if (c.IsButtonLeftThumbPressed())
                     {
                         Console.WriteLine("Button LeftThumb pressed!");
                     }
-                    if (c.isButtonRightThumbPressed())
+                    if (c.IsButtonRightThumbPressed())
                     {
                         Console.WriteLine("Button RightThumb pressed!");
                     }
-                    if (c.isButtonStartPressed())
+                    if (c.IsButtonStartPressed())
                     {
                         Console.WriteLine("Button Start pressed!");
                     }

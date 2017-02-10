@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26127.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xWin", "xWin\xWin.csproj", "{FC93D01A-8394-4212-936C-9D29C5260048}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTest", "Test\MSTest\MSTest.csproj", "{85D12564-A919-44D1-88D1-BF1EAB190C54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cucumber", "Test\Cucumber\Cucumber.csproj", "{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{FC93D01A-8394-4212-936C-9D29C5260048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC93D01A-8394-4212-936C-9D29C5260048}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC93D01A-8394-4212-936C-9D29C5260048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85D12564-A919-44D1-88D1-BF1EAB190C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85D12564-A919-44D1-88D1-BF1EAB190C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85D12564-A919-44D1-88D1-BF1EAB190C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85D12564-A919-44D1-88D1-BF1EAB190C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
