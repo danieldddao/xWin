@@ -38,7 +38,5 @@ namespace xWin.Library
         {
             return this.yCoord;
         }
-
-        public short
     }
 }

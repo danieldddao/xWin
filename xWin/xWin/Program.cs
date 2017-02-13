@@ -12,11 +12,11 @@ namespace xWin
 	{
 		static void Main(string[] args)
 		{
-            XController c = new XController(new SharpDX.XInput.Controller(UserIndex.One));
+            XController c = new XController(new SharpDX.XInput.Controller(UserIndex.Any));
             bool msg = false;
             while(!Console.KeyAvailable)
             {
-                Thread.Sleep(200);
+                //Thread.Sleep(200);
                 if (c.IsConnected())
                 {
                     if (!msg) {
@@ -79,6 +79,8 @@ namespace xWin
                     {
                         Console.WriteLine("Button Start pressed!");
                     }
+
+                    Console.WriteLine("LeftX: {0},\tLeftY: {1}", c.GetLeftX(), c.GetLeftY());
                 } else
                 {
                     Console.WriteLine("Controller Disconnected!");

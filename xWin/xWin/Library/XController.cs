@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Drawing.Point;
 using SharpDX.XInput;
 
 namespace xWin.Library
@@ -10,15 +11,44 @@ namespace xWin.Library
     public class XController
     {
         private SharpDX.XInput.Controller controller;
+        private short DEADZONE_RADIUS;
 
         public XController()
         {
+            this.controller = new SharpDX.XInput.Controller(UserIndex.Any);
+            this.DEADZONE_RADIUS = 300;
+        }
+
+        public XController(short deadZoneRad)
+        {
+            this.DEADZONE_RADIUS = deadZoneRad;
             this.controller = new SharpDX.XInput.Controller(UserIndex.Any);
         }
 
         public XController(SharpDX.XInput.Controller c)
         {
             this.controller = c;
+            this.DEADZONE_RADIUS = 300;
+        }
+
+        public XController(SharpDX.XInput.Controller c, short deadZoneRad)
+        {
+            this.controller = c;
+            this.DEADZONE_RADIUS = deadZoneRad;
+        }
+
+        public void MoveCurser()
+        {
+            State s = controller.GetState();
+            short currXVal = s.Gamepad.LeftThumbX;
+            short currYVal = s.Gamepad.LeftThumbY;
+            double currRad = Math.Sqrt(Math.Pow(currXVal, 2) + Math.Pow(currYVal, 2));
+
+            if(currRad > this.DEADZONE_RADIUS)
+            {
+
+                Curser.Position = new Point()
+            }
         }
 
         public virtual bool IsConnected()
@@ -31,13 +61,13 @@ namespace xWin.Library
             return !controller.IsConnected;
         }
 
-        public virtual short GetLeftStickX()
+        public virtual int GetLeftX()
         {
             State s = controller.GetState();
             return s.Gamepad.LeftThumbX;
         }
 
-        public virtual short GetLeftStckY()
+        public virtual int GetLeftY()
         {
             State s = controller.GetState();
             return s.Gamepad.LeftThumbY;
