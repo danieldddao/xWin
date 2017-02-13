@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using SharpDX.XInput;
 
 namespace xWin.Library
 {
     public class XController
     {
-        Controller controller;
+        SharpDX.XInput.Controller controller;
 
         public XController()
         {
-            this.controller = new Controller(UserIndex.One);
+            this.controller = new SharpDX.XInput.Controller(UserIndex.One);
         }
 
-        public XController(Controller c)
+        public XController(SharpDX.XInput.Controller c)
         {
             this.controller = c;
         }
@@ -29,7 +29,6 @@ namespace xWin.Library
         public virtual bool IsDisconnected()
         {
             return !controller.IsConnected;
-
         }
 
         public virtual bool IsButtonAPressed()

@@ -12,7 +12,7 @@ namespace xWin
 	{
 		static void Main(string[] args)
 		{
-            XController c = new XController(new Controller(UserIndex.One));
+            XController c = new XController(new SharpDX.XInput.Controller(UserIndex.One));
             bool msg = false;
             while(!Console.KeyAvailable)
             {
