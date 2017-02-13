@@ -9,11 +9,11 @@ namespace xWin.Library
 {
     public class XController
     {
-        SharpDX.XInput.Controller controller;
+        private SharpDX.XInput.Controller controller;
 
         public XController()
         {
-            this.controller = new SharpDX.XInput.Controller(UserIndex.One);
+            this.controller = new SharpDX.XInput.Controller(UserIndex.Any);
         }
 
         public XController(SharpDX.XInput.Controller c)
@@ -29,6 +29,30 @@ namespace xWin.Library
         public virtual bool IsDisconnected()
         {
             return !controller.IsConnected;
+        }
+
+        public virtual short GetLeftStickXValue()
+        {
+            State s = controller.GetState();
+            return s.Gamepad.LeftThumbX;
+        }
+
+        public virtual short GetLeftStckYValue()
+        {
+            State s = controller.GetState();
+            return s.Gamepad.LeftThumbY;
+        }
+
+        public virtual double GetLeftRValue()
+        {
+            State s = controller.GetState();
+            return Math.Sqrt(Math.Pow(s.Gamepad.LeftThumbX, 2) + Math.Pow(s.Gamepad.LeftThumbY, 2));
+        }
+
+        public virtual double GetLeftThetaValue()
+        {
+            State s = controller.GetState();
+            return Math.Atan(s.Gamepad.LeftThumbY / s.Gamepad.LeftThumbX);
         }
 
         public virtual bool IsButtonAPressed()
