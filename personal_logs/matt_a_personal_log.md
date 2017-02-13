@@ -13,3 +13,16 @@
 * Reorganized useful links doc
 * Added a bunch of links for C++ best practices and testing
 * Researching how to best write a C++ app for Windows
+
+## 2/7/2017
+* Discussed test plan in scrum and how we're going to go about it
+* Kyle and I started the test plan
+
+## 2/8/2017
+* Was sick, nothing got done unfortunately
+
+## 2/9/2017
+* Pulled project that dan made from the repository and got it to build
+* Currently using a 3rd party library to interact with the controller, looking into switching to microsofts
+* Updated gitignore to ignore executable files so there aren't massive commits
+* Built and basic test of the current application
