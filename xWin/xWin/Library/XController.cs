@@ -31,28 +31,52 @@ namespace xWin.Library
             return !controller.IsConnected;
         }
 
-        public virtual short GetLeftStickXValue()
+        public virtual short GetLeftStickX()
         {
             State s = controller.GetState();
             return s.Gamepad.LeftThumbX;
         }
 
-        public virtual short GetLeftStckYValue()
+        public virtual short GetLeftStckY()
         {
             State s = controller.GetState();
             return s.Gamepad.LeftThumbY;
         }
 
-        public virtual double GetLeftRValue()
+        public virtual double GetLeftR()
         {
             State s = controller.GetState();
             return Math.Sqrt(Math.Pow(s.Gamepad.LeftThumbX, 2) + Math.Pow(s.Gamepad.LeftThumbY, 2));
         }
 
-        public virtual double GetLeftThetaValue()
+        public virtual double GetLeftTheta()
         {
             State s = controller.GetState();
             return Math.Atan(s.Gamepad.LeftThumbY / s.Gamepad.LeftThumbX);
+        }
+
+        public virtual short GetRightX()
+        {
+            State s = controller.GetState();
+            return s.Gamepad.RightThumbX;
+        }
+
+        public virtual short GetRightY()
+        {
+            State s = controller.GetState();
+            return s.Gamepad.RightThumbY;
+        }
+
+        public virtual double GetRightR()
+        {
+            State s = controller.GetState();
+            return Math.Sqrt(Math.Pow(s.Gamepad.RightThumbX, 2) + Math.Pow(s.Gamepad.RightThumbY, 2));
+        }
+
+        public virtual double GetRightTheta()
+        {
+            State s = controller.GetState();
+            return Math.Atan(s.Gamepad.RightThumbY / s.Gamepad.RightThumbX);
         }
 
         public virtual bool IsButtonAPressed()
