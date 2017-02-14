@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using SharpDX.XInput;
 using xWin.Library;
+using SharpDX.XInput;
 
 namespace xWin
 {
