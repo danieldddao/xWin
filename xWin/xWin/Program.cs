@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
+
 using SharpDX.XInput;
 using xWin.Library;
 
@@ -10,11 +12,11 @@ namespace xWin
 {
 	class Program
 	{
-		static void Main(string[] args)
+        static void Main(string[] args)
 		{
             XController c = new XController(new Controller(UserIndex.One));
             bool msg = false;
-            while(!Console.KeyAvailable)
+            while (true)
             {
                 Thread.Sleep(200);
                 if (c.IsConnected())
@@ -26,6 +28,7 @@ namespace xWin
                     if (c.IsButtonAPressed())
                     {
                         Console.WriteLine("Button A pressed!");
+                         XKeyBoard.PressKey(Keys.A);
                     }
                     if (c.IsButtonBPressed())
                     {
