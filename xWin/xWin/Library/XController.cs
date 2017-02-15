@@ -33,5 +33,11 @@ namespace xWin.Library
         {
             currentControllerState = controller.GetState();
         }
+
+        public void ButtonsPressed()
+        {
+            //currentControllerState.Gamepad.Buttons.
+            GamepadButtonFlags.
+        }
     }
 }
