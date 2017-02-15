@@ -41,5 +41,23 @@ namespace xWin.Library
             // Releases the key  
             keybd_event((byte) VkKeyScan(key), 0, 2, 0);
         }
+
+        public static void Press()
+        {
+            // Presses the key  
+            keybd_event((byte)VkKeyScan('H'), 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
+            // Releases the key  
+            keybd_event((byte)VkKeyScan('H'), 0, 2, 0);
+
+            // Presses the key  
+            keybd_event((byte)VkKeyScan('E'), 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
+            // Releases the key  
+            keybd_event((byte)VkKeyScan('E'), 0, 2, 0);
+
+            // Presses the key  
+            keybd_event((byte)VkKeyScan('O'), 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
+            // Releases the key  
+            keybd_event((byte)VkKeyScan('O'), 0, 2, 0);
+        }
     }
 }

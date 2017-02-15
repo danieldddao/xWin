@@ -28,7 +28,7 @@ namespace xWin
                     if (c.IsButtonAPressed())
                     {
                         Console.WriteLine("Button A pressed!");
-                         XKeyBoard.PressKey(Keys.A);
+                        XKeyBoard.Press();
                     }
                     if (c.IsButtonBPressed())
                     {
