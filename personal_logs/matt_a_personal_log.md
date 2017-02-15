@@ -26,3 +26,22 @@
 * Currently using a 3rd party library to interact with the controller, looking into switching to microsofts
 * Updated gitignore to ignore executable files so there aren't massive commits
 * Built and basic test of the current application
+
+## 2/10/2017 - 2/12/2017
+* Weekend
+
+## 2/13/2017
+* Got some listeners working a bit in the controller class
+* Can detect left analog stick X and Y values
+* Decided we're sticking with SharpDX
+* Learned how to use NuGet to install packages
+* Researched moving mouse pointer but it's harder than I thought it would be
+
+## 2/14/2017
+* Fighting with getting the code to compile
+* Getting dlls needed for moving the mouse pointer
+* Stack Overflow is a godsend
+
+## 2/15/2017
+* Got the code to compile!!
+* Found a helpful stack overflow to getting the pointer to move

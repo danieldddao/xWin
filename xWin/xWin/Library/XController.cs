@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 using SharpDX.XInput;
 
 namespace xWin.Library
@@ -15,14 +16,14 @@ namespace xWin.Library
 
         public XController()
         {
-            this.controller = new SharpDX.XInput.Controller(UserIndex.Any);
+            this.controller = new SharpDX.XInput.Controller(UserIndex.One);
             this.DEADZONE_RADIUS = 500;
         }
 
         public XController(short deadZoneRad)
         {
             this.DEADZONE_RADIUS = deadZoneRad;
-            this.controller = new SharpDX.XInput.Controller(UserIndex.Any);
+            this.controller = new SharpDX.XInput.Controller(UserIndex.One);
         }
 
         public XController(SharpDX.XInput.Controller c)
@@ -48,9 +49,8 @@ namespace xWin.Library
             {
                 int xDiff = Math.Abs(currXVal) - DEADZONE_RADIUS;
                 int yDiff = Math.Abs(currYVal) - DEADZONE_RADIUS;
-                Win32.POINT p = new Win32.POINT();
 
-                Curser.Position = new System.Drawing.Point(Curser.Position.X+(currXVal);
+                Cursor.Position = new System.Drawing.Point(Cursor.Position.X+xDiff, Cursor.Position.Y+yDiff);
             }
         }
 

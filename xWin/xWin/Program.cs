@@ -12,13 +12,14 @@ namespace xWin
 	{
 		static void Main(string[] args)
 		{
-            XController c = new XController(new SharpDX.XInput.Controller(UserIndex.Any));
+            XController c = new XController(new SharpDX.XInput.Controller(UserIndex.One));
             bool msg = false;
             while(!Console.KeyAvailable)
             {
                 //Thread.Sleep(200);
                 if (c.IsConnected())
                 {
+                    c.MoveCurser();
                     if (!msg) {
                         Console.WriteLine("Controller Connected!");
                         msg = true;
