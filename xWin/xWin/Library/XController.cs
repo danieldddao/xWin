@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using SharpDX.XInput;
 
 namespace xWin.Library
@@ -14,6 +15,12 @@ namespace xWin.Library
         private short deadZoneRad { get; set; }
         private Controller controller { get; }
         private State currentControllerState { get; set; }
+
+        [DllImport("User32.Dll", EntryPoint = "SetCursorPos")]
+        public static extern long SetCursorPos(int x, int y);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
         public XController(short deadZoneRad = 500)
         {
@@ -37,7 +44,7 @@ namespace xWin.Library
         public void ButtonsPressed()
         {
             //currentControllerState.Gamepad.Buttons.
-            GamepadButtonFlags.
+            //GamepadButtonFlags.
         }
     }
 }

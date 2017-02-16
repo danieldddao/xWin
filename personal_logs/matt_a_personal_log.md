@@ -44,4 +44,7 @@
 
 ## 2/15/2017
 * Got the code to compile!!
-* Found a helpful stack overflow to getting the pointer to move
+* Found a helpful stack overflow to getting the pointer to move mouse
+* Found a video turorial to help
+* leaning dllimports
+* Started rewrite of the controller class
