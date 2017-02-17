@@ -15,6 +15,7 @@ namespace xWin
         static void Main(string[] args)
 		{
             XController c = new XController(new Controller(UserIndex.One));
+            XKeyBoard x = new XKeyBoard();
             bool msg = false;
             while (true)
             {
@@ -28,19 +29,22 @@ namespace xWin
                     if (c.IsButtonAPressed())
                     {
                         Console.WriteLine("Button A pressed!");
-                        XKeyBoard.Press();
+                        x.PressKey(Keys.A);
                     }
                     if (c.IsButtonBPressed())
                     {
                         Console.WriteLine("Button B pressed!");
+                        x.PressKey(Keys.B);
                     }
                     if (c.IsButtonXPressed())
                     {
                         Console.WriteLine("Button X pressed!");
+                        x.PressKey(Keys.Enter);
                     }
                     if (c.IsButtonYPressed())
                     {
                         Console.WriteLine("Button Y pressed!");
+                        x.PressKey(Keys.Space);
                     }
                     if (c.IsButtonBackPressed())
                     {

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace xWin.Library
 {
-    public static class XKeyBoard
+    public class XKeyBoard
     {
         const uint KEYEVENTF_EXTENDEDKEY = 0x0001;
 
@@ -18,46 +18,74 @@ namespace xWin.Library
         [DllImport("user32.dll")]
         public static extern short VkKeyScan(char s);
 
+        public void Press(byte key)
+        {
+            // Presses the key  
+            keybd_event(key, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
+        }
+
+        public void Release(byte key)
+        {
+            // Releases the key  
+            keybd_event(key, 0, 2, 0);
+        }
+
         /*
          * Press and Release the key where key = System.Windows.Forms.Keys.somekey
          */
-        public static void PressKey (Keys key)
+        public bool PressKey(Keys key)
         {
-            // Presses the key  
-            keybd_event((byte) key, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-            Thread.Sleep(100);
-            // Releases the key  
-            keybd_event((byte) key, 0, 2, 0);
+            try
+            {
+                Press((byte) key);
+                Thread.Sleep(100);
+                Release((byte)key);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error When Pressing Key: {0}", key);
+                throw e;
+            }
         }
 
         /*
          * Press and Release the key where key is a char
          */
-        public static void PressKey(char key)
+        public bool PressKey(char key)
         {
-            // Presses the key  
-            keybd_event((byte) VkKeyScan(key), 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-            Thread.Sleep(100);
-            // Releases the key  
-            keybd_event((byte) VkKeyScan(key), 0, 2, 0);
+            try
+            {
+                Press((byte) VkKeyScan(key));      
+                Thread.Sleep(100);
+                Release((byte)VkKeyScan(key));
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error When Pressing Key: {0}", key);
+                throw e;
+            }
         }
 
-        public static void Press()
+        public bool PressKeysFromString(string s)
         {
-            // Presses the key  
-            keybd_event((byte)VkKeyScan('H'), 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-            // Releases the key  
-            keybd_event((byte)VkKeyScan('H'), 0, 2, 0);
-
-            // Presses the key  
-            keybd_event((byte)VkKeyScan('E'), 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-            // Releases the key  
-            keybd_event((byte)VkKeyScan('E'), 0, 2, 0);
-
-            // Presses the key  
-            keybd_event((byte)VkKeyScan('O'), 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-            // Releases the key  
-            keybd_event((byte)VkKeyScan('O'), 0, 2, 0);
+            try
+            {
+                char[] array = s.ToCharArray(); // Convert String to array of characters
+                for (int i = 0; i < array.Length; i++)
+                {
+                    char c = array[i];
+                    Press((byte)VkKeyScan(c));
+                    Release((byte)VkKeyScan(c));
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error When Mapping String to Keys: {0}", s);
+                throw e;
+            }
         }
     }
 }
