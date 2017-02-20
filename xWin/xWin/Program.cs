@@ -12,7 +12,7 @@ namespace xWin
 	{
 		static void Main(string[] args)
 		{
-            XController c = new XController(new SharpDX.XInput.Controller(UserIndex.One));
+            XController c = new XController();
             bool msg = false;
             while(!Console.KeyAvailable)
             {
@@ -24,6 +24,8 @@ namespace xWin
                     {
                         Console.WriteLine(button.Key + " is pressed: " + button.Value);
                     }
+                    Console.Read();
+                    Console.Clear();
                 }
                 else
                 {

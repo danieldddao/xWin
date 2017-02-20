@@ -24,7 +24,7 @@ namespace xWin.Library
 
         public XController(short deadZoneRad = 500)
         {
-            controller = new SharpDX.XInput.Controller();
+            controller = new SharpDX.XInput.Controller(UserIndex.One);
             this.deadZoneRad = deadZoneRad;
             currentControllerState = controller.GetState();
         }
