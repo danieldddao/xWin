@@ -64,6 +64,25 @@ namespace xWin.Library
             return currentButtons;
         }
 
+        public Dictionary<string, short> GetLeftCart()
+        {
+            Dictionary<string, short> thumbLoc = new Dictionary<string, short>();
+
+            thumbLoc.Add("X", currentControllerState.Gamepad.LeftThumbX);
+            thumbLoc.Add("Y", currentControllerState.Gamepad.LeftThumbY);
+
+            return thumbLoc;
+        }
+        public Dictionary<string, short> GetRightCart()
+        {
+            Dictionary<string, short> thumbLoc = new Dictionary<string, short>();
+
+            thumbLoc.Add("X", currentControllerState.Gamepad.RightThumbX);
+            thumbLoc.Add("Y", currentControllerState.Gamepad.RightThumbY);
+
+            return thumbLoc;
+        }
+
         public bool IsConnected()
         {
             return controller.IsConnected;

@@ -24,7 +24,15 @@ namespace xWin
                     {
                         Console.WriteLine(button.Key + " is pressed: " + button.Value);
                     }
-                    Console.Read();
+                    foreach(var thumb in c.GetLeftCart())
+                    {
+                        Console.WriteLine("Left stick " + thumb.Key + ": " + thumb.Value);
+                    }
+                    foreach(var thumb in c.GetRightCart())
+                    {
+                        Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
+                    }
+                    Thread.Sleep(100);
                     Console.Clear();
                 }
                 else
