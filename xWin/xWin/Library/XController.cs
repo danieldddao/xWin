@@ -12,6 +12,7 @@ namespace xWin.Library
 {
     public class XController
     {
+        private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
         private short deadZoneRad { get; set; }
         private Controller controller { get; }
         private State currentControllerState { get; set; }
@@ -73,12 +74,41 @@ namespace xWin.Library
 
             return thumbLoc;
         }
+
+        public Dictionary<string, double> GetLeftPolar()
+        {
+            Dictionary<string, double> thumbLoc = new Dictionary<string, double>();
+            short x = currentControllerState.Gamepad.LeftThumbX;
+            short y = currentControllerState.Gamepad.LeftThumbY;
+
+            double r = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+            double theta = Math.Atan(y / x);
+            thumbLoc.Add("R", r);
+            thumbLoc.Add("THETA", theta);
+
+            return thumbLoc;
+        }
+
         public Dictionary<string, short> GetRightCart()
         {
             Dictionary<string, short> thumbLoc = new Dictionary<string, short>();
 
             thumbLoc.Add("X", currentControllerState.Gamepad.RightThumbX);
             thumbLoc.Add("Y", currentControllerState.Gamepad.RightThumbY);
+
+            return thumbLoc;
+        }
+
+        public Dictionary<string, double> GetRightPolar()
+        {
+            Dictionary<string, double> thumbLoc = new Dictionary<string, double>();
+            short x = currentControllerState.Gamepad.RightThumbX;
+            short y = currentControllerState.Gamepad.RightThumbY;
+
+            double r = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+            double theta = Math.Atan(y / x);
+            thumbLoc.Add("R", r);
+            thumbLoc.Add("THETA", theta);
 
             return thumbLoc;
         }
