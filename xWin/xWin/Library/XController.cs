@@ -13,9 +13,11 @@ namespace xWin.Library
     public class XController
     {
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
-        private short deadZoneRad { get; set; }
         private Controller controller { get; }
         private State currentControllerState { get; set; }
+        private short oldLeftX;
+        private short oldLeftY;
+        private bool leftStickMove;
 
         [DllImport("User32.Dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);
@@ -23,18 +25,18 @@ namespace xWin.Library
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
-        public XController(short deadZoneRad = 500)
+        public XController()
         {
             controller = new SharpDX.XInput.Controller(UserIndex.One);
-            this.deadZoneRad = deadZoneRad;
             currentControllerState = controller.GetState();
+            leftStickMove = false;
         }
 
         public XController(SharpDX.XInput.Controller contoller, short deadZoneRad = 500)
         {
             this.controller = controller;
-            this.deadZoneRad = deadZoneRad;
             currentControllerState = this.controller.GetState();
+            leftStickMove = false;
         }
 
         public void UpdateSate()
@@ -111,6 +113,38 @@ namespace xWin.Library
             thumbLoc.Add("THETA", theta);
 
             return thumbLoc;
+        }
+
+        public void MoveCurser()
+        {
+            short currX = currentControllerState.Gamepad.LeftThumbX;
+            short currY = currentControllerState.Gamepad.LeftThumbY;
+            int xDiff = 0;
+            int yDiff = 0;
+
+            if(currX != oldLeftX || currY != oldLeftY)
+            {
+                if(currX > oldLeftX)
+                {
+                    xDiff = Math.Abs(currX - oldLeftX);
+                }
+                else
+                {
+                    xDiff = Math.Abs(oldLeftX - currX);
+                    xDiff *= -1;
+                }
+                if(currY >= oldLeftY)
+                {
+                    yDiff = Math.Abs(currY - oldLeftY);
+                }
+                else
+                {
+                    yDiff = Math.Abs(oldLeftY - currY);
+                    yDiff *= -1;
+                }
+                Win32.SetCursorPos(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
+                //Cursor.Position = new Point(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
+            }
         }
 
         public bool IsConnected()

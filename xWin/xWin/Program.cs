@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Threading;
 using xWin.Library;
 using SharpDX.XInput;
@@ -32,6 +33,9 @@ namespace xWin
                     {
                         Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
                     }
+                    c.MoveCurser();
+                    Console.WriteLine("Mouse x: " + Cursor.Position.X);
+                    Console.WriteLine("Mouse y: " + Cursor.Position.Y);
                     Thread.Sleep(100);
                     Console.Clear();
                 }
