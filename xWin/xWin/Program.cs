@@ -33,8 +33,8 @@ namespace xWin
                     {
                         Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
                     }
-                    //c.MoveCurser();
-                    if(c.ButtonsPressed()["DPAD_UP"])
+                    c.MoveCurser();
+                    /*if(c.ButtonsPressed()["DPAD_UP"])
                     {
                         Cursor.Position = new System.Drawing.Point(Cursor.Position.X, Cursor.Position.Y - 1);
                     }
@@ -49,7 +49,7 @@ namespace xWin
                     if(c.ButtonsPressed()["DPAD_DOWN"])
                     {
                         Cursor.Position = new System.Drawing.Point(Cursor.Position.X, Cursor.Position.Y + 1);
-                    }
+                    }*/
                     Console.WriteLine("Mouse x: " + Cursor.Position.X);
                     Console.WriteLine("Mouse y: " + Cursor.Position.Y);
                     Thread.Sleep(100);

@@ -121,29 +121,33 @@ namespace xWin.Library
             short currY = currentControllerState.Gamepad.LeftThumbY;
             int xDiff = 0;
             int yDiff = 0;
-
+            int dpi = 20;
+            int maxInput = 32768;
             if(currX != oldLeftX || currY != oldLeftY)
             {
                 if(currX > oldLeftX)
                 {
-                    xDiff = Math.Abs(currX - oldLeftX);
+                    xDiff = Math.Abs(currX - oldLeftX)/maxInput*dpi;
                 }
                 else
                 {
-                    xDiff = Math.Abs(oldLeftX - currX);
+                    xDiff = Math.Abs(oldLeftX - currX)/maxInput*dpi;
                     xDiff *= -1;
                 }
                 if(currY >= oldLeftY)
                 {
-                    yDiff = Math.Abs(currY - oldLeftY);
+                    yDiff = Math.Abs(currY - oldLeftY)/maxInput*dpi;
                 }
                 else
                 {
-                    yDiff = Math.Abs(oldLeftY - currY);
+                    yDiff = Math.Abs(oldLeftY - currY)/maxInput*dpi;
                     yDiff *= -1;
                 }
-                Win32.SetCursorPos(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
-                //Cursor.Position = new Point(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
+                //Win32.SetCursorPos(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
+                Console.WriteLine("xDiff: " + xDiff + " yDiff: " + yDiff);
+                Cursor.Position = new Point(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
+                oldLeftX = currX;
+                oldLeftY = currY;
             }
         }
 

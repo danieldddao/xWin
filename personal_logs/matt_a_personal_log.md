@@ -71,4 +71,10 @@
   * can move the pointer
   * no nullptr errors
   * cant really see the pointer though, especiially when moving
- 
+
+## 2/21/2017
+* Nada mass, playing around with the curseor and trying to get it to move predictably 
+
+## 2/22/2017
+* Got the cursor to move with the dpad
+* Jake and I started to develope a method for moving the cursor witht he analog sticks easily
