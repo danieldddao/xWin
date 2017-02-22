@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -14,9 +11,9 @@ namespace xWin
 	{
         static void Main(string[] args)
 		{
+            bool msg = false;
             XController c = new XController(new Controller(UserIndex.One));
             XKeyBoard x = new XKeyBoard();
-            bool msg = false;
             while (true)
             {
                 Thread.Sleep(200);
