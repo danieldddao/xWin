@@ -48,3 +48,27 @@
 * Found a video turorial to help
 * leaning dllimports
 * Started rewrite of the controller class
+
+## 2/16/2017
+* Still having trouble getting the mouse to move correctly. Getting nullptr errors
+* Getting mouse cursor postion reletive to the screen and printing it out
+* Got other listerners to print out for each of the other buttons
+* Looked into testing for the controller and how to get that set up but haven't started it yet
+
+## 2/17/2017
+* Sat down and discussed how the controller class is actually going to comunicate with the rest of the project
+  * Witch methods are going to be needed
+  * how to translate the analog stick inputs to cursor movement
+  * testing
+* Short retrospective start for monday
+
+## 2/18 - 2/19/2017
+* Weekend
+
+## 2/20/2017
+* Team retrospective and presentation
+* At scrum, showed off what the controller does currently 
+  * can move the pointer
+  * no nullptr errors
+  * cant really see the pointer though, especiially when moving
+ 
