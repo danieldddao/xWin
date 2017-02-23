@@ -15,9 +15,8 @@ namespace xWin.Library
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
         private Controller controller { get; }
         private State currentControllerState { get; set; }
-        private short oldLeftX;
-        private short oldLeftY;
-        private bool leftStickMove;
+        private short deadZoneRad { get; set; }
+        private const short MAX_INPUT = 32767;
 
         [DllImport("User32.Dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);
@@ -25,18 +24,18 @@ namespace xWin.Library
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
-        public XController()
+        public XController(short deadZoneRad = 4000)
         {
             controller = new SharpDX.XInput.Controller(UserIndex.One);
             currentControllerState = controller.GetState();
-            leftStickMove = false;
+            this.deadZoneRad = deadZoneRad;
         }
 
-        public XController(SharpDX.XInput.Controller contoller, short deadZoneRad = 500)
+        public XController(SharpDX.XInput.Controller contoller, short deadZoneRad = 4000)
         {
             this.controller = controller;
             currentControllerState = this.controller.GetState();
-            leftStickMove = false;
+            this.deadZoneRad = deadZoneRad;
         }
 
         public void UpdateSate()
@@ -117,37 +116,30 @@ namespace xWin.Library
 
         public void MoveCurser()
         {
-            short currX = currentControllerState.Gamepad.LeftThumbX;
-            short currY = currentControllerState.Gamepad.LeftThumbY;
-            int xDiff = 0;
-            int yDiff = 0;
-            int dpi = 20;
-            int maxInput = 32768;
-            if(currX != oldLeftX || currY != oldLeftY)
+            int currX = currentControllerState.Gamepad.LeftThumbX;
+            int currY = currentControllerState.Gamepad.LeftThumbY;
+            float xDiff = 0;
+            float yDiff = 0;
+            int dpi = 100;
+            
+            if(Math.Abs(currX) > deadZoneRad)
             {
-                if(currX > oldLeftX)
-                {
-                    xDiff = Math.Abs(currX - oldLeftX)/maxInput*dpi;
-                }
-                else
-                {
-                    xDiff = Math.Abs(oldLeftX - currX)/maxInput*dpi;
-                    xDiff *= -1;
-                }
-                if(currY >= oldLeftY)
-                {
-                    yDiff = Math.Abs(currY - oldLeftY)/maxInput*dpi;
-                }
-                else
-                {
-                    yDiff = Math.Abs(oldLeftY - currY)/maxInput*dpi;
-                    yDiff *= -1;
-                }
-                //Win32.SetCursorPos(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
-                Console.WriteLine("xDiff: " + xDiff + " yDiff: " + yDiff);
-                Cursor.Position = new Point(Cursor.Position.X + xDiff, Cursor.Position.Y + yDiff);
-                oldLeftX = currX;
-                oldLeftY = currY;
+                xDiff = currX;
+                xDiff /= MAX_INPUT;
+                xDiff *= dpi;
+
+                Console.WriteLine("xDiff: " + xDiff);
+                Cursor.Position = new Point(Cursor.Position.X + (short)Math.Floor(xDiff), Cursor.Position.Y);
+            }
+            if(Math.Abs(currY) > deadZoneRad)
+            {
+                yDiff = currY;
+                yDiff /= MAX_INPUT;
+                yDiff *= dpi;
+                yDiff *= -1;
+
+                Console.WriteLine("yDiff: " + yDiff);
+                Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + (short)Math.Floor(yDiff));
             }
         }
 

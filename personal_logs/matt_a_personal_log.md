@@ -78,3 +78,13 @@
 ## 2/22/2017
 * Got the cursor to move with the dpad
 * Jake and I started to develope a method for moving the cursor witht he analog sticks easily
+* Jake developed an algorithm for translating the mouse movement to the screen in a viewable instead of it bouncing aroun the screen too fast
+* Alg needs more fine tuning
+
+## 2/23/2017
+* Got the mouse cursor moving with the analog sticks!!!
+* Some issues debugging it but now it works as expected
+* Some momentum can be seen but not too much. Need to fix
+* Mouse movement is jittery and needs to be fixed.
+  * WOuldn't be an issue w/ C++...
+* Finally on to testing
