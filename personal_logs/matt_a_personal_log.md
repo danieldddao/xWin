@@ -88,3 +88,4 @@
 * Mouse movement is jittery and needs to be fixed.
   * WOuldn't be an issue w/ C++...
 * Finally on to testing
+* It's moving smoothly now!!!! Thread.sleep is a bad thing

@@ -120,7 +120,7 @@ namespace xWin.Library
             int currY = currentControllerState.Gamepad.LeftThumbY;
             float xDiff = 0;
             float yDiff = 0;
-            int dpi = 100;
+            int dpi = 20;
             
             if(Math.Abs(currX) > deadZoneRad)
             {
@@ -128,7 +128,7 @@ namespace xWin.Library
                 xDiff /= MAX_INPUT;
                 xDiff *= dpi;
 
-                Console.WriteLine("xDiff: " + xDiff);
+                //Console.WriteLine("xDiff: " + xDiff);
                 Cursor.Position = new Point(Cursor.Position.X + (short)Math.Floor(xDiff), Cursor.Position.Y);
             }
             if(Math.Abs(currY) > deadZoneRad)
@@ -138,7 +138,7 @@ namespace xWin.Library
                 yDiff *= dpi;
                 yDiff *= -1;
 
-                Console.WriteLine("yDiff: " + yDiff);
+                //Console.WriteLine("yDiff: " + yDiff);
                 Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + (short)Math.Floor(yDiff));
             }
         }
