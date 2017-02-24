@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using xWin.Wrapper;
@@ -74,7 +73,7 @@ namespace xWin.Library
             {
                 systemWrapper.Press((byte) key);
                 Thread.Sleep(100);
-                systemWrapper.Release((byte)key);
+                systemWrapper.Release((byte) key);
                 return true;
             }
             catch (Exception e)
