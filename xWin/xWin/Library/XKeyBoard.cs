@@ -2,12 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.IO;
+using xWin.Wrapper;
 
 namespace xWin.Library
 {
-    public enum Action
+    public enum XAction
     {
         None,
         PressKey,
@@ -18,88 +17,52 @@ namespace xWin.Library
 
     public class XKeyBoard
     {
-        const uint KEYEVENTF_EXTENDEDKEY = 0x0001;
-        [DllImport("user32.dll")]
-        public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
-        [DllImport("user32.dll")]
-        public static extern short VkKeyScan(char s);
-
-        private Action action = Action.None;
+        private XAction action = XAction.None;
         private Keys keyToPress = Keys.None;
         private string stringToPress = null;
         private string appPath = null;
         private Keys[] shortcutToPress = null;
 
-        public void SetAction(Action a)
+        private readonly ISystemWrapper systemWrapper;
+
+        public XKeyBoard()
         {
-            this.action = a;
+            this.systemWrapper = new SystemWrapper();
         }
 
-        public void SetKeyToPress(Keys key)
+        public XKeyBoard(ISystemWrapper isystemWrapper)
         {
-                this.keyToPress = key;
+            this.systemWrapper = isystemWrapper;
+        }   
+
+        public XAction Action
+        {
+            get { return this.action; }
+            set { this.action = value; }
         }
 
-        public void SetStringToPress(string s)
+        public Keys KeyToPress
         {
-            this.stringToPress = s;
+            get { return this.keyToPress; }
+            set { this.keyToPress = value; }
         }
 
-        public void SetAppPath(string path)
+        public string StringToPress
         {
-            this.appPath = path;
+            get { return this.stringToPress; }
+            set { this.stringToPress = value; }
+        }
+
+        public string AppPath
+        {
+            get { return this.appPath; }
+            set { this.appPath = value; }
         }
     
-        public void SetShortcutToPress(Keys[] shortcut)
+        public Keys[] ShortcutToPress
         {
-            this.shortcutToPress = shortcut;
-        }
-
-        /*
-         * Execute based on the Action
-         */ 
-        public void Execute ()
-        {
-            switch (action)
-            {
-                case Action.None:
-                    {
-                        // do nothing
-                        break;
-                    }
-                case Action.PressKey:
-                    {
-                        if (keyToPress != Keys.None) { PressKey(keyToPress); }
-                        break;
-                    }
-                case Action.PressKeysFromString:
-                    {
-                        if (stringToPress != null) { PressKeysFromString(stringToPress); }
-                        break;
-                    }
-                case Action.PressShortcut:
-                    {
-                        if (shortcutToPress != null) { PressShortcut(shortcutToPress); }
-                        break;
-                    }
-                case Action.OpenApp:
-                    {
-                        if (appPath != null) { OpenApplication(appPath); }
-                        break;
-                    }
-            }
-        }
-
-        public void Press(byte key)
-        {
-            // Presses the key  
-            keybd_event(key, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-        }
-
-        public void Release(byte key)
-        {
-            // Releases the key  
-            keybd_event(key, 0, 2, 0);
+            get { return this.shortcutToPress; }
+            set { this.shortcutToPress = value; }
         }
 
         /*
@@ -109,9 +72,9 @@ namespace xWin.Library
         {
             try
             {
-                Press((byte) key);
+                systemWrapper.Press((byte) key);
                 Thread.Sleep(100);
-                Release((byte)key);
+                systemWrapper.Release((byte)key);
                 return true;
             }
             catch (Exception e)
@@ -129,9 +92,9 @@ namespace xWin.Library
         {
             try
             {
-                Press((byte) VkKeyScan(key));      
+                systemWrapper.Press((byte) systemWrapper.ScanKey(key));      
                 Thread.Sleep(100);
-                Release((byte)VkKeyScan(key));
+                systemWrapper.Release((byte) systemWrapper.ScanKey(key));
                 return true;
             }
             catch (Exception e)
@@ -156,15 +119,15 @@ namespace xWin.Library
                     char c = array[i];
                     if (char.IsUpper(c)) // If c is uppercase, press shift key
                     {
-                        Press(VK_SHIFT);
-                    } else { }
-                    Press((byte)VkKeyScan(c));
+                        systemWrapper.Press(VK_SHIFT);
+                    }
+                    systemWrapper.Press((byte) systemWrapper.ScanKey(c));
 
                     if (char.IsUpper(c)) // If c is uppercase, release shift key
                     {
-                        Release(VK_SHIFT);
+                        systemWrapper.Release(VK_SHIFT);
                     }
-                    Release((byte)VkKeyScan(c));
+                    systemWrapper.Release((byte)systemWrapper.ScanKey(c));
                 }
                 return true;
             }
@@ -184,9 +147,9 @@ namespace xWin.Library
             try
             {
                 foreach (Keys k in shortcut)
-                { Press((byte)k); }
+                { systemWrapper.Press((byte)k); }
                 foreach (Keys k in shortcut)
-                { Release((byte)k); }
+                { systemWrapper.Release((byte)k); }
                 return true;
             }
             catch (Exception e)
@@ -204,12 +167,12 @@ namespace xWin.Library
         {
             try
             {
-                if (!File.Exists(path))
+                if (!systemWrapper.IsFileExist(path))
                 {
                     Console.WriteLine("Application doesn't exist {0}", path);
                     return false;
                 }
-                Process.Start(path);
+                systemWrapper.StartProcess(path);
                 return true;
             }
             catch (Exception e)
@@ -219,5 +182,41 @@ namespace xWin.Library
                 return false;
             }
         }
+
+        /*
+         * Execute based on the Action
+         */
+        public void Execute()
+        {
+            switch (action)
+            {
+                case XAction.None:
+                    {
+                        // do nothing
+                        break;
+                    }
+                case XAction.PressKey:
+                    {
+                        if (keyToPress != Keys.None) { PressKey(keyToPress); }
+                        break;
+                    }
+                case XAction.PressKeysFromString:
+                    {
+                        if (stringToPress != null) { PressKeysFromString(stringToPress); }
+                        break;
+                    }
+                case XAction.PressShortcut:
+                    {
+                        if (shortcutToPress != null) { PressShortcut(shortcutToPress); }
+                        break;
+                    }
+                case XAction.OpenApp:
+                    {
+                        if (appPath != null) { OpenApplication(appPath); }
+                        break;
+                    }
+            }
+        }
     }
+
 }
