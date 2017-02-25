@@ -5,15 +5,6 @@ using xWin.Wrapper;
 
 namespace xWin.Library
 {
-    public enum XAction
-    {
-        None,
-        PressKey,
-        PressKeysFromString,
-        PressShortcut,
-        OpenApp
-    };
-
     public class XKeyBoard
     {
         private XAction action = XAction.None;
@@ -91,8 +82,18 @@ namespace xWin.Library
         {
             try
             {
-                systemWrapper.Press((byte) systemWrapper.ScanKey(key));      
+                const byte VK_SHIFT = 0x10;
+                if (char.IsUpper(key)) // If c is uppercase, press shift key
+                {
+                    systemWrapper.Press(VK_SHIFT);
+                }
+                systemWrapper.Press((byte)systemWrapper.ScanKey(key));
+
                 Thread.Sleep(100);
+                if (char.IsUpper(key)) // If c is uppercase, press shift key
+                {
+                    systemWrapper.Release(VK_SHIFT);
+                }
                 systemWrapper.Release((byte) systemWrapper.ScanKey(key));
                 return true;
             }

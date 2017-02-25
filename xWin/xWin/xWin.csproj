@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\XAction.cs" />
     <Compile Include="Library\XKeyBoard.cs" />
     <Compile Include="Library\XController.cs" />
     <Compile Include="Program.cs" />
