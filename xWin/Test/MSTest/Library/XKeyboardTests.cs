@@ -4,16 +4,12 @@ using xWin.Library;
 using System.Windows.Forms;
 using Moq;
 using xWin.Wrapper;
-using System.Runtime.InteropServices;
 
 namespace MSTest.Library
 {
     [TestClass]
     public class XKeyboardTest
     {
-        [DllImport("user32.dll")]
-        public static extern short VkKeyScan(char s);
-
         XKeyBoard xKeyboard;
         Mock<ISystemWrapper> mockSystemWrapper;
 
@@ -44,7 +40,7 @@ namespace MSTest.Library
         [TestMethod]
         public void TestPressKeyFormsKeys_PressException()
         {
-            mockSystemWrapper.Setup(x => x.Press((byte) Keys.A)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Press((byte)Keys.A)).Throws(new Exception());
 
             bool status = xKeyboard.PressKey(Keys.A);
             Assert.IsFalse(status);
@@ -53,7 +49,7 @@ namespace MSTest.Library
         public void TestPressKeyFormsKeys_ReleaseException()
         {
             mockSystemWrapper.Setup(x => x.Press((byte)Keys.A));
-            mockSystemWrapper.Setup(x => x.Release((byte) Keys.A)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Release((byte)Keys.A)).Throws(new Exception());
 
             bool status = xKeyboard.PressKey(Keys.A);
             Assert.IsFalse(status);
@@ -65,8 +61,8 @@ namespace MSTest.Library
         public void TestPressKeyChar()
         {
             mockSystemWrapper.Setup(x => x.ScanKey('a')).Returns(1);
-            mockSystemWrapper.Setup(x => x.Press((byte) 1));
-            mockSystemWrapper.Setup(x => x.Release((byte) 1));
+            mockSystemWrapper.Setup(x => x.Press((byte)1));
+            mockSystemWrapper.Setup(x => x.Release((byte)1));
 
             bool status = xKeyboard.PressKey('a');
             Assert.IsTrue(status);
@@ -87,7 +83,7 @@ namespace MSTest.Library
         public void TestPressKeyChar_PressException()
         {
             mockSystemWrapper.Setup(x => x.ScanKey('B')).Returns(1);
-            mockSystemWrapper.Setup(x => x.Press((byte) 1)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Press((byte)1)).Throws(new Exception());
 
             bool status = xKeyboard.PressKey('B');
             Assert.IsFalse(status);
@@ -96,8 +92,8 @@ namespace MSTest.Library
         public void TestPressKeyChar_ReleaseException()
         {
             mockSystemWrapper.Setup(x => x.ScanKey('B')).Returns(1);
-            mockSystemWrapper.Setup(x => x.Press((byte) 1));
-            mockSystemWrapper.Setup(x => x.Release((byte) 1)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Press((byte)1));
+            mockSystemWrapper.Setup(x => x.Release((byte)1)).Throws(new Exception());
 
             bool status = xKeyboard.PressKey('B');
             Assert.IsFalse(status);
@@ -110,10 +106,10 @@ namespace MSTest.Library
         {
             mockSystemWrapper.Setup(x => x.ScanKey('a')).Returns(1);
             mockSystemWrapper.Setup(x => x.ScanKey('b')).Returns(2);
-            mockSystemWrapper.Setup(x => x.Press((byte) 1));
-            mockSystemWrapper.Setup(x => x.Release((byte) 1));
-            mockSystemWrapper.Setup(x => x.Press((byte) 2));
-            mockSystemWrapper.Setup(x => x.Release((byte) 2));
+            mockSystemWrapper.Setup(x => x.Press((byte)1));
+            mockSystemWrapper.Setup(x => x.Release((byte)1));
+            mockSystemWrapper.Setup(x => x.Press((byte)2));
+            mockSystemWrapper.Setup(x => x.Release((byte)2));
 
             bool status = xKeyboard.PressKeysFromString("ab");
             Assert.IsTrue(status);
@@ -136,7 +132,7 @@ namespace MSTest.Library
         public void TestPressKeysFromString_PressException()
         {
             mockSystemWrapper.Setup(x => x.ScanKey('a')).Returns(1);
-            mockSystemWrapper.Setup(x => x.Press((byte) 1)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Press((byte)1)).Throws(new Exception());
 
             bool status = xKeyboard.PressKeysFromString("ab");
             Assert.IsFalse(status);
@@ -145,8 +141,8 @@ namespace MSTest.Library
         public void TestPressKeysFromString_ReleaseException()
         {
             mockSystemWrapper.Setup(x => x.ScanKey('a')).Returns(1);
-            mockSystemWrapper.Setup(x => x.Press((byte) 1));
-            mockSystemWrapper.Setup(x => x.Release((byte) 1)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Press((byte)1));
+            mockSystemWrapper.Setup(x => x.Release((byte)1)).Throws(new Exception());
 
             bool status = xKeyboard.PressKeysFromString("ab");
             Assert.IsFalse(status);
@@ -171,7 +167,7 @@ namespace MSTest.Library
         {
             Keys[] shortcut = { Keys.LWin, Keys.R };
             mockSystemWrapper.Setup(x => x.Press((byte)Keys.LWin));
-            mockSystemWrapper.Setup(x => x.Press((byte) Keys.R)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Press((byte)Keys.R)).Throws(new Exception());
             bool status = xKeyboard.PressShortcut(shortcut);
             Assert.IsFalse(status);
         }
@@ -182,7 +178,7 @@ namespace MSTest.Library
             mockSystemWrapper.Setup(x => x.Press((byte)Keys.LWin));
             mockSystemWrapper.Setup(x => x.Press((byte)Keys.R));
             mockSystemWrapper.Setup(x => x.Release((byte)Keys.LWin));
-            mockSystemWrapper.Setup(x => x.Release((byte) Keys.R)).Throws(new Exception());
+            mockSystemWrapper.Setup(x => x.Release((byte)Keys.R)).Throws(new Exception());
 
             bool status = xKeyboard.PressShortcut(shortcut);
             Assert.IsFalse(status);

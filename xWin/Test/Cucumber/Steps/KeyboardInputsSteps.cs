@@ -34,8 +34,8 @@ namespace Cucumber.Steps
         {
             char c = p0.ToCharArray()[0];
             mockSystemWrapper.Setup(x => x.ScanKey(c)).Returns(1);
-            mockSystemWrapper.Setup(x => x.Press((byte) 1));
-            mockSystemWrapper.Setup(x => x.Release((byte) 1));
+            mockSystemWrapper.Setup(x => x.Press((byte)1));
+            mockSystemWrapper.Setup(x => x.Release((byte)1));
             status = xKeyboard.PressKey(c);
         }
 
@@ -75,10 +75,10 @@ namespace Cucumber.Steps
         [When(@"I press the shortcut Ctrl\+R")]
         public void WhenIPressTheShortcutCtrlR()
         {
-            mockSystemWrapper.Setup(x => x.Press((byte) Keys.ControlKey));
+            mockSystemWrapper.Setup(x => x.Press((byte)Keys.ControlKey));
             mockSystemWrapper.Setup(x => x.Press((byte)Keys.R));
             mockSystemWrapper.Setup(x => x.Release((byte)Keys.ControlKey));
-            mockSystemWrapper.Setup(x => x.Release((byte) Keys.R));
+            mockSystemWrapper.Setup(x => x.Release((byte)Keys.R));
 
             Keys[] shortcut = { Keys.ControlKey, Keys.R };
             status = xKeyboard.PressShortcut(shortcut);

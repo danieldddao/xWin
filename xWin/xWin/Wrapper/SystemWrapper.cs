@@ -18,7 +18,9 @@ namespace xWin.Wrapper
 
     public class SystemWrapper : ISystemWrapper
     {
-        const uint KEYEVENTF_EXTENDEDKEY = 0x0001;
+        public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
+        public const int KEYEVENTF_KEYUP = 0x0002; //Key up flag
+
         [DllImport("user32.dll")]
         public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
         [DllImport("user32.dll")]
@@ -33,7 +35,7 @@ namespace xWin.Wrapper
         public void Release(byte key)
         {
             // Releases the key  
-            keybd_event(key, 0, 2, 0);
+            keybd_event(key, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
         }
 
         public short ScanKey(char c)

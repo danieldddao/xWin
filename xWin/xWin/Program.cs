@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-
 using SharpDX.XInput;
 using xWin.Library;
 
@@ -13,7 +12,6 @@ namespace xWin
 		{
             bool msg = false;
             XController c = new XController(new Controller(UserIndex.One));
-            XKeyBoard x = new XKeyBoard();
             while (true)
             {
                 Thread.Sleep(200);
@@ -26,22 +24,27 @@ namespace xWin
                     if (c.IsButtonAPressed())
                     {
                         Console.WriteLine("Button A pressed!");
-                        x.PressKey(Keys.A);
+                        XKeyBoard x = new XKeyBoard();
+                        x.PressKeysFromString("Hello World@$%^&*()<>?");
                     }
                     if (c.IsButtonBPressed())
                     {
                         Console.WriteLine("Button B pressed!");
-                        x.PressKey(Keys.B);
+                        XKeyBoard x = new XKeyBoard();
+                        Keys[] k = { Keys.LControlKey, Keys.LMenu, Keys.Tab };
+                        x.PressShortcut(k);
                     }
                     if (c.IsButtonXPressed())
                     {
                         Console.WriteLine("Button X pressed!");
-                        x.PressKey(Keys.Enter);
+                        XKeyBoard x = new XKeyBoard();
+                        x.OpenApplication("C:\\KMPlayer\\KMPlayer.exe");
                     }
                     if (c.IsButtonYPressed())
                     {
                         Console.WriteLine("Button Y pressed!");
-                        x.PressKey(Keys.Space);
+                        XKeyBoard x = new XKeyBoard();
+                        x.PressKey('|');
                     }
                     if (c.IsButtonBackPressed())
                     {

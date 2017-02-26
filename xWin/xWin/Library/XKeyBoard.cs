@@ -7,6 +7,7 @@ namespace xWin.Library
 {
     public class XKeyBoard
     {
+        private char[] shiftedKeys = {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'};
         private XAction action = XAction.None;
         private Keys keyToPress = Keys.None;
         private string stringToPress = null;
@@ -83,18 +84,18 @@ namespace xWin.Library
             try
             {
                 const byte VK_SHIFT = 0x10;
-                if (char.IsUpper(key)) // If c is uppercase, press shift key
+                if (char.IsUpper(key) || Array.IndexOf(shiftedKeys, key) > -1) // If key is uppercase or shifted key, also press and release shift key
                 {
                     systemWrapper.Press(VK_SHIFT);
-                }
-                systemWrapper.Press((byte)systemWrapper.ScanKey(key));
-
-                Thread.Sleep(100);
-                if (char.IsUpper(key)) // If c is uppercase, press shift key
-                {
+                    systemWrapper.Press((byte)systemWrapper.ScanKey(key));
+                    systemWrapper.Release((byte)systemWrapper.ScanKey(key));
                     systemWrapper.Release(VK_SHIFT);
                 }
-                systemWrapper.Release((byte) systemWrapper.ScanKey(key));
+                else
+                {
+                    systemWrapper.Press((byte)systemWrapper.ScanKey(key));
+                    systemWrapper.Release((byte)systemWrapper.ScanKey(key));
+                }
                 return true;
             }
             catch (Exception e)
@@ -117,17 +118,18 @@ namespace xWin.Library
                 for (int i = 0; i < array.Length; i++)
                 {
                     char c = array[i];
-                    if (char.IsUpper(c)) // If c is uppercase, press shift key
+                    if (char.IsUpper(c) || Array.IndexOf(shiftedKeys, c) > -1) // If c is uppercase or shifted key, also press and release shift key
                     {
                         systemWrapper.Press(VK_SHIFT);
-                    }
-                    systemWrapper.Press((byte) systemWrapper.ScanKey(c));
-
-                    if (char.IsUpper(c)) // If c is uppercase, release shift key
-                    {
+                        systemWrapper.Press((byte)systemWrapper.ScanKey(c));
+                        systemWrapper.Release((byte)systemWrapper.ScanKey(c));
                         systemWrapper.Release(VK_SHIFT);
                     }
-                    systemWrapper.Release((byte)systemWrapper.ScanKey(c));
+                    else
+                    {
+                        systemWrapper.Press((byte)systemWrapper.ScanKey(c));
+                        systemWrapper.Release((byte)systemWrapper.ScanKey(c));
+                    }
                 }
                 return true;
             }
@@ -148,8 +150,10 @@ namespace xWin.Library
             {
                 foreach (Keys k in shortcut)
                 { systemWrapper.Press((byte)k); }
+
                 foreach (Keys k in shortcut)
                 { systemWrapper.Release((byte)k); }
+
                 return true;
             }
             catch (Exception e)
