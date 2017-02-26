@@ -16,6 +16,10 @@ Scenario: Press a key on keyboard using uppercase character
 	Given I have keyboard set up
 	When I press key 'A'
 	Then It should be pressed with shift key
+Scenario: Press a key on keyboard using shiftedkey character
+	Given I have keyboard set up
+	When I press key '!'
+	Then It should be pressed with shift key
 
 @mytag
 Scenario: Press keys from given lowercase string
@@ -28,9 +32,19 @@ Scenario: Press keys from given uppercase-lowercase string
 	When I press keys from string 'Abc'
 	Then It should be pressed with shift key
 @mytag
+Scenario: Press keys from given shiftedkeys-lowercase string
+	Given I have keyboard set up
+	When I press keys from string '!@bc'
+	Then It should be pressed with shift key
+@mytag
 Scenario: Press keys from given uppercase string
 	Given I have keyboard set up
 	When I press keys from string 'ABC'
+	Then It should be pressed with shift key
+@mytag
+Scenario: Press keys from given shiftedkeys string
+	Given I have keyboard set up
+	When I press keys from string '#$#'
 	Then It should be pressed with shift key
 
 @mytag

@@ -80,6 +80,18 @@ namespace MSTest.Library
             mockSystemWrapper.Verify(x => x.Release(0x10), Times.Once());
         }
         [TestMethod]
+        public void TestPressKeyChar_ShiftedKeys()
+        {
+            mockSystemWrapper.Setup(x => x.ScanKey('!')).Returns(1);
+            mockSystemWrapper.Setup(x => x.Press((byte)1));
+            mockSystemWrapper.Setup(x => x.Release((byte)1));
+
+            bool status = xKeyboard.PressKey('!');
+            Assert.IsTrue(status);
+            mockSystemWrapper.Verify(x => x.Press(0x10), Times.Once());
+            mockSystemWrapper.Verify(x => x.Release(0x10), Times.Once());
+        }
+        [TestMethod]
         public void TestPressKeyChar_PressException()
         {
             mockSystemWrapper.Setup(x => x.ScanKey('B')).Returns(1);
@@ -126,6 +138,20 @@ namespace MSTest.Library
             mockSystemWrapper.Setup(x => x.Release((byte)2));
 
             bool status = xKeyboard.PressKeysFromString("Ab");
+            Assert.IsTrue(status);
+        }
+        [TestMethod]
+        public void TestPressKeysFromString_ShiftedKeys()
+        {
+            mockSystemWrapper.Setup(x => x.ScanKey('!')).Returns(1);
+            mockSystemWrapper.Setup(x => x.ScanKey('b')).Returns(2);
+            mockSystemWrapper.Setup(x => x.Press(0x10)); // press shift key
+            mockSystemWrapper.Setup(x => x.Press((byte)1));
+            mockSystemWrapper.Setup(x => x.Release((byte)1));
+            mockSystemWrapper.Setup(x => x.Press((byte)2));
+            mockSystemWrapper.Setup(x => x.Release((byte)2));
+
+            bool status = xKeyboard.PressKeysFromString("!b");
             Assert.IsTrue(status);
         }
         [TestMethod]
