@@ -18,12 +18,17 @@ xWin/xWin/bld/
 xWin/xWin/[Bb]in/
 xWin/xWin/[Oo]bj/
 xWin/xWin/[Ll]og/
+proto/test/test/[Bb]in/
+proto/test/test/[Oo]bj/
+xWin/packages/
 
 # .NET Core
 xWin/xWin/project.lock.json
 xWin/xWin/project.fragment.lock.json
 xWin/xWin/artifacts/
 **/Properties/launchSettings.json
+xWin/xWin/.DS_Store
+xWin/xWin/packages.config
 
 *_i.c
 *_p.c
@@ -53,10 +58,16 @@ xWin/xWin/artifacts/
 # MSTest test Results
 xWin/xWin/[Tt]est[Rr]esult*/
 xWin/xWin/[Bb]uild[Ll]og.*
+xWin/xWin/[Bb]uild[Ll]og.*
 
 # NUNIT
 xWin/xWin/*.VisualState.xml
-xWin/xWin/TestResult.xml
+xWin/Test/MSTest/bin/
+xWin/Test/MSTest/obj/
+
+# Cucumber
+xWin/Test/Cucumber/bin/
+xWin/Test/Cucumber/obj/
 
 # Visual C++ cache files
 xWin/xWin/ipch/

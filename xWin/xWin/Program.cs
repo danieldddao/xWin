@@ -11,11 +11,12 @@ namespace xWin
 {
 	class Program
 	{
-		static void Main(string[] args)
+        static void Main(string[] args)
 		{
             XController c = new XController();
             bool msg = false;
-            while(!Console.KeyAvailable)
+            XController c = new XController(new Controller(UserIndex.One));
+            while (true)
             {
                 //Thread.Sleep(200);
                 if (c.IsConnected())

@@ -20,3 +20,15 @@
 
 #2/9
 * config saving design
+
+#2/10
+* research on .net libraries
+
+#2/11
+* no internet access
+
+#2/12
+* sick
+
+#2/13
+* stick region detection and isolation started

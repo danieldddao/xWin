@@ -1,0 +1,14 @@
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\obj\Debug\test.exe
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\obj\Debug\test.pdb
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test.exe.config
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\test.exe.config
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\test.exe
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\test.pdb
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\Google.Protobuf.dll
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\Google.Protobuf.xml
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\test.exe.config
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\test.exe
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\test.pdb
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\Google.Protobuf.dll
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\Google.Protobuf.xml
