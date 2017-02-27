@@ -12,11 +12,27 @@ namespace xWin.Library
 {
     public class XController
     {
-        private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
         private Controller controller { get; }
         private State currentControllerState { get; set; }
         private short deadZoneRad { get; set; }
         private const short MAX_INPUT = 32767;
+        private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+
+        public enum buttonState : short
+        {
+            A = 0,
+            B = 0,
+            X = 0,
+            Y = 0,
+            START = 0,
+            SELECT = 0,
+            LEFT_STICK = 0,
+            RIGHT_STICK = 0,
+            DPAD_UP = 0,
+            DPAD_DOWN = 0,
+            DPAD_LEFT = 0,
+            DPAD_RIGHT = 0
+        };
 
         [DllImport("User32.Dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);
@@ -114,6 +130,16 @@ namespace xWin.Library
             return thumbLoc;
         }
 
+        public short GetLeftTrigger()
+        {
+            return currentControllerState.Gamepad.LeftTrigger;
+        }
+
+        public short GetRightTrigger()
+        {
+            return currentControllerState.Gamepad.RightTrigger;
+        }
+
         public void MoveCurser()
         {
             int currX = currentControllerState.Gamepad.LeftThumbX;
@@ -127,8 +153,7 @@ namespace xWin.Library
                 xDiff = currX;
                 xDiff /= MAX_INPUT;
                 xDiff *= dpi;
-
-                //Console.WriteLine("xDiff: " + xDiff);
+                
                 Cursor.Position = new Point(Cursor.Position.X + (short)Math.Floor(xDiff), Cursor.Position.Y);
             }
             if(Math.Abs(currY) > deadZoneRad)
@@ -137,8 +162,7 @@ namespace xWin.Library
                 yDiff /= MAX_INPUT;
                 yDiff *= dpi;
                 yDiff *= -1;
-
-                //Console.WriteLine("yDiff: " + yDiff);
+                
                 Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + (short)Math.Floor(yDiff));
             }
         }

@@ -21,7 +21,7 @@ namespace xWin
                 if (c.IsConnected())
                 {
                     c.UpdateSate();
-                    /*foreach(var button in c.ButtonsPressed())
+                    foreach(var button in c.ButtonsPressed())
                     {
                         Console.WriteLine(button.Key + " is pressed: " + button.Value);
                     }
@@ -32,7 +32,9 @@ namespace xWin
                     foreach(var thumb in c.GetRightCart())
                     {
                         Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
-                    }*/
+                    }
+                    Console.WriteLine("Left trigger: " + c.GetLeftTrigger());
+                    Console.WriteLine("Right trigger:" + c.GetRightTrigger());
                     c.MoveCurser();
                     
                     //Console.WriteLine("Mouse x: " + Cursor.Position.X);
