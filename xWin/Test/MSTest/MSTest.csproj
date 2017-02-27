@@ -72,13 +72,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-=======
->>>>>>> master
     <ProjectReference Include="..\..\xWin\xWin.csproj">
       <Project>{fc93d01a-8394-4212-936c-9d29c5260048}</Project>
       <Name>xWin</Name>
