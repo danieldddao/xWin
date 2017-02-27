@@ -18,22 +18,6 @@ namespace xWin.Library
         private const short MAX_INPUT = 32767;
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
 
-        public enum buttonState : short
-        {
-            A = 0,
-            B = 0,
-            X = 0,
-            Y = 0,
-            START = 0,
-            SELECT = 0,
-            LEFT_STICK = 0,
-            RIGHT_STICK = 0,
-            DPAD_UP = 0,
-            DPAD_DOWN = 0,
-            DPAD_LEFT = 0,
-            DPAD_RIGHT = 0
-        };
-
         [DllImport("User32.Dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);
 
@@ -59,11 +43,16 @@ namespace xWin.Library
             currentControllerState = controller.GetState();
         }
 
-        public Dictionary<string, bool> ButtonsPressed()
+        public List<Buttons> ButtonsPressed()
         {
-            Dictionary<string, bool> currentButtons = new Dictionary<string, bool>();
+            List<Buttons> currentButtons = new List<Buttons>();
 
-            currentButtons.Add("A", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A));
+            if(currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A))
+            {
+                currentButtons.Add(Buttons.A);
+            }
+
+            /*currentButtons.Add(Buttons.A, currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A));
             currentButtons.Add("B", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.B));
             currentButtons.Add("X", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.X));
             currentButtons.Add("Y", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Y));
@@ -77,7 +66,7 @@ namespace xWin.Library
             currentButtons.Add("DPAD_RIGHT", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadRight));
             currentButtons.Add("DPAD_LEFT", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft));
             currentButtons.Add("DPAD_DOWN", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadDown));
-            currentButtons.Add("NONE", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.None));
+            currentButtons.Add("NONE", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.None));*/
 
             return currentButtons;
         }
