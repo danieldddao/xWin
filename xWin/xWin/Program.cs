@@ -14,8 +14,6 @@ namespace xWin
         static void Main(string[] args)
 		{
             XController c = new XController();
-            bool msg = false;
-            XController c = new XController(new Controller(UserIndex.One));
             while (true)
             {
                 //Thread.Sleep(200);
@@ -38,14 +36,11 @@ namespace xWin
                     Console.WriteLine("Right trigger:" + c.GetRightTrigger());
                     c.MoveCurser();
                     
-                    //Console.WriteLine("Mouse x: " + Cursor.Position.X);
-                    //Console.WriteLine("Mouse y: " + Cursor.Position.Y);
                     Console.Clear();
                 }
                 else
                 {
                     Console.WriteLine("Controller Disconnected!");
-                    msg = false;
                 }     
             }
 		}
