@@ -17,10 +17,11 @@ namespace xWin.Library
         DPAD_LEFT,
         DPAD_RIGHT,
         START,
-        SELECT,
+        BACK,
         LEFT_BUMPER,
         RIGHT_BUMPER,
         LEFT_STICK,
-        RIGHT_STICK
+        RIGHT_STICK,
+        NONE
     }
 }

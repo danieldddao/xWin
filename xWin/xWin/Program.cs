@@ -16,11 +16,11 @@ namespace xWin
             XController c = new XController();
             while (true)
             {
-                //Thread.Sleep(200);
+                
                 if (c.IsConnected())
                 {
                     c.UpdateSate();
-                    foreach(var button in c.ButtonsPressed())
+                    /*foreach(var button in c.ButtonsPressed())
                     {
                         Console.WriteLine(button.Key + " is pressed: " + button.Value);
                     }
@@ -33,9 +33,12 @@ namespace xWin
                         Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
                     }
                     Console.WriteLine("Left trigger: " + c.GetLeftTrigger());
-                    Console.WriteLine("Right trigger:" + c.GetRightTrigger());
+                    Console.WriteLine("Right trigger:" + c.GetRightTrigger());*/
                     c.MoveCurser();
-                    
+                    if (c.ButtonsPressed()["A"]) XController.LeftDown();
+                    else XController.LeftUp();
+                    if (c.ButtonsPressed()["B"]) XController.RightClick();
+                    //Thread.Sleep(200);
                     Console.Clear();
                 }
                 else
