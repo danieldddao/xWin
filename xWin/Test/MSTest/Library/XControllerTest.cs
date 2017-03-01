@@ -5,6 +5,7 @@ using xWin.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using xWin.Wrapper;
+using SharpDX;
 
 namespace MSTest.Library
 {
@@ -14,14 +15,16 @@ namespace MSTest.Library
     [TestClass]
     public class XControllerTest
     {
-        XController controller;
+        XControllerImplementation controller;
         Mock<ISystemWrapper> mockSystemWrapper;
+        Mock<SharpDX.XInput.Controller> mockController;
 
         [TestInitialize]
         public void Setup()
         {
             mockSystemWrapper = new Mock<ISystemWrapper>();
-            //XController = 
+            mockController = new Mock<SharpDX.XInput.Controller>();
+            //controller = new XController(mockController.)
         }
 
         [TestMethod]

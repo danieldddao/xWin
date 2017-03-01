@@ -13,7 +13,7 @@ namespace xWin
 	{
         static void Main(string[] args)
 		{
-            XController c = new XController();
+            XControllerImplementation c = new XControllerImplementation();
             while (true)
             {
                 
@@ -35,9 +35,9 @@ namespace xWin
                     Console.WriteLine("Left trigger: " + c.GetLeftTrigger());
                     Console.WriteLine("Right trigger:" + c.GetRightTrigger());*/
                     c.MoveCurser();
-                    if (c.ButtonsPressed()["A"]) XController.LeftDown();
-                    else XController.LeftUp();
-                    if (c.ButtonsPressed()["B"]) XController.RightClick();
+                    if (c.ButtonsPressed()["A"]) XControllerImplementation.LeftDown();
+                    else XControllerImplementation.LeftUp();
+                    if (c.ButtonsPressed()["B"]) XControllerImplementation.RightClick();
                     //Thread.Sleep(200);
                     Console.Clear();
                 }
