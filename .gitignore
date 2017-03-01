@@ -27,8 +27,12 @@ xWin/xWin/project.lock.json
 xWin/xWin/project.fragment.lock.json
 xWin/xWin/artifacts/
 **/Properties/launchSettings.json
-xWin/xWin/.DS_Store
 xWin/xWin/packages.config
+
+# MacOS files
+xWin/xWin/.DS_Store
+.DS_Store
+xWin/.DS_Store
 
 *_i.c
 *_p.c

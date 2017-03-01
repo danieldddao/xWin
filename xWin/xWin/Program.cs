@@ -3,15 +3,26 @@ using System.Threading;
 using System.Windows.Forms;
 using SharpDX.XInput;
 using xWin.Library;
+using xWin.Forms;
 
 namespace xWin
 {
 	class Program
 	{
+        public static void RunFormApplication()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ControllerOptions());
+        }
+
+        [STAThread]
         static void Main(string[] args)
 		{
+            RunFormApplication();
             bool msg = false;
             XController c = new XController(new Controller(UserIndex.One));
+            /*
             while (true)
             {
                 Thread.Sleep(200);
@@ -92,6 +103,7 @@ namespace xWin
                     msg = false;
                 }     
             }
+            */
 		}
 	}
 }
