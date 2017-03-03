@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ButtonOptions));
             this.mapKeyboard = new System.Windows.Forms.Button();
             this.openApplication = new System.Windows.Forms.Button();
             this.mapShortcut = new System.Windows.Forms.Button();
@@ -60,7 +61,7 @@
             // mapShortcut
             // 
             this.mapShortcut.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mapShortcut.Location = new System.Drawing.Point(323, 77);
+            this.mapShortcut.Location = new System.Drawing.Point(63, 338);
             this.mapShortcut.Name = "mapShortcut";
             this.mapShortcut.Size = new System.Drawing.Size(212, 78);
             this.mapShortcut.TabIndex = 2;
@@ -71,7 +72,7 @@
             // mapText
             // 
             this.mapText.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mapText.Location = new System.Drawing.Point(323, 209);
+            this.mapText.Location = new System.Drawing.Point(63, 461);
             this.mapText.Name = "mapText";
             this.mapText.Size = new System.Drawing.Size(212, 78);
             this.mapText.TabIndex = 3;
@@ -83,11 +84,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 422);
+            this.ClientSize = new System.Drawing.Size(658, 613);
             this.Controls.Add(this.mapText);
             this.Controls.Add(this.mapShortcut);
             this.Controls.Add(this.openApplication);
             this.Controls.Add(this.mapKeyboard);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ButtonOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ButtonOptions";

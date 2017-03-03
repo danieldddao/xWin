@@ -13,7 +13,7 @@ namespace xWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ControllerOptions());
+            Application.Run(new xWinPanel());
         }
 
         [STAThread]

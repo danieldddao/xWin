@@ -19,7 +19,8 @@ namespace xWin.Forms
 
         private void mapKeyboard_Click(object sender, EventArgs e)
         {
-
+            KeyboardMapping kb = new KeyboardMapping();
+            kb.ShowDialog(); 
         }
 
         private void mapShortcut_Click(object sender, EventArgs e)
