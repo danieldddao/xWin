@@ -1,0 +1,1 @@
+protoc --csharp_out=../xWin/xWin/Config ./mouse_control.proto
