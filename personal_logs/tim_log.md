@@ -32,3 +32,16 @@
 
 #2/13
 * stick region detection and isolation started
+
+#2/14 - 2/18
+* learning MSTest
+* research into C# programming methodology
+* writing Unit Tests
+
+#2/19
+* Finished Unit Testing for sprint 1
+
+##SPRINT 2
+
+#2/20
+* Created Base Class for customizable button interpretation
