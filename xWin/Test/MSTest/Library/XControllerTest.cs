@@ -29,14 +29,17 @@ namespace MSTest.Library
 
         [TestMethod]
         public void RightButtonTest()
-        {
-            //
-            // TODO: Add test logic here
-            //
-            
+        {           
             mockController.Setup(x => x.RightDown());
-            mockController.Setup(x => x.RightUp());
-            mockController.Setup(x => x.RightClick());
+            mockController.Setup(x => x.RightUp()); 
+
+        }
+        [TestMethod]
+        public void LeftButtonTest()
+        {
+            mockController.Setup(x => x.LeftUp());
+            mockController.Setup(x => x.LeftDown());
+            mockController.Setup(x => x.LeftClick());
         }
     }
 }

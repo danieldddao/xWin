@@ -14,7 +14,8 @@ namespace xWin.Library
 {
     public class XController
     {
-        private readonly IXController controller;
+        private readonly IXController ixcontroller;
+        private Controller controller;
         private State currentControllerState { get; set; }
         private short deadZoneRad { get; set; }
         private const short MAX_INPUT = 32767;
@@ -28,7 +29,7 @@ namespace xWin.Library
         
         public XController(IXController iXController)
         {
-            this.controller = iXController;
+            this.ixcontroller = iXController;
         }
 
         public XController(short deadZoneRad = 7000)
