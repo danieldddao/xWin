@@ -6,14 +6,26 @@ using System.Windows.Forms;
 using System.Threading;
 using xWin.Library;
 using SharpDX.XInput;
+using xWin.Forms;
 
 namespace xWin
 {
 	class Program
 	{
+        public static void RunFormApplication()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new xWinPanel());
+        }
+
+        [STAThread]
         static void Main(string[] args)
 		{
             XController c = new XController();
+            RunFormApplication();
+            bool msg = false;
+            /*
             while (true)
             {
                 
@@ -46,6 +58,7 @@ namespace xWin
                     Console.WriteLine("Controller Disconnected!");
                 }     
             }
+            */
 		}
 	}
 }
