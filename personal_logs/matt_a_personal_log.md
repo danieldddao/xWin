@@ -89,3 +89,19 @@
   * WOuldn't be an issue w/ C++...
 * Finally on to testing
 * It's moving smoothly now!!!! Thread.sleep is a bad thing
+
+## 2/24/2017
+* Got variable speed for mouse movement working a lot better
+* Jake kyle and I worked on it
+* mostly cleaning up a lot of code
+
+## 2/25 - 2/26/2017
+* Weekend
+
+## 2/27/2017
+* Had scrum to discuss testing
+* I am looking into how to do the testing for the controller
+* Testing is hard
+
+## 3/1/2017
+* Jake and I are still working on 
