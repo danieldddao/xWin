@@ -35,9 +35,9 @@ namespace xWin
                     Console.WriteLine("Left trigger: " + c.GetLeftTrigger());
                     Console.WriteLine("Right trigger:" + c.GetRightTrigger());*/
                     c.MoveCursor();
-                    if (c.ButtonsPressed()["A"]) c.LeftDown();
-                    else c.LeftUp();
-                    if (c.ButtonsPressed()["B"]) c.RightClick();
+                    //if (c.ButtonsPressed()["A"]) c.LeftDown();
+                    //else c.LeftUp();
+                    //if (c.ButtonsPressed()["B"]) c.RightClick();
                     //Thread.Sleep(200);
                     Console.Clear();
                 }

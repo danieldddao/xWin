@@ -7,14 +7,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using SharpDX.XInput;
-
+using xWin.Wrapper;
 
 
 namespace xWin.Library
 {
     public class XController
     {
-        private readonly IXController ixcontroller;
+        private readonly IXControllerWrapper controllerWrapper;
         private Controller controller;
         private State currentControllerState { get; set; }
         private short deadZoneRad { get; set; }
@@ -27,9 +27,9 @@ namespace xWin.Library
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         
-        public XController(IXController iXController)
+        public XController(IXControllerWrapper iXController)
         {
-            this.ixcontroller = iXController;
+            this.controllerWrapper = iXController;
         }
 
         public XController(short deadZoneRad = 7000)
@@ -44,6 +44,7 @@ namespace xWin.Library
                 ;
             }
             this.deadZoneRad = deadZoneRad;
+            controllerWrapper = new XControllerWrapper();
         }
 
         public XController(SharpDX.XInput.Controller contoller, short deadZoneRad = 7000)
@@ -190,46 +191,77 @@ namespace xWin.Library
         {
             return controller.IsConnected;
         }
-        
-        private const int MOUSEEVENTF_MOVE = 0x0001;
-        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
-        private const int MOUSEEVENTF_LEFTUP = 0x0004;
-        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
-        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
-        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
-        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
-        private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
-        
-        public void LeftClick()
+        public bool LeftUp()
         {
-            mouse_event(MOUSEEVENTF_LEFTDOWN, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
-            mouse_event(MOUSEEVENTF_LEFTUP, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+            try
+            {
+                controllerWrapper.LeftUp();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public void LeftDown()
+        public bool LeftDown()
         {
-            mouse_event(MOUSEEVENTF_LEFTDOWN, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+            try
+            {
+                controllerWrapper.LeftDown();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public void LeftUp()
+        public bool LeftClick()
         {
-            mouse_event(MOUSEEVENTF_LEFTUP, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+            try
+            {
+                controllerWrapper.LeftClick();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public void RightClick()
+        public bool RightUp()
         {
-            mouse_event(MOUSEEVENTF_RIGHTDOWN, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
-            mouse_event(MOUSEEVENTF_RIGHTUP, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+            try
+            {
+                controllerWrapper.RightUp();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public void RightDown()
+        public bool RightDown()
         {
-            mouse_event(MOUSEEVENTF_RIGHTDOWN, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+            try
+            {
+                controllerWrapper.RightDown();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public void RightUp()
+        public bool RightClick()
         {
-            mouse_event(MOUSEEVENTF_RIGHTUP, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+            try
+            {
+                controllerWrapper.RightClick();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
