@@ -72,8 +72,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\ActionsTests.cs" />
+    <Compile Include="Library\DI2XITest.cs" />
+    <Compile Include="Library\InterpreterTests.cs" />
+    <Compile Include="Library\PolarStickTests.cs" />
     <Compile Include="Library\XKeyboardTests.cs" />
-    <Compile Include="StickTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

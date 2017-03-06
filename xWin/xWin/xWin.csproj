@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\MouseControl.cs" />
-    <Compile Include="Library\Actions.cs" />
+    <Compile Include="Library\Behaviors.cs" />
     <Compile Include="Library\DI2XI.cs" />
     <Compile Include="Library\Interpreter.cs" />
     <Compile Include="Library\PolarStick.cs" />

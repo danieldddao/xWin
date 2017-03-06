@@ -3,47 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using xWin.Wrapper;
 
 namespace xWin.Library
 {
-  public struct PolarStick
-  {
-    public ushort deadzone { get; private set; }
-    public uint R 
+    public interface IPolarSticks
     {
-      get { return R; }
-      set {
-        R = (uint)Math.Abs(value);
-        if ( R < deadzone ) { R = 0; }
-        if (R == 0) { theta = null; }
-      }
-    }
-    //values 0 to 359
-    public short? theta
-    {
-      get { return theta; }
-      set
-      {
-        if (R == 0) { theta = null; }
-        else
-        {
-          theta = (short?)(value % 360);
-          theta += (short?)((theta < 0) ? 360 : 0);
-        }
-      }
-    }
 
-    public PolarStick(uint R, short? theta, ushort deadzone = 0)
-    {
-      this.deadzone = deadzone;
-      this.R = R;
-      this.theta = theta;
     }
-    public PolarStick(short x, short y, ushort deadzone = 0)
+    public struct PolarStick : IPolarSticks
     {
-      this.deadzone = deadzone;
-      R = (uint)Math.Sqrt(x * x + y * y);
-      theta = (short?)(Math.Atan2(x, y) * 57.2958);
+        ushort deadzone;// { get; private set; }
+        uint _R;
+        public uint R
+        {
+            get { return _R; }
+            set
+            {
+                //var r = (uint)Math.Abs(value);
+                _R = value < deadzone ? 0 : value;
+            }
+        }
+        //values 0 to 359
+        short? _theta;
+        public short? theta
+        {
+            get
+            {
+                if (R == 0) { return null; }
+                return _theta;
+            }
+            set
+            {
+                _theta = (short?)(value % 360);
+                _theta +=(short?) ( _theta < 0 ? 360 : 0);
+            }
+        }
+
+        //public short? getTheta() { return theta; }
+        //public uint getR() { return R; }
+        public PolarStick(uint r, short? t, ushort deadzone)
+        {
+            this.deadzone = deadzone;
+            _R = r < deadzone ? 0 : r;
+            _theta = (short?)(t % 360);
+            _theta += (short?)((_theta < 0) ? 360 : 0);
+        }
+        public PolarStick(short x, short y, ushort deadzone)
+        {
+            this.deadzone = deadzone;
+            _R = (uint)Math.Sqrt(x * x + y * y);
+            _R = _R < deadzone ? 0 :_R;
+            _theta = (_R == 0) ? null : (short?)(Math.Atan2(x, y) * 57.2958);
+            _theta += (short?)((_theta < 0) ? 360 : 0);
+        }
     }
-  }
 }
