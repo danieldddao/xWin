@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using xWin.Wrapper;
 using SharpDX;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace MSTest.Library
 {
@@ -110,6 +112,54 @@ namespace MSTest.Library
             mockController.Setup(x => x.RightClick()).Throws(new Exception()); ;
             bool status = controller.RightClick();
             Assert.IsFalse(status);
+        }
+
+        [TestMethod]
+        public void TestConnected()
+        {
+            mockController.Setup(x => x.IsConnected());
+            bool status = controller.IsConnected();
+            Assert.IsTrue(status);
+        }
+        [TestMethod]
+        public void TestConnected_ThrowsException()
+        {
+            mockController.Setup(x => x.IsConnected()).Throws(new Exception());
+            bool status = controller.IsConnected();
+            Assert.IsFalse(status);
+        }
+
+        [TestMethod]
+        public void testMouseMove()
+        {
+            mockController.Setup(x => x.MoveCursor(10,7000));
+            bool status = controller.MoveCursor();
+            Assert.IsTrue(status);
+        }
+        [TestMethod]
+        public void testCursorPos()
+        {
+            Cursor.Position = new Point(200, 200);
+            mockController.Setup(x => x.MoveCursor(1,10, 32647));
+            int mockPosX = Cursor.Position.X;
+            int mockPosY = Cursor.Position.Y;
+            Cursor.Position = new Point(200,200);
+            controller.MoveCursorTest();
+            int actPosX = Cursor.Position.X;
+            int actPosY = Cursor.Position.Y;
+
+            bool status = false;
+            if(actPosX == mockPosX && actPosY == mockPosY)
+            {
+                status = true;
+            }
+            else
+            {
+                status = false;
+            }
+            System.Diagnostics.Trace.Write(actPosX);
+            System.Diagnostics.Trace.Write(actPosY);
+            Assert.IsTrue(status);
         }
     }
 }

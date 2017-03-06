@@ -160,36 +160,35 @@ namespace xWin.Library
             return currentControllerState.Gamepad.RightTrigger;
         }
 
-        public void MoveCursor()
+        public bool MoveCursor()
         {
-            int currX = currentControllerState.Gamepad.LeftThumbX;
-            int currY = currentControllerState.Gamepad.LeftThumbY;
-            float xDiff = 0;
-            float yDiff = 0;
-            int dpi = 10;
-            
-            if(Math.Abs(currX) > deadZoneRad)
+            try
             {
-                xDiff = currX;
-                xDiff /= MAX_INPUT;
-                xDiff *= dpi;
-                
-                Cursor.Position = new Point(Cursor.Position.X + (short)Math.Floor(xDiff), Cursor.Position.Y);
+                controllerWrapper.MoveCursor(10,7000);
+                return true;
             }
-            if(Math.Abs(currY) > deadZoneRad)
+            catch
             {
-                yDiff = currY;
-                yDiff /= MAX_INPUT;
-                yDiff *= dpi;
-                yDiff *= -1;
-                
-                Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + (short)Math.Floor(yDiff));
+                return false;
             }
+        }
+
+        public void MoveCursorTest()
+        {
+            controllerWrapper.MoveCursor(1,10, 7000);
         }
 
         public bool IsConnected()
         {
-            return controller.IsConnected;
+            try
+            {
+                controllerWrapper.IsConnected();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool LeftUp()
         {
