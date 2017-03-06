@@ -1,8 +1,11 @@
 ﻿using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
-using SharpDX.XInput;
+using System.Threading;
 using xWin.Library;
+using SharpDX.XInput;
 
 namespace xWin
 {
@@ -10,86 +13,37 @@ namespace xWin
 	{
         static void Main(string[] args)
 		{
-            bool msg = false;
-            XController c = new XController(new Controller(UserIndex.One));
+            XController c = new XController();
             while (true)
             {
-                Thread.Sleep(200);
+                
                 if (c.IsConnected())
                 {
-                    if (!msg) {
-                        Console.WriteLine("Controller Connected!");
-                        msg = true;
-                    }
-                    if (c.IsButtonAPressed())
+                    c.UpdateState();
+                    /*foreach(var button in c.ButtonsPressed())
                     {
-                        Console.WriteLine("Button A pressed!");
-                        XKeyBoard x = new XKeyBoard();
-                        x.PressKeysFromString("Hello World@$%^&*()<>?");
+                        Console.WriteLine(button.Key + " is pressed: " + button.Value);
                     }
-                    if (c.IsButtonBPressed())
+                    foreach(var thumb in c.GetLeftCart())
                     {
-                        Console.WriteLine("Button B pressed!");
-                        XKeyBoard x = new XKeyBoard();
-                        Keys[] k = { Keys.LControlKey, Keys.LMenu, Keys.Tab };
-                        x.PressShortcut(k);
+                        Console.WriteLine("Left stick " + thumb.Key + ": " + thumb.Value);
                     }
-                    if (c.IsButtonXPressed())
+                    foreach(var thumb in c.GetRightCart())
                     {
-                        Console.WriteLine("Button X pressed!");
-                        XKeyBoard x = new XKeyBoard();
-                        x.OpenApplication("C:\\KMPlayer\\KMPlayer.exe");
+                        Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
                     }
-                    if (c.IsButtonYPressed())
-                    {
-                        Console.WriteLine("Button Y pressed!");
-                        XKeyBoard x = new XKeyBoard();
-                        x.PressKey('|');
-                    }
-                    if (c.IsButtonBackPressed())
-                    {
-                        Console.WriteLine("Button Back pressed!");
-                    }
-                    if (c.IsButtonDPadDownPressed())
-                    {
-                        Console.WriteLine("Button DPadDown pressed!");
-                    }
-                    if (c.IsButtonDPadUpPressed())
-                    {
-                        Console.WriteLine("Button DPadUp pressed!");
-                    }
-                    if (c.IsButtonDPadLeftPressed())
-                    {
-                        Console.WriteLine("Button DPadLeft pressed!");
-                    }
-                    if (c.IsButtonDPadRightPressed())
-                    {
-                        Console.WriteLine("Button DPadRight pressed!");
-                    }
-                    if (c.IsButtonLeftShoulderPressed())
-                    {
-                        Console.WriteLine("Button LeftShoulder pressed!");
-                    }
-                    if (c.IsButtonRightShoulderPressed())
-                    {
-                        Console.WriteLine("Button RightShoulder pressed!");
-                    }
-                    if (c.IsButtonLeftThumbPressed())
-                    {
-                        Console.WriteLine("Button LeftThumb pressed!");
-                    }
-                    if (c.IsButtonRightThumbPressed())
-                    {
-                        Console.WriteLine("Button RightThumb pressed!");
-                    }
-                    if (c.IsButtonStartPressed())
-                    {
-                        Console.WriteLine("Button Start pressed!");
-                    }
-                } else
+                    Console.WriteLine("Left trigger: " + c.GetLeftTrigger());
+                    Console.WriteLine("Right trigger:" + c.GetRightTrigger());*/
+                    c.MoveCursor();
+                    //if (c.ButtonsPressed()["A"]) c.LeftDown();
+                    //else c.LeftUp();
+                    //if (c.ButtonsPressed()["B"]) c.RightClick();
+                    //Thread.Sleep(200);
+                    Console.Clear();
+                }
+                else
                 {
                     Console.WriteLine("Controller Disconnected!");
-                    msg = false;
                 }     
             }
 		}

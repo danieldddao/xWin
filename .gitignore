@@ -21,6 +21,8 @@ xWin/xWin/[Ll]og/
 proto/test/test/[Bb]in/
 proto/test/test/[Oo]bj/
 xWin/packages/
+xWin/Test/Cucumber/[Oo]bj/
+xWin/Test/MSTest/[Oo]bj/
 
 # .NET Core
 xWin/xWin/project.lock.json
