@@ -85,35 +85,7 @@ namespace xWin
                 Console.WriteLine(ps.theta);
                 Console.Write("Distance: ");
                 Console.WriteLine(ps.R);
-                //*/
-                /*
-                for (int i = 0; i < datas.Buttons.GetLength(0); ++i)
-                {
-                  if (datas.Buttons[i])
-                  {
-                    Console.Write((Buttons)i);
-                    Console.Write(",");
-                  }
-                }
-                Console.WriteLine("");
-                Console.Write(datas.X);
-                Console.Write(",");
-                Console.Write(datas.Y);
-                Console.Write(",");
-                Console.Write(datas.Z);
-                Console.WriteLine("");
-                Console.WriteLine(datas.RotationX);
-                Console.Write(",");
-                Console.Write(datas.RotationY);
-                Console.WriteLine("");
-                */
-                /* D-Pad read
-                * 
-                */
-                /*
-               var j = datas.PointOfViewControllers[0] >= 0 ? (DPAD)(datas.PointOfViewControllers[0]/4500): DPAD.none;
-               Console.WriteLine(j);
-               */
+
                 Thread.Sleep(300);
                 Console.Clear();
             }

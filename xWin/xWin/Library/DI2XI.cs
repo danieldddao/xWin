@@ -93,5 +93,47 @@ namespace xWin.Library
 
             return xi_state;
         }
+
+        public static Joystick setup_stick()
+        {
+            // Initialize DirectInput
+            var directInput = new DirectInput();
+
+            // Find a Joystick Guid
+            var joystickGuid = Guid.Empty;
+
+            foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Gamepad, DeviceEnumerationFlags.AllDevices))
+                joystickGuid = deviceInstance.InstanceGuid;
+
+            // If Gamepad not found, look for a Joystick
+            if (joystickGuid == Guid.Empty)
+                foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
+                    joystickGuid = deviceInstance.InstanceGuid;
+
+            // If Joystick not found, throws an error
+            if (joystickGuid == Guid.Empty)
+            {
+                Console.WriteLine("No joystick/Gamepad found.");
+                Console.ReadKey();
+                Environment.Exit(1);
+            }
+
+            // Instantiate the joystick
+            var joystick = new Joystick(directInput, joystickGuid);
+
+            Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
+
+            // Set BufferSize in order to use buffered data.
+            joystick.Properties.BufferSize = 128;
+
+            foreach (DeviceObjectInstance doi in joystick.GetObjects(DeviceObjectTypeFlags.Axis))
+            {
+                joystick.GetObjectPropertiesById(doi.ObjectId).Range = new InputRange(-32767, 32767);
+            }
+
+            // Acquire the joystick
+            joystick.Acquire();
+            return joystick;
+        }
     }
 }
