@@ -16,9 +16,9 @@
 
 ## Testing Tools:
 * MSTest
-* Cucumber - [SpecFlow] (http://specflow.org): 
-	Specflow for Visual Studio, NUnit Test Adapter: Tools -> Extensions and Updates
-	SpecFlow and SpecFlow.NUnit: Nuget Packages
+* Cucumber - [SpecFlow](http://specflow.org): 
+* Specflow for Visual Studio, NUnit Test Adapter: Tools -> Extensions and Updates
+* SpecFlow and SpecFlow.NUnit: Nuget Packages
 * Mocking Framework [Moq](https://github.com/moq/moq4)
 
 # Custom setting storage possibility
@@ -26,3 +26,9 @@
 
 ## General useful links
 * TODO
+
+## For Matt
+* [Moving mouse tutorial](https://www.youtube.com/watch?v=B4g4ePM-rG4)
+* [Cursor.Position MSDN](https://msdn.microsoft.com/en-us/library/system.windows.forms.cursor.position(v=vs.110).aspx)
+* [More mouse moving](http://stackoverflow.com/questions/647236/moving-mouse-cursor-programmatically)
+* [More mouse moving](http://stackoverflow.com/questions/8050825/how-to-move-mouse-cursor-using-c)

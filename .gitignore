@@ -21,6 +21,8 @@ xWin/xWin/[Ll]og/
 proto/test/test/[Bb]in/
 proto/test/test/[Oo]bj/
 xWin/packages/
+xWin/Test/Cucumber/[Oo]bj/
+xWin/Test/MSTest/[Oo]bj/
 
 # .NET Core
 xWin/xWin/project.lock.json
@@ -66,12 +68,16 @@ xWin/xWin/[Bb]uild[Ll]og.*
 
 # NUNIT
 xWin/xWin/*.VisualState.xml
-xWin/Test/MSTest/bin/
-xWin/Test/MSTest/obj/
+xWin/Test/MSTest/bin/*
+xWin/Test/MSTest/obj/*
 
 # Cucumber
-xWin/Test/Cucumber/bin/
-xWin/Test/Cucumber/obj/
+xWin/Test/Cucumber/bin/*
+xWin/Test/Cucumber/obj/*
+
+# NUnitForms
+xWin/Test/NUnitForms/bin/*
+xWin/Test/NUnitForms/obj/*
 
 # Visual C++ cache files
 xWin/xWin/ipch/
@@ -83,3 +89,6 @@ xWin/xWin/ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
+
+xWin/UpgradeLog.htm
+xWin/xWin/Resources/Thumbs.db

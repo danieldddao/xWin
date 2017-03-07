@@ -12,3 +12,7 @@ C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\
 C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\test.pdb
 C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\Google.Protobuf.dll
 C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\Google.Protobuf.xml
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\SharpDX.dll
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\SharpDX.XInput.dll
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\SharpDX.xml
+C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\SharpDX.XInput.xml

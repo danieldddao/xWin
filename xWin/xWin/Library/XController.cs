@@ -1,119 +1,266 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using SharpDX.XInput;
+using xWin.Wrapper;
+
 
 namespace xWin.Library
 {
     public class XController
     {
-        Controller controller;
+        private readonly IXControllerWrapper controllerWrapper;
+        private Controller controller;
+        private State currentControllerState { get; set; }
+        private short deadZoneRad { get; set; }
+        private const short MAX_INPUT = 32767;
+        private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
 
-        public XController()
+        [DllImport("User32.Dll", EntryPoint = "SetCursorPos")]
+        public static extern long SetCursorPos(int x, int y);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        
+        public XController(IXControllerWrapper iXController)
         {
-            this.controller = new Controller(UserIndex.One);
+            this.controllerWrapper = iXController;
         }
 
-        public XController(Controller c)
+        public XController(short deadZoneRad = 7000)
         {
-            this.controller = c;
+            this.controller = new SharpDX.XInput.Controller(UserIndex.One);
+            try
+            {
+                currentControllerState = controller.GetState();
+            }
+            catch
+            {
+                ;
+            }
+            this.deadZoneRad = deadZoneRad;
+            controllerWrapper = new XControllerWrapper();
         }
 
-        public virtual bool IsConnected()
+        public XController(SharpDX.XInput.Controller contoller, short deadZoneRad = 7000)
         {
-            return controller.IsConnected;
+            this.controller = controller;
+            currentControllerState = this.controller.GetState();
+            this.deadZoneRad = deadZoneRad;
         }
 
-        public virtual bool IsDisconnected()
+        public void UpdateState()
         {
-            return !controller.IsConnected;
-
+            currentControllerState = controller.GetState();
         }
 
-        public virtual bool IsButtonAPressed()
+        public Dictionary<string,bool> ButtonsPressed()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A);
+            Dictionary<string,bool> currentButtons = new Dictionary<string,bool>();
+            /*
+            if(currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A))
+            {
+                currentButtons.Add(Buttons.A);
+            }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.B)) { currentButtons.Add(Buttons.B); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.X)) { currentButtons.Add(Buttons.X); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Y)) { currentButtons.Add(Buttons.Y); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Start)) { currentButtons.Add(Buttons.START); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Back)) { currentButtons.Add(Buttons.START); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder)) { currentButtons.Add(Buttons.LEFT_BUMPER); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder)) { currentButtons.Add(Buttons.RIGHT_BUMPER); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb)) { currentButtons.Add(Buttons.LEFT_STICK); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightThumb)) { currentButtons.Add(Buttons.RIGHT_STICK); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadUp)) { currentButtons.Add(Buttons.DPAD_UP); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadRight)) { currentButtons.Add(Buttons.DPAD_RIGHT); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft)) { currentButtons.Add(Buttons.DPAD_LEFT); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadDown)) { currentButtons.Add(Buttons.DPAD_DOWN); }
+            if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.None)) { currentButtons.Add(Buttons.NONE); }
+            */
+
+            currentButtons.Add("A", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A));
+            currentButtons.Add("B", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.B));
+            currentButtons.Add("X", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.X));
+            currentButtons.Add("Y", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Y));
+            currentButtons.Add("START", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Start));
+            currentButtons.Add("BACK", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Back));
+            currentButtons.Add("LEFT_S", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder));
+            currentButtons.Add("RIGHT_S", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder));
+            currentButtons.Add("LEFT_T", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb));
+            currentButtons.Add("RIGHT_T", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightThumb));
+            currentButtons.Add("DPAD_UP", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadUp));
+            currentButtons.Add("DPAD_RIGHT", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadRight));
+            currentButtons.Add("DPAD_LEFT", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft));
+            currentButtons.Add("DPAD_DOWN", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadDown));
+            currentButtons.Add("NONE", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.None));
+
+            return currentButtons;
         }
 
-        public virtual bool IsButtonBPressed()
+        public Dictionary<string, short> GetLeftCart()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.B);
+            Dictionary<string, short> thumbLoc = new Dictionary<string, short>();
+
+            thumbLoc.Add("X", currentControllerState.Gamepad.LeftThumbX);
+            thumbLoc.Add("Y", currentControllerState.Gamepad.LeftThumbY);
+
+            return thumbLoc;
         }
 
-        public virtual bool IsButtonXPressed()
+        public Dictionary<string, double> GetLeftPolar()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.X);
+            Dictionary<string, double> thumbLoc = new Dictionary<string, double>();
+            short x = currentControllerState.Gamepad.LeftThumbX;
+            short y = currentControllerState.Gamepad.LeftThumbY;
+
+            double r = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+            double theta = Math.Atan(y / x);
+            thumbLoc.Add("R", r);
+            thumbLoc.Add("THETA", theta);
+
+            return thumbLoc;
         }
 
-        public virtual bool IsButtonYPressed()
+        public Dictionary<string, short> GetRightCart()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Y);
+            Dictionary<string, short> thumbLoc = new Dictionary<string, short>();
+
+            thumbLoc.Add("X", currentControllerState.Gamepad.RightThumbX);
+            thumbLoc.Add("Y", currentControllerState.Gamepad.RightThumbY);
+
+            return thumbLoc;
         }
 
-        public virtual bool IsButtonBackPressed()
+        public Dictionary<string, double> GetRightPolar()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Back);
+            Dictionary<string, double> thumbLoc = new Dictionary<string, double>();
+            short x = currentControllerState.Gamepad.RightThumbX;
+            short y = currentControllerState.Gamepad.RightThumbY;
+
+            double r = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+            double theta = Math.Atan(y / x);
+            thumbLoc.Add("R", r);
+            thumbLoc.Add("THETA", theta);
+            
+            return thumbLoc;
         }
 
-        public virtual bool IsButtonDPadDownPressed()
+        public short GetLeftTrigger()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadDown);
+            return currentControllerState.Gamepad.LeftTrigger;
         }
 
-        public virtual bool IsButtonDPadUpPressed()
+        public short GetRightTrigger()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadUp);
+            return currentControllerState.Gamepad.RightTrigger;
         }
 
-        public virtual bool IsButtonDPadLeftPressed()
+        public bool MoveCursor()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft);
+            try
+            {
+                controllerWrapper.MoveCursor(10,7000);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public virtual bool IsButtonDPadRightPressed()
+        public void MoveCursorTest()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadRight);
+            controllerWrapper.MoveCursor(1,10, 7000);
         }
 
-        public virtual bool IsButtonLeftShoulderPressed()
+        public bool IsConnected()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder);
+            try
+            {
+                controllerWrapper.IsConnected();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public virtual bool IsButtonRightShoulderPressed()
+        public bool LeftUp()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder);
+            try
+            {
+                controllerWrapper.LeftUp();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public virtual bool IsButtonLeftThumbPressed()
+        public bool LeftDown()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb);
+            try
+            {
+                controllerWrapper.LeftDown();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public virtual bool IsButtonRightThumbPressed()
+        public bool LeftClick()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightThumb);
+            try
+            {
+                controllerWrapper.LeftClick();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-
-        public virtual bool IsButtonStartPressed()
+        public bool RightUp()
         {
-            State s = controller.GetState();
-            return s.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Start);
+            try
+            {
+                controllerWrapper.RightUp();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool RightDown()
+        {
+            try
+            {
+                controllerWrapper.RightDown();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool RightClick()
+        {
+            try
+            {
+                controllerWrapper.RightClick();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
