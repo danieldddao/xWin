@@ -16,8 +16,8 @@ namespace MSTest.Library
     [TestClass]
     public class BehaviorsTests
     {
-        Behavior b1,b2,b3,b4,b5;
-        Stick s1, s2, s3;
+        Behavior KeyBehavior,SpecialBehavior,NoBehavior,TogglePressBehavior, ToggleReleaseBehavior;
+        Stick KeyBehaviorStick;
 
         private KeyboardMouseState KMState()
         {
@@ -27,7 +27,7 @@ namespace MSTest.Library
         [TestInitialize]
         public void Setup()
         {
-            b1 = new Behavior
+            KeyBehavior = new Behavior
             {
                 OnPress = new Configuration.Types.Action { Keybind = (int)Keys.A },
                 OnHold = new Configuration.Types.Action { Keybind = (int)Keys.B },
@@ -36,16 +36,7 @@ namespace MSTest.Library
                 OnPressToggle = false,
                 OnReleaseToggle = false
             };
-            b2 = new Behavior
-            {
-                OnPress = new Configuration.Types.Action { SpecialAction = SpecialAction.Turbo },
-                OnHold = new Configuration.Types.Action { Keybind = (int)Keys.B },
-                OnRelease = new Configuration.Types.Action { SpecialAction = SpecialAction.TypingMode },
-                OnStay = new Configuration.Types.Action { Keybind = (int)Keys.D },
-                OnPressToggle = true,
-                OnReleaseToggle = true
-            };
-            b3 = new Behavior
+            SpecialBehavior = new Behavior
             {
                 OnPress = new Configuration.Types.Action { SpecialAction = SpecialAction.MouseDown },
                 OnHold = new Configuration.Types.Action { SpecialAction = SpecialAction.MouseLeft },
@@ -54,17 +45,7 @@ namespace MSTest.Library
                 OnPressToggle = false,
                 OnReleaseToggle = false
             };
-            b4 = new Behavior
-            {
-                OnPress = new Configuration.Types.Action { SpecialAction = SpecialAction.Pass },
-                OnHold = new Configuration.Types.Action { SpecialAction = SpecialAction.Pass },
-                OnRelease = new Configuration.Types.Action { SpecialAction = SpecialAction.Pass },
-                OnStay = new Configuration.Types.Action { SpecialAction = SpecialAction.Pass },
-                OnPressToggle = false,
-                OnReleaseToggle = false
-            };
-
-            b5 = new Behavior
+            NoBehavior = new Behavior
             {
                 OnPress = new Configuration.Types.Action { Keybind = (int)Keys.None },
                 OnHold = new Configuration.Types.Action { Keybind = (int)Keys.None },
@@ -74,16 +55,38 @@ namespace MSTest.Library
                 OnReleaseToggle = false
             };
 
+            TogglePressBehavior = new Behavior
+            {
+                OnPress = new Configuration.Types.Action { Keybind = (int)Keys.A },
+                OnHold = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnRelease = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnStay = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnPressToggle = true,
+                OnReleaseToggle = false
+            };
 
-            s1 = new Stick
+            ToggleReleaseBehavior = new Behavior
+            {
+                OnPress = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnHold = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnRelease = new Configuration.Types.Action { Keybind = (int)Keys.A },
+                OnStay = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnPressToggle = false,
+                OnReleaseToggle = true
+            };
+
+            KeyBehaviorStick = new Stick
             {
                 Deadzone = 1000,
                 RegionStart = 0,
                 ControlMouse = false,
-                StayBehavior = b1,
-                Regions = { new Region { Range = 180, Behavior = b3 }, new Region { Range = 180, Behavior = b5 } }
+                StayBehavior = NoBehavior,
+                Regions = { new Region { Range = 180, Behavior = KeyBehavior },
+                            new Region { Range = 180, Behavior = NoBehavior } }
             };
-            s2 = new Stick
+
+            /*
+           s2 = new Stick
             {
                 Deadzone = 1000,
                 ControlMouse = true,
@@ -98,7 +101,7 @@ namespace MSTest.Library
                 InvertLr = true,
                 InvertUd = true
             };
-
+            */
 
         }
 
@@ -133,97 +136,215 @@ namespace MSTest.Library
         }
 
         [TestMethod]
-        public void TestButtonBehaviorWithKeybinds()
+        public void TestButtonBehaviorWithKeybinds_Press()
         {
+            var bb = new ButtonBehavior(KeyBehavior);
+            bb.Act(false, KMState());
+
             KeyboardMouseState kmstate = KMState();
-            var bb = new ButtonBehavior(b1);
             bb.Act(true, kmstate);
-            bb.Act(true, kmstate);
-            bb.Act(false, kmstate);
-            bb.Act(false, kmstate);
 
-            Assert.AreEqual(4, kmstate.pressed.Count);
 
-            Assert.AreEqual(Keys.A, kmstate.pressed.Dequeue());
-            Assert.AreEqual(Keys.B, kmstate.pressed.Dequeue());
-            Assert.AreEqual(Keys.C, kmstate.pressed.Dequeue());
-            Assert.AreEqual(Keys.D, kmstate.pressed.Dequeue());
+            Assert.AreEqual(1, kmstate.pressed.Count);
+            Assert.AreEqual((Keys)KeyBehavior.OnPress.Keybind, kmstate.pressed.Dequeue());
             
             Assert.AreEqual(0, kmstate.special.Count);
             Assert.AreEqual(0, kmstate.mouse_movement.Count);
         }
 
         [TestMethod]
-        public void TestButtonBehaviorWithSpecialActions()
+        public void TestButtonBehaviorWithKeybinds_Hold()
         {
-            var kmstate = KMState();
-            var bb = new ButtonBehavior(b3);
+            var bb = new ButtonBehavior(KeyBehavior);
+            bb.Act(true, KMState());
+
+            KeyboardMouseState kmstate = KMState();
             bb.Act(true, kmstate);
-            bb.Act(true, kmstate);
-            bb.Act(false, kmstate);
+
+
+            Assert.AreEqual(1, kmstate.pressed.Count);
+            Assert.AreEqual((Keys)KeyBehavior.OnHold.Keybind, kmstate.pressed.Dequeue());
+
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+        }
+
+        [TestMethod]
+        public void TestButtonBehaviorWithKeybinds_Release()
+        {
+            var bb = new ButtonBehavior(KeyBehavior);
+            bb.Act(true, KMState());
+
+            KeyboardMouseState kmstate = KMState();
             bb.Act(false, kmstate);
 
-            Assert.AreEqual(4, kmstate.special.Count);
 
-            Assert.AreEqual(SpecialAction.MouseDown, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.MouseLeft, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.MouseRight, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.MouseUp, kmstate.special.Dequeue());
+            Assert.AreEqual(1, kmstate.pressed.Count);
+            Assert.AreEqual((Keys)KeyBehavior.OnRelease.Keybind, kmstate.pressed.Dequeue());
+
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+        }
+
+        [TestMethod]
+        public void TestButtonBehaviorWithKeybinds_Stay()
+        {
+            var bb = new ButtonBehavior(KeyBehavior);
+            bb.Act(false, KMState());
+
+            KeyboardMouseState kmstate = KMState();
+            bb.Act(false, kmstate);
+
+
+            Assert.AreEqual(1, kmstate.pressed.Count);
+            Assert.AreEqual((Keys)KeyBehavior.OnStay.Keybind, kmstate.pressed.Dequeue());
+
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+        }
+
+
+        [TestMethod]
+        public void TestButtonBehaviorWithSpecialActions_Press()
+        {
+            var bb = new ButtonBehavior(SpecialBehavior);
+            bb.Act(false, KMState());
+
+            KeyboardMouseState kmstate = KMState();
+            bb.Act(true, kmstate);
             
             Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(1, kmstate.special.Count);
+
+            Assert.AreEqual((SpecialAction)SpecialBehavior.OnPress.SpecialAction, kmstate.special.Dequeue());
+
             Assert.AreEqual(0, kmstate.mouse_movement.Count);
-
         }
-
+        
         [TestMethod]
-        public void TestButtonBehaviorWithToggle()
+        public void TestButtonBehaviorWithSpecialActions_Hold()
         {
+            var bb = new ButtonBehavior(SpecialBehavior);
+            bb.Act(true, KMState());
+
             KeyboardMouseState kmstate = KMState();
-            var bb = new ButtonBehavior(b2);
             bb.Act(true, kmstate);
-            bb.Act(true, kmstate);
-            bb.Act(false, kmstate);
-            bb.Act(false, kmstate);
-            bb.Act(true, kmstate);
-            bb.Act(true, kmstate);
-            bb.Act(false, kmstate);
-            bb.Act(false, kmstate);
 
-            Assert.AreEqual(4, kmstate.pressed.Count);
-            Assert.AreEqual(Keys.B, kmstate.pressed.Dequeue());
-            Assert.AreEqual(Keys.D, kmstate.pressed.Dequeue());
-            Assert.AreEqual(Keys.B, kmstate.pressed.Dequeue());
-            Assert.AreEqual(Keys.D, kmstate.pressed.Dequeue());
+            Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(1, kmstate.special.Count);
 
-            Assert.AreEqual(8, kmstate.special.Count);
-            Assert.AreEqual(SpecialAction.Turbo, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.Turbo, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.Turbo, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.TypingMode, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.Turbo, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.TypingMode, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.TypingMode, kmstate.special.Dequeue());
-            Assert.AreEqual(SpecialAction.TypingMode, kmstate.special.Dequeue());
+            Assert.AreEqual((SpecialAction)SpecialBehavior.OnHold.SpecialAction, kmstate.special.Dequeue());
 
             Assert.AreEqual(0, kmstate.mouse_movement.Count);
         }
 
         [TestMethod]
-        public void TestButtonBehaviorEmpty()
+        public void TestButtonBehaviorWithSpecialActions_Release()
+        {
+            var bb = new ButtonBehavior(SpecialBehavior);
+            bb.Act(true, KMState());
+
+            KeyboardMouseState kmstate = KMState();
+            bb.Act(false, kmstate);
+            
+            Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(1, kmstate.special.Count);
+
+            Assert.AreEqual((SpecialAction)SpecialBehavior.OnRelease.SpecialAction, kmstate.special.Dequeue());
+
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+        }
+
+        [TestMethod]
+        public void TestButtonBehaviorWithSpecialActions_Stay()
+        {
+            var bb = new ButtonBehavior(SpecialBehavior);
+            bb.Act(false, KMState());
+
+            KeyboardMouseState kmstate = KMState();
+            bb.Act(false, kmstate);
+
+            Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(1, kmstate.special.Count);
+
+            Assert.AreEqual((SpecialAction)SpecialBehavior.OnStay.SpecialAction, kmstate.special.Dequeue());
+
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+        }
+
+        [TestMethod]
+        public void TestButtonBehaviorWithNoAction()
         {
             KeyboardMouseState kmstate = KMState();
-            var bb = new ButtonBehavior(b5);
+            var bb = new ButtonBehavior(NoBehavior);
             bb.Act(true, kmstate);
+
+            Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+        }
+        
+        [TestMethod]
+        public void TestButtonBehaviorWithTogglePress()
+        {
+            var bb = new ButtonBehavior(TogglePressBehavior);
+            bb.Act(false, KMState());
+
+            KeyboardMouseState kmstate = KMState();
             bb.Act(true, kmstate);
-            bb.Act(false, kmstate);
-            bb.Act(false, kmstate);
+
+            Assert.AreEqual(1, kmstate.pressed.Count);
+
+            Assert.AreEqual((Keys)TogglePressBehavior.OnPress.Keybind, kmstate.pressed.Dequeue());
+
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+
+            kmstate = KMState();
+            bb.Act(false, KMState());
+            bb.Act(false, KMState());
+            bb.Act(true, kmstate);
 
             Assert.AreEqual(0, kmstate.pressed.Count);
             Assert.AreEqual(0, kmstate.special.Count);
             Assert.AreEqual(0, kmstate.mouse_movement.Count);
         }
 
+        [TestMethod]
+        public void TestButtonBehaviorWithToggleRelease()
+        {
+            var bb = new ButtonBehavior(ToggleReleaseBehavior);
+            bb.Act(true, KMState());
 
+            KeyboardMouseState kmstate = KMState();
+            bb.Act(false, kmstate);
+
+            Assert.AreEqual(1, kmstate.pressed.Count);
+
+            Assert.AreEqual((Keys)ToggleReleaseBehavior.OnRelease.Keybind, kmstate.pressed.Dequeue());
+
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+
+            kmstate = KMState();
+            bb.Act(true, KMState());
+            bb.Act(false, kmstate);
+
+            Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+        }
+        
+        [TestMethod]
+        public void TestRegionStickBehavior()
+        {
+            var rsb = new RegionStickBehavior(KeyBehaviorStick);
+            rsb.Act(0, 0, KMState());
+
+            KeyboardMouseState kmstate = KMState();
+            rsb.Act(0, 2000, kmstate);
+        }
+        /*
         [TestMethod]
         public void TestRegionStickBehavior ()
         {
@@ -239,6 +360,7 @@ namespace MSTest.Library
             rsb.Act(0, 0, kmstate);
             
         }
+        */
     }
 
 }

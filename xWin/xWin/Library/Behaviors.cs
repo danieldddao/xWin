@@ -97,8 +97,7 @@ namespace xWin.Library
             private readonly bool toggle_press, toggle_release;
 
             private bool press_state, release_state;
-
-            //was it down last time?
+            
             private bool previous_state;
 
             public void Reset() { press_state = false; release_state = false; previous_state = false; }
@@ -248,7 +247,7 @@ namespace xWin.Library
             public void Reset() { }
             public void Act(short x, short y, KeyboardMouseState kmstate)
             {
-                kmstate.mouse_movement.Enqueue(new PolarStick((short)(invert_lr ? -x : x), (short)(invert_lr ? -y : y), deadzone));
+                kmstate.mouse_movement.Enqueue(new KeyboardMouseState.coord {x = x,y = y});
             }
         }
 

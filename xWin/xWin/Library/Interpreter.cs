@@ -22,7 +22,9 @@ namespace xWin.Library
         {
             public Queue<Keys> pressed;
             public Queue<SpecialAction> special;
-            public Queue<PolarStick> mouse_movement;
+
+            public struct coord { public int x; public int y; }; 
+            public Queue<coord> mouse_movement;
         }
 
         protected Dictionary<GamepadButtonFlags, ButtonBehavior> button_map { get; private set; }
