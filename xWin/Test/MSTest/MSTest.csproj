@@ -77,14 +77,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\XKeyBoardTest.cs" />
     <Compile Include="Library\XControllerTest.cs" />
-    <Compile Include="Library\XKeyboardTests.cs" />
-    <Compile Include="Library\StickTest.cs" />
     <Compile Include="Library\ActionsTests.cs" />
     <Compile Include="Library\DI2XITest.cs" />
     <Compile Include="Library\InterpreterTests.cs" />
     <Compile Include="Library\PolarStickTests.cs" />
-    <Compile Include="Library\XKeyboardTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
