@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\DefaultConfiguration.cs" />
     <Compile Include="Config\MouseControl.cs" />
     <Compile Include="Library\Behaviors.cs" />
     <Compile Include="Library\DI2XI.cs" />

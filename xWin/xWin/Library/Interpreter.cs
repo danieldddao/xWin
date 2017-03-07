@@ -31,14 +31,6 @@ namespace xWin.Library
         protected readonly StickAction LeftStick, RightStick;
         protected readonly TriggerBehavior LeftTrigger, RightTrigger;
         protected readonly List<ControllerAction> all_connections;
-        //private State _last_state;
-        protected State last_state { get; private set; }
-        private State _current_state;
-        protected State current_state
-        {
-            get { return _current_state; }
-            set { last_state = _current_state; _current_state = value; }
-        }
 
         public Interpreter(Configuration c)
         {
@@ -53,31 +45,26 @@ namespace xWin.Library
 
                 all_connections.Add(button_map[b]);
             }
-            LeftStick = c.LeftStick.ControlMouse ? (StickAction)new MouseStickBehavior(c.LeftStick) : new RegionStickBehavior(c.LeftStick);
-            RightStick = c.RightStick.ControlMouse ? (StickAction)new MouseStickBehavior(c.RightStick) : new RegionStickBehavior(c.RightStick);
+            LeftStick  = c.LeftStick.ControlMouse  ? (StickAction) new MouseStickBehavior(c.LeftStick)  : new RegionStickBehavior(c.LeftStick);
+            RightStick = c.RightStick.ControlMouse ? (StickAction) new MouseStickBehavior(c.RightStick) : new RegionStickBehavior(c.RightStick);
             all_connections.Add(LeftStick);
             all_connections.Add(RightStick);
             LeftTrigger = new TriggerBehavior(c.LeftTrigger);
             RightTrigger = new TriggerBehavior(c.RightTrigger);
             all_connections.Add(LeftTrigger);
             all_connections.Add(RightTrigger);
-            _current_state = new State();
-            last_state = new State();
         }
 
         /*Clear the old States*/
         public void Reset()
         {
-            current_state = new State();
-            current_state = new State();
             foreach (var b in button_map.Values) { b.Reset(); }
         }
 
         /*The Method that should be in the main loop*/
         public KeyboardMouseState NextState(State s)
         {
-            current_state = s;
-            var gamepad = current_state.Gamepad;
+            var gamepad = s.Gamepad;
             //run Action for each Button (there's probably a cleaner way to write this)
             //button_map[GamepadButtonFlags.A].Action(current_state.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A));
             //etc...

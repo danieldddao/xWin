@@ -17,11 +17,12 @@ namespace MSTest.Library
     public class BehaviorsTests
     {
         Behavior KeyBehavior,SpecialBehavior,NoBehavior,TogglePressBehavior, ToggleReleaseBehavior;
-        Stick KeyBehaviorStick;
+        Stick KeyBehaviorStick, SpinnyBehaviorStick, MouseControlStick;
 
         private KeyboardMouseState KMState()
         {
-            return new KeyboardMouseState { special = new Queue<SpecialAction>(), mouse_movement = new Queue<PolarStick>(), pressed = new Queue<Keys>() };
+            return new KeyboardMouseState { special = new Queue<SpecialAction>(),
+                mouse_movement = new Queue<KeyboardMouseState.coord>(), pressed = new Queue<Keys>() };
         }
 
         [TestInitialize]
@@ -75,6 +76,27 @@ namespace MSTest.Library
                 OnReleaseToggle = true
             };
 
+            var b1 = new Behavior
+            {
+                OnPress = new Configuration.Types.Action { SpecialAction = SpecialAction.MouseDown },
+                OnHold = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnRelease = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnStay = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnPressToggle = false,
+                OnReleaseToggle = false
+            };
+
+            var b2 = new Behavior
+            {
+                OnPress = new Configuration.Types.Action { SpecialAction = SpecialAction.MouseUp },
+                OnHold = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnRelease = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnStay = new Configuration.Types.Action { Keybind = (int)Keys.None },
+                OnPressToggle = false,
+                OnReleaseToggle = false
+            };
+
+
             KeyBehaviorStick = new Stick
             {
                 Deadzone = 1000,
@@ -85,23 +107,21 @@ namespace MSTest.Library
                             new Region { Range = 180, Behavior = NoBehavior } }
             };
 
-            /*
-           s2 = new Stick
+            SpinnyBehaviorStick = new Stick
             {
                 Deadzone = 1000,
-                ControlMouse = true,
-                InvertLr = false,
-                InvertUd = false
+                RegionStart = 0,
+                ControlMouse = false,
+                StayBehavior = NoBehavior,
+                Regions = { new Region { Range = 180, Behavior =b1 },
+                            new Region { Range = 180, Behavior =b2 } }
             };
 
-            s3 = new Stick
+            MouseControlStick = new Stick
             {
                 Deadzone = 1000,
-                ControlMouse = true,
-                InvertLr = true,
-                InvertUd = true
+                ControlMouse = true
             };
-            */
 
         }
 
@@ -338,29 +358,39 @@ namespace MSTest.Library
         [TestMethod]
         public void TestRegionStickBehavior()
         {
-            var rsb = new RegionStickBehavior(KeyBehaviorStick);
+            var rsb = new RegionStickBehavior(SpinnyBehaviorStick);
             rsb.Act(0, 0, KMState());
 
             KeyboardMouseState kmstate = KMState();
-            rsb.Act(0, 2000, kmstate);
-        }
-        /*
-        [TestMethod]
-        public void TestRegionStickBehavior ()
-        {
-            var rsb = new RegionStickBehavior(s1);
-            var kmstate = KMState();
             rsb.Act(0, -2000, kmstate);
-            Assert.AreEqual(s1.Regions[0].Behavior.OnPress.SpecialAction, kmstate.special.Dequeue());
-            Assert.AreEqual((Keys)s1.StayBehavior.OnRelease.Keybind, kmstate.pressed.Dequeue());
-            Assert.AreEqual(0, kmstate.special.Count);
-            Assert.AreEqual(0, kmstate.mouse_movement.Count);
             Assert.AreEqual(0, kmstate.pressed.Count);
-            rsb.Act(0, -2000, kmstate);
-            rsb.Act(0, 0, kmstate);
-            
+            Assert.AreEqual(1, kmstate.special.Count);
+            Assert.AreEqual(SpinnyBehaviorStick.Regions[0].Behavior.OnPress.SpecialAction, kmstate.special.Dequeue());
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
+
+            rsb.Act(0, 2000, kmstate);
+            Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(1, kmstate.special.Count);
+            Assert.AreEqual(SpinnyBehaviorStick.Regions[1].Behavior.OnPress.SpecialAction, kmstate.special.Dequeue());
+            Assert.AreEqual(0, kmstate.mouse_movement.Count);
         }
-        */
+
+        [TestMethod]
+        public void TestMouseControlBehavior_OutsideDeadzone()
+        {
+            var rsb = new MouseStickBehavior(MouseControlStick);
+            var kmstate = KMState();
+            rsb.Act(2000, 2000, kmstate);
+            Assert.AreEqual(0, kmstate.pressed.Count);
+            Assert.AreEqual(0, kmstate.special.Count);
+            Assert.AreEqual(1, kmstate.mouse_movement.Count);
+
+            var pl = new PolarStick(2000, 2000, 0);
+            var i = kmstate.mouse_movement.Dequeue();
+            var p2 = new PolarStick((short)i.x, (short)i.y, 0);
+            Assert.AreEqual(pl.theta, p2.theta);
+
+        }
     }
 
 }
