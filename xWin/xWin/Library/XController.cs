@@ -14,49 +14,54 @@ namespace xWin.Library
 {
     public class XController
     {
-        private readonly IXControllerWrapper controllerWrapper;
-        private Controller controller;
+        private readonly IControllerWrapper controllerWrapper;
+
         private State currentControllerState { get; set; }
         private short deadZoneRad { get; set; }
         private const short MAX_INPUT = 32767;
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
 
-        [DllImport("User32.Dll", EntryPoint = "SetCursorPos")]
+        [DllImport("user32.dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         
-        public XController(IXControllerWrapper iXController)
+        public XController(IControllerWrapper iController)
         {
-            this.controllerWrapper = iXController;
+            this.controllerWrapper = iController;
         }
 
         public XController(short deadZoneRad = 7000)
         {
-            this.controller = new SharpDX.XInput.Controller(UserIndex.One);
-            try
-            {
-                currentControllerState = controller.GetState();
-            }
-            catch
-            {
-                ;
-            }
             this.deadZoneRad = deadZoneRad;
-            controllerWrapper = new XControllerWrapper();
+            controllerWrapper = new ControllerWrapper(new SharpDX.XInput.Controller(UserIndex.One));
+            if (controllerWrapper.IsConnected())
+            {
+                currentControllerState = controllerWrapper.GetState();
+            }
         }
 
-        public XController(SharpDX.XInput.Controller contoller, short deadZoneRad = 7000)
+        public XController(SharpDX.XInput.Controller controller, short deadZoneRad = 7000)
         {
-            this.controller = controller;
-            currentControllerState = this.controller.GetState();
+            controllerWrapper = new ControllerWrapper(controller);
+            if (controllerWrapper.IsConnected())
+            {
+                currentControllerState = controllerWrapper.GetState();
+            }
             this.deadZoneRad = deadZoneRad;
         }
 
         public void UpdateState()
         {
-            currentControllerState = controller.GetState();
+            try
+            {
+                currentControllerState = controllerWrapper.GetState();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}", e);
+            }
         }
 
         public Dictionary<string,bool> ButtonsPressed()
@@ -180,15 +185,7 @@ namespace xWin.Library
 
         public bool IsConnected()
         {
-            try
-            {
-                controllerWrapper.IsConnected();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return controllerWrapper.IsConnected();
         }
         public bool LeftUp()
         {

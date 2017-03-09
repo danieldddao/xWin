@@ -10,9 +10,10 @@ using System.Drawing;
 
 namespace xWin.Wrapper
 {
-    public interface IXControllerWrapper
+    public interface IControllerWrapper
     {
         bool IsConnected();
+        State GetState();
         void LeftClick();
         void LeftDown();
         void LeftUp();
@@ -23,9 +24,9 @@ namespace xWin.Wrapper
         void MoveCursor(int flag,int deadZoneRad,int dpi);
     }
 
-    public class XControllerWrapper : IXControllerWrapper
+    public class ControllerWrapper : IControllerWrapper
     {
-        SharpDX.XInput.Controller controller;
+        Controller controller;
         private State currentControllerState;
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
@@ -38,9 +39,19 @@ namespace xWin.Wrapper
         private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
         private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
 
+        public ControllerWrapper(Controller controller)
+        {
+            this.controller = controller;
+        }
+
         public virtual bool IsConnected()
         {
             return controller.IsConnected;
+        }
+
+        public State GetState()
+        {
+            return controller.GetState();
         }
 
         public virtual void LeftClick()

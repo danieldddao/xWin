@@ -18,13 +18,13 @@ namespace MSTest.Library
     public class XControllerTest
     {
         xWin.Library.XController controller;
-        Mock<xWin.Wrapper.XControllerWrapper> mockController;
+        Mock<xWin.Wrapper.ControllerWrapper> mockController;
    
 
         [TestInitialize]
         public void Setup()
         {
-            mockController = new Mock<xWin.Wrapper.XControllerWrapper>();
+            mockController = new Mock<xWin.Wrapper.ControllerWrapper>();
 
             controller = new XController(mockController.Object);
         }

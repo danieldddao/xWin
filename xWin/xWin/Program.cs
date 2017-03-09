@@ -10,7 +10,6 @@ using xWin.Forms;
 using static Configuration.Types;
 using SharpDX.DirectInput;
 
-
 namespace xWin
 {
     class Program
@@ -26,8 +25,7 @@ namespace xWin
         static void Main(string[] args)
         {
             XController c = new XController();
-            //RunFormApplication();
-            bool msg = false;
+            RunFormApplication();
             /*
             while (true)
             {
@@ -56,7 +54,7 @@ namespace xWin
                     //Thread.Sleep(200);
                     Console.Clear();  
             }*/
-
+             
             // Initialize DirectInput
             var directInput = new DirectInput();
             // Find a Joystick Guid
