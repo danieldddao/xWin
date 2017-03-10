@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message TypingControl {
+  repeated int32 keyboard_select = 3;
+  repeated int32 tier1 = 1;
+  repeated int32 tier2 = 2;
+  int32 select_char = 4;
+  int32 stop_typing = 5;
+  
+}

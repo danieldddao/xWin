@@ -1,15 +1,23 @@
 syntax = "proto3";
 
-message Configuration {
+message BasicControl {
   
   enum SpecialAction {
-    Pass = 0;
+    Default = 0;
     MouseDown = 1;
     MouseLeft = 2;
     MouseRight = 3;
     MouseUp = 4;
+    
+    ScrollDown = 9;
+    ScrollLeft = 7;
+    ScrollRight = 8;
+    ScrollUp = 10;
+    
     Turbo = 5;
-    TypingMode = 6;
+    EnterTypingMode = 6;
+    OpenMenu = 11;
+    
     //mouse clicks are in the key enumeration
   }
   
@@ -58,6 +66,6 @@ message Configuration {
   Trigger right_trigger = 4;
   
   //use the sharpdx enum for key
-  map<int32, Behavior> button_map = 5;
+  map<uint32, Behavior> button_map = 5;
   
 }
