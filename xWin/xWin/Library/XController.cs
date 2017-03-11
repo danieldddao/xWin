@@ -12,7 +12,13 @@ using xWin.Wrapper;
 
 namespace xWin.Library
 {
-    public class XController
+    public interface IXController
+    {
+        bool IsConnected();
+        IXKeyBoard GetKeyBoardForButton(GamepadButtonFlags button);
+    }
+
+    public class XController : IXController
     {
         private readonly IControllerWrapper controllerWrapper;
 
@@ -20,10 +26,10 @@ namespace xWin.Library
         private short deadZoneRad { get; set; }
         private const short MAX_INPUT = 32767;
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+        private Dictionary<GamepadButtonFlags, XKeyBoard> singleButtonMaps;
 
         [DllImport("user32.dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);
-
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         
@@ -40,6 +46,7 @@ namespace xWin.Library
             {
                 currentControllerState = controllerWrapper.GetState();
             }
+            InitializeButtonMaps();
         }
 
         public XController(SharpDX.XInput.Controller controller, short deadZoneRad = 7000)
@@ -50,6 +57,26 @@ namespace xWin.Library
                 currentControllerState = controllerWrapper.GetState();
             }
             this.deadZoneRad = deadZoneRad;
+            InitializeButtonMaps();
+        }
+
+        private void InitializeButtonMaps()
+        {
+            this.singleButtonMaps = new Dictionary<GamepadButtonFlags, XKeyBoard>();
+            this.singleButtonMaps.Add(GamepadButtonFlags.A, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.B, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.X, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.Y, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.Start, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.Back, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.LeftShoulder, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.LeftThumb, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.RightShoulder, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.RightThumb, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.DPadUp, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.DPadDown, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.DPadLeft, new XKeyBoard());
+            this.singleButtonMaps.Add(GamepadButtonFlags.DPadRight, new XKeyBoard());
         }
 
         public void UpdateState()
@@ -259,5 +286,28 @@ namespace xWin.Library
                 return false;
             }
         }
-    }
+
+        public IXKeyBoard GetKeyBoardForButton(GamepadButtonFlags button)
+        {
+            try
+            {
+                if (singleButtonMaps.ContainsKey(button))
+                {
+                    XKeyBoard xKeyboard = singleButtonMaps[button];
+                    return xKeyboard;
+                }
+                else
+                {
+                    return null;
+                }
+            } catch (Exception e)
+            {
+                Console.WriteLine("Error when getting keyboard for button {0} : {0}", button, e);
+                return null;
+            }
+
+        }
+
+
+    } // end class
 }

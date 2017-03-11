@@ -5,56 +5,40 @@ using xWin.Wrapper;
 
 namespace xWin.Library
 {
-    public class XKeyBoard
+    public interface IXKeyBoard
+    {
+        XAction Action { get; set; }
+        Keys KeyToPress { get; set; }
+        string StringToPress { get; set; }
+        string AppPath { get; set; }
+        Keys[] ShortcutToPress { get; set; }
+    }
+
+    public class XKeyBoard : IXKeyBoard
     {
         private char[] shiftedKeys = {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'};
-        private XAction action = XAction.None;
-        private Keys keyToPress = Keys.None;
-        private string stringToPress = null;
-        private string appPath = null;
-        private Keys[] shortcutToPress = null;
+        public XAction Action { get; set; }
+        public Keys KeyToPress { get; set; }
+        public string StringToPress { get; set; }
+        public string AppPath { get; set; }
+        public Keys[] ShortcutToPress { get; set; }
 
         private readonly ISystemWrapper systemWrapper;
 
         public XKeyBoard()
         {
             this.systemWrapper = new SystemWrapper();
+            Action = XAction.None;
+            KeyToPress = Keys.None;
+            StringToPress = null;
+            AppPath = null;
+            ShortcutToPress = null;
         }
 
         public XKeyBoard(ISystemWrapper isystemWrapper)
         {
             this.systemWrapper = isystemWrapper;
         }   
-
-        public XAction Action
-        {
-            get { return this.action; }
-            set { this.action = value; }
-        }
-
-        public Keys KeyToPress
-        {
-            get { return this.keyToPress; }
-            set { this.keyToPress = value; }
-        }
-
-        public string StringToPress
-        {
-            get { return this.stringToPress; }
-            set { this.stringToPress = value; }
-        }
-
-        public string AppPath
-        {
-            get { return this.appPath; }
-            set { this.appPath = value; }
-        }
-    
-        public Keys[] ShortcutToPress
-        {
-            get { return this.shortcutToPress; }
-            set { this.shortcutToPress = value; }
-        }
 
         /*
          * Press and Release the key where key = System.Windows.Forms.Keys.somekey
@@ -192,7 +176,7 @@ namespace xWin.Library
          */
         public void Execute()
         {
-            switch (action)
+            switch (Action)
             {
                 case XAction.None:
                     {
@@ -201,22 +185,22 @@ namespace xWin.Library
                     }
                 case XAction.PressKey:
                     {
-                        if (keyToPress != Keys.None) { PressKey(keyToPress); }
+                        if (KeyToPress != Keys.None) { PressKey(KeyToPress); }
                         break;
                     }
                 case XAction.PressKeysFromString:
                     {
-                        if (stringToPress != null) { PressKeysFromString(stringToPress); }
+                        if (StringToPress != null) { PressKeysFromString(StringToPress); }
                         break;
                     }
                 case XAction.PressShortcut:
                     {
-                        if (shortcutToPress != null) { PressShortcut(shortcutToPress); }
+                        if (ShortcutToPress != null) { PressShortcut(ShortcutToPress); }
                         break;
                     }
                 case XAction.OpenApp:
                     {
-                        if (appPath != null) { OpenApplication(appPath); }
+                        if (AppPath != null) { OpenApplication(AppPath); }
                         break;
                     }
             }

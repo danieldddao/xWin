@@ -14,16 +14,16 @@ namespace xWin.Forms
 {
     public partial class xWinPanel : Form
     {
-        XController XCon1;
+        IXController XCon1;
         ControllerOptions OpXCon1;
 
-        XController XCon2;
+        IXController XCon2;
         ControllerOptions OpXCon2;
 
-        XController XCon3;
+        IXController XCon3;
         ControllerOptions OpXCon3;
 
-        XController XCon4;
+        IXController XCon4;
         ControllerOptions OpXCon4;
 
         public xWinPanel()
@@ -41,6 +41,25 @@ namespace xWin.Forms
             OpXCon3 = new ControllerOptions(XCon3);
 
             XCon4 = new XController(new SharpDX.XInput.Controller(UserIndex.Four));
+            OpXCon4 = new ControllerOptions(XCon4);
+        }
+
+        /* For Unit Testing */
+        public xWinPanel(IXController con1, IXController con2, IXController con3, IXController con4)
+        {
+            InitializeComponent();
+
+            // Initialize 4 controllers
+            XCon1 = con1;
+            OpXCon1 = new ControllerOptions(XCon1);
+
+            XCon2 = con2;
+            OpXCon2 = new ControllerOptions(XCon2);
+
+            XCon3 = con3;
+            OpXCon3 = new ControllerOptions(XCon3);
+
+            XCon4 = con4;
             OpXCon4 = new ControllerOptions(XCon4);
         }
 
@@ -92,6 +111,7 @@ namespace xWin.Forms
             }
         }
 
+        /* Update Controllers status when loading main panel */
         private void XWinPanel_Load(object sender, EventArgs e)
         {
             UpdateControllers();
@@ -99,10 +119,10 @@ namespace xWin.Forms
 
         private void Controller1_Click(object sender, EventArgs e)
         {
-            if (XCon1.IsConnected())
-            {
+            //if (XCon1.IsConnected())
+            //{
                 OpXCon1.ShowDialog();
-            }
+            //}
         }
 
         private void Controller2_Click(object sender, EventArgs e)
@@ -129,6 +149,7 @@ namespace xWin.Forms
             }
         }
 
+        /* Update Controllers status every 1 sec */
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateControllers();
