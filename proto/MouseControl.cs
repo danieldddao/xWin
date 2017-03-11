@@ -20,41 +20,42 @@ public static partial class MouseControlReflection {
   static MouseControlReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChNtb3VzZV9jb250cm9sLnByb3RvIvQICg1Db25maWd1cmF0aW9uEigKCmxl",
-          "ZnRfc3RpY2sYASABKAsyFC5Db25maWd1cmF0aW9uLlN0aWNrEikKC3JpZ2h0",
-          "X3N0aWNrGAIgASgLMhQuQ29uZmlndXJhdGlvbi5TdGljaxIsCgxsZWZ0X3Ry",
-          "aWdnZXIYAyABKAsyFi5Db25maWd1cmF0aW9uLlRyaWdnZXISLQoNcmlnaHRf",
-          "dHJpZ2dlchgEIAEoCzIWLkNvbmZpZ3VyYXRpb24uVHJpZ2dlchIxCgpidXR0",
-          "b25fbWFwGAUgAygLMh0uQ29uZmlndXJhdGlvbi5CdXR0b25NYXBFbnRyeRph",
-          "CgZBY3Rpb24SEQoHa2V5YmluZBgBIAEoBUgAEjYKDnNwZWNpYWxfYWN0aW9u",
-          "GAIgASgOMhwuQ29uZmlndXJhdGlvbi5TcGVjaWFsQWN0aW9uSABCDAoKb25l",
-          "X2FjdGlvbhriAQoIQmVoYXZpb3ISJwoIb25fcHJlc3MYASABKAsyFS5Db25m",
-          "aWd1cmF0aW9uLkFjdGlvbhIXCg9vbl9wcmVzc190b2dnbGUYBSABKAgSJgoH",
-          "b25faG9sZBgCIAEoCzIVLkNvbmZpZ3VyYXRpb24uQWN0aW9uEikKCm9uX3Jl",
-          "bGVhc2UYAyABKAsyFS5Db25maWd1cmF0aW9uLkFjdGlvbhIZChFvbl9yZWxl",
-          "YXNlX3RvZ2dsZRgGIAEoCBImCgdvbl9zdGF5GAQgASgLMhUuQ29uZmlndXJh",
-          "dGlvbi5BY3Rpb24aQgoGUmVnaW9uEikKCGJlaGF2aW9yGAEgASgLMhcuQ29u",
-          "ZmlndXJhdGlvbi5CZWhhdmlvchINCgVyYW5nZRgCIAEoDRrEAQoFU3RpY2sS",
-          "EAoIZGVhZHpvbmUYASABKA0SFQoNY29udHJvbF9tb3VzZRgCIAEoCBIUCgxy",
-          "ZWdpb25fc3RhcnQYAyABKAUSJgoHcmVnaW9ucxgEIAMoCzIVLkNvbmZpZ3Vy",
-          "YXRpb24uUmVnaW9uEi4KDXN0YXlfYmVoYXZpb3IYBSABKAsyFy5Db25maWd1",
-          "cmF0aW9uLkJlaGF2aW9yEhEKCWludmVydF91ZBgGIAEoCBIRCglpbnZlcnRf",
-          "bHIYByABKAgabwoHVHJpZ2dlchIQCghkZWFkem9uZRgBIAEoDRImCgdyZWdp",
-          "b25zGAIgAygLMhUuQ29uZmlndXJhdGlvbi5SZWdpb24SKgoJdW5wcmVzc2Vk",
-          "GAMgASgLMhcuQ29uZmlndXJhdGlvbi5CZWhhdmlvchpJCg5CdXR0b25NYXBF",
-          "bnRyeRILCgNrZXkYASABKAUSJgoFdmFsdWUYAiABKAsyFy5Db25maWd1cmF0",
-          "aW9uLkJlaGF2aW9yOgI4ASJvCg1TcGVjaWFsQWN0aW9uEggKBFBhc3MQABIN",
-          "CglNb3VzZURvd24QARINCglNb3VzZUxlZnQQAhIOCgpNb3VzZVJpZ2h0EAMS",
-          "CwoHTW91c2VVcBAEEgkKBVR1cmJvEAUSDgoKVHlwaW5nTW9kZRAGYgZwcm90",
-          "bzM="));
+          "ChNtb3VzZV9jb250cm9sLnByb3RvIsMJCgxCYXNpY0NvbnRyb2wSJwoKbGVm",
+          "dF9zdGljaxgBIAEoCzITLkJhc2ljQ29udHJvbC5TdGljaxIoCgtyaWdodF9z",
+          "dGljaxgCIAEoCzITLkJhc2ljQ29udHJvbC5TdGljaxIrCgxsZWZ0X3RyaWdn",
+          "ZXIYAyABKAsyFS5CYXNpY0NvbnRyb2wuVHJpZ2dlchIsCg1yaWdodF90cmln",
+          "Z2VyGAQgASgLMhUuQmFzaWNDb250cm9sLlRyaWdnZXISMAoKYnV0dG9uX21h",
+          "cBgFIAMoCzIcLkJhc2ljQ29udHJvbC5CdXR0b25NYXBFbnRyeRpRCgdBY3Rp",
+          "b25zEhAKCGtleWJpbmRzGAEgAygFEjQKD3NwZWNpYWxfYWN0aW9ucxgCIAMo",
+          "DjIbLkJhc2ljQ29udHJvbC5TcGVjaWFsQWN0aW9uGvUBCghCZWhhdmlvchIn",
+          "Cghvbl9wcmVzcxgBIAEoCzIVLkJhc2ljQ29udHJvbC5BY3Rpb25zEhcKD29u",
+          "X3ByZXNzX3RvZ2dsZRgFIAEoCBImCgdvbl9ob2xkGAIgASgLMhUuQmFzaWND",
+          "b250cm9sLkFjdGlvbnMSKQoKb25fcmVsZWFzZRgDIAEoCzIVLkJhc2ljQ29u",
+          "dHJvbC5BY3Rpb25zEhkKEW9uX3JlbGVhc2VfdG9nZ2xlGAYgASgIEiYKB29u",
+          "X3N0YXkYBCABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIRCglibGFja2xp",
+          "c3QYByADKAUaQQoGUmVnaW9uEigKCGJlaGF2aW9yGAEgASgLMhYuQmFzaWND",
+          "b250cm9sLkJlaGF2aW9yEg0KBXJhbmdlGAIgASgNGsIBCgVTdGljaxIQCghk",
+          "ZWFkem9uZRgBIAEoDRIVCg1jb250cm9sX21vdXNlGAIgASgIEhQKDHJlZ2lv",
+          "bl9zdGFydBgDIAEoBRIlCgdyZWdpb25zGAQgAygLMhQuQmFzaWNDb250cm9s",
+          "LlJlZ2lvbhItCg1zdGF5X2JlaGF2aW9yGAUgASgLMhYuQmFzaWNDb250cm9s",
+          "LkJlaGF2aW9yEhEKCWludmVydF91ZBgGIAEoCBIRCglpbnZlcnRfbHIYByAB",
+          "KAgabQoHVHJpZ2dlchIQCghkZWFkem9uZRgBIAEoDRIlCgdyZWdpb25zGAIg",
+          "AygLMhQuQmFzaWNDb250cm9sLlJlZ2lvbhIpCgl1bnByZXNzZWQYAyABKAsy",
+          "Fi5CYXNpY0NvbnRyb2wuQmVoYXZpb3IaSAoOQnV0dG9uTWFwRW50cnkSCwoD",
+          "a2V5GAEgASgFEiUKBXZhbHVlGAIgASgLMhYuQmFzaWNDb250cm9sLkJlaGF2",
+          "aW9yOgI4ASLGAQoNU3BlY2lhbEFjdGlvbhIMCghPcGVuTWVudRAAEg0KCU1v",
+          "dXNlRG93bhABEg0KCU1vdXNlTGVmdBACEg4KCk1vdXNlUmlnaHQQAxILCgdN",
+          "b3VzZVVwEAQSDgoKU2Nyb2xsRG93bhAJEg4KClNjcm9sbExlZnQQBxIPCgtT",
+          "Y3JvbGxSaWdodBAIEgwKCFNjcm9sbFVwEAoSCQoFVHVyYm8QBRITCg9FbnRl",
+          "clR5cGluZ01vZGUQBhINCglQcmVjaXNpb24QC2IGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::Configuration), global::Configuration.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap" }, null, new[]{ typeof(global::Configuration.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Configuration.Types.Action), global::Configuration.Types.Action.Parser, new[]{ "Keybind", "SpecialAction" }, new[]{ "OneAction" }, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Configuration.Types.Behavior), global::Configuration.Types.Behavior.Parser, new[]{ "OnPress", "OnPressToggle", "OnHold", "OnRelease", "OnReleaseToggle", "OnStay" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Configuration.Types.Region), global::Configuration.Types.Region.Parser, new[]{ "Behavior", "Range" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Configuration.Types.Stick), global::Configuration.Types.Stick.Parser, new[]{ "Deadzone", "ControlMouse", "RegionStart", "Regions", "StayBehavior", "InvertUd", "InvertLr" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::Configuration.Types.Trigger), global::Configuration.Types.Trigger.Parser, new[]{ "Deadzone", "Regions", "Unpressed" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Behavior), global::BasicControl.Types.Behavior.Parser, new[]{ "OnPress", "OnPressToggle", "OnHold", "OnRelease", "OnReleaseToggle", "OnStay", "Blacklist" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Region), global::BasicControl.Types.Region.Parser, new[]{ "Behavior", "Range" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Stick), global::BasicControl.Types.Stick.Parser, new[]{ "Deadzone", "ControlMouse", "RegionStart", "Regions", "StayBehavior", "InvertUd", "InvertLr" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Trigger), global::BasicControl.Types.Trigger.Parser, new[]{ "Deadzone", "Regions", "Unpressed" }, null, null, null),
           null, })
         }));
   }
@@ -62,10 +63,10 @@ public static partial class MouseControlReflection {
 
 }
 #region Messages
-public sealed partial class Configuration : pb::IMessage<Configuration> {
-  private static readonly pb::MessageParser<Configuration> _parser = new pb::MessageParser<Configuration>(() => new Configuration());
+public sealed partial class BasicControl : pb::IMessage<BasicControl> {
+  private static readonly pb::MessageParser<BasicControl> _parser = new pb::MessageParser<BasicControl>(() => new BasicControl());
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<Configuration> Parser { get { return _parser; } }
+  public static pb::MessageParser<BasicControl> Parser { get { return _parser; } }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
@@ -78,14 +79,14 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Configuration() {
+  public BasicControl() {
     OnConstruction();
   }
 
   partial void OnConstruction();
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Configuration(Configuration other) : this() {
+  public BasicControl(BasicControl other) : this() {
     LeftStick = other.leftStick_ != null ? other.LeftStick.Clone() : null;
     RightStick = other.rightStick_ != null ? other.RightStick.Clone() : null;
     LeftTrigger = other.leftTrigger_ != null ? other.LeftTrigger.Clone() : null;
@@ -94,15 +95,15 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public Configuration Clone() {
-    return new Configuration(this);
+  public BasicControl Clone() {
+    return new BasicControl(this);
   }
 
   /// <summary>Field number for the "left_stick" field.</summary>
   public const int LeftStickFieldNumber = 1;
-  private global::Configuration.Types.Stick leftStick_;
+  private global::BasicControl.Types.Stick leftStick_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::Configuration.Types.Stick LeftStick {
+  public global::BasicControl.Types.Stick LeftStick {
     get { return leftStick_; }
     set {
       leftStick_ = value;
@@ -111,9 +112,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
   /// <summary>Field number for the "right_stick" field.</summary>
   public const int RightStickFieldNumber = 2;
-  private global::Configuration.Types.Stick rightStick_;
+  private global::BasicControl.Types.Stick rightStick_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::Configuration.Types.Stick RightStick {
+  public global::BasicControl.Types.Stick RightStick {
     get { return rightStick_; }
     set {
       rightStick_ = value;
@@ -122,9 +123,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
   /// <summary>Field number for the "left_trigger" field.</summary>
   public const int LeftTriggerFieldNumber = 3;
-  private global::Configuration.Types.Trigger leftTrigger_;
+  private global::BasicControl.Types.Trigger leftTrigger_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::Configuration.Types.Trigger LeftTrigger {
+  public global::BasicControl.Types.Trigger LeftTrigger {
     get { return leftTrigger_; }
     set {
       leftTrigger_ = value;
@@ -133,9 +134,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
   /// <summary>Field number for the "right_trigger" field.</summary>
   public const int RightTriggerFieldNumber = 4;
-  private global::Configuration.Types.Trigger rightTrigger_;
+  private global::BasicControl.Types.Trigger rightTrigger_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::Configuration.Types.Trigger RightTrigger {
+  public global::BasicControl.Types.Trigger RightTrigger {
     get { return rightTrigger_; }
     set {
       rightTrigger_ = value;
@@ -144,24 +145,24 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
   /// <summary>Field number for the "button_map" field.</summary>
   public const int ButtonMapFieldNumber = 5;
-  private static readonly pbc::MapField<int, global::Configuration.Types.Behavior>.Codec _map_buttonMap_codec
-      = new pbc::MapField<int, global::Configuration.Types.Behavior>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::Configuration.Types.Behavior.Parser), 42);
-  private readonly pbc::MapField<int, global::Configuration.Types.Behavior> buttonMap_ = new pbc::MapField<int, global::Configuration.Types.Behavior>();
+  private static readonly pbc::MapField<int, global::BasicControl.Types.Behavior>.Codec _map_buttonMap_codec
+      = new pbc::MapField<int, global::BasicControl.Types.Behavior>.Codec(pb::FieldCodec.ForInt32(8), pb::FieldCodec.ForMessage(18, global::BasicControl.Types.Behavior.Parser), 42);
+  private readonly pbc::MapField<int, global::BasicControl.Types.Behavior> buttonMap_ = new pbc::MapField<int, global::BasicControl.Types.Behavior>();
   /// <summary>
   ///use the sharpdx enum for key
   /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::MapField<int, global::Configuration.Types.Behavior> ButtonMap {
+  public pbc::MapField<int, global::BasicControl.Types.Behavior> ButtonMap {
     get { return buttonMap_; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
-    return Equals(other as Configuration);
+    return Equals(other as BasicControl);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(Configuration other) {
+  public bool Equals(BasicControl other) {
     if (ReferenceEquals(other, null)) {
       return false;
     }
@@ -233,31 +234,31 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(Configuration other) {
+  public void MergeFrom(BasicControl other) {
     if (other == null) {
       return;
     }
     if (other.leftStick_ != null) {
       if (leftStick_ == null) {
-        leftStick_ = new global::Configuration.Types.Stick();
+        leftStick_ = new global::BasicControl.Types.Stick();
       }
       LeftStick.MergeFrom(other.LeftStick);
     }
     if (other.rightStick_ != null) {
       if (rightStick_ == null) {
-        rightStick_ = new global::Configuration.Types.Stick();
+        rightStick_ = new global::BasicControl.Types.Stick();
       }
       RightStick.MergeFrom(other.RightStick);
     }
     if (other.leftTrigger_ != null) {
       if (leftTrigger_ == null) {
-        leftTrigger_ = new global::Configuration.Types.Trigger();
+        leftTrigger_ = new global::BasicControl.Types.Trigger();
       }
       LeftTrigger.MergeFrom(other.LeftTrigger);
     }
     if (other.rightTrigger_ != null) {
       if (rightTrigger_ == null) {
-        rightTrigger_ = new global::Configuration.Types.Trigger();
+        rightTrigger_ = new global::BasicControl.Types.Trigger();
       }
       RightTrigger.MergeFrom(other.RightTrigger);
     }
@@ -274,28 +275,28 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
           break;
         case 10: {
           if (leftStick_ == null) {
-            leftStick_ = new global::Configuration.Types.Stick();
+            leftStick_ = new global::BasicControl.Types.Stick();
           }
           input.ReadMessage(leftStick_);
           break;
         }
         case 18: {
           if (rightStick_ == null) {
-            rightStick_ = new global::Configuration.Types.Stick();
+            rightStick_ = new global::BasicControl.Types.Stick();
           }
           input.ReadMessage(rightStick_);
           break;
         }
         case 26: {
           if (leftTrigger_ == null) {
-            leftTrigger_ = new global::Configuration.Types.Trigger();
+            leftTrigger_ = new global::BasicControl.Types.Trigger();
           }
           input.ReadMessage(leftTrigger_);
           break;
         }
         case 34: {
           if (rightTrigger_ == null) {
-            rightTrigger_ = new global::Configuration.Types.Trigger();
+            rightTrigger_ = new global::BasicControl.Types.Trigger();
           }
           input.ReadMessage(rightTrigger_);
           break;
@@ -309,30 +310,35 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
   }
 
   #region Nested types
-  /// <summary>Container for nested types declared in the Configuration message type.</summary>
+  /// <summary>Container for nested types declared in the BasicControl message type.</summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static partial class Types {
     public enum SpecialAction {
-      [pbr::OriginalName("Pass")] Pass = 0,
+      [pbr::OriginalName("OpenMenu")] OpenMenu = 0,
       [pbr::OriginalName("MouseDown")] MouseDown = 1,
       [pbr::OriginalName("MouseLeft")] MouseLeft = 2,
       [pbr::OriginalName("MouseRight")] MouseRight = 3,
       [pbr::OriginalName("MouseUp")] MouseUp = 4,
+      [pbr::OriginalName("ScrollDown")] ScrollDown = 9,
+      [pbr::OriginalName("ScrollLeft")] ScrollLeft = 7,
+      [pbr::OriginalName("ScrollRight")] ScrollRight = 8,
+      [pbr::OriginalName("ScrollUp")] ScrollUp = 10,
       [pbr::OriginalName("Turbo")] Turbo = 5,
+      [pbr::OriginalName("EnterTypingMode")] EnterTypingMode = 6,
       /// <summary>
-      ///mouse clicks are in the key enumeration
+      ///opposite of turbo
       /// </summary>
-      [pbr::OriginalName("TypingMode")] TypingMode = 6,
+      [pbr::OriginalName("Precision")] Precision = 11,
     }
 
-    public sealed partial class Action : pb::IMessage<Action> {
-      private static readonly pb::MessageParser<Action> _parser = new pb::MessageParser<Action>(() => new Action());
+    public sealed partial class Actions : pb::IMessage<Actions> {
+      private static readonly pb::MessageParser<Actions> _parser = new pb::MessageParser<Actions>(() => new Actions());
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pb::MessageParser<Action> Parser { get { return _parser; } }
+      public static pb::MessageParser<Actions> Parser { get { return _parser; } }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public static pbr::MessageDescriptor Descriptor {
-        get { return global::Configuration.Descriptor.NestedTypes[0]; }
+        get { return global::BasicControl.Descriptor.NestedTypes[0]; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -341,96 +347,66 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Action() {
+      public Actions() {
         OnConstruction();
       }
 
       partial void OnConstruction();
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Action(Action other) : this() {
-        switch (other.OneActionCase) {
-          case OneActionOneofCase.Keybind:
-            Keybind = other.Keybind;
-            break;
-          case OneActionOneofCase.SpecialAction:
-            SpecialAction = other.SpecialAction;
-            break;
-        }
-
+      public Actions(Actions other) : this() {
+        keybinds_ = other.keybinds_.Clone();
+        specialActions_ = other.specialActions_.Clone();
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Action Clone() {
-        return new Action(this);
+      public Actions Clone() {
+        return new Actions(this);
       }
 
-      /// <summary>Field number for the "keybind" field.</summary>
-      public const int KeybindFieldNumber = 1;
+      /// <summary>Field number for the "keybinds" field.</summary>
+      public const int KeybindsFieldNumber = 1;
+      private static readonly pb::FieldCodec<int> _repeated_keybinds_codec
+          = pb::FieldCodec.ForInt32(10);
+      private readonly pbc::RepeatedField<int> keybinds_ = new pbc::RepeatedField<int>();
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int Keybind {
-        get { return oneActionCase_ == OneActionOneofCase.Keybind ? (int) oneAction_ : 0; }
-        set {
-          oneAction_ = value;
-          oneActionCase_ = OneActionOneofCase.Keybind;
-        }
+      public pbc::RepeatedField<int> Keybinds {
+        get { return keybinds_; }
       }
 
-      /// <summary>Field number for the "special_action" field.</summary>
-      public const int SpecialActionFieldNumber = 2;
+      /// <summary>Field number for the "special_actions" field.</summary>
+      public const int SpecialActionsFieldNumber = 2;
+      private static readonly pb::FieldCodec<global::BasicControl.Types.SpecialAction> _repeated_specialActions_codec
+          = pb::FieldCodec.ForEnum(18, x => (int) x, x => (global::BasicControl.Types.SpecialAction) x);
+      private readonly pbc::RepeatedField<global::BasicControl.Types.SpecialAction> specialActions_ = new pbc::RepeatedField<global::BasicControl.Types.SpecialAction>();
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.SpecialAction SpecialAction {
-        get { return oneActionCase_ == OneActionOneofCase.SpecialAction ? (global::Configuration.Types.SpecialAction) oneAction_ : 0; }
-        set {
-          oneAction_ = value;
-          oneActionCase_ = OneActionOneofCase.SpecialAction;
-        }
-      }
-
-      private object oneAction_;
-      /// <summary>Enum of possible cases for the "one_action" oneof.</summary>
-      public enum OneActionOneofCase {
-        None = 0,
-        Keybind = 1,
-        SpecialAction = 2,
-      }
-      private OneActionOneofCase oneActionCase_ = OneActionOneofCase.None;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public OneActionOneofCase OneActionCase {
-        get { return oneActionCase_; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void ClearOneAction() {
-        oneActionCase_ = OneActionOneofCase.None;
-        oneAction_ = null;
+      public pbc::RepeatedField<global::BasicControl.Types.SpecialAction> SpecialActions {
+        get { return specialActions_; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public override bool Equals(object other) {
-        return Equals(other as Action);
+        return Equals(other as Actions);
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool Equals(Action other) {
+      public bool Equals(Actions other) {
         if (ReferenceEquals(other, null)) {
           return false;
         }
         if (ReferenceEquals(other, this)) {
           return true;
         }
-        if (Keybind != other.Keybind) return false;
-        if (SpecialAction != other.SpecialAction) return false;
-        if (OneActionCase != other.OneActionCase) return false;
+        if(!keybinds_.Equals(other.keybinds_)) return false;
+        if(!specialActions_.Equals(other.specialActions_)) return false;
         return true;
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public override int GetHashCode() {
         int hash = 1;
-        if (oneActionCase_ == OneActionOneofCase.Keybind) hash ^= Keybind.GetHashCode();
-        if (oneActionCase_ == OneActionOneofCase.SpecialAction) hash ^= SpecialAction.GetHashCode();
-        hash ^= (int) oneActionCase_;
+        hash ^= keybinds_.GetHashCode();
+        hash ^= specialActions_.GetHashCode();
         return hash;
       }
 
@@ -441,42 +417,25 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public void WriteTo(pb::CodedOutputStream output) {
-        if (oneActionCase_ == OneActionOneofCase.Keybind) {
-          output.WriteRawTag(8);
-          output.WriteInt32(Keybind);
-        }
-        if (oneActionCase_ == OneActionOneofCase.SpecialAction) {
-          output.WriteRawTag(16);
-          output.WriteEnum((int) SpecialAction);
-        }
+        keybinds_.WriteTo(output, _repeated_keybinds_codec);
+        specialActions_.WriteTo(output, _repeated_specialActions_codec);
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public int CalculateSize() {
         int size = 0;
-        if (oneActionCase_ == OneActionOneofCase.Keybind) {
-          size += 1 + pb::CodedOutputStream.ComputeInt32Size(Keybind);
-        }
-        if (oneActionCase_ == OneActionOneofCase.SpecialAction) {
-          size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) SpecialAction);
-        }
+        size += keybinds_.CalculateSize(_repeated_keybinds_codec);
+        size += specialActions_.CalculateSize(_repeated_specialActions_codec);
         return size;
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(Action other) {
+      public void MergeFrom(Actions other) {
         if (other == null) {
           return;
         }
-        switch (other.OneActionCase) {
-          case OneActionOneofCase.Keybind:
-            Keybind = other.Keybind;
-            break;
-          case OneActionOneofCase.SpecialAction:
-            SpecialAction = other.SpecialAction;
-            break;
-        }
-
+        keybinds_.Add(other.keybinds_);
+        specialActions_.Add(other.specialActions_);
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -487,13 +446,14 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
             default:
               input.SkipLastField();
               break;
+            case 10:
             case 8: {
-              Keybind = input.ReadInt32();
+              keybinds_.AddEntriesFrom(input, _repeated_keybinds_codec);
               break;
             }
+            case 18:
             case 16: {
-              oneAction_ = input.ReadEnum();
-              oneActionCase_ = OneActionOneofCase.SpecialAction;
+              specialActions_.AddEntriesFrom(input, _repeated_specialActions_codec);
               break;
             }
           }
@@ -509,7 +469,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public static pbr::MessageDescriptor Descriptor {
-        get { return global::Configuration.Descriptor.NestedTypes[1]; }
+        get { return global::BasicControl.Descriptor.NestedTypes[1]; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -532,6 +492,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         OnRelease = other.onRelease_ != null ? other.OnRelease.Clone() : null;
         onReleaseToggle_ = other.onReleaseToggle_;
         OnStay = other.onStay_ != null ? other.OnStay.Clone() : null;
+        blacklist_ = other.blacklist_.Clone();
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -541,9 +502,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       /// <summary>Field number for the "on_press" field.</summary>
       public const int OnPressFieldNumber = 1;
-      private global::Configuration.Types.Action onPress_;
+      private global::BasicControl.Types.Actions onPress_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.Action OnPress {
+      public global::BasicControl.Types.Actions OnPress {
         get { return onPress_; }
         set {
           onPress_ = value;
@@ -563,9 +524,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       /// <summary>Field number for the "on_hold" field.</summary>
       public const int OnHoldFieldNumber = 2;
-      private global::Configuration.Types.Action onHold_;
+      private global::BasicControl.Types.Actions onHold_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.Action OnHold {
+      public global::BasicControl.Types.Actions OnHold {
         get { return onHold_; }
         set {
           onHold_ = value;
@@ -574,9 +535,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       /// <summary>Field number for the "on_release" field.</summary>
       public const int OnReleaseFieldNumber = 3;
-      private global::Configuration.Types.Action onRelease_;
+      private global::BasicControl.Types.Actions onRelease_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.Action OnRelease {
+      public global::BasicControl.Types.Actions OnRelease {
         get { return onRelease_; }
         set {
           onRelease_ = value;
@@ -596,13 +557,23 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       /// <summary>Field number for the "on_stay" field.</summary>
       public const int OnStayFieldNumber = 4;
-      private global::Configuration.Types.Action onStay_;
+      private global::BasicControl.Types.Actions onStay_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.Action OnStay {
+      public global::BasicControl.Types.Actions OnStay {
         get { return onStay_; }
         set {
           onStay_ = value;
         }
+      }
+
+      /// <summary>Field number for the "blacklist" field.</summary>
+      public const int BlacklistFieldNumber = 7;
+      private static readonly pb::FieldCodec<int> _repeated_blacklist_codec
+          = pb::FieldCodec.ForInt32(58);
+      private readonly pbc::RepeatedField<int> blacklist_ = new pbc::RepeatedField<int>();
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+      public pbc::RepeatedField<int> Blacklist {
+        get { return blacklist_; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -624,6 +595,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         if (!object.Equals(OnRelease, other.OnRelease)) return false;
         if (OnReleaseToggle != other.OnReleaseToggle) return false;
         if (!object.Equals(OnStay, other.OnStay)) return false;
+        if(!blacklist_.Equals(other.blacklist_)) return false;
         return true;
       }
 
@@ -636,6 +608,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         if (onRelease_ != null) hash ^= OnRelease.GetHashCode();
         if (OnReleaseToggle != false) hash ^= OnReleaseToggle.GetHashCode();
         if (onStay_ != null) hash ^= OnStay.GetHashCode();
+        hash ^= blacklist_.GetHashCode();
         return hash;
       }
 
@@ -670,6 +643,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
           output.WriteRawTag(48);
           output.WriteBool(OnReleaseToggle);
         }
+        blacklist_.WriteTo(output, _repeated_blacklist_codec);
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -693,6 +667,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         if (onStay_ != null) {
           size += 1 + pb::CodedOutputStream.ComputeMessageSize(OnStay);
         }
+        size += blacklist_.CalculateSize(_repeated_blacklist_codec);
         return size;
       }
 
@@ -703,7 +678,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         }
         if (other.onPress_ != null) {
           if (onPress_ == null) {
-            onPress_ = new global::Configuration.Types.Action();
+            onPress_ = new global::BasicControl.Types.Actions();
           }
           OnPress.MergeFrom(other.OnPress);
         }
@@ -712,13 +687,13 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         }
         if (other.onHold_ != null) {
           if (onHold_ == null) {
-            onHold_ = new global::Configuration.Types.Action();
+            onHold_ = new global::BasicControl.Types.Actions();
           }
           OnHold.MergeFrom(other.OnHold);
         }
         if (other.onRelease_ != null) {
           if (onRelease_ == null) {
-            onRelease_ = new global::Configuration.Types.Action();
+            onRelease_ = new global::BasicControl.Types.Actions();
           }
           OnRelease.MergeFrom(other.OnRelease);
         }
@@ -727,10 +702,11 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         }
         if (other.onStay_ != null) {
           if (onStay_ == null) {
-            onStay_ = new global::Configuration.Types.Action();
+            onStay_ = new global::BasicControl.Types.Actions();
           }
           OnStay.MergeFrom(other.OnStay);
         }
+        blacklist_.Add(other.blacklist_);
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -743,28 +719,28 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
               break;
             case 10: {
               if (onPress_ == null) {
-                onPress_ = new global::Configuration.Types.Action();
+                onPress_ = new global::BasicControl.Types.Actions();
               }
               input.ReadMessage(onPress_);
               break;
             }
             case 18: {
               if (onHold_ == null) {
-                onHold_ = new global::Configuration.Types.Action();
+                onHold_ = new global::BasicControl.Types.Actions();
               }
               input.ReadMessage(onHold_);
               break;
             }
             case 26: {
               if (onRelease_ == null) {
-                onRelease_ = new global::Configuration.Types.Action();
+                onRelease_ = new global::BasicControl.Types.Actions();
               }
               input.ReadMessage(onRelease_);
               break;
             }
             case 34: {
               if (onStay_ == null) {
-                onStay_ = new global::Configuration.Types.Action();
+                onStay_ = new global::BasicControl.Types.Actions();
               }
               input.ReadMessage(onStay_);
               break;
@@ -775,6 +751,11 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
             }
             case 48: {
               OnReleaseToggle = input.ReadBool();
+              break;
+            }
+            case 58:
+            case 56: {
+              blacklist_.AddEntriesFrom(input, _repeated_blacklist_codec);
               break;
             }
           }
@@ -790,7 +771,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public static pbr::MessageDescriptor Descriptor {
-        get { return global::Configuration.Descriptor.NestedTypes[2]; }
+        get { return global::BasicControl.Descriptor.NestedTypes[2]; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -818,9 +799,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       /// <summary>Field number for the "behavior" field.</summary>
       public const int BehaviorFieldNumber = 1;
-      private global::Configuration.Types.Behavior behavior_;
+      private global::BasicControl.Types.Behavior behavior_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.Behavior Behavior {
+      public global::BasicControl.Types.Behavior Behavior {
         get { return behavior_; }
         set {
           behavior_ = value;
@@ -831,7 +812,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
       public const int RangeFieldNumber = 2;
       private uint range_;
       /// <summary>
-      ///for sticks this is an arc length in degrees, for triggers its a value from 0-255
+      ///for sticks this is an arc length in degrees, for triggers its a value from 1-255
       /// </summary>
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public uint Range {
@@ -903,7 +884,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         }
         if (other.behavior_ != null) {
           if (behavior_ == null) {
-            behavior_ = new global::Configuration.Types.Behavior();
+            behavior_ = new global::BasicControl.Types.Behavior();
           }
           Behavior.MergeFrom(other.Behavior);
         }
@@ -922,7 +903,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
               break;
             case 10: {
               if (behavior_ == null) {
-                behavior_ = new global::Configuration.Types.Behavior();
+                behavior_ = new global::BasicControl.Types.Behavior();
               }
               input.ReadMessage(behavior_);
               break;
@@ -944,7 +925,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public static pbr::MessageDescriptor Descriptor {
-        get { return global::Configuration.Descriptor.NestedTypes[3]; }
+        get { return global::BasicControl.Descriptor.NestedTypes[3]; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1016,19 +997,19 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       /// <summary>Field number for the "regions" field.</summary>
       public const int RegionsFieldNumber = 4;
-      private static readonly pb::FieldCodec<global::Configuration.Types.Region> _repeated_regions_codec
-          = pb::FieldCodec.ForMessage(34, global::Configuration.Types.Region.Parser);
-      private readonly pbc::RepeatedField<global::Configuration.Types.Region> regions_ = new pbc::RepeatedField<global::Configuration.Types.Region>();
+      private static readonly pb::FieldCodec<global::BasicControl.Types.Region> _repeated_regions_codec
+          = pb::FieldCodec.ForMessage(34, global::BasicControl.Types.Region.Parser);
+      private readonly pbc::RepeatedField<global::BasicControl.Types.Region> regions_ = new pbc::RepeatedField<global::BasicControl.Types.Region>();
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public pbc::RepeatedField<global::Configuration.Types.Region> Regions {
+      public pbc::RepeatedField<global::BasicControl.Types.Region> Regions {
         get { return regions_; }
       }
 
       /// <summary>Field number for the "stay_behavior" field.</summary>
       public const int StayBehaviorFieldNumber = 5;
-      private global::Configuration.Types.Behavior stayBehavior_;
+      private global::BasicControl.Types.Behavior stayBehavior_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.Behavior StayBehavior {
+      public global::BasicControl.Types.Behavior StayBehavior {
         get { return stayBehavior_; }
         set {
           stayBehavior_ = value;
@@ -1169,7 +1150,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         regions_.Add(other.regions_);
         if (other.stayBehavior_ != null) {
           if (stayBehavior_ == null) {
-            stayBehavior_ = new global::Configuration.Types.Behavior();
+            stayBehavior_ = new global::BasicControl.Types.Behavior();
           }
           StayBehavior.MergeFrom(other.StayBehavior);
         }
@@ -1207,7 +1188,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
             }
             case 42: {
               if (stayBehavior_ == null) {
-                stayBehavior_ = new global::Configuration.Types.Behavior();
+                stayBehavior_ = new global::BasicControl.Types.Behavior();
               }
               input.ReadMessage(stayBehavior_);
               break;
@@ -1233,7 +1214,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public static pbr::MessageDescriptor Descriptor {
-        get { return global::Configuration.Descriptor.NestedTypes[4]; }
+        get { return global::BasicControl.Descriptor.NestedTypes[4]; }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1273,19 +1254,19 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
 
       /// <summary>Field number for the "regions" field.</summary>
       public const int RegionsFieldNumber = 2;
-      private static readonly pb::FieldCodec<global::Configuration.Types.Region> _repeated_regions_codec
-          = pb::FieldCodec.ForMessage(18, global::Configuration.Types.Region.Parser);
-      private readonly pbc::RepeatedField<global::Configuration.Types.Region> regions_ = new pbc::RepeatedField<global::Configuration.Types.Region>();
+      private static readonly pb::FieldCodec<global::BasicControl.Types.Region> _repeated_regions_codec
+          = pb::FieldCodec.ForMessage(18, global::BasicControl.Types.Region.Parser);
+      private readonly pbc::RepeatedField<global::BasicControl.Types.Region> regions_ = new pbc::RepeatedField<global::BasicControl.Types.Region>();
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public pbc::RepeatedField<global::Configuration.Types.Region> Regions {
+      public pbc::RepeatedField<global::BasicControl.Types.Region> Regions {
         get { return regions_; }
       }
 
       /// <summary>Field number for the "unpressed" field.</summary>
       public const int UnpressedFieldNumber = 3;
-      private global::Configuration.Types.Behavior unpressed_;
+      private global::BasicControl.Types.Behavior unpressed_;
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public global::Configuration.Types.Behavior Unpressed {
+      public global::BasicControl.Types.Behavior Unpressed {
         get { return unpressed_; }
         set {
           unpressed_ = value;
@@ -1362,7 +1343,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         regions_.Add(other.regions_);
         if (other.unpressed_ != null) {
           if (unpressed_ == null) {
-            unpressed_ = new global::Configuration.Types.Behavior();
+            unpressed_ = new global::BasicControl.Types.Behavior();
           }
           Unpressed.MergeFrom(other.Unpressed);
         }
@@ -1386,7 +1367,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
             }
             case 26: {
               if (unpressed_ == null) {
-                unpressed_ = new global::Configuration.Types.Behavior();
+                unpressed_ = new global::BasicControl.Types.Behavior();
               }
               input.ReadMessage(unpressed_);
               break;
