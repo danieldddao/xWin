@@ -35,13 +35,13 @@ namespace xWin.Forms
             OpXCon1 = new ControllerOptions(XCon1);
 
             XCon2 = new XController(new SharpDX.XInput.Controller(UserIndex.Two));
-            OpXCon2 = new ControllerOptions(XCon2);
+            //OpXCon2 = new ControllerOptions(XCon2);
 
             XCon3 = new XController(new SharpDX.XInput.Controller(UserIndex.Three));
-            OpXCon3 = new ControllerOptions(XCon3);
+            //OpXCon3 = new ControllerOptions(XCon3);
 
             XCon4 = new XController(new SharpDX.XInput.Controller(UserIndex.Four));
-            OpXCon4 = new ControllerOptions(XCon4);
+            //OpXCon4 = new ControllerOptions(XCon4);
         }
 
         /* For Unit Testing */

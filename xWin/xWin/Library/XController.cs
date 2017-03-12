@@ -63,20 +63,10 @@ namespace xWin.Library
         private void InitializeButtonMaps()
         {
             this.singleButtonMaps = new Dictionary<GamepadButtonFlags, XKeyBoard>();
-            this.singleButtonMaps.Add(GamepadButtonFlags.A, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.B, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.X, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.Y, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.Start, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.Back, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.LeftShoulder, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.LeftThumb, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.RightShoulder, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.RightThumb, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.DPadUp, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.DPadDown, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.DPadLeft, new XKeyBoard());
-            this.singleButtonMaps.Add(GamepadButtonFlags.DPadRight, new XKeyBoard());
+            foreach (GamepadButtonFlags b in Enum.GetValues(typeof(GamepadButtonFlags)))
+            {
+                this.singleButtonMaps.Add(b, new XKeyBoard());
+            }
         }
 
         public void UpdateState()

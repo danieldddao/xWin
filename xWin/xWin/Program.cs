@@ -18,13 +18,12 @@ namespace xWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new xWinPanel());
+            Application.Run(new ControllerOptions(new XController()));
         }
 
         [STAThread]
         static void Main(string[] args)
         {
-            XController c = new XController();
             RunFormApplication();
             /*
             while (true)
@@ -54,7 +53,7 @@ namespace xWin
                     //Thread.Sleep(200);
                     Console.Clear();  
             }*/
-             
+             /*
             // Initialize DirectInput
             var directInput = new DirectInput();
             // Find a Joystick Guid
@@ -118,7 +117,7 @@ namespace xWin
                 Console.WriteLine(ps.R);
                 Thread.Sleep(300);
                 Console.Clear();
-            }
+            }*/
 
         }
     }

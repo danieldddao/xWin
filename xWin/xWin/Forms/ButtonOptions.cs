@@ -1,6 +1,8 @@
 ﻿using SharpDX.XInput;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using xWin.Forms.ButtonMaps;
 using xWin.Library;
 
 namespace xWin.Forms
@@ -9,36 +11,17 @@ namespace xWin.Forms
     {
         IXController xController;
         public GamepadButtonFlags currentButton { get; set; }
+        private List<CheckBox> checkboxes = new List<CheckBox>();
 
         public ButtonOptions(IXController controller)
         {
             InitializeComponent();
             this.xController = controller;
             currentButton = GamepadButtonFlags.None;
-        }
-        
-        private void ChangeKeyboardButtonAndCheckbox(bool status)
-        {
-            mapKeyboard.Enabled = status;
-            keyboardCheckBox.Enabled = status;
-        }
-
-        private void ChangeAppButtonAndCheckbox(bool status)
-        {
-            openApplication.Enabled = status;
-            openAppCheckBox.Enabled = status;
-        }
-
-        private void ChangeShortcutButtonAndCheckbox(bool status)
-        {
-            mapShortcut.Enabled = status;
-            shortcutCheckBox.Enabled = status;
-        }
-
-        private void ChangeTextButtonAndCheckbox(bool status)
-        {
-            mapText.Enabled = status;
-            textCheckBox.Enabled = status;
+            checkboxes.Add(keyboardCheckBox);
+            checkboxes.Add(openAppCheckBox);
+            checkboxes.Add(shortcutCheckBox);
+            checkboxes.Add(textCheckBox);
         }
 
         /*
@@ -46,122 +29,248 @@ namespace xWin.Forms
          */
         private void UpdateTextBoxes(IXKeyBoard keyboard)
         {
-            // check if a key has been assigned to the currentButton
-            if (keyboard.KeyToPress == Keys.None)
+            try
             {
-                keyboardTextBox.Text = "";
-                keyboardTextBox.AppendText("Key Mapping: NONE");
-                keyboardTextBox.AppendText(Environment.NewLine);
-                keyboardTextBox.AppendText("Please choose a key to map button to key!");
-            }
-            else
-            {
-                keyboardTextBox.Text = "Key Mapping: " + keyboard.KeyToPress;
-            }
-
-            // check if an application has been assigned to the currentButton
-            if (keyboard.AppPath == null)
-            {
-                openAppTextBox.Text = "";
-                openAppTextBox.AppendText("Application to open: NONE");
-                openAppTextBox.AppendText(Environment.NewLine);
-                openAppTextBox.AppendText("Please choose an application to open!");
-            }
-            else
-            {
-                openAppTextBox.Text = "Application to open: " + keyboard.AppPath;
-            }
-
-            // check if a shortcut has been assigned to the currentButton
-            if (keyboard.ShortcutToPress == null)
-            {
-                shortcutTextBox.Text = "";
-                shortcutTextBox.AppendText("Shortcut: NONE");
-                shortcutTextBox.AppendText(Environment.NewLine);
-                shortcutTextBox.AppendText("Please choose a shortcut!");
-            }
-            else
-            {
-                string shortcut = "";
-                foreach (Keys key in keyboard.ShortcutToPress)
+                // check if a key has been assigned to the currentButton
+                if (keyboard.KeyToPress == Keys.None)
                 {
-                    shortcut += key + " ";
+                    keyboardTextBox.Text = "";
+                    keyboardTextBox.AppendText("Key Mapping: NONE");
+                    keyboardTextBox.AppendText(Environment.NewLine);
+                    keyboardTextBox.AppendText("Please choose a key to map button to key!");
                 }
-                shortcutTextBox.Text = "Shortcut: " + shortcut;
-            }
+                else
+                {
+                    keyboardTextBox.Text = "Key Mapping: " + keyboard.KeyToPress;
+                }
 
-            // check if a text has been assigned to the currentButton
-            if (keyboard.StringToPress == null)
-            {
-                textTextBox.Text = "";
-                textTextBox.AppendText("Text: NONE");
-                textTextBox.AppendText(Environment.NewLine);
-                textTextBox.AppendText("Please enter a text!");
+                // check if an application has been assigned to the currentButton
+                if (keyboard.AppPath == null)
+                {
+                    openAppTextBox.Text = "";
+                    openAppTextBox.AppendText("Application to open: NONE");
+                    openAppTextBox.AppendText(Environment.NewLine);
+                    openAppTextBox.AppendText("Please choose an application to open!");
+                }
+                else
+                {
+                    openAppTextBox.Text = "Application to open: " + keyboard.AppPath;
+                }
+
+                // check if a shortcut has been assigned to the currentButton
+                if (keyboard.ShortcutToPress == null)
+                {
+                    shortcutTextBox.Text = "";
+                    shortcutTextBox.AppendText("Shortcut: NONE");
+                    shortcutTextBox.AppendText(Environment.NewLine);
+                    shortcutTextBox.AppendText("Please choose a shortcut!");
+                }
+                else
+                {
+                    string shortcutString = "";
+                    Keys[] shortcut = keyboard.ShortcutToPress;
+                    for (int i = 0; i < shortcut.Length; i++)
+                    {
+                        if (i == shortcut.Length - 1) // if key in shortcut is the last key
+                        {
+                            shortcutString += shortcut[i];
+                        }
+                        else
+                        {
+                            shortcutString += shortcut[i] + " + ";
+                        }
+                    }
+                    shortcutTextBox.Text = "Shortcut: " + shortcutString;
+                }
+
+                // check if a text has been assigned to the currentButton
+                if (keyboard.StringToPress == null)
+                {
+                    textTextBox.Text = "";
+                    textTextBox.AppendText("Text: NONE");
+                    textTextBox.AppendText(Environment.NewLine);
+                    textTextBox.AppendText("Please enter a text!");
+                }
+                else
+                {
+                    textTextBox.Text = "Text: " + keyboard.StringToPress;
+                }
             }
-            else
+            catch (Exception e)
             {
-                textTextBox.Text = keyboard.StringToPress;
+                Console.WriteLine("{0}", e);
+            }
+        }
+
+        private void RefreshButtonsAndTextboxes()
+        {
+            try
+            {
+                if (currentButton != GamepadButtonFlags.None)
+                {
+                    IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton); // Keyboard corresponding to currentButton
+                    UpdateTextBoxes(keyboard);
+
+                    switch (keyboard.Action)
+                    {
+                        case XAction.None:
+                            {
+                                foreach (CheckBox checkbox in checkboxes)
+                                { checkbox.Checked = false; }
+                               
+                                break;
+                            }
+                        case XAction.PressKey:
+                            {
+                                foreach (CheckBox checkbox in checkboxes)
+                                {
+                                    if (checkbox == keyboardCheckBox) { checkbox.Checked = true; }
+                                    else { checkbox.Checked = false; }
+                                }
+                                
+                                break;
+                            }
+                        case XAction.OpenApp:
+                            {
+                                foreach (CheckBox checkbox in checkboxes)
+                                {
+                                    if (checkbox == openAppCheckBox) { checkbox.Checked = true; }
+                                    else { checkbox.Checked = false; }
+                                }
+                                
+                                break;
+                            }
+                        case XAction.PressShortcut:
+                            {
+                                foreach (CheckBox checkbox in checkboxes)
+                                {
+                                    if (checkbox == shortcutCheckBox) { checkbox.Checked = true; }
+                                    else { checkbox.Checked = false; }
+                                }
+                                
+                                break;
+                            }
+                        case XAction.PressKeysFromString:
+                            {
+                                foreach (CheckBox checkbox in checkboxes)
+                                {
+                                    if (checkbox == textCheckBox) { checkbox.Checked = true; }
+                                    else { checkbox.Checked = false; }
+                                }
+                                
+                                break;
+                            }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}", e);
+            }
+        }
+
+        private void RefreshCurrentActionTextbox()
+        {
+            try
+            {
+                if (currentButton != GamepadButtonFlags.None)
+                {
+                    IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton); // Keyboard corresponding to currentButton
+                    currentActionTextbox.Text = "Button " + currentButton + " currently maps to:";
+                    switch (keyboard.Action)
+                    {
+                        case XAction.None:
+                            {
+                                currentActionTextbox.AppendText(Environment.NewLine);
+                                currentActionTextbox.AppendText("NONE");
+
+                                break;
+                            }
+                        case XAction.PressKey:
+                            {
+                                currentActionTextbox.AppendText(Environment.NewLine);
+                                currentActionTextbox.AppendText("Keyboard");
+
+                                break;
+                            }
+                        case XAction.OpenApp:
+                            {
+                                currentActionTextbox.AppendText(Environment.NewLine);
+                                currentActionTextbox.AppendText("Open Application");
+
+                                break;
+                            }
+                        case XAction.PressShortcut:
+                            {
+                                currentActionTextbox.AppendText(Environment.NewLine);
+                                currentActionTextbox.AppendText("Shortcut");
+
+                                break;
+                            }
+                        case XAction.PressKeysFromString:
+                            {
+                                currentActionTextbox.AppendText(Environment.NewLine);
+                                currentActionTextbox.AppendText("Text");
+
+                                break;
+                            }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}", e);
             }
         }
 
         /*
-         * Update actions on load
+         * Update buttons, textboxes, keyboard, etc. on load
          */
         private void ButtonOptions_Load(object sender, EventArgs e)
         {
-            IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton); // Keyboard corresponding to currentButton
-            switch (keyboard.Action)
-            {
-                case XAction.None:
-                    {
-                        ChangeKeyboardButtonAndCheckbox(true);
-                        ChangeAppButtonAndCheckbox(true);
-                        ChangeShortcutButtonAndCheckbox(true);
-                        ChangeTextButtonAndCheckbox(true);
-                        UpdateTextBoxes(keyboard);
-                        break;
-                    }
-                case XAction.PressKey:
-                    {
-                        break;
-                    }
-                case XAction.OpenApp:
-                    {
-                        break;
-                    }
-                case XAction.PressShortcut:
-                    {
-                        break;
-                    }
-                case XAction.PressKeysFromString:
-                    {
-                        break;
-                    }
-            }
+            RefreshButtonsAndTextboxes();
+            RefreshCurrentActionTextbox();
         }
 
         /* Map to Keyboard */
         private void mapKeyboard_Click(object sender, EventArgs e)
         {
-            KeyboardMapping kb = new KeyboardMapping();
-            kb.ShowDialog(); 
+            try
+            {
+                RefreshButtonsAndTextboxes();
+                RefreshCurrentActionTextbox();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0}", ex);
+            }
         }
 
         private void keyboardCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (keyboardCheckBox.Checked)
+            try
             {
-                ChangeKeyboardButtonAndCheckbox(true);
-                ChangeAppButtonAndCheckbox(false);
-                ChangeShortcutButtonAndCheckbox(false);
-                ChangeTextButtonAndCheckbox(false);
-            } 
-            else
+                IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                if (!keyboardCheckBox.Checked)
+                {
+                    // Set keyboard action to None
+                    keyboard.Action = XAction.None;
+                }
+                else
+                {
+                    foreach (CheckBox checkbox in checkboxes)
+                    {
+                        if (checkbox != keyboardCheckBox) { checkbox.Checked = false; }
+                    }
+
+                    // Set keyboard action to pressKey
+                    keyboard.Action = XAction.PressKey;
+                }
+                RefreshCurrentActionTextbox();
+            }
+            catch (Exception ex)
             {
-                ChangeKeyboardButtonAndCheckbox(true);
-                ChangeAppButtonAndCheckbox(true);
-                ChangeShortcutButtonAndCheckbox(true);
-                ChangeTextButtonAndCheckbox(true);
+                Console.WriteLine("{0}", ex);
             }
         }
 
@@ -175,77 +284,141 @@ namespace xWin.Forms
                 if (result == DialogResult.OK) // Test result.
                 {
                     string file = openFileDialog.FileName;
-                    IXKeyBoard xKeyboard = xController.GetKeyBoardForButton(currentButton);
-                    xKeyboard.Action = XAction.OpenApp;
-                    xKeyboard.AppPath = file;
+                    IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                    keyboard.Action = XAction.OpenApp;
+                    keyboard.AppPath = file;
+                    RefreshButtonsAndTextboxes();
+                    RefreshCurrentActionTextbox();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(" Error when mapping button to application {0}", ex);
+                Console.WriteLine("{0}", ex);
             }
         }
         private void openAppCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (openAppCheckBox.Checked)
+            try
             {
-                ChangeKeyboardButtonAndCheckbox(false);
-                ChangeAppButtonAndCheckbox(true);
-                ChangeShortcutButtonAndCheckbox(false);
-                ChangeTextButtonAndCheckbox(false);
+                IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                if (!openAppCheckBox.Checked)
+                {
+                    // Set keyboard action to None
+                    keyboard.Action = XAction.None;
+                }
+                else
+                {
+                    foreach (CheckBox checkbox in checkboxes)
+                    {
+                        if (checkbox != openAppCheckBox) { checkbox.Checked = false; }
+                    }
+
+                    // Set keyboard action to pressKey
+                    keyboard.Action = XAction.OpenApp;
+                }
+                RefreshCurrentActionTextbox();
             }
-            else
+            catch (Exception ex)
             {
-                ChangeKeyboardButtonAndCheckbox(true);
-                ChangeAppButtonAndCheckbox(true);
-                ChangeShortcutButtonAndCheckbox(true);
-                ChangeTextButtonAndCheckbox(true);
+                Console.WriteLine("{0}", ex);
             }
         }
 
         /* Map to Shortcut */
         private void mapShortcut_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                RefreshButtonsAndTextboxes();
+                RefreshCurrentActionTextbox();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0}", ex);
+            }
         }
         private void shortcutCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (shortcutCheckBox.Checked)
+            try
             {
-                ChangeKeyboardButtonAndCheckbox(false);
-                ChangeAppButtonAndCheckbox(false);
-                ChangeShortcutButtonAndCheckbox(true);
-                ChangeTextButtonAndCheckbox(false);
+                IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                if (!shortcutCheckBox.Checked)
+                {
+                    // Set keyboard action to None
+                    keyboard.Action = XAction.None;
+                }
+                else
+                {
+                    foreach (CheckBox checkbox in checkboxes)
+                    {
+                        if (checkbox != shortcutCheckBox) { checkbox.Checked = false; }
+                    }
+
+                    // Set keyboard action to pressKey
+                    keyboard.Action = XAction.PressShortcut;
+                }
+                RefreshCurrentActionTextbox();
             }
-            else
+            catch (Exception ex)
             {
-                ChangeKeyboardButtonAndCheckbox(true);
-                ChangeAppButtonAndCheckbox(true);
-                ChangeShortcutButtonAndCheckbox(true);
-                ChangeTextButtonAndCheckbox(true);
+                Console.WriteLine("{0}", ex);
             }
         }
 
         /* Map to Text */
         private void mapText_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Show TextMapping dialog
+                TextMapping textMapping = new TextMapping(currentButton);
+                textMapping.Text = "Map button '" + currentButton + "' to text";
+                textMapping.ShowDialog();
+                if (textMapping.textToMap != "")
+                {
+                    IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                    keyboard.Action = XAction.PressKeysFromString;
+                    keyboard.StringToPress = textMapping.textToMap;
 
-        }        
+                    RefreshButtonsAndTextboxes();
+                    RefreshCurrentActionTextbox();
+                }
+                else
+                {
+                    MessageBox.Show("Text can't be empty");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0}", ex);
+            }
+        }
         private void textCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (textCheckBox.Checked)
+            try
             {
-                ChangeKeyboardButtonAndCheckbox(false);
-                ChangeAppButtonAndCheckbox(false);
-                ChangeShortcutButtonAndCheckbox(false);
-                ChangeTextButtonAndCheckbox(true);
+                IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                if (!textCheckBox.Checked)
+                {
+                    // Set keyboard action to None
+                    keyboard.Action = XAction.None;
+                }
+                else
+                {
+                    foreach (CheckBox checkbox in checkboxes)
+                    {
+                        if (checkbox != textCheckBox) { checkbox.Checked = false; }
+                    }
+
+                    // Set keyboard action to pressKey
+                    keyboard.Action = XAction.PressKeysFromString;
+                }
+                RefreshCurrentActionTextbox();
             }
-            else
+            catch (Exception ex)
             {
-                ChangeKeyboardButtonAndCheckbox(true);
-                ChangeAppButtonAndCheckbox(true);
-                ChangeShortcutButtonAndCheckbox(true);
-                ChangeTextButtonAndCheckbox(true);
+                Console.WriteLine("{0}", ex);
             }
         }
 

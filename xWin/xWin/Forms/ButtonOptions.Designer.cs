@@ -42,14 +42,15 @@
             this.openAppTextBox = new System.Windows.Forms.TextBox();
             this.shortcutTextBox = new System.Windows.Forms.TextBox();
             this.textTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.currentActionTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // mapKeyboard
             // 
             this.mapKeyboard.CausesValidation = false;
-            this.mapKeyboard.Enabled = false;
             this.mapKeyboard.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mapKeyboard.Location = new System.Drawing.Point(138, 75);
+            this.mapKeyboard.Location = new System.Drawing.Point(142, 219);
             this.mapKeyboard.Name = "mapKeyboard";
             this.mapKeyboard.Size = new System.Drawing.Size(212, 78);
             this.mapKeyboard.TabIndex = 0;
@@ -59,9 +60,8 @@
             // 
             // openApplication
             // 
-            this.openApplication.Enabled = false;
             this.openApplication.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openApplication.Location = new System.Drawing.Point(138, 207);
+            this.openApplication.Location = new System.Drawing.Point(142, 351);
             this.openApplication.Name = "openApplication";
             this.openApplication.Size = new System.Drawing.Size(212, 78);
             this.openApplication.TabIndex = 1;
@@ -71,9 +71,8 @@
             // 
             // mapShortcut
             // 
-            this.mapShortcut.Enabled = false;
             this.mapShortcut.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mapShortcut.Location = new System.Drawing.Point(138, 336);
+            this.mapShortcut.Location = new System.Drawing.Point(142, 480);
             this.mapShortcut.Name = "mapShortcut";
             this.mapShortcut.Size = new System.Drawing.Size(212, 78);
             this.mapShortcut.TabIndex = 2;
@@ -83,9 +82,8 @@
             // 
             // mapText
             // 
-            this.mapText.Enabled = false;
             this.mapText.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mapText.Location = new System.Drawing.Point(138, 459);
+            this.mapText.Location = new System.Drawing.Point(142, 603);
             this.mapText.Name = "mapText";
             this.mapText.Size = new System.Drawing.Size(212, 78);
             this.mapText.TabIndex = 3;
@@ -100,8 +98,7 @@
             // keyboardCheckBox
             // 
             this.keyboardCheckBox.AutoSize = true;
-            this.keyboardCheckBox.Enabled = false;
-            this.keyboardCheckBox.Location = new System.Drawing.Point(74, 103);
+            this.keyboardCheckBox.Location = new System.Drawing.Point(78, 247);
             this.keyboardCheckBox.Name = "keyboardCheckBox";
             this.keyboardCheckBox.Size = new System.Drawing.Size(28, 27);
             this.keyboardCheckBox.TabIndex = 4;
@@ -111,8 +108,7 @@
             // openAppCheckBox
             // 
             this.openAppCheckBox.AutoSize = true;
-            this.openAppCheckBox.Enabled = false;
-            this.openAppCheckBox.Location = new System.Drawing.Point(74, 233);
+            this.openAppCheckBox.Location = new System.Drawing.Point(78, 377);
             this.openAppCheckBox.Name = "openAppCheckBox";
             this.openAppCheckBox.Size = new System.Drawing.Size(28, 27);
             this.openAppCheckBox.TabIndex = 5;
@@ -122,8 +118,7 @@
             // shortcutCheckBox
             // 
             this.shortcutCheckBox.AutoSize = true;
-            this.shortcutCheckBox.Enabled = false;
-            this.shortcutCheckBox.Location = new System.Drawing.Point(74, 364);
+            this.shortcutCheckBox.Location = new System.Drawing.Point(78, 508);
             this.shortcutCheckBox.Name = "shortcutCheckBox";
             this.shortcutCheckBox.Size = new System.Drawing.Size(28, 27);
             this.shortcutCheckBox.TabIndex = 6;
@@ -133,8 +128,7 @@
             // textCheckBox
             // 
             this.textCheckBox.AutoSize = true;
-            this.textCheckBox.Enabled = false;
-            this.textCheckBox.Location = new System.Drawing.Point(74, 487);
+            this.textCheckBox.Location = new System.Drawing.Point(78, 631);
             this.textCheckBox.Name = "textCheckBox";
             this.textCheckBox.Size = new System.Drawing.Size(28, 27);
             this.textCheckBox.TabIndex = 7;
@@ -144,52 +138,78 @@
             // keyboardTextBox
             // 
             this.keyboardTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.keyboardTextBox.Location = new System.Drawing.Point(441, 75);
+            this.keyboardTextBox.Font = new System.Drawing.Font("Arial", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keyboardTextBox.Location = new System.Drawing.Point(445, 219);
             this.keyboardTextBox.Multiline = true;
             this.keyboardTextBox.Name = "keyboardTextBox";
             this.keyboardTextBox.ReadOnly = true;
-            this.keyboardTextBox.Size = new System.Drawing.Size(653, 78);
+            this.keyboardTextBox.Size = new System.Drawing.Size(802, 78);
             this.keyboardTextBox.TabIndex = 8;
             this.keyboardTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // openAppTextBox
             // 
             this.openAppTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.openAppTextBox.Location = new System.Drawing.Point(441, 207);
+            this.openAppTextBox.Font = new System.Drawing.Font("Arial", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openAppTextBox.Location = new System.Drawing.Point(445, 351);
             this.openAppTextBox.Multiline = true;
             this.openAppTextBox.Name = "openAppTextBox";
             this.openAppTextBox.ReadOnly = true;
-            this.openAppTextBox.Size = new System.Drawing.Size(653, 78);
+            this.openAppTextBox.Size = new System.Drawing.Size(802, 78);
             this.openAppTextBox.TabIndex = 9;
             this.openAppTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // shortcutTextBox
             // 
             this.shortcutTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.shortcutTextBox.Location = new System.Drawing.Point(441, 336);
+            this.shortcutTextBox.Font = new System.Drawing.Font("Arial", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shortcutTextBox.Location = new System.Drawing.Point(445, 480);
             this.shortcutTextBox.Multiline = true;
             this.shortcutTextBox.Name = "shortcutTextBox";
             this.shortcutTextBox.ReadOnly = true;
-            this.shortcutTextBox.Size = new System.Drawing.Size(653, 78);
+            this.shortcutTextBox.Size = new System.Drawing.Size(802, 78);
             this.shortcutTextBox.TabIndex = 10;
             this.shortcutTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textTextBox
             // 
             this.textTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.textTextBox.Location = new System.Drawing.Point(441, 459);
+            this.textTextBox.Font = new System.Drawing.Font("Arial", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textTextBox.Location = new System.Drawing.Point(445, 603);
             this.textTextBox.Multiline = true;
             this.textTextBox.Name = "textTextBox";
             this.textTextBox.ReadOnly = true;
-            this.textTextBox.Size = new System.Drawing.Size(653, 78);
+            this.textTextBox.Size = new System.Drawing.Size(802, 78);
             this.textTextBox.TabIndex = 11;
             this.textTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 25);
+            this.label1.TabIndex = 12;
+            // 
+            // currentActionTextbox
+            // 
+            this.currentActionTextbox.BackColor = System.Drawing.SystemColors.Info;
+            this.currentActionTextbox.Font = new System.Drawing.Font("Arial Black", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentActionTextbox.Location = new System.Drawing.Point(340, 49);
+            this.currentActionTextbox.Multiline = true;
+            this.currentActionTextbox.Name = "currentActionTextbox";
+            this.currentActionTextbox.ReadOnly = true;
+            this.currentActionTextbox.Size = new System.Drawing.Size(697, 100);
+            this.currentActionTextbox.TabIndex = 13;
+            this.currentActionTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ButtonOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1155, 613);
+            this.ClientSize = new System.Drawing.Size(1327, 766);
+            this.Controls.Add(this.currentActionTextbox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textTextBox);
             this.Controls.Add(this.shortcutTextBox);
             this.Controls.Add(this.openAppTextBox);
@@ -227,5 +247,7 @@
         private System.Windows.Forms.TextBox openAppTextBox;
         private System.Windows.Forms.TextBox shortcutTextBox;
         private System.Windows.Forms.TextBox textTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox currentActionTextbox;
     }
 }

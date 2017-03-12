@@ -70,23 +70,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\Buttons.cs" />
     <Compile Include="Forms\ButtonOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ButtonOptions.Designer.cs">
+    <Compile Include="Forms\ButtonOptions.designer.cs">
       <DependentUpon>ButtonOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ButtonMaps\TextMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ButtonMaps\TextMapping.Designer.cs">
+      <DependentUpon>TextMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Buttons.cs" />
     <Compile Include="Forms\ControllerOptions.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ControllerOptions.Designer.cs">
       <DependentUpon>ControllerOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\KeyboardMapping.cs">
+    <Compile Include="Forms\ButtonMaps\KeyboardMapping.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\KeyboardMapping.Designer.cs">
+    <Compile Include="Forms\ButtonMaps\KeyboardMapping.Designer.cs">
       <DependentUpon>KeyboardMapping.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\XWinPanel.cs">
@@ -128,8 +134,11 @@
     <EmbeddedResource Include="Forms\ControllerOptions.resx">
       <DependentUpon>ControllerOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\KeyboardMapping.resx">
+    <EmbeddedResource Include="Forms\ButtonMaps\KeyboardMapping.resx">
       <DependentUpon>KeyboardMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ButtonMaps\TextMapping.resx">
+      <DependentUpon>TextMapping.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\XWinPanel.resx">
       <DependentUpon>XWinPanel.cs</DependentUpon>
@@ -147,5 +156,6 @@
     <None Include="Resources\button_highlight.png" />
     <Content Include="Resources\xbox360controller.PNG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
