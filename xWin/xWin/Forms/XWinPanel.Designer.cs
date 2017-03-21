@@ -1,6 +1,6 @@
 ﻿namespace xWin.Forms
 {
-    partial class xWinPanel
+    partial class XWinPanel
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(xWinPanel));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XWinPanel));
             this.ControllerPanel = new System.Windows.Forms.TabControl();
             this.controllersPanel = new System.Windows.Forms.TabPage();
             this.Controller4 = new System.Windows.Forms.Button();

@@ -12,6 +12,7 @@ namespace xWin.Library
         string StringToPress { get; set; }
         string AppPath { get; set; }
         Keys[] ShortcutToPress { get; set; }
+        void Execute();
     }
 
     public class XKeyBoard : IXKeyBoard

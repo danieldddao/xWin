@@ -12,7 +12,7 @@ using xWin.Library;
 
 namespace xWin.Forms
 {
-    public partial class xWinPanel : Form
+    public partial class XWinPanel : Form
     {
         IXController XCon1;
         ControllerOptions OpXCon1;
@@ -26,7 +26,7 @@ namespace xWin.Forms
         IXController XCon4;
         ControllerOptions OpXCon4;
 
-        public xWinPanel()
+        public XWinPanel()
         {
             InitializeComponent();
 
@@ -45,7 +45,7 @@ namespace xWin.Forms
         }
 
         /* For Unit Testing */
-        public xWinPanel(IXController con1, IXController con2, IXController con3, IXController con4)
+        public XWinPanel(IXController con1, IXController con2, IXController con3, IXController con4)
         {
             InitializeComponent();
 
@@ -63,7 +63,7 @@ namespace xWin.Forms
             OpXCon4 = new ControllerOptions(XCon4);
         }
 
-        public void UpdateControllers()
+        private void UpdateControllers()
         {
             // Check status of each controller and update the button accordingly
             if (XCon1.IsConnected())

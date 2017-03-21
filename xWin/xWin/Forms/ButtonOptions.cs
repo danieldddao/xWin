@@ -237,6 +237,11 @@ namespace xWin.Forms
         {
             try
             {
+                KeyboardMapping keyboardMapping = new KeyboardMapping();
+                keyboardMapping.ShowDialog();
+                IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                keyboard.Action = XAction.PressKey;
+                keyboard.KeyToPress = keyboardMapping.CurrentKey;
                 RefreshButtonsAndTextboxes();
                 RefreshCurrentActionTextbox();
             }

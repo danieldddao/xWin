@@ -14,6 +14,7 @@ namespace xWin.Wrapper
     {
         bool IsConnected();
         State GetState();
+        void UpdateState();
         void LeftClick();
         void LeftDown();
         void LeftUp();
@@ -22,6 +23,7 @@ namespace xWin.Wrapper
         void RightUp();
         void MoveCursor(int dpi, int deadZoneRad);
         void MoveCursor(int flag,int deadZoneRad,int dpi);
+        bool IsButtonPressed(GamepadButtonFlags button);
     }
 
     public class ControllerWrapper : IControllerWrapper
@@ -42,6 +44,10 @@ namespace xWin.Wrapper
         public ControllerWrapper(Controller controller)
         {
             this.controller = controller;
+            if (controller.IsConnected)
+            {
+                currentControllerState = controller.GetState();
+            }
         }
 
         public virtual bool IsConnected()
@@ -51,7 +57,22 @@ namespace xWin.Wrapper
 
         public State GetState()
         {
-            return controller.GetState();
+            return currentControllerState;
+        }
+
+        public void UpdateState()
+        {
+            try
+            {
+                if (controller.IsConnected)
+                {
+                    currentControllerState = controller.GetState();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}", e);
+            }
         }
 
         public virtual void LeftClick()
@@ -139,6 +160,11 @@ namespace xWin.Wrapper
 
                 Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + (short)Math.Floor(yDiff));
             }
+        }
+
+        public bool IsButtonPressed(GamepadButtonFlags button)
+        {
+            return currentControllerState.Gamepad.Buttons.HasFlag(button);
         }
     }
 }

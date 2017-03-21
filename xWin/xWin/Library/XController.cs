@@ -22,7 +22,6 @@ namespace xWin.Library
     {
         private readonly IControllerWrapper controllerWrapper;
 
-        private State currentControllerState { get; set; }
         private short deadZoneRad { get; set; }
         private const short MAX_INPUT = 32767;
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
@@ -36,6 +35,11 @@ namespace xWin.Library
         public XController(IControllerWrapper iController)
         {
             this.controllerWrapper = iController;
+            if (controllerWrapper.IsConnected())
+            {
+                controllerWrapper.UpdateState();
+            }
+            InitializeButtonMaps();
         }
 
         public XController(short deadZoneRad = 7000)
@@ -44,7 +48,7 @@ namespace xWin.Library
             controllerWrapper = new ControllerWrapper(new SharpDX.XInput.Controller(UserIndex.One));
             if (controllerWrapper.IsConnected())
             {
-                currentControllerState = controllerWrapper.GetState();
+                controllerWrapper.UpdateState();
             }
             InitializeButtonMaps();
         }
@@ -54,7 +58,7 @@ namespace xWin.Library
             controllerWrapper = new ControllerWrapper(controller);
             if (controllerWrapper.IsConnected())
             {
-                currentControllerState = controllerWrapper.GetState();
+                controllerWrapper.UpdateState();
             }
             this.deadZoneRad = deadZoneRad;
             InitializeButtonMaps();
@@ -71,14 +75,7 @@ namespace xWin.Library
 
         public void UpdateState()
         {
-            try
-            {
-                currentControllerState = controllerWrapper.GetState();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("{0}", e);
-            }
+            controllerWrapper.UpdateState();
         }
 
         public Dictionary<string,bool> ButtonsPressed()
@@ -105,21 +102,21 @@ namespace xWin.Library
             if (currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.None)) { currentButtons.Add(Buttons.NONE); }
             */
 
-            currentButtons.Add("A", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.A));
-            currentButtons.Add("B", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.B));
-            currentButtons.Add("X", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.X));
-            currentButtons.Add("Y", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Y));
-            currentButtons.Add("START", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Start));
-            currentButtons.Add("BACK", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Back));
-            currentButtons.Add("LEFT_S", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftShoulder));
-            currentButtons.Add("RIGHT_S", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightShoulder));
-            currentButtons.Add("LEFT_T", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.LeftThumb));
-            currentButtons.Add("RIGHT_T", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.RightThumb));
-            currentButtons.Add("DPAD_UP", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadUp));
-            currentButtons.Add("DPAD_RIGHT", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadRight));
-            currentButtons.Add("DPAD_LEFT", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadLeft));
-            currentButtons.Add("DPAD_DOWN", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadDown));
-            currentButtons.Add("NONE", currentControllerState.Gamepad.Buttons.HasFlag(GamepadButtonFlags.None));
+            currentButtons.Add("A", controllerWrapper.IsButtonPressed(GamepadButtonFlags.A));
+            currentButtons.Add("B", controllerWrapper.IsButtonPressed(GamepadButtonFlags.B));
+            currentButtons.Add("X", controllerWrapper.IsButtonPressed(GamepadButtonFlags.X));
+            currentButtons.Add("Y", controllerWrapper.IsButtonPressed(GamepadButtonFlags.Y));
+            currentButtons.Add("START", controllerWrapper.IsButtonPressed(GamepadButtonFlags.Start));
+            currentButtons.Add("BACK", controllerWrapper.IsButtonPressed(GamepadButtonFlags.Back));
+            currentButtons.Add("LEFT_S", controllerWrapper.IsButtonPressed(GamepadButtonFlags.LeftShoulder));
+            currentButtons.Add("RIGHT_S", controllerWrapper.IsButtonPressed(GamepadButtonFlags.RightShoulder));
+            currentButtons.Add("LEFT_T", controllerWrapper.IsButtonPressed(GamepadButtonFlags.LeftThumb));
+            currentButtons.Add("RIGHT_T", controllerWrapper.IsButtonPressed(GamepadButtonFlags.RightThumb));
+            currentButtons.Add("DPAD_UP", controllerWrapper.IsButtonPressed(GamepadButtonFlags.DPadUp));
+            currentButtons.Add("DPAD_RIGHT", controllerWrapper.IsButtonPressed(GamepadButtonFlags.DPadRight));
+            currentButtons.Add("DPAD_LEFT", controllerWrapper.IsButtonPressed(GamepadButtonFlags.DPadLeft));
+            currentButtons.Add("DPAD_DOWN", controllerWrapper.IsButtonPressed(GamepadButtonFlags.DPadDown));
+            currentButtons.Add("NONE", controllerWrapper.IsButtonPressed(GamepadButtonFlags.None));
 
             return currentButtons;
         }
@@ -128,8 +125,8 @@ namespace xWin.Library
         {
             Dictionary<string, short> thumbLoc = new Dictionary<string, short>();
 
-            thumbLoc.Add("X", currentControllerState.Gamepad.LeftThumbX);
-            thumbLoc.Add("Y", currentControllerState.Gamepad.LeftThumbY);
+            thumbLoc.Add("X", controllerWrapper.GetState().Gamepad.LeftThumbX);
+            thumbLoc.Add("Y", controllerWrapper.GetState().Gamepad.LeftThumbY);
 
             return thumbLoc;
         }
@@ -137,8 +134,8 @@ namespace xWin.Library
         public Dictionary<string, double> GetLeftPolar()
         {
             Dictionary<string, double> thumbLoc = new Dictionary<string, double>();
-            short x = currentControllerState.Gamepad.LeftThumbX;
-            short y = currentControllerState.Gamepad.LeftThumbY;
+            short x = controllerWrapper.GetState().Gamepad.LeftThumbX;
+            short y = controllerWrapper.GetState().Gamepad.LeftThumbY;
 
             double r = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
             double theta = Math.Atan(y / x);
@@ -152,8 +149,8 @@ namespace xWin.Library
         {
             Dictionary<string, short> thumbLoc = new Dictionary<string, short>();
 
-            thumbLoc.Add("X", currentControllerState.Gamepad.RightThumbX);
-            thumbLoc.Add("Y", currentControllerState.Gamepad.RightThumbY);
+            thumbLoc.Add("X", controllerWrapper.GetState().Gamepad.RightThumbX);
+            thumbLoc.Add("Y", controllerWrapper.GetState().Gamepad.RightThumbY);
 
             return thumbLoc;
         }
@@ -161,8 +158,8 @@ namespace xWin.Library
         public Dictionary<string, double> GetRightPolar()
         {
             Dictionary<string, double> thumbLoc = new Dictionary<string, double>();
-            short x = currentControllerState.Gamepad.RightThumbX;
-            short y = currentControllerState.Gamepad.RightThumbY;
+            short x = controllerWrapper.GetState().Gamepad.RightThumbX;
+            short y = controllerWrapper.GetState().Gamepad.RightThumbY;
 
             double r = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
             double theta = Math.Atan(y / x);
@@ -174,12 +171,12 @@ namespace xWin.Library
 
         public short GetLeftTrigger()
         {
-            return currentControllerState.Gamepad.LeftTrigger;
+            return controllerWrapper.GetState().Gamepad.LeftTrigger;
         }
 
         public short GetRightTrigger()
         {
-            return currentControllerState.Gamepad.RightTrigger;
+            return controllerWrapper.GetState().Gamepad.RightTrigger;
         }
 
         public bool MoveCursor()
@@ -277,6 +274,7 @@ namespace xWin.Library
             }
         }
 
+        /* Get XKeyboard corresponding to button */
         public IXKeyBoard GetKeyBoardForButton(GamepadButtonFlags button)
         {
             try
@@ -287,9 +285,7 @@ namespace xWin.Library
                     return xKeyboard;
                 }
                 else
-                {
-                    return null;
-                }
+                { return null; }
             } catch (Exception e)
             {
                 Console.WriteLine("Error when getting keyboard for button {0} : {0}", button, e);
@@ -298,6 +294,33 @@ namespace xWin.Library
 
         }
 
+        /* Get all currently pressed buttons */
+        public List<GamepadButtonFlags> GetCurrentlyPressedButtons()
+        {
+            List<GamepadButtonFlags> pressedButtons = new List<GamepadButtonFlags>();
+            try
+            {
+                UpdateState(); // update state before checking
+
+                // Check each button and add button to the list if it's currently pressed
+                foreach (GamepadButtonFlags button in Enum.GetValues(typeof(GamepadButtonFlags)))
+                {
+                    if (button != GamepadButtonFlags.None && controllerWrapper.IsButtonPressed(button))
+                       {
+                        pressedButtons.Add(button);
+                        Console.WriteLine("buttons pressed: {0}", button);
+                    }
+                }
+                Console.WriteLine("buttons pressed: {0}", pressedButtons.Count);
+                return pressedButtons;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}", e);
+                return pressedButtons;
+            }
+            
+        }
 
     } // end class
 }

@@ -18,14 +18,13 @@ namespace MSTest.Library
     public class XControllerTest
     {
         xWin.Library.XController controller;
-        Mock<xWin.Wrapper.ControllerWrapper> mockController;
-   
+        Mock<xWin.Wrapper.IControllerWrapper> mockController;
+
 
         [TestInitialize]
         public void Setup()
         {
-            mockController = new Mock<xWin.Wrapper.ControllerWrapper>();
-
+            mockController = new Mock<xWin.Wrapper.IControllerWrapper>();
             controller = new XController(mockController.Object);
         }
 
@@ -117,14 +116,14 @@ namespace MSTest.Library
         [TestMethod]
         public void TestConnected()
         {
-            mockController.Setup(x => x.IsConnected());
+            mockController.Setup(x => x.IsConnected()).Returns(true);
             bool status = controller.IsConnected();
             Assert.IsTrue(status);
         }
         [TestMethod]
-        public void TestConnected_ThrowsException()
+        public void TestDisconnected()
         {
-            mockController.Setup(x => x.IsConnected()).Throws(new Exception());
+            mockController.Setup(x => x.IsConnected()).Returns(false);
             bool status = controller.IsConnected();
             Assert.IsFalse(status);
         }
@@ -132,7 +131,7 @@ namespace MSTest.Library
         [TestMethod]
         public void testMouseMove()
         {
-            mockController.Setup(x => x.MoveCursor(10,7000));
+            mockController.Setup(x => x.MoveCursor(10, 7000));
             bool status = controller.MoveCursor();
             Assert.IsTrue(status);
         }
@@ -140,16 +139,16 @@ namespace MSTest.Library
         public void testCursorPos()
         {
             Cursor.Position = new Point(200, 200);
-            mockController.Setup(x => x.MoveCursor(1,10, 32647));
+            mockController.Setup(x => x.MoveCursor(1, 10, 32647));
             int mockPosX = Cursor.Position.X;
             int mockPosY = Cursor.Position.Y;
-            Cursor.Position = new Point(200,200);
+            Cursor.Position = new Point(200, 200);
             controller.MoveCursorTest();
             int actPosX = Cursor.Position.X;
             int actPosY = Cursor.Position.Y;
 
             bool status = false;
-            if(actPosX == mockPosX && actPosY == mockPosY)
+            if (actPosX == mockPosX && actPosY == mockPosY)
             {
                 status = true;
             }
@@ -160,6 +159,42 @@ namespace MSTest.Library
             System.Diagnostics.Trace.Write(actPosX);
             System.Diagnostics.Trace.Write(actPosY);
             Assert.IsTrue(status);
+        }
+
+        [TestMethod]
+        public void TestGetKeyBoardForButton()
+        {
+            foreach (SharpDX.XInput.GamepadButtonFlags button in Enum.GetValues(typeof(SharpDX.XInput.GamepadButtonFlags)))
+            {
+                IXKeyBoard keyboard = controller.GetKeyBoardForButton(button);
+                Assert.IsNotNull(keyboard);
+            }
+
+        }
+
+        [TestMethod]
+        public void TestGetPressedButtons_OnlyButtonAButtonXPressed()
+        {
+            mockController.Setup(x => x.IsButtonPressed(SharpDX.XInput.GamepadButtonFlags.A)).Returns(true);
+            mockController.Setup(x => x.IsButtonPressed(SharpDX.XInput.GamepadButtonFlags.X)).Returns(true);
+
+            List<SharpDX.XInput.GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
+            Assert.AreEqual(list.Count, 2);
+            Assert.AreEqual(list.Contains(SharpDX.XInput.GamepadButtonFlags.A), true);
+            Assert.AreEqual(list.Contains(SharpDX.XInput.GamepadButtonFlags.X), true);
+        }
+        [TestMethod]
+        public void TestGetPressedButtons_NoButtonPressed()
+        {
+            List<SharpDX.XInput.GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
+            Assert.AreEqual(list.Count, 0);
+        }
+        [TestMethod]
+        public void TestGetPressedButtons_Exception()
+        {
+            mockController.Setup(x => x.IsButtonPressed(SharpDX.XInput.GamepadButtonFlags.A)).Throws(new Exception());
+            List<SharpDX.XInput.GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
+            Assert.AreEqual(list.Count, 0);
         }
     }
 }

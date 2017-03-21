@@ -14,17 +14,29 @@ namespace xWin
 {
     class Program
     {
+        static XController c = new XController();
         public static void RunFormApplication()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ControllerOptions(new XController()));
+            Application.Run(new ControllerOptions(c));
         }
 
         [STAThread]
         static void Main(string[] args)
         {
             RunFormApplication();
+            while (true)
+            {
+                Thread.Sleep(500);
+                List<GamepadButtonFlags> l = c.GetCurrentlyPressedButtons();
+                if (l.Count == 1)
+                {
+                    GamepadButtonFlags b = l.First<GamepadButtonFlags>();
+                    Console.WriteLine("{0}", c.GetKeyBoardForButton(b).Action);
+                    c.GetKeyBoardForButton(b).Execute();
+                }
+            }
             /*
             while (true)
             {
