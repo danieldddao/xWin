@@ -26,13 +26,11 @@ namespace xWin.Library
             public struct coord { public int x; public int y; }; 
             public coord mouse_movement;
         }
-
-        protected Dictionary<GamepadButtonFlags, ButtonBehavior> button_map { get; private set; }
-        protected readonly StickBehavior LeftStick, RightStick;
-        protected readonly TriggerBehavior LeftTrigger, RightTrigger;
-        protected readonly List<ControllerAction> all_connections;
-
-
+        
+        private readonly StickBehavior LeftStick, RightStick;
+        private readonly TriggerBehavior LeftTrigger, RightTrigger;
+        private readonly List<ButtonBehavior> all_connections;
+        
         private readonly Dictionary<GamepadFlags, ButtonBehavior> input_mapping;
 
         public Interpreter(BasicControl c)
@@ -42,7 +40,7 @@ namespace xWin.Library
             * button_map[ControllerButton.A] = new `ButtonAction(this)`;
             */
 
-            all_connections = new List<ControllerAction>();
+            all_connections = new List<ButtonBehavior>();
             input_mapping = new Dictionary<GamepadFlags, ButtonBehavior>();
             foreach (GamepadFlags s in c.ButtonMap.Keys)
             {
@@ -57,27 +55,28 @@ namespace xWin.Library
         /*Clear the old States*/
         public void Reset()
         {
-            foreach (var b in button_map.Values) { b.Reset(); }
+            foreach (var b in input_mapping.Values) { b.Reset(); }
         }
 
         public KeyboardMouseState NextState(Gamepad g)
         {
             var kms = new KeyboardMouseState();
+            kms.mouse_movement = new KeyboardMouseState.coord();
+            kms.pressed = new Queue<Keys>();
+            kms.special = new Queue<SpecialAction>();
             /*
                 Get Stick and Trigger Regions, and put them into the GamepadFlags constructor
             */
 
             byte lt = LeftTrigger.GetRegion(g.LeftTrigger);
             byte rt = RightTrigger.GetRegion(g.RightTrigger);
-            byte? ls = LeftStick.Act(g.LeftThumbX, g.LeftThumbY, kms);
-            byte? rs = LeftStick.Act(g.RightThumbX, g.RightThumbY, kms);
-            bool lss = false, rss = false;
-            if (ls == null) { lss = true; ls = 0; }
-            if (rs == null) { rss = true; rs = 0; }
-            var state = new GamepadFlags(g.Buttons,lt == 0, rt == 0, lss, rss, false, false, lt, rt, (byte)ls, (byte)rs);
-            foreach(GamepadFlags flags in input_mapping.Keys)
+            byte ls = LeftStick.Act(g.LeftThumbX, g.LeftThumbY, kms);
+            byte rs = RightStick.Act(g.RightThumbX, g.RightThumbY, kms);
+            var state = new GamepadFlags(g.Buttons, lt, rt, ls, rs);
+
+            foreach (GamepadFlags flags in input_mapping.Keys)
             {
-                input_mapping[flags].Act(flags & state, state, kms);
+                input_mapping[flags].Act(state & flags, state, kms);
             }
             return kms;
         }

@@ -43,15 +43,13 @@ message BasicControl {
     bool control_mouse = 2;
     int32 region_start = 3;//the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
     repeated uint32 regions = 4;
-    Behavior stay_behavior = 5;
-    bool invert_ud = 6;
-    bool invert_lr = 7;
+    bool invert_ud = 5;
+    bool invert_lr = 6;
   }
   
   message Trigger {
     uint32 deadzone = 1;
-    repeated Region regions = 2;
-    Behavior unpressed = 3;
+    repeated uint32 regions = 2;//must add to 255 - deadzone
   }
 
   

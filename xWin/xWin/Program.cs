@@ -7,7 +7,7 @@ using System.Threading;
 using xWin.Library;
 using SharpDX.XInput;
 using xWin.Forms;
-using static Configuration.Types;
+//using static Configuration.Types;
 using SharpDX.DirectInput;
 
 
