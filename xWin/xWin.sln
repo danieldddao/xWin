@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTest", "Test\MSTest\MSTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cucumber", "Test\Cucumber\Cucumber.csproj", "{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitForms", "Test\NUnitForms\NUnitForms.csproj", "{DBC4722E-CFA2-494D-B31E-4DAE793E546D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D63AD74E-4CF4-4CFF-908A-89B21B5B4324}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBC4722E-CFA2-494D-B31E-4DAE793E546D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBC4722E-CFA2-494D-B31E-4DAE793E546D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBC4722E-CFA2-494D-B31E-4DAE793E546D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBC4722E-CFA2-494D-B31E-4DAE793E546D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

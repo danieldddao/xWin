@@ -44,7 +44,7 @@ namespace xWin.Forms
             //OpXCon4 = new ControllerOptions(XCon4);
         }
 
-        /* For Unit Testing */
+        /* For Testing */
         public XWinPanel(IXController con1, IXController con2, IXController con3, IXController con4)
         {
             InitializeComponent();
@@ -62,6 +62,15 @@ namespace xWin.Forms
             XCon4 = con4;
             OpXCon4 = new ControllerOptions(XCon4);
         }
+
+        public Button GetController1()
+        { return Controller1; }
+        public Button GetController2()
+        { return Controller2; }
+        public Button GetController3()
+        { return Controller3; }
+        public Button GetController4()
+        { return Controller4; }
 
         private void UpdateControllers()
         {
@@ -119,15 +128,15 @@ namespace xWin.Forms
 
         private void Controller1_Click(object sender, EventArgs e)
         {
-            //if (XCon1.IsConnected())
-            //{
+            if (XCon1.IsConnected())
+            {
                 OpXCon1.ShowDialog();
-            //}
+            }
         }
 
         private void Controller2_Click(object sender, EventArgs e)
         {
-            if (XCon1.IsConnected())
+            if (XCon2.IsConnected())
             {
                 OpXCon2.ShowDialog();
             }
@@ -135,7 +144,7 @@ namespace xWin.Forms
 
         private void Controller3_Click(object sender, EventArgs e)
         {
-            if (XCon1.IsConnected())
+            if (XCon3.IsConnected())
             {
                 OpXCon3.ShowDialog();
             }
@@ -143,7 +152,7 @@ namespace xWin.Forms
 
         private void Controller4_Click(object sender, EventArgs e)
         {
-            if (XCon1.IsConnected())
+            if (XCon4.IsConnected())
             {
                 OpXCon4.ShowDialog();
             }
