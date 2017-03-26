@@ -18,9 +18,9 @@ namespace Cucumber.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("XWinPanel")]
+    [NUnit.Framework.DescriptionAttribute("XWinPanel Window")]
     [NUnit.Framework.CategoryAttribute("XWinPanel")]
-    public partial class XWinPanelFeature
+    public partial class XWinPanelWindowFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -32,7 +32,7 @@ namespace Cucumber.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "XWinPanel", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "XWinPanel Window", null, ProgrammingLanguage.CSharp, new string[] {
                         "XWinPanel"});
             testRunner.OnFeatureStart(featureInfo);
         }

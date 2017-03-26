@@ -74,10 +74,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\ButtonOptions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ButtonOptions.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\KeyboardInputs.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>KeyboardInputs.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ControllerOptions.feature.cs">
+      <DependentUpon>ControllerOptions.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Features\XWinPanel.feature.cs">
       <AutoGen>True</AutoGen>
@@ -85,14 +95,24 @@
       <DependentUpon>XWinPanel.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\ButtonOptionsSteps.cs" />
     <Compile Include="Steps\KeyboardInputsSteps.cs" />
+    <Compile Include="Steps\ControllerOptionsSteps.cs" />
     <Compile Include="Steps\XWinPanelSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\ButtonOptions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ButtonOptions.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\KeyboardInputs.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>KeyboardInputs.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ControllerOptions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ControllerOptions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\XWinPanel.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

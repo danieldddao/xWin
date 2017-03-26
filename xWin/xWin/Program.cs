@@ -20,18 +20,20 @@ namespace xWin
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
         {
-            Mock<IXController> mockController1;
-            Mock<IXController> mockController2;
-            Mock<IXController> mockController3;
-            Mock<IXController> mockController4;
-            mockController1 = new Mock<IXController>();
-            mockController2 = new Mock<IXController>();
-            mockController3 = new Mock<IXController>();
-            mockController4 = new Mock<IXController>();
+            Mock<IXController> mockController1 = new Mock<IXController>();
+            Mock<IXController> mockController2 = new Mock<IXController>();
+            Mock<IXController> mockController3 = new Mock<IXController>();
+            Mock<IXController> mockController4 = new Mock<IXController>();
             mockController1.Setup(x => x.IsConnected()).Returns(true);
             mockController2.Setup(x => x.IsConnected()).Returns(false);
             mockController3.Setup(x => x.IsConnected()).Returns(false);
             mockController4.Setup(x => x.IsConnected()).Returns(true);
+
+            XKeyBoard keyboard = new XKeyBoard();
+            keyboard.AppPath = ".../Test.exe";
+
+            mockController4.Setup(x => x.GetKeyBoardForButton(GamepadButtonFlags.LeftThumb)).Returns(keyboard);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new XWinPanel(mockController1.Object, mockController2.Object, mockController3.Object, mockController4.Object));

@@ -225,7 +225,7 @@ namespace xWin.Forms
         /* Button DPadRight */
         private void buttonDPadRight_Click(object sender, EventArgs e)
         {
-            buttonOptions.Text = "Button DpadRight Options";
+            buttonOptions.Text = "Button DPadRight Options";
             buttonOptions.currentButton = GamepadButtonFlags.DPadRight;
             buttonOptions.ShowDialog();
         }

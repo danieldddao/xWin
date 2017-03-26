@@ -51,22 +51,22 @@ namespace Cucumber.Steps
         [Then(@"It should show that controller (.*) is connected")]
         public void ThenItShouldShowThatControllerIsConnected(int p0)
         {
-            Button buttonController1 = window.Get<Button>("Controller" + p0);
-            Assert.AreEqual(buttonController1.Text, "Controller " + p0 + " \nConnected");
+            Button buttonController = window.Get<Button>("Controller" + p0);
+            Assert.AreEqual(buttonController.Text, "Controller " + p0 + " \nConnected");
         }
 
         [Then(@"It should show that controller (.*) is disconnected")]
         public void ThenItShouldShowThatControllerIsDisconnected(int p0)
         {
-            Button buttonController1 = window.Get<Button>("Controller" + p0);
-            Assert.AreEqual(buttonController1.Text, "Controller " + p0 + " \nDisconnected");
+            Button buttonController = window.Get<Button>("Controller" + p0);
+            Assert.AreEqual(buttonController.Text, "Controller " + p0 + " \nDisconnected");
         }
 
         [When(@"I click on Controller (.*) button")]
         public void WhenIClickOnControllerButton(int p0)
         {
-            Button buttonController1 = window.Get<Button>("Controller" + p0);
-            buttonController1.Click();
+            Button buttonController = window.Get<Button>("Controller" + p0);
+            buttonController.Click();
         }
 
         [Then(@"It should show ControllerOptions window")]

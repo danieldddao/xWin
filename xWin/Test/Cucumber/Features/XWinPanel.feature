@@ -1,5 +1,5 @@
 ﻿@XWinPanel
-Feature: XWinPanel
+Feature: XWinPanel Window
 
 Scenario: XWinPanel loads successfully
 	Given XWin program is set up
