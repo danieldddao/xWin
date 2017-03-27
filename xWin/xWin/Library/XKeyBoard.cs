@@ -8,7 +8,7 @@ namespace xWin.Library
     public interface IXKeyBoard
     {
         XAction Action { get; set; }
-        Keys KeyToPress { get; set; }
+        byte KeyToPress { get; set; }
         string StringToPress { get; set; }
         string AppPath { get; set; }
         Keys[] ShortcutToPress { get; set; }
@@ -19,7 +19,7 @@ namespace xWin.Library
     {
         private char[] shiftedKeys = {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'};
         public XAction Action { get; set; }
-        public Keys KeyToPress { get; set; }
+        public byte KeyToPress { get; set; }
         public string StringToPress { get; set; }
         public string AppPath { get; set; }
         public Keys[] ShortcutToPress { get; set; }
@@ -30,7 +30,7 @@ namespace xWin.Library
         {
             this.systemWrapper = new SystemWrapper();
             Action = XAction.None;
-            KeyToPress = Keys.None;
+            KeyToPress = 0;
             StringToPress = null;
             AppPath = null;
             ShortcutToPress = null;
@@ -39,7 +39,27 @@ namespace xWin.Library
         public XKeyBoard(ISystemWrapper isystemWrapper)
         {
             this.systemWrapper = isystemWrapper;
-        }   
+        }
+
+        /*
+         * Press and Release the key where key is a byte
+         */
+        public bool PressKey(byte key)
+        {
+            try
+            {
+                systemWrapper.Press(key);
+                Thread.Sleep(100);
+                systemWrapper.Release(key);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error When Pressing Key (byte): {0}", key);
+                Console.WriteLine(e);
+                return false;
+            }
+        }
 
         /*
          * Press and Release the key where key = System.Windows.Forms.Keys.somekey
@@ -177,33 +197,40 @@ namespace xWin.Library
          */
         public void Execute()
         {
-            switch (Action)
+            try
             {
-                case XAction.None:
-                    {
-                        // do nothing
-                        break;
-                    }
-                case XAction.PressKey:
-                    {
-                        if (KeyToPress != Keys.None) { PressKey(KeyToPress); }
-                        break;
-                    }
-                case XAction.PressKeysFromString:
-                    {
-                        if (StringToPress != null) { PressKeysFromString(StringToPress); }
-                        break;
-                    }
-                case XAction.PressShortcut:
-                    {
-                        if (ShortcutToPress != null) { PressShortcut(ShortcutToPress); }
-                        break;
-                    }
-                case XAction.OpenApp:
-                    {
-                        if (AppPath != null) { OpenApplication(AppPath); }
-                        break;
-                    }
+                switch (Action)
+                {
+                    case XAction.None:
+                        {
+                            // do nothing
+                            break;
+                        }
+                    case XAction.PressKey:
+                        {
+                            if (KeyToPress != 0) { PressKey(KeyToPress); }
+                            break;
+                        }
+                    case XAction.PressKeysFromString:
+                        {
+                            if (StringToPress != null) { PressKeysFromString(StringToPress); }
+                            break;
+                        }
+                    case XAction.PressShortcut:
+                        {
+                            if (ShortcutToPress != null) { PressShortcut(ShortcutToPress); }
+                            break;
+                        }
+                    case XAction.OpenApp:
+                        {
+                            if (AppPath != null) { OpenApplication(AppPath); }
+                            break;
+                        }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error when executing action {0} : {0}", Action, e);
             }
         }
     }

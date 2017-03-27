@@ -5,539 +5,539 @@ namespace xWin.Forms.ButtonMaps
 {
     public partial class KeyboardMapping : Form
     {
-        public Keys CurrentKey { get; set; }
+        public byte CurrentKey { get; set; }
 
         public KeyboardMapping()
         {
             InitializeComponent();
-            CurrentKey = Keys.None;
+            CurrentKey = 0;
         }
 
         private void btnESC_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Escape;
+            CurrentKey = (byte) Keys.Escape;
             this.Close();
         }
 
         private void btnF1_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F1;
+            CurrentKey = (byte) Keys.F1;
             this.Close();
         }
 
         private void btnF2_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F2;
+            CurrentKey = (byte) Keys.F2;
             this.Close();
         }
 
         private void btnF3_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F3;
+            CurrentKey = (byte) Keys.F3;
             this.Close();
         }
 
         private void btnF4_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F4;
+            CurrentKey = (byte) Keys.F4;
             this.Close();
         }
 
         private void btnF5_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F5;
+            CurrentKey = (byte) Keys.F5;
             this.Close();
         }
 
         private void btnF6_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F6;
+            CurrentKey = (byte) Keys.F6;
             this.Close();
         }
 
         private void btnF7_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F7;
+            CurrentKey = (byte) Keys.F7;
             this.Close();
         }
 
         private void btnF8_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F8;
+            CurrentKey = (byte) Keys.F8;
             this.Close();
         }
 
         private void btnF9_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F9;
+            CurrentKey = (byte) Keys.F9;
             this.Close();
         }
 
         private void btnF10_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F10;
+            CurrentKey = (byte) Keys.F10;
             this.Close();
         }
 
         private void btnF11_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F11;
+            CurrentKey = (byte) Keys.F11;
             this.Close();
         }
 
         private void btnF12_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F12;
+            CurrentKey = (byte) Keys.F12;
             this.Close();
         }
 
         private void btnTILDE_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oemtilde;
+            CurrentKey = (byte) Keys.Oemtilde;
             this.Close();
         }
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem1;
+            CurrentKey = (byte) Keys.Oem1;
             this.Close();
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem2;
+            CurrentKey = (byte) Keys.Oem2;
             this.Close();
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem3;
+            CurrentKey = (byte) Keys.Oem3;
             this.Close();
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem4;
+            CurrentKey = (byte) Keys.Oem4;
             this.Close();
         }
 
         private void btn5_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem5;
+            CurrentKey = (byte) Keys.Oem5;
             this.Close();
         }
 
         private void btn6_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem6;
+            CurrentKey = (byte) Keys.Oem6;
             this.Close();
         }
 
         private void btn7_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem7;
+            CurrentKey = (byte) Keys.Oem7;
             this.Close();
         }
 
         private void btn8_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oem8;
+            CurrentKey = (byte) Keys.Oem8;
             this.Close();
         }
 
         private void btn9_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemOpenBrackets;
+            CurrentKey = (byte) Keys.OemOpenBrackets;
             this.Close();
         }
 
         private void btn0_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemCloseBrackets;
+            CurrentKey = (byte) Keys.OemCloseBrackets;
             this.Close();
         }
 
         private void btnMINUS_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemMinus;
+            CurrentKey = (byte) Keys.OemMinus;
             this.Close();
         }
 
         private void btnEQUALS_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oemplus;
+            CurrentKey = (byte) Keys.Oemplus;
             this.Close();
         }
 
         private void btnBACKSPACE_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Back;
+            CurrentKey = (byte) Keys.Back;
             this.Close();
         }
 
         private void btnTAB_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Tab;
+            CurrentKey = (byte) Keys.Tab;
             this.Close();
         }
 
         private void btnQ_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Q;
+            CurrentKey = (byte) Keys.Q;
             this.Close();
         }
 
         private void btnW_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.W;
+            CurrentKey = (byte) Keys.W;
             this.Close();
         }
 
         private void btnE_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.E;
+            CurrentKey = (byte) Keys.E;
             this.Close();
         }
 
         private void btnR_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.R;
+            CurrentKey = (byte) Keys.R;
             this.Close();
         }
 
         private void btnT_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.T;
+            CurrentKey = (byte) Keys.T;
             this.Close();
         }
 
         private void btnY_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Y;
+            CurrentKey = (byte) Keys.Y;
             this.Close();
         }
 
         private void btnU_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.U;
+            CurrentKey = (byte) Keys.U;
             this.Close();
         }
 
         private void btnI_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.I;
+            CurrentKey = (byte) Keys.I;
             this.Close();
         }
 
         private void btnO_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.O;
+            CurrentKey = (byte) Keys.O;
             this.Close();
         }
 
         private void btnP_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.P;
+            CurrentKey = (byte) Keys.P;
             this.Close();
         }
 
         private void btnOPENBRACKET_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemOpenBrackets;
+            CurrentKey = (byte) Keys.OemOpenBrackets;
             this.Close();
         }
 
         private void btnCLOSEBRACKET_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemCloseBrackets;
+            CurrentKey = (byte) Keys.OemCloseBrackets;
             this.Close();
         }
 
         private void btnBACKSLASH_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemBackslash;
+            CurrentKey = (byte) Keys.OemBackslash;
             this.Close();
         }
 
         private void btnCAPS_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.CapsLock;
+            CurrentKey = (byte) Keys.CapsLock;
             this.Close();
         }
 
         private void btnA_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.A;
+            CurrentKey = (byte) Keys.A;
             this.Close();
         }
 
         private void btnS_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.S;
+            CurrentKey = (byte) Keys.S;
             this.Close();
         }
 
         private void btnD_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.D;
+            CurrentKey = (byte) Keys.D;
             this.Close();
         }
 
         private void btnF_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.F;
+            CurrentKey = (byte) Keys.F;
             this.Close();
         }
 
         private void btnG_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.G;
+            CurrentKey = (byte) Keys.G;
             this.Close();
         }
 
         private void btnH_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.H;
+            CurrentKey = (byte) Keys.H;
             this.Close();
         }
 
         private void btnJ_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.J;
+            CurrentKey = (byte) Keys.J;
             this.Close();
         }
 
         private void btnK_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.K;
+            CurrentKey = (byte) Keys.K;
             this.Close();
         }
 
         private void btnL_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.L;
+            CurrentKey = (byte) Keys.L;
             this.Close();
         }
 
         private void btnSEMICOLON_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemSemicolon;
+            CurrentKey = (byte) Keys.OemSemicolon;
             this.Close();
         }
 
         private void btnAPOSTROPHE_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemQuotes;
+            CurrentKey = (byte) Keys.OemQuotes;
             this.Close();
         }
 
         private void btnRETURN_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Enter;
+            CurrentKey = (byte) Keys.Enter;
             this.Close();
         }
 
         private void btnLSHIFT_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Shift;
+            CurrentKey = 0x10;
             this.Close();
         }
 
         private void btnZ_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Z;
+            CurrentKey = (byte) Keys.Z;
             this.Close();
         }
 
         private void btnX_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.X;
+            CurrentKey = (byte) Keys.X;
             this.Close();
         }
 
         private void btnC_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.C;
+            CurrentKey = (byte) Keys.C;
             this.Close();
         }
 
         private void btnV_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.V;
+            CurrentKey = (byte) Keys.V;
             this.Close();
         }
 
         private void btnB_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.B;
+            CurrentKey = (byte) Keys.B;
             this.Close();
         }
 
         private void btnN_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.N;
+            CurrentKey = (byte) Keys.N;
             this.Close();
         }
 
         private void btnM_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.M;
+            CurrentKey = (byte) Keys.M;
             this.Close();
         }
 
         private void btnCOMMA_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Oemcomma;
+            CurrentKey = (byte) Keys.Oemcomma;
             this.Close();
         }
 
         private void btnPERIOD_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemPeriod;
+            CurrentKey = (byte) Keys.OemPeriod;
             this.Close();
         }
 
         private void btnSLASH_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemQuestion;
+            CurrentKey = (byte) Keys.OemQuestion;
             this.Close();
         }
 
         private void btnRSHIFT_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Shift;
+            CurrentKey = 0x10;
             this.Close();
         }
 
         private void btnLCTRL_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Control;
+            CurrentKey = 0x11;
             this.Close();
         }
 
         private void btnLWin_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.LWin;
+            CurrentKey = (byte) Keys.LWin;
             this.Close();
         }
 
         private void btnLAlt_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Alt;
+            CurrentKey = 0x12;
             this.Close();
         }
 
         private void btnSPACE_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Space;
+            CurrentKey = (byte) Keys.Space;
             this.Close();
         }
 
         private void buttonRWin_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.RWin;
+            CurrentKey = (byte) Keys.RWin;
             this.Close();
         }
 
         private void btnRALT_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Alt;
+            CurrentKey = 0x12;
             this.Close();
         }
 
         private void btnRCTRL_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Control;
+            CurrentKey = 0x11;
             this.Close();
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Left;
+            CurrentKey = (byte) Keys.Left;
             this.Close();
         }
 
         private void Right_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Right;
+            CurrentKey = (byte) Keys.Right;
             this.Close();
         }
 
         private void buttonUp_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Up;
+            CurrentKey = (byte) Keys.Up;
             this.Close();
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Down;
+            CurrentKey = (byte) Keys.Down;
             this.Close();
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.PrintScreen;
+            CurrentKey = (byte) Keys.PrintScreen;
             this.Close();
         }
 
         private void btnScroll_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Scroll;
+            CurrentKey = (byte) Keys.Scroll;
             this.Close();
         }
 
         private void btnBreak_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Pause;
+            CurrentKey = (byte) Keys.Pause;
             this.Close();
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Insert;
+            CurrentKey = (byte) Keys.Insert;
             this.Close();
         }
 
         private void btnHOME_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Home;
+            CurrentKey = (byte) Keys.Home;
             this.Close();
         }
 
         private void btnPGUP_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.PageUp;
+            CurrentKey = (byte) Keys.PageUp;
             this.Close();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.Delete;
+            CurrentKey = (byte) Keys.Delete;
             this.Close();
         }
 
         private void btnEnd_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.End;
+            CurrentKey = (byte) Keys.End;
             this.Close();
         }
 
         private void btnPageDown_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.PageDown;
+            CurrentKey = (byte) Keys.PageDown;
             this.Close();
         }
 
         private void btnNumLock_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.NumLock;
+            CurrentKey = (byte) Keys.NumLock;
             this.Close();
         }
 
         private void btnNumSlash_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemQuestion;
+            CurrentKey = (byte) Keys.OemQuestion;
             this.Close();
         }
 
@@ -548,7 +548,7 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnNumDash_Click(object sender, EventArgs e)
         {
-            CurrentKey = Keys.OemMinus;
+            CurrentKey = (byte) Keys.OemMinus;
             this.Close();
         }
     }

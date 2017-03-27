@@ -10,6 +10,7 @@ using xWin.Forms;
 using static Configuration.Types;
 using SharpDX.DirectInput;
 using Moq;
+using xWin.Wrapper;
 
 namespace xWin
 {
@@ -29,10 +30,31 @@ namespace xWin
             mockController3.Setup(x => x.IsConnected()).Returns(false);
             mockController4.Setup(x => x.IsConnected()).Returns(true);
 
-            XKeyBoard keyboard = new XKeyBoard();
-            keyboard.AppPath = ".../Test.exe";
+            // List of currently pressed buttons
+            List<GamepadButtonFlags> list1 = new List<GamepadButtonFlags>();
+            List<GamepadButtonFlags> list2 = new List<GamepadButtonFlags>();
+            List<GamepadButtonFlags> list3 = new List<GamepadButtonFlags>();
+            List<GamepadButtonFlags> list4 = new List<GamepadButtonFlags>();
+            mockController1.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list1);
+            mockController2.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list2);
+            mockController3.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list3);
+            mockController4.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list4);
 
-            mockController4.Setup(x => x.GetKeyBoardForButton(GamepadButtonFlags.LeftThumb)).Returns(keyboard);
+            /* Controller 4 */
+            // XKeyboard for Left Thumb button
+            XKeyBoard keyboardLT4 = new XKeyBoard();
+            keyboardLT4.AppPath = ".../Test.exe";
+            keyboardLT4.Action = XAction.OpenApp;
+            foreach (GamepadButtonFlags button in Enum.GetValues(typeof(GamepadButtonFlags)))
+            {
+                if (button != GamepadButtonFlags.None)
+                {
+                    if (button == GamepadButtonFlags.LeftThumb)
+                    { mockController4.Setup(x => x.GetKeyBoardForButton(button)).Returns(keyboardLT4); }
+                    else
+                    { mockController4.Setup(x => x.GetKeyBoardForButton(button)).Returns(new XKeyBoard()); }
+                }
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -49,20 +71,8 @@ namespace xWin
         [STAThread]
         static void Main(string[] args)
         {
-            RunFormApplicationForTesting();
-            //RunFormApplication();
-
-            /*while (true)
-            {
-                Thread.Sleep(500);
-                List<GamepadButtonFlags> l = c.GetCurrentlyPressedButtons();
-                if (l.Count == 1)
-                {
-                    GamepadButtonFlags b = l.First<GamepadButtonFlags>();
-                    Console.WriteLine("{0}", c.GetKeyBoardForButton(b).Action);
-                    c.GetKeyBoardForButton(b).Execute();
-                }
-            }*/
+            //RunFormApplicationForTesting();
+            RunFormApplication();
             /*
             while (true)
             {

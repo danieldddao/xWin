@@ -16,6 +16,7 @@ namespace xWin.Library
     {
         bool IsConnected();
         IXKeyBoard GetKeyBoardForButton(GamepadButtonFlags button);
+        List<GamepadButtonFlags> GetCurrentlyPressedButtons();
     }
 
     public class XController : IXController
@@ -308,10 +309,8 @@ namespace xWin.Library
                     if (button != GamepadButtonFlags.None && controllerWrapper.IsButtonPressed(button))
                        {
                         pressedButtons.Add(button);
-                        Console.WriteLine("buttons pressed: {0}", button);
                     }
                 }
-                Console.WriteLine("buttons pressed: {0}", pressedButtons.Count);
                 return pressedButtons;
             }
             catch (Exception e)

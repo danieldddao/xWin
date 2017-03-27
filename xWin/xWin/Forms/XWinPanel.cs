@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using xWin.Library;
@@ -158,10 +159,35 @@ namespace xWin.Forms
             }
         }
 
-        /* Update Controllers status every 1 sec */
+        public void ExecuteButtonsForController(IXController controller)
+        {
+            List<GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
+            try
+            {
+                Console.WriteLine("list.Count: {0}", list.Count);
+
+                // If the list has only 1 button pressed
+                if (list.Count == 1)
+                {
+                    GamepadButtonFlags b = list.First<GamepadButtonFlags>(); // get the currently pressed button
+                    controller.GetKeyBoardForButton(b).Execute(); // Execute action for the button 
+                }
+                Thread.Sleep(50);
+            }
+             catch (Exception e)
+            {
+                Console.WriteLine("{0}", e);
+            }
+        }
+
+        /* Update Controllers status every 0.1 sec */
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateControllers();
+            ExecuteButtonsForController(XCon1);
+            ExecuteButtonsForController(XCon2);
+            ExecuteButtonsForController(XCon3);
+            ExecuteButtonsForController(XCon4);
         }
     }
 }

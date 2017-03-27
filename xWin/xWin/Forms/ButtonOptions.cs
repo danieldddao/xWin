@@ -32,7 +32,7 @@ namespace xWin.Forms
             try
             {
                 // check if a key has been assigned to the currentButton
-                if (keyboard.KeyToPress == Keys.None)
+                if (keyboard.KeyToPress == 0)
                 {
                     keyboardTextBox.Text = "";
                     keyboardTextBox.AppendText("Key Mapping: NONE");
