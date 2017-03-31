@@ -1,96 +1,63 @@
 syntax = "proto3";
 
 message Configuration {
-  enum ControllerButton {
-    NONE = 0;
-    LS = 1;//Stick Press
-    RS = 2;
-    LB = 3;//Bumper
-    RB = 4;
-    LT = 5;//Trigger
-    RT = 6;
-    A = 7;
-    B = 8;
-    X = 9;
-    Y = 10;
-    MENU = 11;
-    VIEW = 12;
-    XBOX = 13;
-    
-    LTH = 14;//half trigger pull
-    RTH = 15;
-    
-    LS0 = 16;//Stick Regions
-    LS1 = 17;
-    LS2 = 18;
-    LS3 = 19;
-    LS4 = 20;
-    LS5 = 21;
-    LS6 = 22;
-    LS7 = 23;
-    LS8 = 24;
-    LS9 = 25;
-    LSA = 26;
-    LSB = 27;
-    LSC = 28;
-    LSD = 29;
-    LSE = 30;
-    LSF = 31;
-    RS0 = 32;
-    RS1 = 33;
-    RS2 = 34;
-    RS3 = 35;
-    RS4 = 36;
-    RS5 = 37;
-    RS6 = 38;
-    RS7 = 39;
-    RS8 = 40;
-    RS9 = 41;
-    RSA = 42;
-    RSB = 43;
-    RSC = 44;
-    RSD = 45;
-    RSE = 46;
-    RSF = 47;
-    
-    DU = 51;
-    DR = 52;
-    DD = 53;
-    DL = 54;
+  
+  enum SpecialAction {
+    Pass = 0;
+    MouseDown = 1;
+    MouseLeft = 2;
+    MouseRight = 3;
+    MouseUp = 4;
+    Turbo = 5;
+    TypingMode = 6;
+    //mouse clicks are in the key enumeration
   }
   
-  enum ControllerSticks {
-    LEFTSTICK = 0;
-    RIGHTSTICK = 1;
+  message Action {
+    oneof one_action {
+      int32 keybind = 1;
+      SpecialAction special_action = 2;
+    }
   }
   
-  //enum 
-  
+  message Behavior{
+    Action on_press = 1;
+    bool on_press_toggle = 5;
+    Action on_hold = 2;
+    Action on_release = 3;
+    bool on_release_toggle = 6;
+    Action on_stay = 4;
+  }
+    
+  message Region {
+    Behavior behavior = 1;
+    uint32 range = 2;//for sticks this is an arc length in degrees, for triggers its a value from 1-255
+  }
   
   message Stick {
-    ControllerSticks s = 1;
-    float threshold = 3;//how far must the stick go to count as moved
-    bool move_mouse = 2;
+    uint32 deadzone = 1;//how far must the stick go to count as moved
+    bool control_mouse = 2;
+    int32 region_start = 3;//the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
+    repeated Region regions = 4;
+    Behavior stay_behavior = 5;
+    bool invert_ud = 6;
+    bool invert_lr = 7;
   }
   
-  message Binding {
-    ControllerButton b = 1;
-    bool active = 2;
+  message Trigger {
+    uint32 deadzone = 1;
+    repeated Region regions = 2;
+    Behavior unpressed = 3;
   }
+
   
-  //map<ControllerButton,Binding> ButtonMap = 1;
-  //compiler doesn't let enum's be keys
-  message ButtonMapEntry {
-    ControllerButton key = 1;
-    Binding value = 2;
-  }
-    
-  Stick mouse_control = 1
+  Stick left_stick = 1;
+  Stick right_stick = 2;
   
-  bool invert_UD_mouse = 2;
-  bool invert_LR_mouse = 3;
-  float sensitivity = 4;
-  ControllerButton left_click = 5;
-  ControllerButton right_click = 6;
+  Trigger left_trigger = 3;
+  Trigger right_trigger = 4;
+  
+  //use the sharpdx enum for key
+  map<int32, Behavior> button_map = 5;
   
 }
