@@ -61,4 +61,3 @@ message Configuration {
   map<int32, Behavior> button_map = 5;
   
 }
-  
