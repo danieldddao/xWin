@@ -1,16 +1,27 @@
 ﻿using System;
 using System.Windows.Forms;
+using xWin.Wrapper;
 
 namespace xWin.Forms.ButtonMaps
 {
     public partial class KeyboardMapping : Form
     {
+        byte VK_SHIFT = 0x10;
+        byte VK_CONTROL = 0x11;
+        byte VK_ALT = 0x12;
+        SystemWrapper systemWrapper;
         public byte CurrentKey { get; set; }
 
         public KeyboardMapping()
         {
             InitializeComponent();
-            CurrentKey = 0;
+            CurrentKey = (byte) Keys.None;
+            systemWrapper = new SystemWrapper();
+        }
+
+        private void KeyboardMapping_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void btnESC_Click(object sender, EventArgs e)
@@ -147,13 +158,13 @@ namespace xWin.Forms.ButtonMaps
 
         private void btn9_Click(object sender, EventArgs e)
         {
-            CurrentKey = (byte) Keys.OemOpenBrackets;
+            CurrentKey = (byte) Keys.OemOpenBrackets; // need to test
             this.Close();
         }
 
         private void btn0_Click(object sender, EventArgs e)
         {
-            CurrentKey = (byte) Keys.OemCloseBrackets;
+            CurrentKey = (byte) Keys.OemCloseBrackets; // need to test
             this.Close();
         }
 
@@ -165,7 +176,7 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnEQUALS_Click(object sender, EventArgs e)
         {
-            CurrentKey = (byte) Keys.Oemplus;
+            CurrentKey = (byte) Keys.Oemplus; // need to test
             this.Close();
         }
 
@@ -327,7 +338,7 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnAPOSTROPHE_Click(object sender, EventArgs e)
         {
-            CurrentKey = (byte) Keys.OemQuotes;
+            CurrentKey = (byte) Keys.OemQuotes; // need to test
             this.Close();
         }
 
@@ -339,7 +350,7 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnLSHIFT_Click(object sender, EventArgs e)
         {
-            CurrentKey = 0x10;
+            CurrentKey = VK_SHIFT;
             this.Close();
         }
 
@@ -405,13 +416,13 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnRSHIFT_Click(object sender, EventArgs e)
         {
-            CurrentKey = 0x10;
+            CurrentKey = VK_SHIFT;
             this.Close();
         }
 
         private void btnLCTRL_Click(object sender, EventArgs e)
         {
-            CurrentKey = 0x11;
+            CurrentKey = VK_CONTROL;
             this.Close();
         }
 
@@ -423,7 +434,7 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnLAlt_Click(object sender, EventArgs e)
         {
-            CurrentKey = 0x12;
+            CurrentKey = VK_ALT;
             this.Close();
         }
 
@@ -441,13 +452,13 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnRALT_Click(object sender, EventArgs e)
         {
-            CurrentKey = 0x12;
+            CurrentKey = VK_ALT;
             this.Close();
         }
 
         private void btnRCTRL_Click(object sender, EventArgs e)
         {
-            CurrentKey = 0x11;
+            CurrentKey = VK_CONTROL;
             this.Close();
         }
 
@@ -537,19 +548,225 @@ namespace xWin.Forms.ButtonMaps
 
         private void btnNumSlash_Click(object sender, EventArgs e)
         {
-            CurrentKey = (byte) Keys.OemQuestion;
+            CurrentKey = (byte) systemWrapper.ScanKey('/');
             this.Close();
         }
 
         private void btnNumStar_Click(object sender, EventArgs e)
         {
+            CurrentKey = (byte) systemWrapper.ScanKey('*');
             this.Close();
         }
 
         private void btnNumDash_Click(object sender, EventArgs e)
         {
-            CurrentKey = (byte) Keys.OemMinus;
+            CurrentKey = (byte) systemWrapper.ScanKey('-');
             this.Close();
         }
+
+        private void btnNUM7_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte) Keys.NumPad7;
+            this.Close();
+        }
+
+        private void btnNUM8_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad8;
+            this.Close();
+        }
+
+        private void btnNUM9_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad9;
+            this.Close();
+        }
+
+        private void btnNUM4_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad4;
+            this.Close();
+        }
+
+        private void btnNUM5_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad5;
+            this.Close();
+        }
+
+        private void btnNUM6_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad6;
+            this.Close();
+        }
+
+        private void btnNUM1_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad1;
+            this.Close();
+        }
+
+        private void btnNUM2_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad2;
+            this.Close();
+        }
+
+        private void btnNUM3_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad3;
+            this.Close();
+        }
+
+        private void btnNUM0_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)Keys.NumPad0;
+            this.Close();
+        }
+
+        private void btnNUMPLUS_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte) systemWrapper.ScanKey('+');
+            this.Close();
+        }
+
+        private void btnNUMDOT_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte) systemWrapper.ScanKey('.');
+            this.Close();
+        }
+
+        private void btnNUMENTER_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte) Keys.Enter;
+            this.Close();
+        }
+
+        private void btnAcute_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('`');
+            this.Close();
+        }
+
+        private void btnExclamationMark_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('!');
+            this.Close();
+        }
+
+        private void btnAmpersat_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('@');
+            this.Close();
+        }
+
+        private void btnHash_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('#');
+            this.Close();
+        }
+
+        private void btnDollar_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('$');
+            this.Close();
+        }
+
+        private void btnPercent_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('%');
+            this.Close();
+        }
+
+        private void btnCaret_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('^');
+            this.Close();
+        }
+
+        private void btnAmpersand_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('&');
+            this.Close();
+        }
+
+        private void btnAsterisk_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('*');
+            this.Close();
+        }
+
+        private void btnOpenParen_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('(');
+            this.Close();
+        }
+
+        private void btnCloseParen_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey(')');
+            this.Close();
+        }
+
+        private void btnUnderscore_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('_');
+            this.Close();
+        }
+
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('+');
+            this.Close();
+        }
+
+        private void btnOpenBrace_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('{');
+            this.Close();
+        }
+
+        private void btnCloseBrace_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('}');
+            this.Close();
+        }
+
+        private void btnPipe_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('|');
+            this.Close();
+        }
+
+        private void btnColon_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey(':');
+            this.Close();
+        }
+
+        private void btnQuote_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('"');
+            this.Close();
+        }
+
+        private void btnLessThan_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('<');
+            this.Close();
+        }
+
+        private void btnGreaterThan_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('>');
+            this.Close();
+        }
+
+        private void btnQuestionMark_Click(object sender, EventArgs e)
+        {
+            CurrentKey = (byte)systemWrapper.ScanKey('?');
+            this.Close();
+        }
+
     }
 }

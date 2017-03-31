@@ -132,13 +132,34 @@
             this.btnRETURN = new System.Windows.Forms.Button();
             this.btnCAPS = new System.Windows.Forms.Button();
             this.btnNUM0 = new System.Windows.Forms.Button();
+            this.btnAcute = new System.Windows.Forms.Button();
+            this.btnExclamationMark = new System.Windows.Forms.Button();
+            this.btnAmpersat = new System.Windows.Forms.Button();
+            this.btnHash = new System.Windows.Forms.Button();
+            this.btnDollar = new System.Windows.Forms.Button();
+            this.btnPercent = new System.Windows.Forms.Button();
+            this.btnCaret = new System.Windows.Forms.Button();
+            this.btnAmpersand = new System.Windows.Forms.Button();
+            this.btnAsterisk = new System.Windows.Forms.Button();
+            this.btnOpenParen = new System.Windows.Forms.Button();
+            this.btnCloseParen = new System.Windows.Forms.Button();
+            this.btnUnderscore = new System.Windows.Forms.Button();
+            this.btnPlus = new System.Windows.Forms.Button();
+            this.btnOpenBrace = new System.Windows.Forms.Button();
+            this.btnCloseBrace = new System.Windows.Forms.Button();
+            this.btnPipe = new System.Windows.Forms.Button();
+            this.btnColon = new System.Windows.Forms.Button();
+            this.btnQuote = new System.Windows.Forms.Button();
+            this.btnLessThan = new System.Windows.Forms.Button();
+            this.btnGreaterThan = new System.Windows.Forms.Button();
+            this.btnQuestionMark = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnESC
             // 
             this.btnESC.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnESC.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnESC.Location = new System.Drawing.Point(49, 49);
+            this.btnESC.Location = new System.Drawing.Point(48, 154);
             this.btnESC.Margin = new System.Windows.Forms.Padding(6);
             this.btnESC.Name = "btnESC";
             this.btnESC.Size = new System.Drawing.Size(102, 48);
@@ -153,7 +174,7 @@
             // 
             this.btnF6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF6.Location = new System.Drawing.Point(462, 49);
+            this.btnF6.Location = new System.Drawing.Point(461, 154);
             this.btnF6.Margin = new System.Windows.Forms.Padding(6);
             this.btnF6.Name = "btnF6";
             this.btnF6.Size = new System.Drawing.Size(54, 48);
@@ -168,7 +189,7 @@
             // 
             this.btnF5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF5.Location = new System.Drawing.Point(403, 49);
+            this.btnF5.Location = new System.Drawing.Point(402, 154);
             this.btnF5.Margin = new System.Windows.Forms.Padding(6);
             this.btnF5.Name = "btnF5";
             this.btnF5.Size = new System.Drawing.Size(54, 48);
@@ -183,7 +204,7 @@
             // 
             this.btnQ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnQ.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnQ.Location = new System.Drawing.Point(133, 169);
+            this.btnQ.Location = new System.Drawing.Point(132, 274);
             this.btnQ.Margin = new System.Windows.Forms.Padding(6);
             this.btnQ.Name = "btnQ";
             this.btnQ.Size = new System.Drawing.Size(48, 48);
@@ -198,7 +219,7 @@
             // 
             this.btnF7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF7.Location = new System.Drawing.Point(523, 49);
+            this.btnF7.Location = new System.Drawing.Point(522, 154);
             this.btnF7.Margin = new System.Windows.Forms.Padding(6);
             this.btnF7.Name = "btnF7";
             this.btnF7.Size = new System.Drawing.Size(54, 48);
@@ -213,7 +234,7 @@
             // 
             this.btnF4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF4.Location = new System.Drawing.Point(344, 49);
+            this.btnF4.Location = new System.Drawing.Point(343, 154);
             this.btnF4.Margin = new System.Windows.Forms.Padding(6);
             this.btnF4.Name = "btnF4";
             this.btnF4.Size = new System.Drawing.Size(54, 48);
@@ -228,7 +249,7 @@
             // 
             this.btnF8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF8.Location = new System.Drawing.Point(584, 49);
+            this.btnF8.Location = new System.Drawing.Point(583, 154);
             this.btnF8.Margin = new System.Windows.Forms.Padding(6);
             this.btnF8.Name = "btnF8";
             this.btnF8.Size = new System.Drawing.Size(54, 48);
@@ -243,7 +264,7 @@
             // 
             this.btnF3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF3.Location = new System.Drawing.Point(283, 49);
+            this.btnF3.Location = new System.Drawing.Point(282, 154);
             this.btnF3.Margin = new System.Windows.Forms.Padding(6);
             this.btnF3.Name = "btnF3";
             this.btnF3.Size = new System.Drawing.Size(54, 48);
@@ -258,7 +279,7 @@
             // 
             this.btnF9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF9.Location = new System.Drawing.Point(643, 49);
+            this.btnF9.Location = new System.Drawing.Point(642, 154);
             this.btnF9.Margin = new System.Windows.Forms.Padding(6);
             this.btnF9.Name = "btnF9";
             this.btnF9.Size = new System.Drawing.Size(54, 48);
@@ -273,7 +294,7 @@
             // 
             this.btnF2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF2.Location = new System.Drawing.Point(222, 49);
+            this.btnF2.Location = new System.Drawing.Point(221, 154);
             this.btnF2.Margin = new System.Windows.Forms.Padding(6);
             this.btnF2.Name = "btnF2";
             this.btnF2.Size = new System.Drawing.Size(54, 48);
@@ -288,10 +309,10 @@
             // 
             this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnInsert.Location = new System.Drawing.Point(961, 109);
+            this.btnInsert.Location = new System.Drawing.Point(972, 224);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(6);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(86, 60);
+            this.btnInsert.Size = new System.Drawing.Size(100, 72);
             this.btnInsert.TabIndex = 418;
             this.btnInsert.TabStop = false;
             this.btnInsert.Tag = "45";
@@ -303,7 +324,7 @@
             // 
             this.btnF1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF1.Location = new System.Drawing.Point(163, 49);
+            this.btnF1.Location = new System.Drawing.Point(162, 154);
             this.btnF1.Margin = new System.Windows.Forms.Padding(6);
             this.btnF1.Name = "btnF1";
             this.btnF1.Size = new System.Drawing.Size(54, 48);
@@ -318,10 +339,10 @@
             // 
             this.btnHOME.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnHOME.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHOME.Location = new System.Drawing.Point(1046, 109);
+            this.btnHOME.Location = new System.Drawing.Point(1070, 225);
             this.btnHOME.Margin = new System.Windows.Forms.Padding(6);
             this.btnHOME.Name = "btnHOME";
-            this.btnHOME.Size = new System.Drawing.Size(79, 60);
+            this.btnHOME.Size = new System.Drawing.Size(86, 72);
             this.btnHOME.TabIndex = 406;
             this.btnHOME.TabStop = false;
             this.btnHOME.Tag = "36";
@@ -333,7 +354,7 @@
             // 
             this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn1.Location = new System.Drawing.Point(104, 109);
+            this.btn1.Location = new System.Drawing.Point(103, 214);
             this.btn1.Margin = new System.Windows.Forms.Padding(6);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(48, 48);
@@ -349,10 +370,10 @@
             this.btnPGUP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPGUP.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPGUP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPGUP.Location = new System.Drawing.Point(1124, 109);
+            this.btnPGUP.Location = new System.Drawing.Point(1156, 225);
             this.btnPGUP.Margin = new System.Windows.Forms.Padding(6);
             this.btnPGUP.Name = "btnPGUP";
-            this.btnPGUP.Size = new System.Drawing.Size(80, 60);
+            this.btnPGUP.Size = new System.Drawing.Size(90, 72);
             this.btnPGUP.TabIndex = 391;
             this.btnPGUP.TabStop = false;
             this.btnPGUP.Tag = "33";
@@ -365,7 +386,7 @@
             this.btnBACKSPACE.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBACKSPACE.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBACKSPACE.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBACKSPACE.Location = new System.Drawing.Point(824, 109);
+            this.btnBACKSPACE.Location = new System.Drawing.Point(823, 214);
             this.btnBACKSPACE.Margin = new System.Windows.Forms.Padding(6);
             this.btnBACKSPACE.Name = "btnBACKSPACE";
             this.btnBACKSPACE.Size = new System.Drawing.Size(102, 48);
@@ -380,14 +401,14 @@
             // 
             this.btnPageDown.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPageDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPageDown.Location = new System.Drawing.Point(1124, 169);
+            this.btnPageDown.Location = new System.Drawing.Point(1156, 296);
             this.btnPageDown.Margin = new System.Windows.Forms.Padding(6);
             this.btnPageDown.Name = "btnPageDown";
-            this.btnPageDown.Size = new System.Drawing.Size(80, 61);
+            this.btnPageDown.Size = new System.Drawing.Size(90, 74);
             this.btnPageDown.TabIndex = 405;
             this.btnPageDown.TabStop = false;
             this.btnPageDown.Tag = "34";
-            this.btnPageDown.Text = "PageDown";
+            this.btnPageDown.Text = "Page Down";
             this.btnPageDown.UseVisualStyleBackColor = true;
             this.btnPageDown.Click += new System.EventHandler(this.btnPageDown_Click);
             // 
@@ -395,7 +416,7 @@
             // 
             this.btnEQUALS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEQUALS.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnEQUALS.Location = new System.Drawing.Point(763, 109);
+            this.btnEQUALS.Location = new System.Drawing.Point(762, 214);
             this.btnEQUALS.Margin = new System.Windows.Forms.Padding(6);
             this.btnEQUALS.Name = "btnEQUALS";
             this.btnEQUALS.Size = new System.Drawing.Size(48, 48);
@@ -410,10 +431,10 @@
             // 
             this.btnEnd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEnd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnEnd.Location = new System.Drawing.Point(1046, 169);
+            this.btnEnd.Location = new System.Drawing.Point(1070, 296);
             this.btnEnd.Margin = new System.Windows.Forms.Padding(6);
             this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(79, 60);
+            this.btnEnd.Size = new System.Drawing.Size(86, 74);
             this.btnEnd.TabIndex = 404;
             this.btnEnd.TabStop = false;
             this.btnEnd.Tag = "35";
@@ -425,7 +446,7 @@
             // 
             this.btnMINUS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMINUS.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMINUS.Location = new System.Drawing.Point(702, 109);
+            this.btnMINUS.Location = new System.Drawing.Point(701, 214);
             this.btnMINUS.Margin = new System.Windows.Forms.Padding(6);
             this.btnMINUS.Name = "btnMINUS";
             this.btnMINUS.Size = new System.Drawing.Size(48, 48);
@@ -439,7 +460,7 @@
             // 
             this.btnW.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnW.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnW.Location = new System.Drawing.Point(193, 169);
+            this.btnW.Location = new System.Drawing.Point(192, 274);
             this.btnW.Margin = new System.Windows.Forms.Padding(6);
             this.btnW.Name = "btnW";
             this.btnW.Size = new System.Drawing.Size(48, 48);
@@ -454,10 +475,10 @@
             // 
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDelete.Location = new System.Drawing.Point(961, 169);
+            this.btnDelete.Location = new System.Drawing.Point(972, 296);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(6);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(86, 60);
+            this.btnDelete.Size = new System.Drawing.Size(100, 74);
             this.btnDelete.TabIndex = 403;
             this.btnDelete.TabStop = false;
             this.btnDelete.Tag = "46";
@@ -469,7 +490,7 @@
             // 
             this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn0.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn0.Location = new System.Drawing.Point(643, 109);
+            this.btn0.Location = new System.Drawing.Point(642, 214);
             this.btn0.Margin = new System.Windows.Forms.Padding(6);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(48, 48);
@@ -484,10 +505,10 @@
             // 
             this.btnScroll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnScroll.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnScroll.Location = new System.Drawing.Point(1046, 49);
+            this.btnScroll.Location = new System.Drawing.Point(1070, 155);
             this.btnScroll.Margin = new System.Windows.Forms.Padding(6);
             this.btnScroll.Name = "btnScroll";
-            this.btnScroll.Size = new System.Drawing.Size(79, 60);
+            this.btnScroll.Size = new System.Drawing.Size(86, 70);
             this.btnScroll.TabIndex = 400;
             this.btnScroll.TabStop = false;
             this.btnScroll.Tag = "145";
@@ -499,7 +520,7 @@
             // 
             this.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn9.Location = new System.Drawing.Point(584, 109);
+            this.btn9.Location = new System.Drawing.Point(583, 214);
             this.btn9.Margin = new System.Windows.Forms.Padding(6);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(48, 48);
@@ -515,10 +536,10 @@
             this.buttonPrint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPrint.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonPrint.Location = new System.Drawing.Point(961, 49);
+            this.buttonPrint.Location = new System.Drawing.Point(972, 156);
             this.buttonPrint.Margin = new System.Windows.Forms.Padding(6);
             this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(86, 60);
+            this.buttonPrint.Size = new System.Drawing.Size(100, 70);
             this.buttonPrint.TabIndex = 394;
             this.buttonPrint.TabStop = false;
             this.buttonPrint.Tag = "42";
@@ -530,7 +551,7 @@
             // 
             this.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn8.Location = new System.Drawing.Point(523, 109);
+            this.btn8.Location = new System.Drawing.Point(522, 214);
             this.btn8.Margin = new System.Windows.Forms.Padding(6);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(48, 48);
@@ -545,7 +566,7 @@
             // 
             this.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn7.Location = new System.Drawing.Point(462, 109);
+            this.btn7.Location = new System.Drawing.Point(461, 214);
             this.btn7.Margin = new System.Windows.Forms.Padding(6);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(48, 48);
@@ -560,7 +581,7 @@
             // 
             this.btnE.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnE.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnE.Location = new System.Drawing.Point(253, 169);
+            this.btnE.Location = new System.Drawing.Point(252, 274);
             this.btnE.Margin = new System.Windows.Forms.Padding(6);
             this.btnE.Name = "btnE";
             this.btnE.Size = new System.Drawing.Size(48, 48);
@@ -575,7 +596,7 @@
             // 
             this.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn6.Location = new System.Drawing.Point(403, 109);
+            this.btn6.Location = new System.Drawing.Point(402, 214);
             this.btn6.Margin = new System.Windows.Forms.Padding(6);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(48, 48);
@@ -590,7 +611,7 @@
             // 
             this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn5.Location = new System.Drawing.Point(344, 109);
+            this.btn5.Location = new System.Drawing.Point(343, 214);
             this.btn5.Margin = new System.Windows.Forms.Padding(6);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(48, 48);
@@ -605,7 +626,7 @@
             // 
             this.btnR.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnR.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnR.Location = new System.Drawing.Point(313, 169);
+            this.btnR.Location = new System.Drawing.Point(312, 274);
             this.btnR.Margin = new System.Windows.Forms.Padding(6);
             this.btnR.Name = "btnR";
             this.btnR.Size = new System.Drawing.Size(48, 48);
@@ -620,7 +641,7 @@
             // 
             this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn4.Location = new System.Drawing.Point(283, 109);
+            this.btn4.Location = new System.Drawing.Point(282, 214);
             this.btn4.Margin = new System.Windows.Forms.Padding(6);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(48, 48);
@@ -635,7 +656,7 @@
             // 
             this.btnT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnT.Location = new System.Drawing.Point(373, 169);
+            this.btnT.Location = new System.Drawing.Point(372, 274);
             this.btnT.Margin = new System.Windows.Forms.Padding(6);
             this.btnT.Name = "btnT";
             this.btnT.Size = new System.Drawing.Size(48, 48);
@@ -650,7 +671,7 @@
             // 
             this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn3.Location = new System.Drawing.Point(222, 109);
+            this.btn3.Location = new System.Drawing.Point(221, 214);
             this.btn3.Margin = new System.Windows.Forms.Padding(6);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(48, 48);
@@ -665,7 +686,7 @@
             // 
             this.btnY.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnY.Location = new System.Drawing.Point(433, 169);
+            this.btnY.Location = new System.Drawing.Point(432, 274);
             this.btnY.Margin = new System.Windows.Forms.Padding(6);
             this.btnY.Name = "btnY";
             this.btnY.Size = new System.Drawing.Size(48, 48);
@@ -680,7 +701,7 @@
             // 
             this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn2.Location = new System.Drawing.Point(163, 109);
+            this.btn2.Location = new System.Drawing.Point(162, 214);
             this.btn2.Margin = new System.Windows.Forms.Padding(6);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(48, 48);
@@ -695,7 +716,7 @@
             // 
             this.btnU.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnU.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnU.Location = new System.Drawing.Point(493, 169);
+            this.btnU.Location = new System.Drawing.Point(492, 274);
             this.btnU.Margin = new System.Windows.Forms.Padding(6);
             this.btnU.Name = "btnU";
             this.btnU.Size = new System.Drawing.Size(48, 48);
@@ -710,7 +731,7 @@
             // 
             this.btnSPACE.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSPACE.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSPACE.Location = new System.Drawing.Point(349, 349);
+            this.btnSPACE.Location = new System.Drawing.Point(348, 454);
             this.btnSPACE.Margin = new System.Windows.Forms.Padding(6);
             this.btnSPACE.Name = "btnSPACE";
             this.btnSPACE.Size = new System.Drawing.Size(275, 48);
@@ -725,7 +746,7 @@
             // 
             this.btnI.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnI.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnI.Location = new System.Drawing.Point(553, 169);
+            this.btnI.Location = new System.Drawing.Point(552, 274);
             this.btnI.Margin = new System.Windows.Forms.Padding(6);
             this.btnI.Name = "btnI";
             this.btnI.Size = new System.Drawing.Size(48, 48);
@@ -741,10 +762,10 @@
             this.btnBreak.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBreak.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBreak.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBreak.Location = new System.Drawing.Point(1124, 49);
+            this.btnBreak.Location = new System.Drawing.Point(1156, 155);
             this.btnBreak.Margin = new System.Windows.Forms.Padding(6);
             this.btnBreak.Name = "btnBreak";
-            this.btnBreak.Size = new System.Drawing.Size(80, 60);
+            this.btnBreak.Size = new System.Drawing.Size(90, 70);
             this.btnBreak.TabIndex = 393;
             this.btnBreak.TabStop = false;
             this.btnBreak.Tag = "19";
@@ -756,7 +777,7 @@
             // 
             this.btnLSHIFT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLSHIFT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLSHIFT.Location = new System.Drawing.Point(49, 289);
+            this.btnLSHIFT.Location = new System.Drawing.Point(48, 394);
             this.btnLSHIFT.Margin = new System.Windows.Forms.Padding(6);
             this.btnLSHIFT.Name = "btnLSHIFT";
             this.btnLSHIFT.Size = new System.Drawing.Size(131, 48);
@@ -771,7 +792,7 @@
             // 
             this.btnO.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnO.Location = new System.Drawing.Point(613, 169);
+            this.btnO.Location = new System.Drawing.Point(612, 274);
             this.btnO.Margin = new System.Windows.Forms.Padding(6);
             this.btnO.Name = "btnO";
             this.btnO.Size = new System.Drawing.Size(48, 48);
@@ -786,7 +807,7 @@
             // 
             this.btnF12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF12.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF12.Location = new System.Drawing.Point(853, 49);
+            this.btnF12.Location = new System.Drawing.Point(852, 154);
             this.btnF12.Margin = new System.Windows.Forms.Padding(6);
             this.btnF12.Name = "btnF12";
             this.btnF12.Size = new System.Drawing.Size(66, 48);
@@ -801,7 +822,7 @@
             // 
             this.btnRSHIFT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRSHIFT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRSHIFT.Location = new System.Drawing.Point(793, 289);
+            this.btnRSHIFT.Location = new System.Drawing.Point(792, 394);
             this.btnRSHIFT.Margin = new System.Windows.Forms.Padding(6);
             this.btnRSHIFT.Name = "btnRSHIFT";
             this.btnRSHIFT.Size = new System.Drawing.Size(131, 48);
@@ -816,7 +837,7 @@
             // 
             this.btnP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnP.Location = new System.Drawing.Point(673, 169);
+            this.btnP.Location = new System.Drawing.Point(672, 274);
             this.btnP.Margin = new System.Windows.Forms.Padding(6);
             this.btnP.Name = "btnP";
             this.btnP.Size = new System.Drawing.Size(48, 48);
@@ -831,7 +852,7 @@
             // 
             this.btnF10.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF10.Location = new System.Drawing.Point(702, 49);
+            this.btnF10.Location = new System.Drawing.Point(701, 154);
             this.btnF10.Margin = new System.Windows.Forms.Padding(6);
             this.btnF10.Name = "btnF10";
             this.btnF10.Size = new System.Drawing.Size(66, 48);
@@ -846,7 +867,7 @@
             // 
             this.btnSLASH.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSLASH.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSLASH.Location = new System.Drawing.Point(733, 289);
+            this.btnSLASH.Location = new System.Drawing.Point(732, 394);
             this.btnSLASH.Margin = new System.Windows.Forms.Padding(6);
             this.btnSLASH.Name = "btnSLASH";
             this.btnSLASH.Size = new System.Drawing.Size(48, 48);
@@ -861,7 +882,7 @@
             // 
             this.btnOPENBRACKET.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOPENBRACKET.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOPENBRACKET.Location = new System.Drawing.Point(733, 169);
+            this.btnOPENBRACKET.Location = new System.Drawing.Point(732, 274);
             this.btnOPENBRACKET.Margin = new System.Windows.Forms.Padding(6);
             this.btnOPENBRACKET.Name = "btnOPENBRACKET";
             this.btnOPENBRACKET.Size = new System.Drawing.Size(48, 48);
@@ -876,7 +897,7 @@
             // 
             this.btnF11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF11.Location = new System.Drawing.Point(776, 49);
+            this.btnF11.Location = new System.Drawing.Point(775, 154);
             this.btnF11.Margin = new System.Windows.Forms.Padding(6);
             this.btnF11.Name = "btnF11";
             this.btnF11.Size = new System.Drawing.Size(66, 48);
@@ -891,7 +912,7 @@
             // 
             this.btnPERIOD.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPERIOD.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnPERIOD.Location = new System.Drawing.Point(673, 289);
+            this.btnPERIOD.Location = new System.Drawing.Point(672, 394);
             this.btnPERIOD.Margin = new System.Windows.Forms.Padding(6);
             this.btnPERIOD.Name = "btnPERIOD";
             this.btnPERIOD.Size = new System.Drawing.Size(48, 48);
@@ -906,7 +927,7 @@
             // 
             this.btnCLOSEBRACKET.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCLOSEBRACKET.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCLOSEBRACKET.Location = new System.Drawing.Point(793, 169);
+            this.btnCLOSEBRACKET.Location = new System.Drawing.Point(792, 274);
             this.btnCLOSEBRACKET.Margin = new System.Windows.Forms.Padding(6);
             this.btnCLOSEBRACKET.Name = "btnCLOSEBRACKET";
             this.btnCLOSEBRACKET.Size = new System.Drawing.Size(48, 48);
@@ -921,14 +942,14 @@
             // 
             this.btnTILDE.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTILDE.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTILDE.Location = new System.Drawing.Point(49, 109);
+            this.btnTILDE.Location = new System.Drawing.Point(163, 75);
             this.btnTILDE.Margin = new System.Windows.Forms.Padding(6);
             this.btnTILDE.Name = "btnTILDE";
             this.btnTILDE.Size = new System.Drawing.Size(48, 48);
             this.btnTILDE.TabIndex = 389;
             this.btnTILDE.TabStop = false;
-            this.btnTILDE.Tag = "192";
-            this.btnTILDE.Text = "`";
+            this.btnTILDE.Tag = "";
+            this.btnTILDE.Text = "~";
             this.btnTILDE.UseVisualStyleBackColor = true;
             this.btnTILDE.Click += new System.EventHandler(this.btnTILDE_Click);
             // 
@@ -936,7 +957,7 @@
             // 
             this.btnCOMMA.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCOMMA.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCOMMA.Location = new System.Drawing.Point(613, 289);
+            this.btnCOMMA.Location = new System.Drawing.Point(612, 394);
             this.btnCOMMA.Margin = new System.Windows.Forms.Padding(6);
             this.btnCOMMA.Name = "btnCOMMA";
             this.btnCOMMA.Size = new System.Drawing.Size(48, 48);
@@ -951,7 +972,7 @@
             // 
             this.btnBACKSLASH.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBACKSLASH.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBACKSLASH.Location = new System.Drawing.Point(853, 169);
+            this.btnBACKSLASH.Location = new System.Drawing.Point(852, 274);
             this.btnBACKSLASH.Margin = new System.Windows.Forms.Padding(6);
             this.btnBACKSLASH.Name = "btnBACKSLASH";
             this.btnBACKSLASH.Size = new System.Drawing.Size(72, 48);
@@ -966,7 +987,7 @@
             // 
             this.btnM.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnM.Location = new System.Drawing.Point(553, 289);
+            this.btnM.Location = new System.Drawing.Point(552, 394);
             this.btnM.Margin = new System.Windows.Forms.Padding(6);
             this.btnM.Name = "btnM";
             this.btnM.Size = new System.Drawing.Size(48, 48);
@@ -982,10 +1003,10 @@
             this.btnNumLock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNumLock.Font = new System.Drawing.Font("Microsoft Sans Serif", 4.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNumLock.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNumLock.Location = new System.Drawing.Point(1262, 49);
+            this.btnNumLock.Location = new System.Drawing.Point(1289, 154);
             this.btnNumLock.Margin = new System.Windows.Forms.Padding(6);
             this.btnNumLock.Name = "btnNumLock";
-            this.btnNumLock.Size = new System.Drawing.Size(48, 48);
+            this.btnNumLock.Size = new System.Drawing.Size(48, 70);
             this.btnNumLock.TabIndex = 426;
             this.btnNumLock.TabStop = false;
             this.btnNumLock.Tag = "144";
@@ -997,7 +1018,7 @@
             // 
             this.btnTAB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTAB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnTAB.Location = new System.Drawing.Point(49, 169);
+            this.btnTAB.Location = new System.Drawing.Point(48, 274);
             this.btnTAB.Margin = new System.Windows.Forms.Padding(6);
             this.btnTAB.Name = "btnTAB";
             this.btnTAB.Size = new System.Drawing.Size(72, 48);
@@ -1012,7 +1033,7 @@
             // 
             this.btnN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnN.Location = new System.Drawing.Point(493, 289);
+            this.btnN.Location = new System.Drawing.Point(492, 394);
             this.btnN.Margin = new System.Windows.Forms.Padding(6);
             this.btnN.Name = "btnN";
             this.btnN.Size = new System.Drawing.Size(48, 48);
@@ -1027,7 +1048,7 @@
             // 
             this.btnNUM7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM7.Location = new System.Drawing.Point(1262, 109);
+            this.btnNUM7.Location = new System.Drawing.Point(1289, 236);
             this.btnNUM7.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM7.Name = "btnNUM7";
             this.btnNUM7.Size = new System.Drawing.Size(48, 48);
@@ -1036,12 +1057,13 @@
             this.btnNUM7.Tag = "103";
             this.btnNUM7.Text = "7";
             this.btnNUM7.UseVisualStyleBackColor = true;
+            this.btnNUM7.Click += new System.EventHandler(this.btnNUM7_Click);
             // 
             // btnA
             // 
             this.btnA.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnA.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnA.Location = new System.Drawing.Point(163, 229);
+            this.btnA.Location = new System.Drawing.Point(162, 334);
             this.btnA.Margin = new System.Windows.Forms.Padding(6);
             this.btnA.Name = "btnA";
             this.btnA.Size = new System.Drawing.Size(48, 48);
@@ -1056,7 +1078,7 @@
             // 
             this.btnB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnB.Location = new System.Drawing.Point(433, 289);
+            this.btnB.Location = new System.Drawing.Point(432, 394);
             this.btnB.Margin = new System.Windows.Forms.Padding(6);
             this.btnB.Name = "btnB";
             this.btnB.Size = new System.Drawing.Size(48, 48);
@@ -1071,10 +1093,10 @@
             // 
             this.btnNumSlash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNumSlash.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNumSlash.Location = new System.Drawing.Point(1322, 49);
+            this.btnNumSlash.Location = new System.Drawing.Point(1349, 154);
             this.btnNumSlash.Margin = new System.Windows.Forms.Padding(6);
             this.btnNumSlash.Name = "btnNumSlash";
-            this.btnNumSlash.Size = new System.Drawing.Size(48, 48);
+            this.btnNumSlash.Size = new System.Drawing.Size(48, 70);
             this.btnNumSlash.TabIndex = 424;
             this.btnNumSlash.TabStop = false;
             this.btnNumSlash.Tag = "111";
@@ -1086,7 +1108,7 @@
             // 
             this.btnS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnS.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnS.Location = new System.Drawing.Point(222, 229);
+            this.btnS.Location = new System.Drawing.Point(221, 334);
             this.btnS.Margin = new System.Windows.Forms.Padding(6);
             this.btnS.Name = "btnS";
             this.btnS.Size = new System.Drawing.Size(48, 48);
@@ -1101,7 +1123,7 @@
             // 
             this.btnV.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnV.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnV.Location = new System.Drawing.Point(373, 289);
+            this.btnV.Location = new System.Drawing.Point(372, 394);
             this.btnV.Margin = new System.Windows.Forms.Padding(6);
             this.btnV.Name = "btnV";
             this.btnV.Size = new System.Drawing.Size(48, 48);
@@ -1116,7 +1138,7 @@
             // 
             this.btnNUM8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM8.Location = new System.Drawing.Point(1322, 109);
+            this.btnNUM8.Location = new System.Drawing.Point(1349, 236);
             this.btnNUM8.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM8.Name = "btnNUM8";
             this.btnNUM8.Size = new System.Drawing.Size(48, 48);
@@ -1125,12 +1147,13 @@
             this.btnNUM8.Tag = "104";
             this.btnNUM8.Text = "8";
             this.btnNUM8.UseVisualStyleBackColor = true;
+            this.btnNUM8.Click += new System.EventHandler(this.btnNUM8_Click);
             // 
             // btnD
             // 
             this.btnD.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnD.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnD.Location = new System.Drawing.Point(283, 229);
+            this.btnD.Location = new System.Drawing.Point(282, 334);
             this.btnD.Margin = new System.Windows.Forms.Padding(6);
             this.btnD.Name = "btnD";
             this.btnD.Size = new System.Drawing.Size(48, 48);
@@ -1145,7 +1168,7 @@
             // 
             this.btnC.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnC.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnC.Location = new System.Drawing.Point(313, 289);
+            this.btnC.Location = new System.Drawing.Point(312, 394);
             this.btnC.Margin = new System.Windows.Forms.Padding(6);
             this.btnC.Name = "btnC";
             this.btnC.Size = new System.Drawing.Size(48, 48);
@@ -1160,10 +1183,10 @@
             // 
             this.btnNumStar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNumStar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNumStar.Location = new System.Drawing.Point(1382, 49);
+            this.btnNumStar.Location = new System.Drawing.Point(1409, 154);
             this.btnNumStar.Margin = new System.Windows.Forms.Padding(6);
             this.btnNumStar.Name = "btnNumStar";
-            this.btnNumStar.Size = new System.Drawing.Size(48, 48);
+            this.btnNumStar.Size = new System.Drawing.Size(48, 70);
             this.btnNumStar.TabIndex = 427;
             this.btnNumStar.TabStop = false;
             this.btnNumStar.Tag = "106";
@@ -1175,7 +1198,7 @@
             // 
             this.btnF.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnF.Location = new System.Drawing.Point(344, 229);
+            this.btnF.Location = new System.Drawing.Point(343, 334);
             this.btnF.Margin = new System.Windows.Forms.Padding(6);
             this.btnF.Name = "btnF";
             this.btnF.Size = new System.Drawing.Size(48, 48);
@@ -1190,7 +1213,7 @@
             // 
             this.btnX.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnX.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnX.Location = new System.Drawing.Point(253, 289);
+            this.btnX.Location = new System.Drawing.Point(252, 394);
             this.btnX.Margin = new System.Windows.Forms.Padding(6);
             this.btnX.Name = "btnX";
             this.btnX.Size = new System.Drawing.Size(48, 48);
@@ -1205,7 +1228,7 @@
             // 
             this.btnNUM9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM9.Location = new System.Drawing.Point(1382, 109);
+            this.btnNUM9.Location = new System.Drawing.Point(1409, 236);
             this.btnNUM9.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM9.Name = "btnNUM9";
             this.btnNUM9.Size = new System.Drawing.Size(48, 48);
@@ -1214,12 +1237,13 @@
             this.btnNUM9.Tag = "105";
             this.btnNUM9.Text = "9";
             this.btnNUM9.UseVisualStyleBackColor = true;
+            this.btnNUM9.Click += new System.EventHandler(this.btnNUM9_Click);
             // 
             // btnG
             // 
             this.btnG.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnG.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnG.Location = new System.Drawing.Point(403, 229);
+            this.btnG.Location = new System.Drawing.Point(402, 334);
             this.btnG.Margin = new System.Windows.Forms.Padding(6);
             this.btnG.Name = "btnG";
             this.btnG.Size = new System.Drawing.Size(48, 48);
@@ -1234,7 +1258,7 @@
             // 
             this.btnZ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnZ.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnZ.Location = new System.Drawing.Point(193, 289);
+            this.btnZ.Location = new System.Drawing.Point(192, 394);
             this.btnZ.Margin = new System.Windows.Forms.Padding(6);
             this.btnZ.Name = "btnZ";
             this.btnZ.Size = new System.Drawing.Size(48, 48);
@@ -1249,10 +1273,10 @@
             // 
             this.buttonUp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonUp.Location = new System.Drawing.Point(1033, 336);
+            this.buttonUp.Location = new System.Drawing.Point(1070, 404);
             this.buttonUp.Margin = new System.Windows.Forms.Padding(6);
             this.buttonUp.Name = "buttonUp";
-            this.buttonUp.Size = new System.Drawing.Size(83, 61);
+            this.buttonUp.Size = new System.Drawing.Size(86, 61);
             this.buttonUp.TabIndex = 439;
             this.buttonUp.TabStop = false;
             this.buttonUp.Tag = "38";
@@ -1264,10 +1288,10 @@
             // 
             this.btnNumDash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNumDash.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNumDash.Location = new System.Drawing.Point(1442, 49);
+            this.btnNumDash.Location = new System.Drawing.Point(1469, 154);
             this.btnNumDash.Margin = new System.Windows.Forms.Padding(6);
             this.btnNumDash.Name = "btnNumDash";
-            this.btnNumDash.Size = new System.Drawing.Size(48, 48);
+            this.btnNumDash.Size = new System.Drawing.Size(48, 70);
             this.btnNumDash.TabIndex = 421;
             this.btnNumDash.TabStop = false;
             this.btnNumDash.Tag = "109";
@@ -1279,7 +1303,7 @@
             // 
             this.btnH.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnH.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnH.Location = new System.Drawing.Point(462, 229);
+            this.btnH.Location = new System.Drawing.Point(461, 334);
             this.btnH.Margin = new System.Windows.Forms.Padding(6);
             this.btnH.Name = "btnH";
             this.btnH.Size = new System.Drawing.Size(48, 48);
@@ -1294,7 +1318,7 @@
             // 
             this.btnRALT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRALT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRALT.Location = new System.Drawing.Point(733, 349);
+            this.btnRALT.Location = new System.Drawing.Point(732, 454);
             this.btnRALT.Margin = new System.Windows.Forms.Padding(6);
             this.btnRALT.Name = "btnRALT";
             this.btnRALT.Size = new System.Drawing.Size(78, 48);
@@ -1309,10 +1333,10 @@
             // 
             this.buttonRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonRight.Location = new System.Drawing.Point(1116, 397);
+            this.buttonRight.Location = new System.Drawing.Point(1156, 463);
             this.buttonRight.Margin = new System.Windows.Forms.Padding(6);
             this.buttonRight.Name = "buttonRight";
-            this.buttonRight.Size = new System.Drawing.Size(78, 59);
+            this.buttonRight.Size = new System.Drawing.Size(94, 71);
             this.buttonRight.TabIndex = 438;
             this.buttonRight.TabStop = false;
             this.buttonRight.Tag = "39";
@@ -1324,7 +1348,7 @@
             // 
             this.btnNUMPLUS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUMPLUS.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUMPLUS.Location = new System.Drawing.Point(1442, 109);
+            this.btnNUMPLUS.Location = new System.Drawing.Point(1469, 236);
             this.btnNUMPLUS.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUMPLUS.Name = "btnNUMPLUS";
             this.btnNUMPLUS.Size = new System.Drawing.Size(48, 109);
@@ -1333,12 +1357,13 @@
             this.btnNUMPLUS.Tag = "107";
             this.btnNUMPLUS.Text = "+";
             this.btnNUMPLUS.UseVisualStyleBackColor = true;
+            this.btnNUMPLUS.Click += new System.EventHandler(this.btnNUMPLUS_Click);
             // 
             // btnJ
             // 
             this.btnJ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnJ.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnJ.Location = new System.Drawing.Point(523, 229);
+            this.btnJ.Location = new System.Drawing.Point(522, 334);
             this.btnJ.Margin = new System.Windows.Forms.Padding(6);
             this.btnJ.Name = "btnJ";
             this.btnJ.Size = new System.Drawing.Size(48, 48);
@@ -1353,7 +1378,7 @@
             // 
             this.buttonRWin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonRWin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonRWin.Location = new System.Drawing.Point(637, 349);
+            this.buttonRWin.Location = new System.Drawing.Point(636, 454);
             this.buttonRWin.Margin = new System.Windows.Forms.Padding(6);
             this.buttonRWin.Name = "buttonRWin";
             this.buttonRWin.Size = new System.Drawing.Size(83, 48);
@@ -1368,10 +1393,10 @@
             // 
             this.buttonLeft.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonLeft.Location = new System.Drawing.Point(964, 397);
+            this.buttonLeft.Location = new System.Drawing.Point(986, 463);
             this.buttonLeft.Margin = new System.Windows.Forms.Padding(6);
             this.buttonLeft.Name = "buttonLeft";
-            this.buttonLeft.Size = new System.Drawing.Size(72, 59);
+            this.buttonLeft.Size = new System.Drawing.Size(86, 71);
             this.buttonLeft.TabIndex = 437;
             this.buttonLeft.TabStop = false;
             this.buttonLeft.Tag = "37";
@@ -1383,7 +1408,7 @@
             // 
             this.btnNUMENTER.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUMENTER.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUMENTER.Location = new System.Drawing.Point(1442, 229);
+            this.btnNUMENTER.Location = new System.Drawing.Point(1469, 356);
             this.btnNUMENTER.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUMENTER.Name = "btnNUMENTER";
             this.btnNUMENTER.Size = new System.Drawing.Size(48, 109);
@@ -1392,12 +1417,13 @@
             this.btnNUMENTER.Tag = "13";
             this.btnNUMENTER.Text = "Enter";
             this.btnNUMENTER.UseVisualStyleBackColor = true;
+            this.btnNUMENTER.Click += new System.EventHandler(this.btnNUMENTER_Click);
             // 
             // btnK
             // 
             this.btnK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnK.Location = new System.Drawing.Point(584, 229);
+            this.btnK.Location = new System.Drawing.Point(583, 334);
             this.btnK.Margin = new System.Windows.Forms.Padding(6);
             this.btnK.Name = "btnK";
             this.btnK.Size = new System.Drawing.Size(48, 48);
@@ -1412,7 +1438,7 @@
             // 
             this.btnLAlt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLAlt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLAlt.Location = new System.Drawing.Point(253, 349);
+            this.btnLAlt.Location = new System.Drawing.Point(252, 454);
             this.btnLAlt.Margin = new System.Windows.Forms.Padding(6);
             this.btnLAlt.Name = "btnLAlt";
             this.btnLAlt.Size = new System.Drawing.Size(83, 48);
@@ -1427,10 +1453,10 @@
             // 
             this.buttonDown.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonDown.Location = new System.Drawing.Point(1033, 397);
+            this.buttonDown.Location = new System.Drawing.Point(1070, 463);
             this.buttonDown.Margin = new System.Windows.Forms.Padding(6);
             this.buttonDown.Name = "buttonDown";
-            this.buttonDown.Size = new System.Drawing.Size(83, 59);
+            this.buttonDown.Size = new System.Drawing.Size(89, 71);
             this.buttonDown.TabIndex = 436;
             this.buttonDown.TabStop = false;
             this.buttonDown.Tag = "40";
@@ -1442,7 +1468,7 @@
             // 
             this.btnNUM4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM4.Location = new System.Drawing.Point(1262, 169);
+            this.btnNUM4.Location = new System.Drawing.Point(1289, 296);
             this.btnNUM4.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM4.Name = "btnNUM4";
             this.btnNUM4.Size = new System.Drawing.Size(48, 48);
@@ -1451,12 +1477,13 @@
             this.btnNUM4.Tag = "100";
             this.btnNUM4.Text = "4";
             this.btnNUM4.UseVisualStyleBackColor = true;
+            this.btnNUM4.Click += new System.EventHandler(this.btnNUM4_Click);
             // 
             // btnL
             // 
             this.btnL.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnL.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnL.Location = new System.Drawing.Point(643, 229);
+            this.btnL.Location = new System.Drawing.Point(642, 334);
             this.btnL.Margin = new System.Windows.Forms.Padding(6);
             this.btnL.Name = "btnL";
             this.btnL.Size = new System.Drawing.Size(48, 48);
@@ -1471,7 +1498,7 @@
             // 
             this.btnLWin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLWin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLWin.Location = new System.Drawing.Point(163, 349);
+            this.btnLWin.Location = new System.Drawing.Point(162, 454);
             this.btnLWin.Margin = new System.Windows.Forms.Padding(6);
             this.btnLWin.Name = "btnLWin";
             this.btnLWin.Size = new System.Drawing.Size(78, 48);
@@ -1486,7 +1513,7 @@
             // 
             this.btnNUMDOT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUMDOT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUMDOT.Location = new System.Drawing.Point(1382, 289);
+            this.btnNUMDOT.Location = new System.Drawing.Point(1409, 416);
             this.btnNUMDOT.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUMDOT.Name = "btnNUMDOT";
             this.btnNUMDOT.Size = new System.Drawing.Size(48, 48);
@@ -1495,12 +1522,13 @@
             this.btnNUMDOT.Tag = "110";
             this.btnNUMDOT.Text = ".";
             this.btnNUMDOT.UseVisualStyleBackColor = true;
+            this.btnNUMDOT.Click += new System.EventHandler(this.btnNUMDOT_Click);
             // 
             // btnNUM5
             // 
             this.btnNUM5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM5.Location = new System.Drawing.Point(1322, 169);
+            this.btnNUM5.Location = new System.Drawing.Point(1349, 296);
             this.btnNUM5.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM5.Name = "btnNUM5";
             this.btnNUM5.Size = new System.Drawing.Size(48, 48);
@@ -1509,12 +1537,13 @@
             this.btnNUM5.Tag = "101";
             this.btnNUM5.Text = "5";
             this.btnNUM5.UseVisualStyleBackColor = true;
+            this.btnNUM5.Click += new System.EventHandler(this.btnNUM5_Click);
             // 
             // btnSEMICOLON
             // 
             this.btnSEMICOLON.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSEMICOLON.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSEMICOLON.Location = new System.Drawing.Point(702, 229);
+            this.btnSEMICOLON.Location = new System.Drawing.Point(701, 334);
             this.btnSEMICOLON.Margin = new System.Windows.Forms.Padding(6);
             this.btnSEMICOLON.Name = "btnSEMICOLON";
             this.btnSEMICOLON.Size = new System.Drawing.Size(48, 48);
@@ -1529,7 +1558,7 @@
             // 
             this.btnRCTRL.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRCTRL.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRCTRL.Location = new System.Drawing.Point(824, 349);
+            this.btnRCTRL.Location = new System.Drawing.Point(823, 454);
             this.btnRCTRL.Margin = new System.Windows.Forms.Padding(6);
             this.btnRCTRL.Name = "btnRCTRL";
             this.btnRCTRL.Size = new System.Drawing.Size(101, 48);
@@ -1544,7 +1573,7 @@
             // 
             this.btnNUM3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM3.Location = new System.Drawing.Point(1382, 229);
+            this.btnNUM3.Location = new System.Drawing.Point(1409, 356);
             this.btnNUM3.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM3.Name = "btnNUM3";
             this.btnNUM3.Size = new System.Drawing.Size(48, 48);
@@ -1553,12 +1582,13 @@
             this.btnNUM3.Tag = "99";
             this.btnNUM3.Text = "3";
             this.btnNUM3.UseVisualStyleBackColor = true;
+            this.btnNUM3.Click += new System.EventHandler(this.btnNUM3_Click);
             // 
             // btnNUM1
             // 
             this.btnNUM1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM1.Location = new System.Drawing.Point(1262, 229);
+            this.btnNUM1.Location = new System.Drawing.Point(1289, 356);
             this.btnNUM1.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM1.Name = "btnNUM1";
             this.btnNUM1.Size = new System.Drawing.Size(48, 48);
@@ -1567,12 +1597,13 @@
             this.btnNUM1.Tag = "97";
             this.btnNUM1.Text = "1";
             this.btnNUM1.UseVisualStyleBackColor = true;
+            this.btnNUM1.Click += new System.EventHandler(this.btnNUM1_Click);
             // 
             // btnAPOSTROPHE
             // 
             this.btnAPOSTROPHE.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAPOSTROPHE.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAPOSTROPHE.Location = new System.Drawing.Point(763, 229);
+            this.btnAPOSTROPHE.Location = new System.Drawing.Point(762, 334);
             this.btnAPOSTROPHE.Margin = new System.Windows.Forms.Padding(6);
             this.btnAPOSTROPHE.Name = "btnAPOSTROPHE";
             this.btnAPOSTROPHE.Size = new System.Drawing.Size(48, 48);
@@ -1587,7 +1618,7 @@
             // 
             this.btnLCTRL.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLCTRL.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLCTRL.Location = new System.Drawing.Point(49, 349);
+            this.btnLCTRL.Location = new System.Drawing.Point(48, 454);
             this.btnLCTRL.Margin = new System.Windows.Forms.Padding(6);
             this.btnLCTRL.Name = "btnLCTRL";
             this.btnLCTRL.Size = new System.Drawing.Size(102, 48);
@@ -1602,7 +1633,7 @@
             // 
             this.btnNUM2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM2.Location = new System.Drawing.Point(1322, 229);
+            this.btnNUM2.Location = new System.Drawing.Point(1349, 356);
             this.btnNUM2.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM2.Name = "btnNUM2";
             this.btnNUM2.Size = new System.Drawing.Size(48, 48);
@@ -1611,12 +1642,13 @@
             this.btnNUM2.Tag = "98";
             this.btnNUM2.Text = "2";
             this.btnNUM2.UseVisualStyleBackColor = true;
+            this.btnNUM2.Click += new System.EventHandler(this.btnNUM2_Click);
             // 
             // btnNUM6
             // 
             this.btnNUM6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM6.Location = new System.Drawing.Point(1382, 169);
+            this.btnNUM6.Location = new System.Drawing.Point(1409, 296);
             this.btnNUM6.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM6.Name = "btnNUM6";
             this.btnNUM6.Size = new System.Drawing.Size(48, 48);
@@ -1625,12 +1657,13 @@
             this.btnNUM6.Tag = "102";
             this.btnNUM6.Text = "6";
             this.btnNUM6.UseVisualStyleBackColor = true;
+            this.btnNUM6.Click += new System.EventHandler(this.btnNUM6_Click);
             // 
             // btnRETURN
             // 
             this.btnRETURN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRETURN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnRETURN.Location = new System.Drawing.Point(824, 229);
+            this.btnRETURN.Location = new System.Drawing.Point(823, 334);
             this.btnRETURN.Margin = new System.Windows.Forms.Padding(6);
             this.btnRETURN.Name = "btnRETURN";
             this.btnRETURN.Size = new System.Drawing.Size(102, 48);
@@ -1645,7 +1678,7 @@
             // 
             this.btnCAPS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCAPS.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCAPS.Location = new System.Drawing.Point(49, 229);
+            this.btnCAPS.Location = new System.Drawing.Point(48, 334);
             this.btnCAPS.Margin = new System.Windows.Forms.Padding(6);
             this.btnCAPS.Name = "btnCAPS";
             this.btnCAPS.Size = new System.Drawing.Size(102, 48);
@@ -1660,7 +1693,7 @@
             // 
             this.btnNUM0.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNUM0.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnNUM0.Location = new System.Drawing.Point(1262, 289);
+            this.btnNUM0.Location = new System.Drawing.Point(1289, 416);
             this.btnNUM0.Margin = new System.Windows.Forms.Padding(6);
             this.btnNUM0.Name = "btnNUM0";
             this.btnNUM0.Size = new System.Drawing.Size(109, 48);
@@ -1669,12 +1702,351 @@
             this.btnNUM0.Tag = "96";
             this.btnNUM0.Text = "0";
             this.btnNUM0.UseVisualStyleBackColor = true;
+            this.btnNUM0.Click += new System.EventHandler(this.btnNUM0_Click);
+            // 
+            // btnAcute
+            // 
+            this.btnAcute.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAcute.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAcute.Location = new System.Drawing.Point(48, 212);
+            this.btnAcute.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAcute.Name = "btnAcute";
+            this.btnAcute.Size = new System.Drawing.Size(48, 48);
+            this.btnAcute.TabIndex = 440;
+            this.btnAcute.TabStop = false;
+            this.btnAcute.Tag = "";
+            this.btnAcute.Text = "`";
+            this.btnAcute.UseVisualStyleBackColor = true;
+            this.btnAcute.Click += new System.EventHandler(this.btnAcute_Click);
+            // 
+            // btnExclamationMark
+            // 
+            this.btnExclamationMark.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnExclamationMark.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExclamationMark.Location = new System.Drawing.Point(218, 75);
+            this.btnExclamationMark.Margin = new System.Windows.Forms.Padding(6);
+            this.btnExclamationMark.Name = "btnExclamationMark";
+            this.btnExclamationMark.Size = new System.Drawing.Size(48, 48);
+            this.btnExclamationMark.TabIndex = 441;
+            this.btnExclamationMark.TabStop = false;
+            this.btnExclamationMark.Tag = "";
+            this.btnExclamationMark.Text = "!";
+            this.btnExclamationMark.UseVisualStyleBackColor = true;
+            this.btnExclamationMark.Click += new System.EventHandler(this.btnExclamationMark_Click);
+            // 
+            // btnAmpersat
+            // 
+            this.btnAmpersat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAmpersat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAmpersat.Location = new System.Drawing.Point(277, 75);
+            this.btnAmpersat.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAmpersat.Name = "btnAmpersat";
+            this.btnAmpersat.Size = new System.Drawing.Size(48, 48);
+            this.btnAmpersat.TabIndex = 442;
+            this.btnAmpersat.TabStop = false;
+            this.btnAmpersat.Tag = "";
+            this.btnAmpersat.Text = "@";
+            this.btnAmpersat.UseVisualStyleBackColor = true;
+            this.btnAmpersat.Click += new System.EventHandler(this.btnAmpersat_Click);
+            // 
+            // btnHash
+            // 
+            this.btnHash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnHash.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnHash.Location = new System.Drawing.Point(336, 75);
+            this.btnHash.Margin = new System.Windows.Forms.Padding(6);
+            this.btnHash.Name = "btnHash";
+            this.btnHash.Size = new System.Drawing.Size(48, 48);
+            this.btnHash.TabIndex = 443;
+            this.btnHash.TabStop = false;
+            this.btnHash.Tag = "";
+            this.btnHash.Text = "#";
+            this.btnHash.UseVisualStyleBackColor = true;
+            this.btnHash.Click += new System.EventHandler(this.btnHash_Click);
+            // 
+            // btnDollar
+            // 
+            this.btnDollar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDollar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnDollar.Location = new System.Drawing.Point(396, 75);
+            this.btnDollar.Margin = new System.Windows.Forms.Padding(6);
+            this.btnDollar.Name = "btnDollar";
+            this.btnDollar.Size = new System.Drawing.Size(48, 48);
+            this.btnDollar.TabIndex = 444;
+            this.btnDollar.TabStop = false;
+            this.btnDollar.Tag = "";
+            this.btnDollar.Text = "$";
+            this.btnDollar.UseVisualStyleBackColor = true;
+            this.btnDollar.Click += new System.EventHandler(this.btnDollar_Click);
+            // 
+            // btnPercent
+            // 
+            this.btnPercent.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnPercent.Location = new System.Drawing.Point(458, 75);
+            this.btnPercent.Margin = new System.Windows.Forms.Padding(6);
+            this.btnPercent.Name = "btnPercent";
+            this.btnPercent.Size = new System.Drawing.Size(48, 48);
+            this.btnPercent.TabIndex = 445;
+            this.btnPercent.TabStop = false;
+            this.btnPercent.Tag = "";
+            this.btnPercent.Text = "%";
+            this.btnPercent.UseVisualStyleBackColor = true;
+            this.btnPercent.Click += new System.EventHandler(this.btnPercent_Click);
+            // 
+            // btnCaret
+            // 
+            this.btnCaret.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCaret.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnCaret.Location = new System.Drawing.Point(517, 75);
+            this.btnCaret.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCaret.Name = "btnCaret";
+            this.btnCaret.Size = new System.Drawing.Size(48, 48);
+            this.btnCaret.TabIndex = 446;
+            this.btnCaret.TabStop = false;
+            this.btnCaret.Tag = "";
+            this.btnCaret.Text = "^";
+            this.btnCaret.UseVisualStyleBackColor = true;
+            this.btnCaret.Click += new System.EventHandler(this.btnCaret_Click);
+            // 
+            // btnAmpersand
+            // 
+            this.btnAmpersand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAmpersand.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAmpersand.Location = new System.Drawing.Point(576, 75);
+            this.btnAmpersand.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAmpersand.Name = "btnAmpersand";
+            this.btnAmpersand.Size = new System.Drawing.Size(48, 48);
+            this.btnAmpersand.TabIndex = 447;
+            this.btnAmpersand.TabStop = false;
+            this.btnAmpersand.Tag = "";
+            this.btnAmpersand.Text = "&&";
+            this.btnAmpersand.UseVisualStyleBackColor = true;
+            this.btnAmpersand.Click += new System.EventHandler(this.btnAmpersand_Click);
+            // 
+            // btnAsterisk
+            // 
+            this.btnAsterisk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAsterisk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnAsterisk.Location = new System.Drawing.Point(636, 75);
+            this.btnAsterisk.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAsterisk.Name = "btnAsterisk";
+            this.btnAsterisk.Size = new System.Drawing.Size(48, 48);
+            this.btnAsterisk.TabIndex = 448;
+            this.btnAsterisk.TabStop = false;
+            this.btnAsterisk.Tag = "";
+            this.btnAsterisk.Text = "*";
+            this.btnAsterisk.UseVisualStyleBackColor = true;
+            this.btnAsterisk.Click += new System.EventHandler(this.btnAsterisk_Click);
+            // 
+            // btnOpenParen
+            // 
+            this.btnOpenParen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOpenParen.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnOpenParen.Location = new System.Drawing.Point(698, 75);
+            this.btnOpenParen.Margin = new System.Windows.Forms.Padding(6);
+            this.btnOpenParen.Name = "btnOpenParen";
+            this.btnOpenParen.Size = new System.Drawing.Size(48, 48);
+            this.btnOpenParen.TabIndex = 449;
+            this.btnOpenParen.TabStop = false;
+            this.btnOpenParen.Tag = "";
+            this.btnOpenParen.Text = "(";
+            this.btnOpenParen.UseVisualStyleBackColor = true;
+            this.btnOpenParen.Click += new System.EventHandler(this.btnOpenParen_Click);
+            // 
+            // btnCloseParen
+            // 
+            this.btnCloseParen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCloseParen.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnCloseParen.Location = new System.Drawing.Point(757, 75);
+            this.btnCloseParen.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCloseParen.Name = "btnCloseParen";
+            this.btnCloseParen.Size = new System.Drawing.Size(48, 48);
+            this.btnCloseParen.TabIndex = 450;
+            this.btnCloseParen.TabStop = false;
+            this.btnCloseParen.Tag = "";
+            this.btnCloseParen.Text = ")";
+            this.btnCloseParen.UseVisualStyleBackColor = true;
+            this.btnCloseParen.Click += new System.EventHandler(this.btnCloseParen_Click);
+            // 
+            // btnUnderscore
+            // 
+            this.btnUnderscore.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUnderscore.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnUnderscore.Location = new System.Drawing.Point(817, 75);
+            this.btnUnderscore.Margin = new System.Windows.Forms.Padding(6);
+            this.btnUnderscore.Name = "btnUnderscore";
+            this.btnUnderscore.Size = new System.Drawing.Size(48, 48);
+            this.btnUnderscore.TabIndex = 451;
+            this.btnUnderscore.TabStop = false;
+            this.btnUnderscore.Tag = "";
+            this.btnUnderscore.Text = "_";
+            this.btnUnderscore.UseVisualStyleBackColor = true;
+            this.btnUnderscore.Click += new System.EventHandler(this.btnUnderscore_Click);
+            // 
+            // btnPlus
+            // 
+            this.btnPlus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPlus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnPlus.Location = new System.Drawing.Point(877, 75);
+            this.btnPlus.Margin = new System.Windows.Forms.Padding(6);
+            this.btnPlus.Name = "btnPlus";
+            this.btnPlus.Size = new System.Drawing.Size(48, 48);
+            this.btnPlus.TabIndex = 452;
+            this.btnPlus.TabStop = false;
+            this.btnPlus.Tag = "";
+            this.btnPlus.Text = "+";
+            this.btnPlus.UseVisualStyleBackColor = true;
+            this.btnPlus.Click += new System.EventHandler(this.btnPlus_Click);
+            // 
+            // btnOpenBrace
+            // 
+            this.btnOpenBrace.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOpenBrace.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnOpenBrace.Location = new System.Drawing.Point(937, 75);
+            this.btnOpenBrace.Margin = new System.Windows.Forms.Padding(6);
+            this.btnOpenBrace.Name = "btnOpenBrace";
+            this.btnOpenBrace.Size = new System.Drawing.Size(48, 48);
+            this.btnOpenBrace.TabIndex = 453;
+            this.btnOpenBrace.TabStop = false;
+            this.btnOpenBrace.Tag = "";
+            this.btnOpenBrace.Text = "{";
+            this.btnOpenBrace.UseVisualStyleBackColor = true;
+            this.btnOpenBrace.Click += new System.EventHandler(this.btnOpenBrace_Click);
+            // 
+            // btnCloseBrace
+            // 
+            this.btnCloseBrace.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCloseBrace.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnCloseBrace.Location = new System.Drawing.Point(992, 75);
+            this.btnCloseBrace.Margin = new System.Windows.Forms.Padding(6);
+            this.btnCloseBrace.Name = "btnCloseBrace";
+            this.btnCloseBrace.Size = new System.Drawing.Size(48, 48);
+            this.btnCloseBrace.TabIndex = 454;
+            this.btnCloseBrace.TabStop = false;
+            this.btnCloseBrace.Tag = "";
+            this.btnCloseBrace.Text = "}";
+            this.btnCloseBrace.UseVisualStyleBackColor = true;
+            this.btnCloseBrace.Click += new System.EventHandler(this.btnCloseBrace_Click);
+            // 
+            // btnPipe
+            // 
+            this.btnPipe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPipe.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnPipe.Location = new System.Drawing.Point(1051, 75);
+            this.btnPipe.Margin = new System.Windows.Forms.Padding(6);
+            this.btnPipe.Name = "btnPipe";
+            this.btnPipe.Size = new System.Drawing.Size(48, 48);
+            this.btnPipe.TabIndex = 455;
+            this.btnPipe.TabStop = false;
+            this.btnPipe.Tag = "";
+            this.btnPipe.Text = "|";
+            this.btnPipe.UseVisualStyleBackColor = true;
+            this.btnPipe.Click += new System.EventHandler(this.btnPipe_Click);
+            // 
+            // btnColon
+            // 
+            this.btnColon.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnColon.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnColon.Location = new System.Drawing.Point(1110, 75);
+            this.btnColon.Margin = new System.Windows.Forms.Padding(6);
+            this.btnColon.Name = "btnColon";
+            this.btnColon.Size = new System.Drawing.Size(48, 48);
+            this.btnColon.TabIndex = 456;
+            this.btnColon.TabStop = false;
+            this.btnColon.Tag = "";
+            this.btnColon.Text = ":";
+            this.btnColon.UseVisualStyleBackColor = true;
+            this.btnColon.Click += new System.EventHandler(this.btnColon_Click);
+            // 
+            // btnQuote
+            // 
+            this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnQuote.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnQuote.Location = new System.Drawing.Point(1171, 75);
+            this.btnQuote.Margin = new System.Windows.Forms.Padding(6);
+            this.btnQuote.Name = "btnQuote";
+            this.btnQuote.Size = new System.Drawing.Size(48, 48);
+            this.btnQuote.TabIndex = 457;
+            this.btnQuote.TabStop = false;
+            this.btnQuote.Tag = "";
+            this.btnQuote.Text = "\"";
+            this.btnQuote.UseVisualStyleBackColor = true;
+            this.btnQuote.Click += new System.EventHandler(this.btnQuote_Click);
+            // 
+            // btnLessThan
+            // 
+            this.btnLessThan.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLessThan.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnLessThan.Location = new System.Drawing.Point(1231, 75);
+            this.btnLessThan.Margin = new System.Windows.Forms.Padding(6);
+            this.btnLessThan.Name = "btnLessThan";
+            this.btnLessThan.Size = new System.Drawing.Size(48, 48);
+            this.btnLessThan.TabIndex = 458;
+            this.btnLessThan.TabStop = false;
+            this.btnLessThan.Tag = "";
+            this.btnLessThan.Text = "<";
+            this.btnLessThan.UseVisualStyleBackColor = true;
+            this.btnLessThan.Click += new System.EventHandler(this.btnLessThan_Click);
+            // 
+            // btnGreaterThan
+            // 
+            this.btnGreaterThan.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGreaterThan.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnGreaterThan.Location = new System.Drawing.Point(1291, 75);
+            this.btnGreaterThan.Margin = new System.Windows.Forms.Padding(6);
+            this.btnGreaterThan.Name = "btnGreaterThan";
+            this.btnGreaterThan.Size = new System.Drawing.Size(48, 48);
+            this.btnGreaterThan.TabIndex = 459;
+            this.btnGreaterThan.TabStop = false;
+            this.btnGreaterThan.Tag = "";
+            this.btnGreaterThan.Text = ">";
+            this.btnGreaterThan.UseVisualStyleBackColor = true;
+            this.btnGreaterThan.Click += new System.EventHandler(this.btnGreaterThan_Click);
+            // 
+            // btnQuestionMark
+            // 
+            this.btnQuestionMark.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnQuestionMark.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnQuestionMark.Location = new System.Drawing.Point(1350, 75);
+            this.btnQuestionMark.Margin = new System.Windows.Forms.Padding(6);
+            this.btnQuestionMark.Name = "btnQuestionMark";
+            this.btnQuestionMark.Size = new System.Drawing.Size(48, 48);
+            this.btnQuestionMark.TabIndex = 460;
+            this.btnQuestionMark.TabStop = false;
+            this.btnQuestionMark.Tag = "";
+            this.btnQuestionMark.Text = "?";
+            this.btnQuestionMark.UseVisualStyleBackColor = true;
+            this.btnQuestionMark.Click += new System.EventHandler(this.btnQuestionMark_Click);
             // 
             // KeyboardMapping
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1581, 708);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1674, 623);
+            this.Controls.Add(this.btnQuestionMark);
+            this.Controls.Add(this.btnGreaterThan);
+            this.Controls.Add(this.btnLessThan);
+            this.Controls.Add(this.btnQuote);
+            this.Controls.Add(this.btnColon);
+            this.Controls.Add(this.btnPipe);
+            this.Controls.Add(this.btnCloseBrace);
+            this.Controls.Add(this.btnOpenBrace);
+            this.Controls.Add(this.btnPlus);
+            this.Controls.Add(this.btnUnderscore);
+            this.Controls.Add(this.btnCloseParen);
+            this.Controls.Add(this.btnOpenParen);
+            this.Controls.Add(this.btnAsterisk);
+            this.Controls.Add(this.btnAmpersand);
+            this.Controls.Add(this.btnCaret);
+            this.Controls.Add(this.btnPercent);
+            this.Controls.Add(this.btnDollar);
+            this.Controls.Add(this.btnHash);
+            this.Controls.Add(this.btnAmpersat);
+            this.Controls.Add(this.btnExclamationMark);
+            this.Controls.Add(this.btnAcute);
             this.Controls.Add(this.btnESC);
             this.Controls.Add(this.btnF6);
             this.Controls.Add(this.btnF5);
@@ -1778,12 +2150,11 @@
             this.Controls.Add(this.btnRETURN);
             this.Controls.Add(this.btnCAPS);
             this.Controls.Add(this.btnNUM0);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "KeyboardMapping";
-            this.RightToLeftLayout = true;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Keyboard Mapping";
+            this.Load += new System.EventHandler(this.KeyboardMapping_Load);
             this.ResumeLayout(false);
 
         }
@@ -1890,8 +2261,29 @@
         private System.Windows.Forms.Button btnLCTRL;
         private System.Windows.Forms.Button btnNUM2;
         private System.Windows.Forms.Button btnNUM6;
-        private System.Windows.Forms.Button btnRETURN;
         private System.Windows.Forms.Button btnCAPS;
         private System.Windows.Forms.Button btnNUM0;
+        private System.Windows.Forms.Button btnAcute;
+        private System.Windows.Forms.Button btnExclamationMark;
+        private System.Windows.Forms.Button btnAmpersat;
+        private System.Windows.Forms.Button btnHash;
+        private System.Windows.Forms.Button btnDollar;
+        private System.Windows.Forms.Button btnPercent;
+        private System.Windows.Forms.Button btnCaret;
+        private System.Windows.Forms.Button btnAmpersand;
+        private System.Windows.Forms.Button btnAsterisk;
+        private System.Windows.Forms.Button btnOpenParen;
+        private System.Windows.Forms.Button btnCloseParen;
+        private System.Windows.Forms.Button btnUnderscore;
+        private System.Windows.Forms.Button btnPlus;
+        private System.Windows.Forms.Button btnOpenBrace;
+        private System.Windows.Forms.Button btnCloseBrace;
+        private System.Windows.Forms.Button btnPipe;
+        private System.Windows.Forms.Button btnColon;
+        private System.Windows.Forms.Button btnQuote;
+        private System.Windows.Forms.Button btnLessThan;
+        private System.Windows.Forms.Button btnGreaterThan;
+        private System.Windows.Forms.Button btnQuestionMark;
+        private System.Windows.Forms.Button btnRETURN;
     }
 }

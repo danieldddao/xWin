@@ -67,7 +67,7 @@
             this.doneButton.Name = "doneButton";
             this.doneButton.Size = new System.Drawing.Size(189, 66);
             this.doneButton.TabIndex = 321;
-            this.doneButton.Text = "Done";
+            this.doneButton.Text = "Save";
             this.doneButton.UseVisualStyleBackColor = false;
             this.doneButton.Click += new System.EventHandler(this.doneButton_Click);
             // 
@@ -81,6 +81,7 @@
             this.Controls.Add(this.textTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TextMapping";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TextMapping";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -11,6 +11,7 @@ using static Configuration.Types;
 using SharpDX.DirectInput;
 using Moq;
 using xWin.Wrapper;
+using xWin.Forms.ButtonMaps;
 
 namespace xWin
 {

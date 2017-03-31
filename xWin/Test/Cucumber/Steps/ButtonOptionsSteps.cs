@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestStack.White.Factory;
 using System.IO;
 using System.Collections.Generic;
+using TestStack.White.WindowsAPI;
 
 namespace Cucumber.Steps
 {
@@ -71,6 +72,84 @@ namespace Cucumber.Steps
             buttonLT.Click();
         }
 
+        /*
+         * Keyboard Option
+         */ 
+        [When(@"I click on Keyboard button")]
+        public void WhenIClickOnKeyboardButton()
+        {
+            Button buttonKeyboard = window.Get<Button>("mapKeyboard");
+            buttonKeyboard.Click();
+        }
+
+        [Then(@"It should display the keyboard mapping dialog for button ""(.*)""")]
+        public void ThenItShouldDisplayTheKeyboardMappingDialogForButton(string p0)
+        {
+            listWindows = application.GetWindows();
+            Assert.AreEqual(listWindows.Count, 4);
+            Assert.AreEqual(listWindows[3].Title, "Keyboard Mapping");
+        }
+
+        [Then(@"It should display None key for Keyboard")]
+        public void ThenItShouldDisplayNoneKeyForKeyboard()
+        {
+            listWindows = application.GetWindows();
+            TextBox currentActionTextbox = listWindows[2].Get<TextBox>("keyboardTextBox");
+            Assert.IsTrue(currentActionTextbox.Text.Contains("Key Mapping: NONE"));
+        }
+
+        [Then(@"It should not check the checkbox for Keyboard")]
+        public void ThenItShouldNotCheckTheCheckboxForKeyboard()
+        {
+            listWindows = application.GetWindows();
+            keyboardCheckBox = listWindows[2].Get<CheckBox>("keyboardCheckBox");
+            Assert.IsFalse(keyboardCheckBox.Checked);
+        }
+
+        [When(@"I choose key ""(.*)""")]
+        public void WhenIChooseKey(string key)
+        {
+            listWindows = application.GetWindows();
+            Button buttonKey = listWindows[3].Get<Button>(key);
+            buttonKey.Click();
+        }
+
+        [Then(@"It should display the key ""(.*)"" for Keyboard")]
+        public void ThenItShouldDisplayTheKeyForKeyboard(string key)
+        {
+            listWindows = application.GetWindows();
+            TextBox openAppTextBox = listWindows[2].Get<TextBox>("keyboardTextBox");
+            Assert.AreEqual(openAppTextBox.Text, "Key Mapping: " + key);
+        }
+
+        [Then(@"It should display the current action for Keyboard")]
+        public void ThenItShouldDisplayTheCurrentActionForKeyboard()
+        {
+            listWindows = application.GetWindows();
+            TextBox currentActionTextbox = listWindows[2].Get<TextBox>("currentActionTextbox");
+            Assert.IsTrue(currentActionTextbox.Text.Contains("currently maps to:"));
+            Assert.IsTrue(currentActionTextbox.Text.Contains("Keyboard"));
+        }
+
+        [Then(@"It should check the checkbox for Keyboard")]
+        public void ThenItShouldCheckTheCheckboxForKeyboard()
+        {
+            listWindows = application.GetWindows();
+            openAppCheckBox = listWindows[2].Get<CheckBox>("openAppCheckBox");
+            keyboardCheckBox = listWindows[2].Get<CheckBox>("keyboardCheckBox");
+            shortcutCheckBox = listWindows[2].Get<CheckBox>("shortcutCheckBox");
+            textCheckBox = listWindows[2].Get<CheckBox>("textCheckBox");
+
+            Assert.IsTrue(keyboardCheckBox.Checked);
+            Assert.IsFalse(openAppCheckBox.Checked);
+            Assert.IsFalse(shortcutCheckBox.Checked);
+            Assert.IsFalse(textCheckBox.Checked);
+        }
+
+
+        /*
+         * Open Application Option
+         */ 
         [When(@"I click on Open Application button")]
         public void WhenIClickOnOpenApplicationButton()
         {
@@ -149,6 +228,112 @@ namespace Cucumber.Steps
             Assert.IsFalse(openAppCheckBox.Checked);
         }
 
+        /*
+         * Shortcut Option
+         */
+        [When(@"I click on Shortcut button")]
+        public void WhenIClickOnShortcutButton()
+        {
+            Button buttonOpenApp = window.Get<Button>("mapShortcut");
+            buttonOpenApp.Click();
+        }
+
+        [Then(@"It should display the Shortcut mapping dialog for button ""(.*)""")]
+        public void ThenItShouldDisplayTheShortcutMappingDialogForButton(string p0)
+        {
+            listWindows = application.GetWindows();
+            Assert.AreEqual(listWindows.Count, 4);
+            Assert.AreEqual(listWindows[3].Title, "Shortcut Mapping");
+        }
+
+        [Then(@"It should display None for Shortcut")]
+        public void ThenItShouldDisplayNoneForShortcut()
+        {
+            listWindows = application.GetWindows();
+            TextBox currentActionTextbox = listWindows[2].Get<TextBox>("shortcutTextBox");
+            Assert.IsTrue(currentActionTextbox.Text.Contains("Shortcut: NONE"));
+            
+        }
+
+        [Then(@"It should not check the checkbox for Shortcut")]
+        public void ThenItShouldNotCheckTheCheckboxForShortcut()
+        {
+            listWindows = application.GetWindows();
+            shortcutCheckBox = listWindows[2].Get<CheckBox>("shortcutCheckBox");
+            Assert.IsFalse(shortcutCheckBox.Checked);
+        }
+
+        [When(@"I enter shortcut F5")]
+        public void WhenIEnterShortcutF5()
+        {
+            listWindows = application.GetWindows();
+            listWindows[3].Keyboard.PressSpecialKey(KeyboardInput.SpecialKeys.F5);
+            Button saveButton = listWindows[3].Get<Button>("buttonDone");
+            saveButton.Click();
+        }
+
+        [Then(@"It should display shortcut ""(.*)"" for shortcut")]
+        public void ThenItShouldDisplayShortcutForShortcut(string shortcut)
+        {
+            listWindows = application.GetWindows();
+            TextBox openAppTextBox = listWindows[2].Get<TextBox>("shortcutTextBox");
+            Assert.AreEqual(openAppTextBox.Text, "Shortcut: " + shortcut);
+        }
+
+        [Then(@"It should display the current action for Shortcut Mapping")]
+        public void ThenItShouldDisplayTheCurrentActionForShortcutMapping()
+        {
+            listWindows = application.GetWindows();
+            TextBox currentActionTextbox = listWindows[2].Get<TextBox>("currentActionTextbox");
+            Assert.IsTrue(currentActionTextbox.Text.Contains("currently maps to:"));
+            Assert.IsTrue(currentActionTextbox.Text.Contains("Shortcut"));
+        }
+
+        [Then(@"It should check the checkbox for Shortcut Mapping")]
+        public void ThenItShouldCheckTheCheckboxForShortcutMapping()
+        {
+            listWindows = application.GetWindows();
+            openAppCheckBox = listWindows[2].Get<CheckBox>("openAppCheckBox");
+            keyboardCheckBox = listWindows[2].Get<CheckBox>("keyboardCheckBox");
+            shortcutCheckBox = listWindows[2].Get<CheckBox>("shortcutCheckBox");
+            textCheckBox = listWindows[2].Get<CheckBox>("textCheckBox");
+
+            Assert.IsTrue(shortcutCheckBox.Checked);
+            Assert.IsFalse(keyboardCheckBox.Checked);
+            Assert.IsFalse(textCheckBox.Checked);
+            Assert.IsFalse(openAppCheckBox.Checked);
+        }
+
+        [When(@"I enter shortcut F5 without saving")]
+        public void WhenIEnterShortcutF5WithoutSaving()
+        {
+            listWindows = application.GetWindows();
+            listWindows[3].Keyboard.PressSpecialKey(KeyboardInput.SpecialKeys.F5);
+            Button cancelButton = listWindows[3].Get<Button>("buttonClear");
+            cancelButton.Click();
+        }
+
+        [Then(@"It should not display the current action for Shortcut Mapping")]
+        public void ThenItShouldNotDisplayTheCurrentActionForShortcutMapping()
+        {
+            listWindows = application.GetWindows();
+            TextBox currentActionTextbox = listWindows[2].Get<TextBox>("currentActionTextbox");
+            Assert.IsTrue(currentActionTextbox.Text.Contains("currently maps to:"));
+            Assert.IsFalse(currentActionTextbox.Text.Contains("Shortcut"));
+        }
+
+        [Then(@"It should not check the checkbox for Shortcut Mapping")]
+        public void ThenItShouldNotCheckTheCheckboxForShortcutMapping()
+        {
+            listWindows = application.GetWindows();
+            shortcutCheckBox = listWindows[2].Get<CheckBox>("shortcutCheckBox");
+
+            Assert.IsFalse(shortcutCheckBox.Checked);
+        }
+
+        /*
+         * Text Option
+         */
         [When(@"I click on Text button")]
         public void WhenIClickOnTextButton()
         {
@@ -261,6 +446,22 @@ namespace Cucumber.Steps
             Button buttonMessageBoxClose = listWindows[3].Get<Button>(SearchCriteria.ByText("Close"));
             Assert.IsNotNull(buttonMessageBoxClose);
             buttonMessageBoxClose.Click();
+        }
+
+        [Then(@"It should display None text for Text")]
+        public void ThenItShouldDisplayNoneTextForText()
+        {
+            listWindows = application.GetWindows();
+            TextBox currentActionTextbox = listWindows[2].Get<TextBox>("textTextBox");
+            Assert.IsTrue(currentActionTextbox.Text.Contains("Text: NONE"));
+        }
+
+        [Then(@"It should not check the checkbox for Text")]
+        public void ThenItShouldNotCheckTheCheckboxForText()
+        {
+            listWindows = application.GetWindows();
+            textCheckBox = listWindows[2].Get<CheckBox>("textCheckBox");
+            Assert.IsFalse(textCheckBox.Checked);
         }
 
     }

@@ -13,8 +13,8 @@ namespace xWin.Forms.ButtonMaps
 {
     public partial class TextMapping : Form
     {
-        public String textToMap { get; set; } = "";
-
+        public String textToMap { get; set; } = null;
+        private String text = null;
         public TextMapping (GamepadButtonFlags button)
         {
             InitializeComponent();
@@ -24,11 +24,12 @@ namespace xWin.Forms.ButtonMaps
 
         private void textTextBox_TextChanged(object sender, EventArgs e)
         {
-            textToMap = textTextBox.Text;
+            text = textTextBox.Text;
         }
 
         private void doneButton_Click(object sender, EventArgs e)
         {
+            textToMap = text;
             this.Close(); // close form when clicking done button
         }
 

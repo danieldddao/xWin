@@ -62,6 +62,8 @@ namespace xWin.Forms
 
             XCon4 = con4;
             OpXCon4 = new ControllerOptions(XCon4);
+
+            timer1.Interval = 5000;
         }
 
         public Button GetController1()
@@ -164,8 +166,6 @@ namespace xWin.Forms
             List<GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
             try
             {
-                Console.WriteLine("list.Count: {0}", list.Count);
-
                 // If the list has only 1 button pressed
                 if (list.Count == 1)
                 {

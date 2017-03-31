@@ -86,21 +86,111 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Click Keyboard button will open the dialog")]
+        public virtual void ClickKeyboardButtonWillOpenTheDialog()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Click Keyboard button will open the dialog", ((string[])(null)));
+#line 14
+this.ScenarioSetup(scenarioInfo);
+#line 15
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 17
+ testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+ testRunner.When("I click on Keyboard button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 19
+ testRunner.Then("It should display the keyboard mapping dialog for button \"LeftThumb\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Initially Keyboard option is None")]
+        public virtual void InitiallyKeyboardOptionIsNone()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Initially Keyboard option is None", ((string[])(null)));
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 22
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
+ testRunner.When("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 25
+ testRunner.Then("It should display None key for Keyboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
+ testRunner.And("It should not check the checkbox for Keyboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Select a key from Keyboard button will display the key and check the checkbox")]
+        public virtual void SelectAKeyFromKeyboardButtonWillDisplayTheKeyAndCheckTheCheckbox()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Select a key from Keyboard button will display the key and check the checkbox", ((string[])(null)));
+#line 28
+this.ScenarioSetup(scenarioInfo);
+#line 29
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 30
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+ testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
+ testRunner.When("I click on Keyboard button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+ testRunner.And("I choose key \"btnRETURN\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 34
+ testRunner.Then("It should display the key \"Enter\" for Keyboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 35
+ testRunner.And("It should display the current action for Keyboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+ testRunner.And("It should check the checkbox for Keyboard", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Switching to Keyboard will check only Keyboard checkbox")]
+        public virtual void SwitchingToKeyboardWillCheckOnlyKeyboardCheckbox()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Switching to Keyboard will check only Keyboard checkbox", ((string[])(null)));
+#line 38
+this.ScenarioSetup(scenarioInfo);
+#line 39
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 40
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+ testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+ testRunner.When("I click on \"keyboardCheckBox\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 43
+ testRunner.Then("It should leave only \"keyboardCheckBox\" checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Click Open Application button will open the dialog")]
         public virtual void ClickOpenApplicationButtonWillOpenTheDialog()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Click Open Application button will open the dialog", ((string[])(null)));
-#line 12
+#line 48
 this.ScenarioSetup(scenarioInfo);
-#line 13
+#line 49
  testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 14
+#line 50
  testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 51
  testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
+#line 52
  testRunner.When("I click on Open Application button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
+#line 53
  testRunner.Then("It should display the open application dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -113,21 +203,21 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Select an application from Open Application button will display the application p" +
                     "ath and check the checkbox", ((string[])(null)));
-#line 19
+#line 55
 this.ScenarioSetup(scenarioInfo);
-#line 20
+#line 56
  testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
+#line 57
  testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
+#line 58
  testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
+#line 59
  testRunner.When("I select to open application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 24
+#line 60
  testRunner.Then("It should display the application path for Open Application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 25
+#line 61
  testRunner.And("It should display the current action for Open Application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
+#line 62
  testRunner.And("It should check the checkbox for Open Application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -138,18 +228,139 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DeselectOpenApplicationCheckboxWillLeaveAllCheckboxesUnchecked()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deselect Open Application checkbox will leave all checkboxes unchecked", ((string[])(null)));
-#line 28
+#line 64
 this.ScenarioSetup(scenarioInfo);
-#line 29
+#line 65
  testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
+#line 66
  testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 67
  testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 68
  testRunner.When("I click on \"openAppCheckBox\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 33
+#line 69
  testRunner.Then("It should leave all checkboxes unchecked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Click Shortcut button will open the dialog")]
+        public virtual void ClickShortcutButtonWillOpenTheDialog()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Click Shortcut button will open the dialog", ((string[])(null)));
+#line 74
+this.ScenarioSetup(scenarioInfo);
+#line 75
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 76
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
+ testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
+ testRunner.When("I click on Shortcut button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 79
+ testRunner.Then("It should display the Shortcut mapping dialog for button \"LeftThumb\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Initially Shortcut option is None")]
+        public virtual void InitiallyShortcutOptionIsNone()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Initially Shortcut option is None", ((string[])(null)));
+#line 81
+this.ScenarioSetup(scenarioInfo);
+#line 82
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 83
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 84
+ testRunner.When("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 85
+ testRunner.Then("It should display None for Shortcut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 86
+ testRunner.And("It should not check the checkbox for Shortcut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Enter and save shortcut from Shortcut button will display the shortcut and check " +
+            "the checkbox")]
+        public virtual void EnterAndSaveShortcutFromShortcutButtonWillDisplayTheShortcutAndCheckTheCheckbox()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter and save shortcut from Shortcut button will display the shortcut and check " +
+                    "the checkbox", ((string[])(null)));
+#line 88
+this.ScenarioSetup(scenarioInfo);
+#line 89
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 90
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 91
+ testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 92
+ testRunner.When("I click on Shortcut button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 93
+ testRunner.And("I enter shortcut F5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 94
+ testRunner.Then("It should display shortcut \"F5\" for shortcut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 95
+ testRunner.And("It should display the current action for Shortcut Mapping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 96
+ testRunner.And("It should check the checkbox for Shortcut Mapping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Enter and not save shortcut from Shortcut button will not display the shortcut an" +
+            "d not check the checkbox")]
+        public virtual void EnterAndNotSaveShortcutFromShortcutButtonWillNotDisplayTheShortcutAndNotCheckTheCheckbox()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter and not save shortcut from Shortcut button will not display the shortcut an" +
+                    "d not check the checkbox", ((string[])(null)));
+#line 98
+this.ScenarioSetup(scenarioInfo);
+#line 99
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 100
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 101
+ testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+ testRunner.When("I click on Shortcut button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 103
+ testRunner.And("I enter shortcut F5 without saving", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 104
+ testRunner.Then("It should display None for Shortcut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 105
+ testRunner.And("It should not display the current action for Shortcut Mapping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+ testRunner.And("It should not check the checkbox for Shortcut Mapping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Switching to Shortcut will check only Shortcut checkbox")]
+        public virtual void SwitchingToShortcutWillCheckOnlyShortcutCheckbox()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Switching to Shortcut will check only Shortcut checkbox", ((string[])(null)));
+#line 108
+this.ScenarioSetup(scenarioInfo);
+#line 109
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 110
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 111
+ testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 112
+ testRunner.When("I click on \"shortcutCheckBox\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 113
+ testRunner.Then("It should leave only \"shortcutCheckBox\" checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -159,18 +370,39 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ClickTextButtonWillOpenTheDialog()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Click Text button will open the dialog", ((string[])(null)));
-#line 36
+#line 119
 this.ScenarioSetup(scenarioInfo);
-#line 37
+#line 120
  testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
+#line 121
  testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+#line 122
  testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
+#line 123
  testRunner.When("I click on Text button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 41
+#line 124
  testRunner.Then("It should display the text mapping dialog for button \"LeftThumb\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Initially Text option is None")]
+        public virtual void InitiallyTextOptionIsNone()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Initially Text option is None", ((string[])(null)));
+#line 126
+this.ScenarioSetup(scenarioInfo);
+#line 127
+ testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 128
+ testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 129
+ testRunner.When("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 130
+ testRunner.Then("It should display None text for Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 131
+ testRunner.And("It should not check the checkbox for Text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -182,21 +414,21 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a text from Open Application button will display the application path and c" +
                     "heck the checkbox", ((string[])(null)));
-#line 43
+#line 133
 this.ScenarioSetup(scenarioInfo);
-#line 44
+#line 134
  testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 45
+#line 135
  testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
+#line 136
  testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 137
  testRunner.When("I select to enter a text \"Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 48
+#line 138
  testRunner.Then("It should display the text \"Testing\" for Text Mapping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 49
+#line 139
  testRunner.And("It should display the current action for Text Mapping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 140
  testRunner.And("It should check the checkbox for Text Mapping", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -207,38 +439,38 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterAnEmptyTextFromOpenApplicationButtonWillDisplayAnErrorWindow()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter an empty text from Open Application button will display an error window", ((string[])(null)));
-#line 52
+#line 142
 this.ScenarioSetup(scenarioInfo);
-#line 53
+#line 143
  testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 54
+#line 144
  testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 145
  testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 146
  testRunner.When("I select to enter a text \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 57
+#line 147
  testRunner.Then("It should display the error for empty text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Switching from Open Application to Text will check only Text checkbox")]
-        public virtual void SwitchingFromOpenApplicationToTextWillCheckOnlyTextCheckbox()
+        [NUnit.Framework.DescriptionAttribute("Switching to Text will check only Text checkbox")]
+        public virtual void SwitchingToTextWillCheckOnlyTextCheckbox()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Switching from Open Application to Text will check only Text checkbox", ((string[])(null)));
-#line 59
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Switching to Text will check only Text checkbox", ((string[])(null)));
+#line 149
 this.ScenarioSetup(scenarioInfo);
-#line 60
+#line 150
  testRunner.Given("XWin program is set up to test ButtonOptions", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 151
  testRunner.And("I have the ControllerOptions window opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 152
  testRunner.And("I launch the \"buttonLT\" ButtonOptions window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 153
  testRunner.When("I click on \"textCheckBox\" checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 64
+#line 154
  testRunner.Then("It should leave only \"textCheckBox\" checked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

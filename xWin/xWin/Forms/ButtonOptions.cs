@@ -31,18 +31,57 @@ namespace xWin.Forms
         {
             try
             {
-                // check if a key has been assigned to the currentButton
-                if (keyboard.KeyToPress == 0)
+                switch ((Keys)keyboard.KeyToPress)
                 {
-                    keyboardTextBox.Text = "";
-                    keyboardTextBox.AppendText("Key Mapping: NONE");
-                    keyboardTextBox.AppendText(Environment.NewLine);
-                    keyboardTextBox.AppendText("Please choose a key to map button to key!");
-                }
-                else
-                {
-                    keyboardTextBox.Text = "Key Mapping: " + keyboard.KeyToPress;
-                }
+                    case Keys.None:
+                        {
+                            keyboardTextBox.Text = "";
+                            keyboardTextBox.AppendText("Key Mapping: NONE");
+                            keyboardTextBox.AppendText(Environment.NewLine);
+                            keyboardTextBox.AppendText("Please choose a key to map button to key!");
+                            break;
+                        }
+                    case Keys.LShiftKey:
+                    case Keys.RShiftKey:
+                    case Keys.Shift:
+                    case Keys.ShiftKey:
+                        {
+                            keyboardTextBox.Text = "Key Mapping: Shift";
+                            break;
+                        }
+                    case Keys.Control:
+                    case Keys.ControlKey:
+                    case Keys.LControlKey:
+                    case Keys.RControlKey:
+                        {
+                            keyboardTextBox.Text = "Key Mapping: Ctrl";
+                            break;
+                        }
+                    case Keys.Alt:
+                    case Keys.Menu:
+                    case Keys.LMenu:
+                    case Keys.RMenu:
+                        {
+                            keyboardTextBox.Text = "Key Mapping: Alt";
+                            break;
+                        }
+                    case Keys.LWin:
+                    case Keys.RWin:
+                        {
+                            keyboardTextBox.Text = "Key Mapping: Win";
+                            break;
+                        }
+                    case Keys.Enter:
+                        {
+                            keyboardTextBox.Text = "Key Mapping: Enter";
+                            break;
+                        }
+                    default:
+                        {
+                            keyboardTextBox.Text = "Key Mapping: " + (Keys)keyboard.KeyToPress;
+                            break;
+                        }
+                }             
 
                 // check if an application has been assigned to the currentButton
                 if (keyboard.AppPath == null)
@@ -71,13 +110,63 @@ namespace xWin.Forms
                     Keys[] shortcut = keyboard.ShortcutToPress;
                     for (int i = 0; i < shortcut.Length; i++)
                     {
+                        String key = "";
+                        switch (shortcut[i])
+                        {
+                            case Keys.None:
+                                {
+                                    // do nothing
+                                    break;
+                                }
+                            case Keys.LShiftKey:
+                            case Keys.RShiftKey:
+                            case Keys.Shift:
+                            case Keys.ShiftKey:
+                                {
+                                    key = "Shift";
+                                    break;
+                                }
+                            case Keys.Control:
+                            case Keys.ControlKey:
+                            case Keys.LControlKey:
+                            case Keys.RControlKey:
+                                {
+                                    key = "Ctrl";
+                                    break;
+                                }
+                            case Keys.Alt:
+                            case Keys.Menu:
+                            case Keys.LMenu:
+                            case Keys.RMenu:
+                                {
+                                    key = "Alt";
+                                    break;
+                                }
+                            case Keys.LWin:
+                            case Keys.RWin:
+                                {
+                                    key = "Win";
+                                    break;
+                                }
+                            case Keys.Enter:
+                                {
+                                    key = "Enter";
+                                    break;
+                                }
+                            default:
+                                {
+                                    key = shortcut[i].ToString();
+                                    break;
+                                }
+                        }
+
                         if (i == shortcut.Length - 1) // if key in shortcut is the last key
                         {
-                            shortcutString += shortcut[i];
+                            shortcutString += key;
                         }
                         else
                         {
-                            shortcutString += shortcut[i] + " + ";
+                            shortcutString += key + " + ";
                         }
                     }
                     shortcutTextBox.Text = "Shortcut: " + shortcutString;
@@ -334,6 +423,14 @@ namespace xWin.Forms
         {
             try
             {
+                ShortcutMapping shortcutMapping = new ShortcutMapping();
+                shortcutMapping.ShowDialog();
+                IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
+                if (shortcutMapping.shortcut.Count > 0)
+                {
+                    keyboard.Action = XAction.PressShortcut;
+                    keyboard.ShortcutToPress = shortcutMapping.shortcut.ToArray();
+                }
                 RefreshButtonsAndTextboxes();
                 RefreshCurrentActionTextbox();
             }
@@ -379,7 +476,7 @@ namespace xWin.Forms
                 TextMapping textMapping = new TextMapping(currentButton);
                 textMapping.Text = "Map button '" + currentButton + "' to text";
                 textMapping.ShowDialog();
-                if (textMapping.textToMap != "")
+                if (textMapping.textToMap != null)
                 {
                     IXKeyBoard keyboard = xController.GetKeyBoardForButton(currentButton);
                     keyboard.Action = XAction.PressKeysFromString;

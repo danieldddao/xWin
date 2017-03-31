@@ -208,7 +208,7 @@ namespace xWin.Library
                         }
                     case XAction.PressKey:
                         {
-                            if (KeyToPress != 0) { PressKey(KeyToPress); }
+                            if (KeyToPress != (byte) Keys.None) { PressKey(KeyToPress); }
                             break;
                         }
                     case XAction.PressKeysFromString:
