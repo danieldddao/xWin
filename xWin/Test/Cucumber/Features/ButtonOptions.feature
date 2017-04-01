@@ -34,7 +34,17 @@ Scenario: Select a key from Keyboard button will display the key and check the c
 	Then It should display the key "Enter" for Keyboard
 	And It should display the current action for Keyboard
 	And It should check the checkbox for Keyboard
-	
+
+Scenario: Enter a key from Keyboard button and click save will display the key and check the checkbox
+	Given XWin program is set up to test ButtonOptions
+	And I have the ControllerOptions window opened
+	And I launch the "buttonLT" ButtonOptions window
+	When I click on Keyboard button
+	And I enter Return key and use it
+	Then It should display the key "Enter" for Keyboard
+	And It should display the current action for Keyboard
+	And It should check the checkbox for Keyboard
+		
 Scenario: Switching to Keyboard will check only Keyboard checkbox
 	Given XWin program is set up to test ButtonOptions
 	And I have the ControllerOptions window opened

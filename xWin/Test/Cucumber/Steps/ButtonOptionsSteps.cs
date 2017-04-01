@@ -146,10 +146,18 @@ namespace Cucumber.Steps
             Assert.IsFalse(textCheckBox.Checked);
         }
 
+        [When(@"I enter Return key and use it")]
+        public void WhenIEnterReturnKeyAndUseIt()
+        {
+            listWindows = application.GetWindows();
+            listWindows[3].Keyboard.PressSpecialKey(KeyboardInput.SpecialKeys.RETURN);
+            Button saveButton = listWindows[3].Get<Button>("buttonSaveKey");
+            saveButton.Click();
+        }
 
         /*
          * Open Application Option
-         */ 
+         */
         [When(@"I click on Open Application button")]
         public void WhenIClickOnOpenApplicationButton()
         {
