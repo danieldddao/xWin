@@ -909,6 +909,7 @@ namespace xWin.Forms.ButtonMaps
 
         private void GlobalHookKeyDown(object sender, KeyEventArgs e)
         {
+            KeyTextBox.Text = "";
             enteredKey = e.KeyCode;
             KeyTextBox.Text = e.KeyCode.ToString();
             e.Handled = true;

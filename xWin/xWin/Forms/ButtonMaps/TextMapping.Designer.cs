@@ -37,12 +37,13 @@
             // textTextBox
             // 
             this.textTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.textTextBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textTextBox.Font = new System.Drawing.Font("Arial", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textTextBox.Location = new System.Drawing.Point(71, 115);
             this.textTextBox.Multiline = true;
             this.textTextBox.Name = "textTextBox";
             this.textTextBox.Size = new System.Drawing.Size(825, 235);
             this.textTextBox.TabIndex = 9;
+            this.textTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textTextBox.TextChanged += new System.EventHandler(this.textTextBox_TextChanged);
             // 
             // TextMappingLabel

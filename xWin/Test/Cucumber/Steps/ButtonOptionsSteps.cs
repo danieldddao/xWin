@@ -151,6 +151,8 @@ namespace Cucumber.Steps
         {
             listWindows = application.GetWindows();
             listWindows[3].Keyboard.PressSpecialKey(KeyboardInput.SpecialKeys.RETURN);
+            TextBox enteredTextBox = listWindows[3].Get<TextBox>("KeyTextBox");
+            Assert.AreEqual(enteredTextBox.Text, "Return");
             Button saveButton = listWindows[3].Get<Button>("buttonSaveKey");
             saveButton.Click();
         }
