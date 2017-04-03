@@ -19,7 +19,7 @@ namespace MSTest.Library
     {
         xWin.Library.XController controller;
         Mock<xWin.Wrapper.XControllerWrapper> mockController;
-   
+
 
         [TestInitialize]
         public void Setup()
@@ -132,33 +132,8 @@ namespace MSTest.Library
         [TestMethod]
         public void testMouseMove()
         {
-            mockController.Setup(x => x.MoveCursor(10,7000));
+            mockController.Setup(x => x.MoveCursor(10, 7000));
             bool status = controller.MoveCursor();
-            Assert.IsTrue(status);
-        }
-        [TestMethod]
-        public void testCursorPos()
-        {
-            Cursor.Position = new Point(200, 200);
-            mockController.Setup(x => x.MoveCursor(1,10, 32647));
-            int mockPosX = Cursor.Position.X;
-            int mockPosY = Cursor.Position.Y;
-            Cursor.Position = new Point(200,200);
-            controller.MoveCursorTest();
-            int actPosX = Cursor.Position.X;
-            int actPosY = Cursor.Position.Y;
-
-            bool status = false;
-            if(actPosX == mockPosX && actPosY == mockPosY)
-            {
-                status = true;
-            }
-            else
-            {
-                status = false;
-            }
-            System.Diagnostics.Trace.Write(actPosX);
-            System.Diagnostics.Trace.Write(actPosY);
             Assert.IsTrue(status);
         }
     }
