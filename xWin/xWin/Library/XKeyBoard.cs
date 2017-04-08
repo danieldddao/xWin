@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Threading;
 using System.Windows.Forms;
 using xWin.Wrapper;

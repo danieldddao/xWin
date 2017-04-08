@@ -12,12 +12,13 @@ using SharpDX.DirectInput;
 using Moq;
 using xWin.Wrapper;
 using xWin.Forms.ButtonMaps;
+using System.Diagnostics;
 
 namespace xWin
 {
     class Program
     {
-        static XController c = new XController();
+        private static readonly log4net.ILog logger = Log.GetLogger();
 
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
@@ -72,8 +73,16 @@ namespace xWin
         [STAThread]
         static void Main(string[] args)
         {
+            //logger.Info("Started the Application");
             //RunFormApplicationForTesting();
-            RunFormApplication();
+            while( true)
+            {
+                Console.Clear();
+                Console.WriteLine(System.AppDomain.CurrentDomain.FriendlyName);
+                Thread.Sleep(500);
+            }
+
+            //RunFormApplication();
             /*
             while (true)
             {
