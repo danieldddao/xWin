@@ -67,22 +67,19 @@ namespace xWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new XWinPanel());
+            log4net.Config.XmlConfigurator.Configure();
+            XWinPanel panel = new XWinPanel();
+            ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
+            logger.Info("Starting the Application...");
+            Application.Run(panel);
         }
 
         [STAThread]
         static void Main(string[] args)
         {
-            //logger.Info("Started the Application");
             //RunFormApplicationForTesting();
-            while( true)
-            {
-                Console.Clear();
-                Console.WriteLine(System.AppDomain.CurrentDomain.FriendlyName);
-                Thread.Sleep(500);
-            }
+            RunFormApplication();
 
-            //RunFormApplication();
             /*
             while (true)
             {

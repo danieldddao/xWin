@@ -47,14 +47,22 @@ namespace xWin.Library
         {
             ((Hierarchy)LogManager.GetRepository()).Root.Level = Level.Debug;
             ((Hierarchy)LogManager.GetRepository()).RaiseConfigurationChanged(EventArgs.Empty);
+            GetLogger().Debug("Debug Mode");
             GetLogger().Info("Enabled Debug Mode");
         }
 
         public static void DisableDebugMode()
         {
-            ((Hierarchy)LogManager.GetRepository()).Root.Level = Level.Warn;
+            ((Hierarchy)LogManager.GetRepository()).Root.Level = Level.Info;
             ((Hierarchy)LogManager.GetRepository()).RaiseConfigurationChanged(EventArgs.Empty);
             GetLogger().Info("Disabled Debug Mode");
+        }
+
+        public static String[] LoadLogFile()
+        {
+            String[] logs = null;
+
+            return logs;
         }
     }
 
