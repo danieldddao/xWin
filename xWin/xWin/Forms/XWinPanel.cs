@@ -27,6 +27,11 @@ namespace xWin.Forms
         IXController XCon4;
         ControllerOptions OpXCon4;
 
+        Thread XCon1Thread = new Thread(delegate () {; });
+        Thread XCon2Thread = new Thread(delegate () {; });
+        Thread XCon3Thread = new Thread(delegate () {; });
+        Thread XCon4Thread = new Thread(delegate () {; });
+
         public XWinPanel()
         {
             InitializeComponent();
@@ -36,13 +41,13 @@ namespace xWin.Forms
             OpXCon1 = new ControllerOptions(XCon1);
 
             XCon2 = new XController(new SharpDX.XInput.Controller(UserIndex.Two));
-            //OpXCon2 = new ControllerOptions(XCon2);
+            OpXCon2 = new ControllerOptions(XCon2);
 
             XCon3 = new XController(new SharpDX.XInput.Controller(UserIndex.Three));
-            //OpXCon3 = new ControllerOptions(XCon3);
+            OpXCon3 = new ControllerOptions(XCon3);
 
             XCon4 = new XController(new SharpDX.XInput.Controller(UserIndex.Four));
-            //OpXCon4 = new ControllerOptions(XCon4);
+            OpXCon4 = new ControllerOptions(XCon4);
         }
 
         /* For Testing */
@@ -87,6 +92,7 @@ namespace xWin.Forms
             {
                 Controller1.Text = "Controller 1 \nDisconnected";
                 Controller1.BackColor = Color.FromArgb(255, 0, 51);
+                if (XCon1Thread.IsAlive) { XCon1Thread.Abort(); }
             }
 
             if (XCon2.IsConnected())
@@ -98,6 +104,7 @@ namespace xWin.Forms
             {
                 Controller2.Text = "Controller 2 \nDisconnected";
                 Controller2.BackColor = Color.FromArgb(255, 0, 51);
+                if (XCon2Thread.IsAlive) { XCon2Thread.Abort(); }
             }
 
             if (XCon3.IsConnected())
@@ -109,6 +116,7 @@ namespace xWin.Forms
             {
                 Controller3.Text = "Controller 3 \nDisconnected";
                 Controller3.BackColor = Color.FromArgb(255, 0, 51);
+                if (XCon3Thread.IsAlive) { XCon3Thread.Abort(); }
             }
 
             if (XCon4.IsConnected())
@@ -120,6 +128,7 @@ namespace xWin.Forms
             {
                 Controller4.Text = "Controller 4 \nDisconnected";
                 Controller4.BackColor = Color.FromArgb(255, 0, 51);
+                if (XCon4Thread.IsAlive) { XCon4Thread.Abort(); }
             }
         }
 
@@ -163,16 +172,74 @@ namespace xWin.Forms
 
         public void ExecuteButtonsForController(IXController controller)
         {
+            Thread keyboardThread = new Thread(delegate () {; });
+            bool buttonPressA = false;
+            bool buttonPressB = false;
             List<GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
             try
             {
-                // If the list has only 1 button pressed
-                if (list.Count == 1)
+                while (true)
                 {
-                    GamepadButtonFlags b = list.First<GamepadButtonFlags>(); // get the currently pressed button
-                    controller.GetKeyBoardForButton(b).Execute(); // Execute action for the button 
+                    list = controller.GetCurrentlyPressedButtons();
+                    // If the list has only 1 button pressed
+                    if (list.Count == 1)
+                    {
+                        GamepadButtonFlags b = list.First<GamepadButtonFlags>(); // get the currently pressed button
+                        controller.GetKeyBoardForButton(b).Execute(); // Execute action for the button 
+                    }
+                    Thread.Sleep(15);
+                    if (controller.IsConnected())
+                    {
+                        controller.UpdateState();
+                        controller.MoveCursor();
+                        if (controller.ButtonsPressed()["A"])
+                        {
+                            if (!buttonPressA)
+                            {
+                                buttonPressA = true;
+                                controller.LeftDown();
+                            }
+                        }
+                        else
+                        {
+                            if (buttonPressA) controller.LeftUp();
+                            buttonPressA = false;
+                        }
+                        if (controller.ButtonsPressed()["B"])
+                        {
+                            if (!buttonPressB)
+                            {
+                                buttonPressB = true;
+                                controller.RightDown();
+                            }
+                        }
+                        else
+                        {
+                            if (buttonPressB) controller.RightUp();
+                            buttonPressB = false;
+                        }
+                        if (controller.ButtonsPressed()["Y"] && !keyboardThread.IsAlive)
+                        {
+                            keyboardThread = new Thread(delegate ()
+                            {
+                                Application.EnableVisualStyles();
+                                Application.SetCompatibleTextRenderingDefault(false);
+                                Application.Run(new KeyboardWindow(controller));
+                            });
+                            keyboardThread.Name = "keyboard";
+                            keyboardThread.IsBackground = true;
+                            keyboardThread.SetApartmentState(ApartmentState.STA);
+                            keyboardThread.Start();
+                        }
+                        if(controller.GetRightCart()["Y"] > 9000 || controller.GetRightCart()["Y"] < -9000)
+                        {
+                            float percentage = (float)controller.GetRightCart()["Y"] / 32767;
+                            Console.WriteLine(percentage);
+                            int WHEEL_DATA = (int)(percentage * 120);
+                            controller.MouseWheel(WHEEL_DATA);
+                        }
+                    }
                 }
-                Thread.Sleep(50);
             }
              catch (Exception e)
             {
@@ -184,10 +251,50 @@ namespace xWin.Forms
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateControllers();
-            ExecuteButtonsForController(XCon1);
-            ExecuteButtonsForController(XCon2);
-            ExecuteButtonsForController(XCon3);
-            ExecuteButtonsForController(XCon4);
+            if (!XCon1Thread.IsAlive && XCon1.IsConnected())
+            {
+                XCon1Thread = new Thread(delegate ()
+                {
+                    ExecuteButtonsForController(XCon1);
+                });
+                XCon1Thread.Name = "XCon1";
+                XCon1Thread.IsBackground = true;
+                XCon1Thread.SetApartmentState(ApartmentState.STA);
+                XCon1Thread.Start();
+            }
+            if (!XCon2Thread.IsAlive && XCon2.IsConnected())
+            {
+                XCon2Thread = new Thread(delegate ()
+                {
+                    ExecuteButtonsForController(XCon2);
+                });
+                XCon2Thread.Name = "XCon2";
+                XCon2Thread.IsBackground = true;
+                XCon2Thread.SetApartmentState(ApartmentState.STA);
+                XCon2Thread.Start();
+            }
+            if (!XCon3Thread.IsAlive && XCon3.IsConnected())
+            {
+                XCon3Thread = new Thread(delegate ()
+                {
+                    ExecuteButtonsForController(XCon3);
+                });
+                XCon3Thread.Name = "XCon3";
+                XCon3Thread.IsBackground = true;
+                XCon3Thread.SetApartmentState(ApartmentState.STA);
+                XCon3Thread.Start();
+            }
+            if (!XCon4Thread.IsAlive && XCon4.IsConnected())
+            {
+                XCon4Thread = new Thread(delegate ()
+                {
+                    ExecuteButtonsForController(XCon4);
+                });
+                XCon4Thread.Name = "XCon4";
+                XCon4Thread.IsBackground = true;
+                XCon4Thread.SetApartmentState(ApartmentState.STA);
+                XCon4Thread.Start();
+            }
         }
     }
 }

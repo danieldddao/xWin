@@ -17,6 +17,20 @@ namespace xWin.Library
         bool IsConnected();
         IXKeyBoard GetKeyBoardForButton(GamepadButtonFlags button);
         List<GamepadButtonFlags> GetCurrentlyPressedButtons();
+        Dictionary<string, bool> ButtonsPressed();
+        Dictionary<string, double> GetLeftPolar();
+        Dictionary<string, short> GetLeftCart();
+        Dictionary<string, double> GetRightPolar();
+        Dictionary<string, short> GetRightCart();
+        short GetLeftTrigger();
+        short GetRightTrigger();
+        bool LeftDown();
+        bool LeftUp();
+        bool MoveCursor();
+        bool RightDown();
+        bool RightUp();
+        void UpdateState();
+        void MouseWheel(int WHEEL_DATA);
     }
 
     public class XController : IXController
@@ -196,6 +210,11 @@ namespace xWin.Library
         public void MoveCursorTest()
         {
             controllerWrapper.MoveCursor(1,10, 7000);
+        }
+
+        public void MouseWheel(int WHEEL_DATA)
+        {
+            controllerWrapper.MouseWheel(WHEEL_DATA);
         }
 
         public bool IsConnected()

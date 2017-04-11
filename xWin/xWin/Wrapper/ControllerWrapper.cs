@@ -24,6 +24,7 @@ namespace xWin.Wrapper
         void MoveCursor(int dpi, int deadZoneRad);
         void MoveCursor(int flag,int deadZoneRad,int dpi);
         bool IsButtonPressed(GamepadButtonFlags button);
+        void MouseWheel(int WHEEL_DATA);
     }
 
     public class ControllerWrapper : IControllerWrapper
@@ -40,6 +41,7 @@ namespace xWin.Wrapper
         private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
         private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
         private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        private const int MOUSEEVENTF_WHEEL = 0x0800;
 
         public ControllerWrapper(Controller controller)
         {
@@ -105,6 +107,11 @@ namespace xWin.Wrapper
         public virtual void RightUp()
         {
             mouse_event(MOUSEEVENTF_RIGHTUP, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+        }
+
+        public virtual void MouseWheel(int WHEEL_DATA)
+        {
+            mouse_event(MOUSEEVENTF_WHEEL, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, WHEEL_DATA, 0);
         }
 
         public virtual void MoveCursor(int dpi = 10, int deadZoneRad = 7000)

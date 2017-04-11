@@ -121,18 +121,24 @@
     <Compile Include="Library\Behaviors.cs" />
     <Compile Include="Library\DI2XI.cs" />
     <Compile Include="Library\Interpreter.cs" />
+    <Compile Include="Forms\KeyboardWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\KeyboardWindow.designer.cs">
+      <DependentUpon>KeyboardWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Library\PolarStick.cs" />
     <Compile Include="Library\XAction.cs" />
     <Compile Include="Library\XKeyBoard.cs" />
     <Compile Include="Library\XController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wrapper\ControllerWrapper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Wrapper\ControllerWrapper.cs" />
     <Compile Include="Wrapper\SystemWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,12 +167,22 @@
     <EmbeddedResource Include="Forms\XWinPanel.resx">
       <DependentUpon>XWinPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\KeyboardWindow.resx">
+      <DependentUpon>KeyboardWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\xboxDPadDown.png" />
+    <None Include="Resources\xboxDPadLeft.png" />
+    <None Include="Resources\xboxDPadRight.png" />
+    <None Include="Resources\xboxDPadUp.png" />
+    <None Include="Resources\xboxLeftShield.png" />
+    <None Include="Resources\xboxRightShield.png" />
     <Content Include="Resources\XWin.ico" />
     <Content Include="Resources\XWin1.ico" />
     <Content Include="Resources\XWin2.ico" />
