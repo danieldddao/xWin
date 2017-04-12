@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using log4net;
 using log4net.Repository.Hierarchy;
 using log4net.Core;
+using System.Linq;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -20,11 +21,7 @@ namespace xWin.Library
         {
             try
             {
-                // stop logging process
                 log4net.Appender.RollingFileAppender rollingFileAppender = (log4net.Appender.RollingFileAppender)LogManager.GetRepository().GetAppenders()[0];
-                rollingFileAppender.ImmediateFlush = true;
-                rollingFileAppender.LockingModel = new log4net.Appender.FileAppender.MinimalLock();
-                rollingFileAppender.ActivateOptions();
                 // get all files in log files' directory
                 string[] allFiles = System.IO.Directory.GetFiles(System.IO.Path.GetDirectoryName(rollingFileAppender.File));
                 foreach (string file in allFiles)
@@ -58,11 +55,20 @@ namespace xWin.Library
             GetLogger().Info("Disabled Debug Mode");
         }
 
-        public static String[] LoadLogFile()
+        public static void OpenLogFile()
         {
-            String[] logs = null;
-
-            return logs;
+            try
+            {
+                var rollingFileAppender = ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.Appenders.OfType<log4net.Appender.RollingFileAppender>().FirstOrDefault();
+                string file = rollingFileAppender != null ? rollingFileAppender.File : string.Empty;
+                GetLogger().Info("Log file is " + file);
+                System.Diagnostics.Process.Start(file);
+                GetLogger().Info("Log file opened!");
+            }
+            catch (Exception ex)
+            {
+                GetLogger().Error("Error when opening log file: ", ex);
+            }
         }
     }
 

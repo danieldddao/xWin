@@ -60,7 +60,11 @@ namespace xWin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new XWinPanel(mockController1.Object, mockController2.Object, mockController3.Object, mockController4.Object));
+            log4net.Config.XmlConfigurator.Configure();
+            XWinPanel panel = new XWinPanel(mockController1.Object, mockController2.Object, mockController3.Object, mockController4.Object);
+            ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
+            logger.Info("Starting the Application...");
+            Application.Run(panel);
         }
 
         public static void RunFormApplication()

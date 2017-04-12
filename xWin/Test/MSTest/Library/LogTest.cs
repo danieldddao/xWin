@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using log4net.Repository.Hierarchy;
 using log4net;
 using log4net.Core;
+using System.Text;
 
 namespace MSTest.Library
 {
@@ -21,12 +22,23 @@ namespace MSTest.Library
         public void TestClearLogs()
         {
             log4net.Appender.RollingFileAppender rollingFileAppender = (log4net.Appender.RollingFileAppender)LogManager.GetRepository().GetAppenders()[0];
-            var myFile  = File.Create(System.IO.Path.GetDirectoryName(rollingFileAppender.File) + "\\xWinLogTest.txt");
-            myFile.Close();
+            string filename = System.IO.Path.GetDirectoryName(rollingFileAppender.File) + "\\xWinLogTest.txt";
+            if (!File.Exists(filename))
+            {
+                var myFile = File.Create(filename);
+                myFile.Close();
+            }
             xWin.Library.Log.ClearLogs();
             string[] allFiles = System.IO.Directory.GetFiles(System.IO.Path.GetDirectoryName(rollingFileAppender.File));
             foreach (string file in allFiles)
-            { Assert.IsFalse(file.Contains("xWinLogTest.txt")); }
+            {
+                if (file.Contains("xWinLogTest.txt"))
+                {
+                    string[] lines = File.ReadAllLines(file, Encoding.UTF8);
+                    Assert.AreEqual(lines.Length, 1);
+                    Assert.IsTrue(lines[0].Contains("Cleared all logs!"));
+                }
+            }
         }
 
         [TestMethod]

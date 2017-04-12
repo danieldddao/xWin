@@ -85,5 +85,74 @@ namespace Cucumber.Steps
             Assert.AreNotEqual(listWindows[0].Title, "XBox360 Controller");
         }
 
+        /*
+         * Tests for Logging
+         */
+        [When(@"I click on Log tab")]
+        public void WhenIClickOnLogTab()
+        {
+            Tab controllerPanel = window.Get<Tab>("ControllerPanel");
+            controllerPanel.SelectTabPage("Log");
+        }
+
+        [Then(@"It should have Log tab")]
+        public void ThenItShouldHaveLogTab()
+        {
+            ListView logListView = window.Get<ListView>("logListView");
+            Assert.IsNotNull(logListView);
+            CheckBox debugModeCheckBox = window.Get<CheckBox>("debugModeCheckbox");
+            Assert.IsNotNull(debugModeCheckBox);
+            Button clearLogsButton = window.Get<Button>("clearLogsButton");
+            Assert.IsNotNull(clearLogsButton);
+            Button openLogFileButton = window.Get<Button>("openLogFileButton");
+            Assert.IsNotNull(openLogFileButton);
+        }
+
+        [Then(@"Log should show ""(.*)""")]
+        public void ThenLogShouldShow(string p0)
+        {
+            ListView logListView = window.Get<ListView>("logListView");
+            bool logShowed = false;
+            foreach (ListViewRow row in logListView.Rows)
+            {
+                if (row.Cells[3].Text.Contains(p0))
+                {
+                    logShowed = true;
+                }
+            }
+            Assert.IsTrue(logShowed);
+            foreach (var process in System.Diagnostics.Process.GetProcessesByName("notepad"))
+            { process.Kill(); }
+        }
+
+        [When(@"I enable debug mode for logging")]
+        public void WhenIEnableDebugModeForLogging()
+        {
+            CheckBox debugModeCheckBox = window.Get<CheckBox>("debugModeCheckbox");
+            debugModeCheckBox.Checked = true;
+        }
+
+        [When(@"I disabled debug mode for logging")]
+        public void WhenIDisabledDebugModeForLogging()
+        {
+            CheckBox debugModeCheckBox = window.Get<CheckBox>("debugModeCheckbox");
+            debugModeCheckBox.Checked = true;
+            debugModeCheckBox.Checked = false;
+        }
+
+        [When(@"I clear all logs")]
+        public void WhenIClearAllLogs()
+        {
+            Button clearAllLogs = window.Get<Button>("clearLogsButton");
+            clearAllLogs.Click();
+        }
+
+        [When(@"I open log file")]
+        public void WhenIOpenLogFile()
+        {
+            Button openLog = window.Get<Button>("openLogFileButton");
+            openLog.Click();
+        }
+
     }
 }

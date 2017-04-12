@@ -49,3 +49,43 @@ Scenario: Controller 4 connected can launch ControllerOptions window
 	When I launch the program
 	And I click on Controller 4 button
 	Then It should show ControllerOptions window
+	
+Scenario: XWinPanel Shows Log
+	Given XWin program is set up
+	When I launch the program
+	And I click on Log tab
+	Then It should have Log tab
+	
+Scenario: Log shows information
+	Given XWin program is set up
+	When I launch the program
+	And I click on Log tab
+	Then Log should show "Application started"
+
+Scenario: Enable debug mode in Log successfully
+	Given XWin program is set up
+	When I launch the program
+	And I click on Log tab
+	And I enable debug mode for logging
+	Then Log should show "Enabled Debug Mode"
+
+Scenario: Disable debug mode in Log successfully
+	Given XWin program is set up
+	When I launch the program
+	And I click on Log tab
+	And I disabled debug mode for logging
+	Then Log should show "Disabled Debug Mode"
+
+Scenario: Clear all logs successfully
+	Given XWin program is set up
+	When I launch the program
+	And I click on Log tab
+	And I clear all logs
+	Then Log should show "Cleared all logs!"
+
+Scenario: Open log file successfully
+	Given XWin program is set up
+	When I launch the program
+	And I click on Log tab
+	And I open log file
+	Then Log should show "Log file opened!"

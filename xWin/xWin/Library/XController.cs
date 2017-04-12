@@ -15,6 +15,7 @@ namespace xWin.Library
     public interface IXController
     {
         bool IsConnected();
+        bool IsPreviouslyConnected { get; set; }
         IXKeyBoard GetKeyBoardForButton(GamepadButtonFlags button);
         List<GamepadButtonFlags> GetCurrentlyPressedButtons();
     }
@@ -27,6 +28,7 @@ namespace xWin.Library
         private const short MAX_INPUT = 32767;
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
         private Dictionary<GamepadButtonFlags, XKeyBoard> singleButtonMaps;
+        public bool IsPreviouslyConnected { get; set; } = false;
 
         [DllImport("user32.dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);

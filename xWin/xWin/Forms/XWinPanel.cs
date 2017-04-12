@@ -68,15 +68,6 @@ namespace xWin.Forms
             timer1.Interval = 5000;
         }
 
-        public Button GetController1()
-        { return Controller1; }
-        public Button GetController2()
-        { return Controller2; }
-        public Button GetController3()
-        { return Controller3; }
-        public Button GetController4()
-        { return Controller4; }
-
         private void UpdateControllers()
         {
             // Check status of each controller and update the button accordingly
@@ -84,51 +75,74 @@ namespace xWin.Forms
             {
                 Controller1.Text = "Controller 1 \nConnected";
                 Controller1.BackColor = Color.FromArgb(46, 204, 113);
+
+                if (!XCon1.IsPreviouslyConnected) { logger.Info("Controller 1 Connected"); }
+                XCon1.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller1.Text = "Controller 1 \nDisconnected";
                 Controller1.BackColor = Color.FromArgb(255, 0, 51);
+
+                if (XCon1.IsPreviouslyConnected) { logger.Info("Controller 1 Disconnected"); }
+                XCon1.IsPreviouslyConnected = false;
             }
 
             if (XCon2.IsConnected())
             {
                 Controller2.Text = "Controller 2 \nConnected";
                 Controller2.BackColor = Color.FromArgb(46, 204, 113);
+
+                if (!XCon2.IsPreviouslyConnected) { logger.Info("Controller 2 Connected"); }
+                XCon2.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller2.Text = "Controller 2 \nDisconnected";
                 Controller2.BackColor = Color.FromArgb(255, 0, 51);
+
+                if (XCon2.IsPreviouslyConnected) { logger.Info("Controller 2 Disconnected"); }
+                XCon2.IsPreviouslyConnected = false;
             }
 
             if (XCon3.IsConnected())
             {
                 Controller3.Text = "Controller 3 \nConnected";
                 Controller3.BackColor = Color.FromArgb(46, 204, 113);
+
+                if (!XCon3.IsPreviouslyConnected) { logger.Info("Controller 3 Connected"); }
+                XCon3.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller3.Text = "Controller 3 \nDisconnected";
                 Controller3.BackColor = Color.FromArgb(255, 0, 51);
+
+                if (XCon3.IsPreviouslyConnected) { logger.Info("Controller 3 Disconnected"); }
+                XCon3.IsPreviouslyConnected = false;
             }
 
             if (XCon4.IsConnected())
             {
                 Controller4.Text = "Controller 4 \nConnected";
                 Controller4.BackColor = Color.FromArgb(46, 204, 113);
+
+                if (!XCon4.IsPreviouslyConnected) { logger.Info("Controller 4 Connected"); }
+                XCon4.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller4.Text = "Controller 4 \nDisconnected";
                 Controller4.BackColor = Color.FromArgb(255, 0, 51);
+
+                if (XCon4.IsPreviouslyConnected) { logger.Info("Controller 4 Disconnected"); }
+                XCon4.IsPreviouslyConnected = false;
             }
         }
 
         /* Update Controllers status when loading main panel */
         private void XWinPanel_Load(object sender, EventArgs e)
         {
-            LoadLogFileToListView();
             UpdateControllers();
             logger.Info("Application started");
         }
@@ -138,6 +152,7 @@ namespace xWin.Forms
             if (XCon1.IsConnected())
             {
                 OpXCon1.ShowDialog();
+                logger.Info("Opened Controller 1's Dialog");
             }
         }
 
@@ -146,6 +161,7 @@ namespace xWin.Forms
             if (XCon2.IsConnected())
             {
                 OpXCon2.ShowDialog();
+                logger.Info("Opened Controller 2's Dialog");
             }
         }
 
@@ -154,6 +170,7 @@ namespace xWin.Forms
             if (XCon3.IsConnected())
             {
                 OpXCon3.ShowDialog();
+                logger.Info("Opened Controller 3's Dialog");
             }
         }
 
@@ -162,6 +179,7 @@ namespace xWin.Forms
             if (XCon4.IsConnected())
             {
                 OpXCon4.ShowDialog();
+                logger.Info("Opened Controller 4's Dialog");
             }
         }
 
@@ -170,17 +188,19 @@ namespace xWin.Forms
             List<GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
             try
             {
+                logger.Debug("list of currently pressed buttons : " + list);
                 // If the list has only 1 button pressed
                 if (list.Count == 1)
                 {
                     GamepadButtonFlags b = list.First<GamepadButtonFlags>(); // get the currently pressed button
                     controller.GetKeyBoardForButton(b).Execute(); // Execute action for the button 
+                    logger.Info("Executed button " + b + " for controller " + controller);
                 }
                 Thread.Sleep(50);
             }
              catch (Exception e)
             {
-                Console.WriteLine("{0}", e);
+                logger.Error("Error when executing buttons for controller " + controller, e);
             }
         }
 
@@ -243,30 +263,10 @@ namespace xWin.Forms
             Log.ClearLogs();
         }
 
-        private void LoadLogFileToListView()
-        {
-
-        }
-
         private void openLogFileButton_Click(object sender, EventArgs e)
         {
             logger.Info("Opening log file...");
-            try
-            {
-                var rollingFileAppender = ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.Appenders.OfType<log4net.Appender.RollingFileAppender>().FirstOrDefault();
-                string file = rollingFileAppender != null ? rollingFileAppender.File : string.Empty;
-                logger.Info("Log file is " + file);
-                rollingFileAppender.ImmediateFlush = true;
-                rollingFileAppender.LockingModel = new log4net.Appender.FileAppender.MinimalLock();
-                rollingFileAppender.ActivateOptions();
-                logger.Info("Locked the log file");
-                System.Diagnostics.Process.Start(file);
-                logger.Info("Log file opened!");
-            } catch (Exception ex)
-            {
-                logger.Error("Error when opening log file: ", ex);
-
-            }
+            Log.OpenLogFile();
         }
     }
 }
