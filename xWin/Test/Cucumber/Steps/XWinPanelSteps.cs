@@ -154,5 +154,62 @@ namespace Cucumber.Steps
             openLog.Click();
         }
 
+        [When(@"I click on report button")]
+        public void WhenIClickOnReportButton()
+        {
+            Button openLog = window.Get<Button>("reportError");
+            openLog.Click();
+        }
+
+        [Then(@"Report Window should be opened")]
+        public void ThenReportWindowShouldBeOpened()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Assert.AreEqual(listWindows.Count, 2);
+            Assert.IsTrue(listWindows[1].Title.Contains("Email The Issue To Developers"));
+        }
+
+        [When(@"I click on send button to report")]
+        public void WhenIClickOnSendButtonToReport()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Button sendButton = listWindows[1].Get<Button>("sendButton");
+            sendButton.Click();
+        }
+
+        [Then(@"It should show the message box")]
+        public void ThenItShouldShowTheMessageBox()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Assert.AreEqual(listWindows.Count, 3);
+            Button buttonMessageBoxClose = listWindows[2].Get<Button>(SearchCriteria.ByText("Close"));
+            Assert.IsNotNull(buttonMessageBoxClose);
+            buttonMessageBoxClose.Click();
+        }
+
+        [When(@"I fill ""(.*)"" in Name text box")]
+        public void WhenIFillInNameTextBox(string p0)
+        {
+            List<Window> listWindows = application.GetWindows();
+            TextBox name = listWindows[1].Get<TextBox>("nameTextBox");
+            name.Text = p0;
+        }
+
+        [When(@"I fill ""(.*)"" in email text box")]
+        public void WhenIFillInEmailTextBox(string p0)
+        {
+            List<Window> listWindows = application.GetWindows();
+            TextBox name = listWindows[1].Get<TextBox>("emailTextBox");
+            name.Text = p0;
+        }
+
+        [When(@"I fill ""(.*)"" in email message text box")]
+        public void WhenIFillInEmailMessageTextBox(string p0)
+        {
+            List<Window> listWindows = application.GetWindows();
+            TextBox name = listWindows[1].Get<TextBox>("emailMsgTextBox");
+            name.Text = p0;
+        }
+
     }
 }

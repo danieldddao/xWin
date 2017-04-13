@@ -268,5 +268,11 @@ namespace xWin.Forms
             logger.Info("Opening log file...");
             Log.OpenLogFile();
         }
+
+        private void reportError_Click(object sender, EventArgs e)
+        {
+            EmailError emailError = new EmailError();
+            emailError.ShowDialog();
+        }
     }
 }
