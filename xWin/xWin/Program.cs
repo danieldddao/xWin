@@ -18,7 +18,6 @@ namespace xWin
 {
     class Program
     {
-        private static readonly log4net.ILog logger = Log.GetLogger();
 
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
@@ -63,7 +62,7 @@ namespace xWin
             log4net.Config.XmlConfigurator.Configure();
             XWinPanel panel = new XWinPanel(mockController1.Object, mockController2.Object, mockController3.Object, mockController4.Object);
             ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
-            logger.Info("Starting the Application...");
+            Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
         }
 
@@ -74,7 +73,7 @@ namespace xWin
             log4net.Config.XmlConfigurator.Configure();
             XWinPanel panel = new XWinPanel();
             ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
-            logger.Info("Starting the Application...");
+            Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
         }
 

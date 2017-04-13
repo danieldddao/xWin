@@ -36,6 +36,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button LT Options";
             buttonOptions.currentButton = GamepadButtonFlags.LeftThumb;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonLT_MouseEnter(object sender, EventArgs e)
         {
@@ -52,6 +53,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button LB Options";
             buttonOptions.currentButton = GamepadButtonFlags.LeftShoulder;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonLB_MouseEnter(object sender, EventArgs e)
         {
@@ -68,6 +70,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button RT Options";
             buttonOptions.currentButton = GamepadButtonFlags.RightThumb;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonRT_MouseEnter(object sender, EventArgs e)
         {
@@ -84,6 +87,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button RB Options";
             buttonOptions.currentButton = GamepadButtonFlags.RightShoulder;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonRB_MouseEnter(object sender, EventArgs e)
         {
@@ -100,6 +104,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button X Options";
             buttonOptions.currentButton = GamepadButtonFlags.X;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonX_MouseEnter(object sender, EventArgs e)
         {
@@ -116,6 +121,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button Y Options";
             buttonOptions.currentButton = GamepadButtonFlags.Y;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonY_MouseEnter(object sender, EventArgs e)
         {
@@ -132,6 +138,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button A Options";
             buttonOptions.currentButton = GamepadButtonFlags.A;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonA_MouseEnter(object sender, EventArgs e)
         {
@@ -148,6 +155,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button B Options";
             buttonOptions.currentButton = GamepadButtonFlags.B;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonB_MouseEnter(object sender, EventArgs e)
         {
@@ -164,6 +172,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button Back Options";
             buttonOptions.currentButton = GamepadButtonFlags.Back;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonBack_MouseEnter(object sender, EventArgs e)
         {
@@ -180,6 +189,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button Start Options";
             buttonOptions.currentButton = GamepadButtonFlags.Start;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonStart_MouseEnter(object sender, EventArgs e)
         {
@@ -196,6 +206,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button DPadUp Options";
             buttonOptions.currentButton = GamepadButtonFlags.DPadUp;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonDPadUp_MouseEnter(object sender, EventArgs e)
         {
@@ -212,6 +223,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button DPadDown Options";
             buttonOptions.currentButton = GamepadButtonFlags.DPadDown;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonDPadDown_MouseEnter(object sender, EventArgs e)
         {
@@ -228,6 +240,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button DPadRight Options";
             buttonOptions.currentButton = GamepadButtonFlags.DPadRight;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonDPadRight_MouseEnter(object sender, EventArgs e)
         {
@@ -244,6 +257,7 @@ namespace xWin.Forms
             buttonOptions.Text = "Button DPadLeft Options";
             buttonOptions.currentButton = GamepadButtonFlags.DPadLeft;
             buttonOptions.ShowDialog();
+            Log.GetLogger().Info("Showed dialog of " + buttonOptions.currentButton);
         }
         private void buttonDPadLeft_MouseEnter(object sender, EventArgs e)
         {

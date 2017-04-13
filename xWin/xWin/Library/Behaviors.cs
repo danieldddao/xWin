@@ -166,7 +166,10 @@ namespace xWin.Library
             public RegionStickBehavior(Stick s)
             {
                 if (s.StayBehavior.OnPressToggle || s.StayBehavior.OnReleaseToggle)
+                {
+                    Log.GetLogger().Error("Toggle is not supported on Sticks");
                     throw new Exception("Toggle is not supported on Sticks");
+                }
                 deadzone = (ushort)s.Deadzone;
                 start = (short)s.RegionStart;
                 short totalsize = 0;
@@ -176,13 +179,19 @@ namespace xWin.Library
                 for (var i = 0; i < s.Regions.Count; i++)
                 {
                     if (s.Regions[i].Behavior.OnPressToggle || s.Regions[i].Behavior.OnReleaseToggle)
+                    {
+                        Log.GetLogger().Error("Toggle is not supported on Sticks");
                         throw new Exception("Toggle is not supported on Sticks");
+                    }
                     region_behaviors.Add(new ABehavior(s.Regions[i].Behavior));
                     region_sizes.Add((short)s.Regions[i].Range);
                     totalsize += region_sizes[i];
                 }
                 if (totalsize != 360)
+                {
+                    Log.GetLogger().Error("Regions not fully defined, size must equal exactly 360");
                     throw new Exception("Regions not fully defined, size must equal exactly 360");
+                }
             }
             public void Reset()
             {
@@ -261,7 +270,10 @@ namespace xWin.Library
             public TriggerBehavior(Trigger t)
             {
                 ushort size = (ushort)t.Deadzone;
-                if (t.Deadzone == 0) { throw new Exception("Deadzone must be greater than 0"); }
+                if (t.Deadzone == 0) {
+                    Log.GetLogger().Error("Deadzone must be greater than 0");
+                    throw new Exception("Deadzone must be greater than 0");
+                }
                 regions = new List<byte>();
                 regions.Add((byte)t.Deadzone);
                 behaviors = new List<ABehavior>();
@@ -272,7 +284,11 @@ namespace xWin.Library
                     regions.Add((byte)size);
                     behaviors.Add(new ABehavior(r.Behavior));
                 }
-                if (size > 255) { throw new Exception("trigger regions and deadzone must sum to exactly 255"); }
+                if (size > 255)
+                {
+                    Log.GetLogger().Error("trigger regions and deadzone must sum to exactly 255");
+                    throw new Exception("trigger regions and deadzone must sum to exactly 255");
+                }
             }
             public void Act(byte value, KeyboardMouseState kmstate)
             {

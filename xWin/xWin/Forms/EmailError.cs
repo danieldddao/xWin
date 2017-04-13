@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
+using xWin.Library;
 
 namespace xWin.Forms
 {
@@ -52,13 +53,15 @@ namespace xWin.Forms
                     SmtpServer.EnableSsl = true;
                     SmtpServer.Send(mail);
 
-                    MessageBox.Show("Email sent to the developers!");
+                    MessageBox.Show("Email sent to developers!");
+                    Log.GetLogger().Info("Email sent to developers");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                Log.GetLogger().Error(ex);
             }
         }
     }
