@@ -15,6 +15,7 @@ namespace xWin.Library
     public interface IXController
     {
         bool IsConnected();
+        bool IsPreviouslyConnected { get; set; }
         IXKeyBoard GetKeyBoardForButton(GamepadButtonFlags button);
         List<GamepadButtonFlags> GetCurrentlyPressedButtons();
         Dictionary<string, bool> ButtonsPressed();
@@ -41,6 +42,7 @@ namespace xWin.Library
         private const short MAX_INPUT = 32767;
         private System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
         private Dictionary<GamepadButtonFlags, XKeyBoard> singleButtonMaps;
+        public bool IsPreviouslyConnected { get; set; } = false;
 
         [DllImport("user32.dll", EntryPoint = "SetCursorPos")]
         public static extern long SetCursorPos(int x, int y);
@@ -85,12 +87,15 @@ namespace xWin.Library
             foreach (GamepadButtonFlags b in Enum.GetValues(typeof(GamepadButtonFlags)))
             {
                 this.singleButtonMaps.Add(b, new XKeyBoard());
+                Log.GetLogger().Debug("Initialized ButtonMaps's button: " + b);
             }
+            Log.GetLogger().Debug("Initialized All ButtonMaps");
         }
 
         public void UpdateState()
         {
             controllerWrapper.UpdateState();
+            Log.GetLogger().Debug("Updated Controller State");
         }
 
         public Dictionary<string,bool> ButtonsPressed()
@@ -302,13 +307,14 @@ namespace xWin.Library
                 if (singleButtonMaps.ContainsKey(button))
                 {
                     XKeyBoard xKeyboard = singleButtonMaps[button];
+                    Log.GetLogger().Debug("Sucessfully got XKeyboard for button" + button);
                     return xKeyboard;
                 }
                 else
                 { return null; }
             } catch (Exception e)
             {
-                Console.WriteLine("Error when getting keyboard for button {0} : {0}", button, e);
+                Log.GetLogger().Error("Error when getting keyboard for button " + button, e);
                 return null;
             }
 
@@ -326,15 +332,17 @@ namespace xWin.Library
                 foreach (GamepadButtonFlags button in Enum.GetValues(typeof(GamepadButtonFlags)))
                 {
                     if (button != GamepadButtonFlags.None && controllerWrapper.IsButtonPressed(button))
-                       {
+                    {
                         pressedButtons.Add(button);
+                        Log.GetLogger().Debug("button " + button + " is pressed");
                     }
                 }
+                Log.GetLogger().Debug("pressedButtons " + pressedButtons);
                 return pressedButtons;
             }
             catch (Exception e)
             {
-                Console.WriteLine("{0}", e);
+                Log.GetLogger().Error(e);
                 return pressedButtons;
             }
             

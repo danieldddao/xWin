@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Threading;
 using System.Windows.Forms;
 using xWin.Wrapper;
@@ -55,8 +56,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error When Pressing Key (byte): {0}", key);
-                Console.WriteLine(e);
+                Log.GetLogger().Error("Error When Pressing Key " + (Keys) key, e);
                 return false;
             }
         }
@@ -75,8 +75,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error When Pressing Key: {0}", key);
-                Console.WriteLine(e);
+                Log.GetLogger().Error("Error When Pressing Key " + (Keys) key, e);
                 return false;
             }
         }
@@ -105,8 +104,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error When Pressing Key: {0}", key);
-                Console.WriteLine(e);
+                Log.GetLogger().Error("Error When Pressing Key " + (Keys) key, e);
                 return false;
             }
         }
@@ -140,8 +138,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error When Mapping String to Keys: {0}", s);
-                Console.WriteLine(e);
+                Log.GetLogger().Error("Error When Mapping String to Keys " + s, e);
                 return false;
             }
         }
@@ -163,8 +160,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error When Pressing Shortcut: {0}", shortcut);
-                Console.WriteLine(e);
+                Log.GetLogger().Error("Error When Pressing Shortcut: " + shortcut, e);
                 return false;
             }
         }
@@ -178,7 +174,7 @@ namespace xWin.Library
             {
                 if (!systemWrapper.IsFileExist(path))
                 {
-                    Console.WriteLine("Application doesn't exist {0}", path);
+                    Log.GetLogger().Warn("Application doesn't exist " + path);
                     return false;
                 }
                 systemWrapper.StartProcess(path);
@@ -186,8 +182,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error When Opening Application: {0}", path);
-                Console.WriteLine(e);
+                Log.GetLogger().Error("Error When Opening Application: " + path, e);
                 return false;
             }
         }
@@ -208,29 +203,47 @@ namespace xWin.Library
                         }
                     case XAction.PressKey:
                         {
-                            if (KeyToPress != (byte) Keys.None) { PressKey(KeyToPress); }
+                            if (KeyToPress != (byte) Keys.None)
+                            {
+                                PressKey(KeyToPress);
+                                Log.GetLogger().Info("Pressed Key " + (Keys) KeyToPress);
+                            }
                             break;
                         }
                     case XAction.PressKeysFromString:
                         {
-                            if (StringToPress != null) { PressKeysFromString(StringToPress); }
+                            if (StringToPress != null)
+                            {
+                                PressKeysFromString(StringToPress);
+                                Log.GetLogger().Info("Printed out string  " + StringToPress);
+
+                            }
                             break;
                         }
                     case XAction.PressShortcut:
                         {
-                            if (ShortcutToPress != null) { PressShortcut(ShortcutToPress); }
+                            if (ShortcutToPress != null)
+                            {
+                                PressShortcut(ShortcutToPress);
+                                Log.GetLogger().Info("Executed Shortcut " + ShortcutToPress);
+                            }
                             break;
                         }
                     case XAction.OpenApp:
                         {
-                            if (AppPath != null) { OpenApplication(AppPath); }
+                            if (AppPath != null)
+                            {
+                                OpenApplication(AppPath);
+                                Log.GetLogger().Info("Opened App " + AppPath);
+                            }
                             break;
                         }
                 }
+                Thread.Sleep(100);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error when executing action {0} : {0}", Action, e);
+                Log.GetLogger().Error("Error when executing action " + Action, e);
             }
         }
     }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xWin.Library;
 
 namespace xWin.Forms.ButtonMaps
 {
@@ -25,12 +26,14 @@ namespace xWin.Forms.ButtonMaps
         private void textTextBox_TextChanged(object sender, EventArgs e)
         {
             text = textTextBox.Text;
+            Log.GetLogger().Info("You entered text " + text);
         }
 
         private void doneButton_Click(object sender, EventArgs e)
         {
             textToMap = text;
             this.Close(); // close form when clicking done button
+            Log.GetLogger().Info("Text: " + textToMap + " was saved successfully");
         }
 
         private void TextMappingLabel_Click(object sender, EventArgs e)

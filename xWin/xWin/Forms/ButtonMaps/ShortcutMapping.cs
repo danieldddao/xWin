@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using xWin.Library;
 
 namespace xWin.Forms.ButtonMaps
 {
@@ -110,12 +111,14 @@ namespace xWin.Forms.ButtonMaps
                         break;
                     }
             }
+            Log.GetLogger().Info("You Entered shortcut " + shortcutTextbox.Text);
         }
 
         private void buttonDone_Click(object sender, EventArgs e)
         {
             this.Close();
             Unsubscribe();
+            Log.GetLogger().Info("shortcut " + shortcut + " was saved");
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -123,6 +126,7 @@ namespace xWin.Forms.ButtonMaps
             shortcut = new List<Keys>();
             this.Close();
             Unsubscribe();
+            Log.GetLogger().Info("shortcut " + shortcut + " was cancelled");
         }
 
     }

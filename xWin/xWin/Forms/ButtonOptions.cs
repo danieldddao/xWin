@@ -187,7 +187,7 @@ namespace xWin.Forms
             }
             catch (Exception e)
             {
-                Console.WriteLine("{0}", e);
+                Log.GetLogger().Error(e);
             }
         }
 
@@ -254,7 +254,7 @@ namespace xWin.Forms
             }
             catch (Exception e)
             {
-                Console.WriteLine("{0}", e);
+                Log.GetLogger().Error(e);
             }
         }
 
@@ -308,7 +308,7 @@ namespace xWin.Forms
             }
             catch (Exception e)
             {
-                Console.WriteLine("{0}", e);
+                Log.GetLogger().Error(e);
             }
         }
 
@@ -333,10 +333,11 @@ namespace xWin.Forms
                 keyboard.KeyToPress = keyboardMapping.CurrentKey;
                 RefreshButtonsAndTextboxes();
                 RefreshCurrentActionTextbox();
+                Log.GetLogger().Info("Successfully mapped button " + currentButton + " to key " + (Keys)keyboard.KeyToPress);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
 
@@ -349,6 +350,7 @@ namespace xWin.Forms
                 {
                     // Set keyboard action to None
                     keyboard.Action = XAction.None;
+                    Log.GetLogger().Info("keyboard option is unchecked");
                 }
                 else
                 {
@@ -359,12 +361,13 @@ namespace xWin.Forms
 
                     // Set keyboard action to pressKey
                     keyboard.Action = XAction.PressKey;
+                    Log.GetLogger().Info("keyboard option is checked");
                 }
                 RefreshCurrentActionTextbox();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
 
@@ -383,11 +386,12 @@ namespace xWin.Forms
                     keyboard.AppPath = file;
                     RefreshButtonsAndTextboxes();
                     RefreshCurrentActionTextbox();
+                    Log.GetLogger().Info("Successfully mapped button " + currentButton + " to open app " + keyboard.AppPath);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
         private void openAppCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -399,6 +403,7 @@ namespace xWin.Forms
                 {
                     // Set keyboard action to None
                     keyboard.Action = XAction.None;
+                    Log.GetLogger().Info("openApp option is unchecked");
                 }
                 else
                 {
@@ -409,12 +414,13 @@ namespace xWin.Forms
 
                     // Set keyboard action to pressKey
                     keyboard.Action = XAction.OpenApp;
+                    Log.GetLogger().Info("openApp option is checked");
                 }
                 RefreshCurrentActionTextbox();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
 
@@ -433,10 +439,11 @@ namespace xWin.Forms
                 }
                 RefreshButtonsAndTextboxes();
                 RefreshCurrentActionTextbox();
+                Log.GetLogger().Info("Successfully mapped button " + currentButton + " to shortcut " + keyboard.ShortcutToPress);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
         private void shortcutCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -448,6 +455,7 @@ namespace xWin.Forms
                 {
                     // Set keyboard action to None
                     keyboard.Action = XAction.None;
+                    Log.GetLogger().Info("Shortcut option is unchecked");
                 }
                 else
                 {
@@ -458,12 +466,13 @@ namespace xWin.Forms
 
                     // Set keyboard action to pressKey
                     keyboard.Action = XAction.PressShortcut;
+                    Log.GetLogger().Info("Shortcut option is unchecked");
                 }
                 RefreshCurrentActionTextbox();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
 
@@ -484,6 +493,7 @@ namespace xWin.Forms
 
                     RefreshButtonsAndTextboxes();
                     RefreshCurrentActionTextbox();
+                    Log.GetLogger().Info("Successfully mapped button " + currentButton + " to text: " + keyboard.StringToPress);
                 }
                 else
                 {
@@ -493,7 +503,7 @@ namespace xWin.Forms
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
         private void textCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -505,6 +515,7 @@ namespace xWin.Forms
                 {
                     // Set keyboard action to None
                     keyboard.Action = XAction.None;
+                    Log.GetLogger().Info("Text option is unchecked");
                 }
                 else
                 {
@@ -515,12 +526,13 @@ namespace xWin.Forms
 
                     // Set keyboard action to pressKey
                     keyboard.Action = XAction.PressKeysFromString;
+                    Log.GetLogger().Info("Text option is checked");
                 }
                 RefreshCurrentActionTextbox();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("{0}", ex);
+                Log.GetLogger().Error(ex);
             }
         }
 

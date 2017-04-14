@@ -113,7 +113,7 @@ namespace xWin.Library
             // If Joystick not found, throws an error
             if (joystickGuid == Guid.Empty)
             {
-                Console.WriteLine("No joystick/Gamepad found.");
+                Log.GetLogger().Info("No joystick/Gamepad found.");
                 Console.ReadKey();
                 Environment.Exit(1);
             }
@@ -121,7 +121,7 @@ namespace xWin.Library
             // Instantiate the joystick
             var joystick = new Joystick(directInput, joystickGuid);
 
-            Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
+            Log.GetLogger().Info("Found Joystick/Gamepad with GUID: " + joystickGuid);
 
             // Set BufferSize in order to use buffered data.
             joystick.Properties.BufferSize = 128;

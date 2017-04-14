@@ -12,12 +12,12 @@ using SharpDX.DirectInput;
 using Moq;
 using xWin.Wrapper;
 using xWin.Forms.ButtonMaps;
+using System.Diagnostics;
 
 namespace xWin
 {
     class Program
     {
-        static XController c = new XController();
 
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
@@ -59,14 +59,22 @@ namespace xWin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new XWinPanel(mockController1.Object, mockController2.Object, mockController3.Object, mockController4.Object));
+            log4net.Config.XmlConfigurator.Configure();
+            XWinPanel panel = new XWinPanel(mockController1.Object, mockController2.Object, mockController3.Object, mockController4.Object);
+            ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
+            Log.GetLogger().Info("Starting the Application...");
+            Application.Run(panel);
         }
 
         public static void RunFormApplication()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new XWinPanel());
+            log4net.Config.XmlConfigurator.Configure();
+            XWinPanel panel = new XWinPanel();
+            ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
+            Log.GetLogger().Info("Starting the Application...");
+            Application.Run(panel);
         }
 
         [STAThread]
@@ -74,6 +82,7 @@ namespace xWin
         {
             //RunFormApplicationForTesting();
             RunFormApplication();
+
             /*
             while (true)
             {

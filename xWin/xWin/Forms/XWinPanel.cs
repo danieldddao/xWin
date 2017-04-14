@@ -13,7 +13,7 @@ using xWin.Library;
 
 namespace xWin.Forms
 {
-    public partial class XWinPanel : Form
+    public partial class XWinPanel : Form, log4net.Appender.IAppender
     {
         IXController XCon1;
         ControllerOptions OpXCon1;
@@ -71,15 +71,6 @@ namespace xWin.Forms
             timer1.Interval = 5000;
         }
 
-        public Button GetController1()
-        { return Controller1; }
-        public Button GetController2()
-        { return Controller2; }
-        public Button GetController3()
-        { return Controller3; }
-        public Button GetController4()
-        { return Controller4; }
-
         private void UpdateControllers()
         {
             // Check status of each controller and update the button accordingly
@@ -87,48 +78,77 @@ namespace xWin.Forms
             {
                 Controller1.Text = "Controller 1 \nConnected";
                 Controller1.BackColor = Color.FromArgb(46, 204, 113);
+
+                //Log.GetLogger().Debug("Previously Connected " + XCon1.IsPreviouslyConnected);
+                if (!XCon1.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 1 Connected"); }
+                XCon1.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller1.Text = "Controller 1 \nDisconnected";
                 Controller1.BackColor = Color.FromArgb(255, 0, 51);
                 if (XCon1Thread.IsAlive) { XCon1Thread.Abort(); }
+
+                //Log.GetLogger().Debug("Previously Connected " + XCon1.IsPreviouslyConnected);
+                if (XCon1.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 1 Disconnected"); }
+                XCon1.IsPreviouslyConnected = false;
             }
 
             if (XCon2.IsConnected())
             {
                 Controller2.Text = "Controller 2 \nConnected";
                 Controller2.BackColor = Color.FromArgb(46, 204, 113);
+
+                //Log.GetLogger().Debug("Previously Connected " + XCon2.IsPreviouslyConnected);
+                if (!XCon2.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 2 Connected"); }
+                XCon2.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller2.Text = "Controller 2 \nDisconnected";
                 Controller2.BackColor = Color.FromArgb(255, 0, 51);
                 if (XCon2Thread.IsAlive) { XCon2Thread.Abort(); }
+                //Log.GetLogger().Debug("Previously Connected " + XCon2.IsPreviouslyConnected);
+                if (XCon2.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 2 Disconnected"); }
+                XCon2.IsPreviouslyConnected = false;
             }
 
             if (XCon3.IsConnected())
             {
                 Controller3.Text = "Controller 3 \nConnected";
                 Controller3.BackColor = Color.FromArgb(46, 204, 113);
+
+                //Log.GetLogger().Debug("Previously Connected " + XCon3.IsPreviouslyConnected);
+                if (!XCon3.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 3 Connected"); }
+                XCon3.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller3.Text = "Controller 3 \nDisconnected";
                 Controller3.BackColor = Color.FromArgb(255, 0, 51);
                 if (XCon3Thread.IsAlive) { XCon3Thread.Abort(); }
+                //Log.GetLogger().Debug("Previously Connected " + XCon3.IsPreviouslyConnected);
+                if (XCon3.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 3 Disconnected"); }
+                XCon3.IsPreviouslyConnected = false;
             }
 
             if (XCon4.IsConnected())
             {
                 Controller4.Text = "Controller 4 \nConnected";
                 Controller4.BackColor = Color.FromArgb(46, 204, 113);
+
+                //Log.GetLogger().Debug("Previously Connected " + XCon4.IsPreviouslyConnected);
+                if (!XCon4.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 4 Connected"); }
+                XCon4.IsPreviouslyConnected = true;
             }
             else
             {
                 Controller4.Text = "Controller 4 \nDisconnected";
                 Controller4.BackColor = Color.FromArgb(255, 0, 51);
                 if (XCon4Thread.IsAlive) { XCon4Thread.Abort(); }
+                //Log.GetLogger().Debug("Previously Connected " + XCon4.IsPreviouslyConnected);
+                if (XCon4.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 4 Disconnected"); }
+                XCon4.IsPreviouslyConnected = false;
             }
         }
 
@@ -136,6 +156,7 @@ namespace xWin.Forms
         private void XWinPanel_Load(object sender, EventArgs e)
         {
             UpdateControllers();
+            Log.GetLogger().Info("Application started");
         }
 
         private void Controller1_Click(object sender, EventArgs e)
@@ -143,6 +164,7 @@ namespace xWin.Forms
             if (XCon1.IsConnected())
             {
                 OpXCon1.ShowDialog();
+                Log.GetLogger().Info("Opened Controller 1's Dialog");
             }
         }
 
@@ -151,6 +173,7 @@ namespace xWin.Forms
             if (XCon2.IsConnected())
             {
                 OpXCon2.ShowDialog();
+                Log.GetLogger().Info("Opened Controller 2's Dialog");
             }
         }
 
@@ -159,6 +182,7 @@ namespace xWin.Forms
             if (XCon3.IsConnected())
             {
                 OpXCon3.ShowDialog();
+                Log.GetLogger().Info("Opened Controller 3's Dialog");
             }
         }
 
@@ -167,6 +191,7 @@ namespace xWin.Forms
             if (XCon4.IsConnected())
             {
                 OpXCon4.ShowDialog();
+                Log.GetLogger().Info("Opened Controller 4's Dialog");
             }
         }
 
@@ -175,19 +200,23 @@ namespace xWin.Forms
             Thread keyboardThread = new Thread(delegate () {; });
             bool buttonPressA = false;
             bool buttonPressB = false;
-            List<GamepadButtonFlags> list = controller.GetCurrentlyPressedButtons();
+            List<GamepadButtonFlags> list = new List<GamepadButtonFlags>();
+
             try
             {
                 while (true)
                 {
                     list = controller.GetCurrentlyPressedButtons();
+                    Log.GetLogger().Debug("list of currently pressed buttons : " + list);
                     // If the list has only 1 button pressed
                     if (list.Count == 1)
                     {
                         GamepadButtonFlags b = list.First<GamepadButtonFlags>(); // get the currently pressed button
                         controller.GetKeyBoardForButton(b).Execute(); // Execute action for the button 
+                        Log.GetLogger().Info("Executed button " + b + " for controller " + controller);
                     }
                     Thread.Sleep(15);
+
                     if (controller.IsConnected())
                     {
                         controller.UpdateState();
@@ -231,7 +260,7 @@ namespace xWin.Forms
                             keyboardThread.SetApartmentState(ApartmentState.STA);
                             keyboardThread.Start();
                         }
-                        if(controller.GetRightCart()["Y"] > 9000 || controller.GetRightCart()["Y"] < -9000)
+                        if (controller.GetRightCart()["Y"] > 9000 || controller.GetRightCart()["Y"] < -9000)
                         {
                             float percentage = (float)controller.GetRightCart()["Y"] / 32767;
                             Console.WriteLine(percentage);
@@ -240,10 +269,11 @@ namespace xWin.Forms
                         }
                     }
                 }
+                
             }
-             catch (Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("{0}", e);
+                Log.GetLogger().Error("Error when executing buttons for controller " + controller, e);
             }
         }
 
@@ -294,6 +324,119 @@ namespace xWin.Forms
                 XCon4Thread.IsBackground = true;
                 XCon4Thread.SetApartmentState(ApartmentState.STA);
                 XCon4Thread.Start();
+            }
+        }
+
+        /*
+         * For Logging
+         */
+        delegate void UniversalVoidDelegate();
+        /// Call form control action from different thread
+        public static void ControlInvike(Control control, Action function)
+        {
+            if (control.IsDisposed || control.Disposing)
+                return;
+
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new UniversalVoidDelegate(() => ControlInvike(control, function)));
+                return;
+            }
+            function();
+        }
+
+        public void DoAppend(log4net.Core.LoggingEvent loggingEvent)
+        {
+            try
+            {
+                ListViewItem list = new ListViewItem(loggingEvent.TimeStamp.ToString());
+                if (loggingEvent.Level == log4net.Core.Level.Error)
+                {
+                    list.BackColor = Color.DarkRed;
+                    list.ForeColor = Color.White;
+                }
+                else if (loggingEvent.Level == log4net.Core.Level.Debug)
+                {
+                    list.BackColor = Color.LightSkyBlue;
+                    list.ForeColor = Color.Black;
+                }
+                else if (loggingEvent.Level == log4net.Core.Level.Warn)
+                {
+                    list.BackColor = Color.Yellow;
+                    list.ForeColor = Color.Black;
+                }
+                else
+                {
+                    list.BackColor = Color.White;
+                    list.ForeColor = Color.Black;
+                }
+                list.SubItems.Add(loggingEvent.Level.Name);
+                list.SubItems.Add(loggingEvent.LoggerName.Substring(loggingEvent.LoggerName.LastIndexOf("xWin")));
+                list.SubItems.Add(loggingEvent.MessageObject.ToString());
+                logListView.Sorting = System.Windows.Forms.SortOrder.Descending;
+                ControlInvike(logListView, () => logListView.Items.Add(list));
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+            }
+        }
+
+        private void debugModeCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (debugModeCheckbox.Checked)
+                {
+                    Log.EnableDebugMode();
+                }
+                else
+                {
+                    Log.DisableDebugMode();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
+        }
+
+        private void clearLogsButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                logListView.Items.Clear();
+                Log.ClearLogs();
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
+        }
+
+        private void openLogFileButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Log.GetLogger().Info("Opening log file...");
+                Log.OpenLogFile();
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
+        }
+
+        private void reportError_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EmailError emailError = new EmailError();
+                emailError.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
             }
         }
     }

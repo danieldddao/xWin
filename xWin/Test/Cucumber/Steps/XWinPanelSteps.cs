@@ -85,5 +85,131 @@ namespace Cucumber.Steps
             Assert.AreNotEqual(listWindows[0].Title, "XBox360 Controller");
         }
 
+        /*
+         * Tests for Logging
+         */
+        [When(@"I click on Log tab")]
+        public void WhenIClickOnLogTab()
+        {
+            Tab controllerPanel = window.Get<Tab>("ControllerPanel");
+            controllerPanel.SelectTabPage("Log");
+        }
+
+        [Then(@"It should have Log tab")]
+        public void ThenItShouldHaveLogTab()
+        {
+            ListView logListView = window.Get<ListView>("logListView");
+            Assert.IsNotNull(logListView);
+            CheckBox debugModeCheckBox = window.Get<CheckBox>("debugModeCheckbox");
+            Assert.IsNotNull(debugModeCheckBox);
+            Button clearLogsButton = window.Get<Button>("clearLogsButton");
+            Assert.IsNotNull(clearLogsButton);
+            Button openLogFileButton = window.Get<Button>("openLogFileButton");
+            Assert.IsNotNull(openLogFileButton);
+        }
+
+        [Then(@"Log should show ""(.*)""")]
+        public void ThenLogShouldShow(string p0)
+        {
+            ListView logListView = window.Get<ListView>("logListView");
+            bool logShowed = false;
+            foreach (ListViewRow row in logListView.Rows)
+            {
+                if (row.Cells[3].Text.Contains(p0))
+                {
+                    logShowed = true;
+                }
+            }
+            Assert.IsTrue(logShowed);
+            foreach (var process in System.Diagnostics.Process.GetProcessesByName("notepad"))
+            { process.Kill(); }
+        }
+
+        [When(@"I enable debug mode for logging")]
+        public void WhenIEnableDebugModeForLogging()
+        {
+            CheckBox debugModeCheckBox = window.Get<CheckBox>("debugModeCheckbox");
+            debugModeCheckBox.Checked = true;
+        }
+
+        [When(@"I disabled debug mode for logging")]
+        public void WhenIDisabledDebugModeForLogging()
+        {
+            CheckBox debugModeCheckBox = window.Get<CheckBox>("debugModeCheckbox");
+            debugModeCheckBox.Checked = true;
+            debugModeCheckBox.Checked = false;
+        }
+
+        [When(@"I clear all logs")]
+        public void WhenIClearAllLogs()
+        {
+            Button clearAllLogs = window.Get<Button>("clearLogsButton");
+            clearAllLogs.Click();
+        }
+
+        [When(@"I open log file")]
+        public void WhenIOpenLogFile()
+        {
+            Button openLog = window.Get<Button>("openLogFileButton");
+            openLog.Click();
+        }
+
+        [When(@"I click on report button")]
+        public void WhenIClickOnReportButton()
+        {
+            Button openLog = window.Get<Button>("reportError");
+            openLog.Click();
+        }
+
+        [Then(@"Report Window should be opened")]
+        public void ThenReportWindowShouldBeOpened()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Assert.AreEqual(listWindows.Count, 2);
+            Assert.IsTrue(listWindows[1].Title.Contains("Email The Issue To Developers"));
+        }
+
+        [When(@"I click on send button to report")]
+        public void WhenIClickOnSendButtonToReport()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Button sendButton = listWindows[1].Get<Button>("sendButton");
+            sendButton.Click();
+        }
+
+        [Then(@"It should show the message box")]
+        public void ThenItShouldShowTheMessageBox()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Assert.AreEqual(listWindows.Count, 3);
+            Button buttonMessageBoxClose = listWindows[2].Get<Button>(SearchCriteria.ByText("Close"));
+            Assert.IsNotNull(buttonMessageBoxClose);
+            buttonMessageBoxClose.Click();
+        }
+
+        [When(@"I fill ""(.*)"" in Name text box")]
+        public void WhenIFillInNameTextBox(string p0)
+        {
+            List<Window> listWindows = application.GetWindows();
+            TextBox name = listWindows[1].Get<TextBox>("nameTextBox");
+            name.Text = p0;
+        }
+
+        [When(@"I fill ""(.*)"" in email text box")]
+        public void WhenIFillInEmailTextBox(string p0)
+        {
+            List<Window> listWindows = application.GetWindows();
+            TextBox name = listWindows[1].Get<TextBox>("emailTextBox");
+            name.Text = p0;
+        }
+
+        [When(@"I fill ""(.*)"" in email message text box")]
+        public void WhenIFillInEmailMessageTextBox(string p0)
+        {
+            List<Window> listWindows = application.GetWindows();
+            TextBox name = listWindows[1].Get<TextBox>("emailMsgTextBox");
+            name.Text = p0;
+        }
+
     }
 }

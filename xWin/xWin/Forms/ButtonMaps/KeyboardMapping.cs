@@ -1,6 +1,7 @@
 ﻿using Gma.System.MouseKeyHook;
 using System;
 using System.Windows.Forms;
+using xWin.Library;
 using xWin.Wrapper;
 
 namespace xWin.Forms.ButtonMaps
@@ -921,6 +922,7 @@ namespace xWin.Forms.ButtonMaps
             CurrentKey = (byte) enteredKey;
             Unsubscribe();
             this.Close();
+            Log.GetLogger().Info("button " + (Keys)CurrentKey + " was saved");
         }
     }
 }

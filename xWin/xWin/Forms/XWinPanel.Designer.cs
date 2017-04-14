@@ -37,15 +37,27 @@
             this.Controller2 = new System.Windows.Forms.Button();
             this.Controller1 = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
+            this.log = new System.Windows.Forms.TabPage();
+            this.reportError = new System.Windows.Forms.Button();
+            this.openLogFileButton = new System.Windows.Forms.Button();
+            this.clearLogsButton = new System.Windows.Forms.Button();
+            this.debugModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.logListView = new System.Windows.Forms.ListView();
+            this.dateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.levelHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ClassHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MessageHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
+            this.log.SuspendLayout();
             this.SuspendLayout();
             // 
             // ControllerPanel
             // 
             this.ControllerPanel.Controls.Add(this.controllersPanel);
             this.ControllerPanel.Controls.Add(this.Settings);
+            this.ControllerPanel.Controls.Add(this.log);
             this.ControllerPanel.Location = new System.Drawing.Point(20, 21);
             this.ControllerPanel.Margin = new System.Windows.Forms.Padding(4);
             this.ControllerPanel.Multiline = true;
@@ -133,6 +145,111 @@
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
             // 
+            // log
+            // 
+            this.log.Controls.Add(this.reportError);
+            this.log.Controls.Add(this.openLogFileButton);
+            this.log.Controls.Add(this.clearLogsButton);
+            this.log.Controls.Add(this.debugModeCheckbox);
+            this.log.Controls.Add(this.logListView);
+            this.log.Location = new System.Drawing.Point(8, 39);
+            this.log.Margin = new System.Windows.Forms.Padding(4);
+            this.log.Name = "log";
+            this.log.Padding = new System.Windows.Forms.Padding(4);
+            this.log.Size = new System.Drawing.Size(1192, 676);
+            this.log.TabIndex = 2;
+            this.log.Text = "Log";
+            this.log.UseVisualStyleBackColor = true;
+            // 
+            // reportError
+            // 
+            this.reportError.BackColor = System.Drawing.Color.OrangeRed;
+            this.reportError.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportError.Location = new System.Drawing.Point(1057, 610);
+            this.reportError.Margin = new System.Windows.Forms.Padding(4);
+            this.reportError.Name = "reportError";
+            this.reportError.Size = new System.Drawing.Size(127, 52);
+            this.reportError.TabIndex = 4;
+            this.reportError.Text = "Report";
+            this.reportError.UseVisualStyleBackColor = false;
+            this.reportError.Click += new System.EventHandler(this.reportError_Click);
+            // 
+            // openLogFileButton
+            // 
+            this.openLogFileButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.openLogFileButton.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openLogFileButton.Location = new System.Drawing.Point(818, 610);
+            this.openLogFileButton.Margin = new System.Windows.Forms.Padding(4);
+            this.openLogFileButton.Name = "openLogFileButton";
+            this.openLogFileButton.Size = new System.Drawing.Size(214, 52);
+            this.openLogFileButton.TabIndex = 3;
+            this.openLogFileButton.Text = "Open Log File";
+            this.openLogFileButton.UseVisualStyleBackColor = false;
+            this.openLogFileButton.Click += new System.EventHandler(this.openLogFileButton_Click);
+            // 
+            // clearLogsButton
+            // 
+            this.clearLogsButton.Font = new System.Drawing.Font("Arial", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearLogsButton.Location = new System.Drawing.Point(399, 610);
+            this.clearLogsButton.Margin = new System.Windows.Forms.Padding(4);
+            this.clearLogsButton.Name = "clearLogsButton";
+            this.clearLogsButton.Size = new System.Drawing.Size(351, 52);
+            this.clearLogsButton.TabIndex = 2;
+            this.clearLogsButton.Text = "Clear All Logs";
+            this.clearLogsButton.UseVisualStyleBackColor = true;
+            this.clearLogsButton.Click += new System.EventHandler(this.clearLogsButton_Click);
+            // 
+            // debugModeCheckbox
+            // 
+            this.debugModeCheckbox.AutoSize = true;
+            this.debugModeCheckbox.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.debugModeCheckbox.Location = new System.Drawing.Point(43, 620);
+            this.debugModeCheckbox.Margin = new System.Windows.Forms.Padding(4);
+            this.debugModeCheckbox.Name = "debugModeCheckbox";
+            this.debugModeCheckbox.Size = new System.Drawing.Size(281, 35);
+            this.debugModeCheckbox.TabIndex = 1;
+            this.debugModeCheckbox.Text = "Enable Debug Mode";
+            this.debugModeCheckbox.UseVisualStyleBackColor = true;
+            this.debugModeCheckbox.CheckedChanged += new System.EventHandler(this.debugModeCheckbox_CheckedChanged);
+            // 
+            // logListView
+            // 
+            this.logListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.dateHeader,
+            this.levelHeader,
+            this.ClassHeader,
+            this.MessageHeader});
+            this.logListView.FullRowSelect = true;
+            this.logListView.GridLines = true;
+            this.logListView.Location = new System.Drawing.Point(0, 0);
+            this.logListView.Margin = new System.Windows.Forms.Padding(4);
+            this.logListView.Name = "logListView";
+            this.logListView.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.logListView.Size = new System.Drawing.Size(1188, 591);
+            this.logListView.TabIndex = 0;
+            this.logListView.UseCompatibleStateImageBehavior = false;
+            this.logListView.View = System.Windows.Forms.View.Details;
+            // 
+            // dateHeader
+            // 
+            this.dateHeader.Text = "Date";
+            this.dateHeader.Width = 171;
+            // 
+            // levelHeader
+            // 
+            this.levelHeader.Text = "Level";
+            this.levelHeader.Width = 96;
+            // 
+            // ClassHeader
+            // 
+            this.ClassHeader.Text = "Class";
+            this.ClassHeader.Width = 115;
+            // 
+            // MessageHeader
+            // 
+            this.MessageHeader.Text = "Message";
+            this.MessageHeader.Width = 763;
+            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -153,6 +270,8 @@
             this.Load += new System.EventHandler(this.XWinPanel_Load);
             this.ControllerPanel.ResumeLayout(false);
             this.controllersPanel.ResumeLayout(false);
+            this.log.ResumeLayout(false);
+            this.log.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -167,5 +286,15 @@
         private System.Windows.Forms.Button Controller1;
         private System.Windows.Forms.TabPage Settings;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TabPage log;
+        private System.Windows.Forms.ListView logListView;
+        private System.Windows.Forms.ColumnHeader dateHeader;
+        private System.Windows.Forms.ColumnHeader levelHeader;
+        private System.Windows.Forms.ColumnHeader ClassHeader;
+        private System.Windows.Forms.ColumnHeader MessageHeader;
+        private System.Windows.Forms.Button clearLogsButton;
+        private System.Windows.Forms.CheckBox debugModeCheckbox;
+        private System.Windows.Forms.Button openLogFileButton;
+        private System.Windows.Forms.Button reportError;
     }
 }
