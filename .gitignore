@@ -92,3 +92,7 @@ xWin/xWin/ipch/
 
 xWin/UpgradeLog.htm
 xWin/xWin/Resources/Thumbs.db
+
+# Coverage report generated files
+xWin/Test/MSTest/Solution\ Items/GeneratedReports/*.xml
+xWin/Test/MSTest/Solution\ Items/GeneratedReports/HRCoverageReport/*
