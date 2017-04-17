@@ -1,4 +1,5 @@
-﻿using SharpDX.XInput;
+﻿using Gma.System.MouseKeyHook;
+using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -69,6 +70,20 @@ namespace xWin.Forms
             OpXCon4 = new ControllerOptions(XCon4);
 
             timer1.Interval = 5000;
+        }
+
+        /* Update Controllers status when loading main panel */
+        private void XWinPanel_Load(object sender, EventArgs e)
+        {
+            UpdateControllers();
+            if (enableWordPrediction)
+            { KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
+            Log.GetLogger().Info("Application started");
+        }
+
+        private void XWinPanel_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            KeyboardInputsUnsubscribe(); // Unsubscribe to unread keyboard inputs
         }
 
         private void UpdateControllers()
@@ -150,13 +165,6 @@ namespace xWin.Forms
                 if (XCon4.IsPreviouslyConnected) { Log.GetLogger().Info("Controller 4 Disconnected"); }
                 XCon4.IsPreviouslyConnected = false;
             }
-        }
-
-        /* Update Controllers status when loading main panel */
-        private void XWinPanel_Load(object sender, EventArgs e)
-        {
-            UpdateControllers();
-            Log.GetLogger().Info("Application started");
         }
 
         private void Controller1_Click(object sender, EventArgs e)
@@ -439,5 +447,54 @@ namespace xWin.Forms
                 Log.GetLogger().Error(ex);
             }
         }
+
+        /*
+         * code for AutoComplete feature
+         */
+        private IKeyboardMouseEvents m_GlobalHook;
+        private bool enableWordPrediction = true;
+        private bool subscribed = false;
+        private string typedWord = "";
+
+        public void KeyboardInputsSubscribe()
+        {
+            m_GlobalHook = Hook.GlobalEvents();
+            m_GlobalHook.KeyDown += GlobalHookKeyDown;
+            m_GlobalHook.KeyUp += GlobalHookKeyUp;
+            subscribed = true;
+            Log.GetLogger().Info("Subscribed to read keyboard inputs");
+        }
+
+        public void KeyboardInputsUnsubscribe()
+        {
+            m_GlobalHook.KeyDown -= GlobalHookKeyDown;
+            m_GlobalHook.KeyUp -= GlobalHookKeyUp;
+            m_GlobalHook.Dispose();
+            subscribed = false;
+            Log.GetLogger().Info("Unsubscribed to stop reading keyboard inputs");
+        }
+
+        private void GlobalHookKeyDown(object sender, KeyEventArgs e)
+        {
+            KeysConverter kc = new KeysConverter();
+            string keyChar = kc.ConvertToString(e.KeyData);
+            typedWord += keyChar.ToLower();
+            Log.GetLogger().Info("key: " +typedWord);
+        }
+
+        private void GlobalHookKeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void AutoCompleteTimer_Tick(object sender, EventArgs e)
+        {
+            if (enableWordPrediction && !subscribed)
+            { KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
+
+            if (!enableWordPrediction && subscribed)
+            { KeyboardInputsUnsubscribe(); } // Unsubscribe to stop reading keyboard inputs
+        }
+
     }
 }

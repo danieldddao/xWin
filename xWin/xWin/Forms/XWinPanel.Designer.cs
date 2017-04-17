@@ -48,6 +48,7 @@
             this.ClassHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MessageHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
             this.log.SuspendLayout();
@@ -255,6 +256,12 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // AutoCompleteTimer
+            // 
+            this.AutoCompleteTimer.Enabled = true;
+            this.AutoCompleteTimer.Interval = 10;
+            this.AutoCompleteTimer.Tick += new System.EventHandler(this.AutoCompleteTimer_Tick);
+            // 
             // XWinPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -267,6 +274,7 @@
             this.Name = "XWinPanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "XWin Panel";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.XWinPanel_FormClosed);
             this.Load += new System.EventHandler(this.XWinPanel_Load);
             this.ControllerPanel.ResumeLayout(false);
             this.controllersPanel.ResumeLayout(false);
@@ -296,5 +304,6 @@
         private System.Windows.Forms.CheckBox debugModeCheckbox;
         private System.Windows.Forms.Button openLogFileButton;
         private System.Windows.Forms.Button reportError;
+        private System.Windows.Forms.Timer AutoCompleteTimer;
     }
 }

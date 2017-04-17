@@ -1,0 +1,7 @@
+2017-04-16 19:11:44,076 [18] [\\Mac\Dropbox\UIowa\Spring 2017\SWEP\Team4\xWin\xWin\Library\AutoCompleteDB.cs] ERROR - System.DllNotFoundException: Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)
+   at System.Data.SQLite.UnsafeNativeMethods.sqlite3_config_none(SQLiteConfigOpsEnum op)
+   at System.Data.SQLite.SQLite3.StaticIsInitialized()
+   at System.Data.SQLite.SQLiteLog.Initialize()
+   at System.Data.SQLite.SQLiteConnection..ctor(String connectionString, Boolean parseViaFramework)
+   at System.Data.SQLite.SQLiteConnection..ctor(String connectionString)
+   at xWin.Library.AutoCompleteDB.CreateDB() in \\Mac\Dropbox\UIowa\Spring 2017\SWEP\Team4\xWin\xWin\Library\AutoCompleteDB.cs:line 25

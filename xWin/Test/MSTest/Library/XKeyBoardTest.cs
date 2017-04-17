@@ -246,5 +246,30 @@ namespace MSTest.Library
             bool status = xKeyboard.OpenApplication("file");
             Assert.IsFalse(status);
         }
+
+        [TestMethod]
+        public void TestKeyToChar_alphabetic()
+        {
+            char c = xKeyboard.KeyToChar(Keys.A);
+            Assert.AreEqual(c, 'a');
+
+            c = xKeyboard.KeyToChar(Keys.M);
+            Assert.AreEqual(c, 'm');
+        }
+        [TestMethod]
+        public void TestKeyToChar_numeric()
+        {
+            char c = xKeyboard.KeyToChar(Keys.D0);
+            Assert.AreEqual(c, '0');
+
+            c = xKeyboard.KeyToChar(Keys.D9);
+            Assert.AreEqual(c, '9');
+        }
+        [TestMethod]
+        public void TestKeyToChar_nonAlphanumeric()
+        {
+            char c = xKeyboard.KeyToChar(Keys.OemMinus);
+            Assert.AreEqual(c, '\0');
+        }
     }
 }
