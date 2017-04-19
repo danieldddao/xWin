@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
+using WindowsInput;
 using xWin.Wrapper;
 
 namespace xWin.Library
@@ -18,7 +19,6 @@ namespace xWin.Library
 
     public class XKeyBoard : IXKeyBoard
     {
-        private char[] shiftedKeys = {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'};
         public XAction Action { get; set; }
         public byte KeyToPress { get; set; }
         public string StringToPress { get; set; }
@@ -81,25 +81,13 @@ namespace xWin.Library
         }
 
         /*
-         * Press and Release the key where key is a char
+         * Convert char to key and press the key
          */
         public bool PressKey(char key)
         {
             try
             {
-                const byte VK_SHIFT = 0x10;
-                if (char.IsUpper(key) || Array.IndexOf(shiftedKeys, key) > -1) // If key is uppercase or shifted key, also press and release shift key
-                {
-                    systemWrapper.Press(VK_SHIFT);
-                    systemWrapper.Press((byte)systemWrapper.ScanKey(key));
-                    systemWrapper.Release((byte)systemWrapper.ScanKey(key));
-                    systemWrapper.Release(VK_SHIFT);
-                }
-                else
-                {
-                    systemWrapper.Press((byte)systemWrapper.ScanKey(key));
-                    systemWrapper.Release((byte)systemWrapper.ScanKey(key));
-                }
+                systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode) systemWrapper.ScanKey(key));
                 return true;
             }
             catch (Exception e)
@@ -110,30 +98,49 @@ namespace xWin.Library
         }
 
         /*
-         * Convert the input string to keys and press them
+         * Press the given WindowsInput.Native.VirtualKeyCode using WindowsInput.InputSimulator
+         */
+        public bool PressKey(WindowsInput.Native.VirtualKeyCode key)
+        {
+            try
+            {
+                systemWrapper.SimulateKeyPress(key);
+                Thread.Sleep(100);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+                return false;
+            }
+        }
+
+        /*
+         * Simulate the text entry
          */
         public bool PressKeysFromString(string s)
         {
             try
             {
-                const byte VK_SHIFT = 0x10;
-                char[] array = s.ToCharArray(); // Convert String to array of characters
-                for (int i = 0; i < array.Length; i++)
-                {
-                    char c = array[i];
-                    if (char.IsUpper(c) || Array.IndexOf(shiftedKeys, c) > -1) // If c is uppercase or shifted key, also press and release shift key
-                    {
-                        systemWrapper.Press(VK_SHIFT);
-                        systemWrapper.Press((byte)systemWrapper.ScanKey(c));
-                        systemWrapper.Release((byte)systemWrapper.ScanKey(c));
-                        systemWrapper.Release(VK_SHIFT);
-                    }
-                    else
-                    {
-                        systemWrapper.Press((byte)systemWrapper.ScanKey(c));
-                        systemWrapper.Release((byte)systemWrapper.ScanKey(c));
-                    }
-                }
+                //const byte VK_SHIFT = 0x10;
+                //char[] array = s.ToCharArray(); // Convert String to array of characters
+                //for (int i = 0; i < array.Length; i++)
+                //{
+                //    char c = array[i];
+                //    if (char.IsUpper(c) || Array.IndexOf(shiftedKeys, c) > -1) // If c is uppercase or shifted key, also press and release shift key
+                //    {
+                //        systemWrapper.Press(VK_SHIFT);
+                //        systemWrapper.Press((byte)systemWrapper.ScanKey(c));
+                //        systemWrapper.Release((byte)systemWrapper.ScanKey(c));
+                //        systemWrapper.Release(VK_SHIFT);
+                //    }
+                //    else
+                //    {
+                //        systemWrapper.Press((byte)systemWrapper.ScanKey(c));
+                //        systemWrapper.Release((byte)systemWrapper.ScanKey(c));
+                //    }
+                //}
+                systemWrapper.SimulateText(s);
                 return true;
             }
             catch (Exception e)
@@ -151,10 +158,10 @@ namespace xWin.Library
             try
             {
                 foreach (Keys k in shortcut)
-                { systemWrapper.Press((byte)k); }
+                { systemWrapper.SimulateKeyDown((WindowsInput.Native.VirtualKeyCode) k); }
 
                 foreach (Keys k in shortcut)
-                { systemWrapper.Release((byte)k); }
+                { systemWrapper.SimulateKeyUp((WindowsInput.Native.VirtualKeyCode)k); }
 
                 return true;
             }
@@ -227,7 +234,7 @@ namespace xWin.Library
                         {
                             if (KeyToPress != (byte) Keys.None)
                             {
-                                PressKey(KeyToPress);
+                                PressKey((WindowsInput.Native.VirtualKeyCode) KeyToPress);
                                 Log.GetLogger().Info("Pressed Key " + (Keys) KeyToPress);
                             }
                             break;

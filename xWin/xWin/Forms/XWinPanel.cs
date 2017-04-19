@@ -449,51 +449,75 @@ namespace xWin.Forms
         }
 
         /*
-         * code for AutoComplete feature
+         * Code for AutoComplete feature
          */
-        private IKeyboardMouseEvents m_GlobalHook;
+        private IKeyboardMouseEvents keyboardGlobalHook; // events to read keyboard's keydown and keypress.
         private bool enableWordPrediction = true;
-        private bool subscribed = false;
-        private string typedWord = "";
+        private bool subscribed = false; // indicate whether we need to read the keyboard inputs
+        private string typedWord = ""; // word that user's typing
 
         public void KeyboardInputsSubscribe()
         {
-            m_GlobalHook = Hook.GlobalEvents();
-            m_GlobalHook.KeyDown += GlobalHookKeyDown;
-            m_GlobalHook.KeyUp += GlobalHookKeyUp;
+            keyboardGlobalHook = Hook.GlobalEvents();
+            keyboardGlobalHook.KeyDown += GlobalHookKeyDown;
+            keyboardGlobalHook.KeyUp += GlobalHookKeyUp;
             subscribed = true;
             Log.GetLogger().Info("Subscribed to read keyboard inputs");
         }
 
         public void KeyboardInputsUnsubscribe()
         {
-            m_GlobalHook.KeyDown -= GlobalHookKeyDown;
-            m_GlobalHook.KeyUp -= GlobalHookKeyUp;
-            m_GlobalHook.Dispose();
+            keyboardGlobalHook.KeyDown -= GlobalHookKeyDown;
+            keyboardGlobalHook.KeyUp -= GlobalHookKeyUp;
+            keyboardGlobalHook.Dispose();
             subscribed = false;
             Log.GetLogger().Info("Unsubscribed to stop reading keyboard inputs");
         }
 
+        // When a key is down
         private void GlobalHookKeyDown(object sender, KeyEventArgs e)
         {
             KeysConverter kc = new KeysConverter();
             string keyChar = kc.ConvertToString(e.KeyData);
             typedWord += keyChar.ToLower();
-            Log.GetLogger().Info("key: " +typedWord);
+            Log.GetLogger().Info("word typed: " +typedWord);
+            
         }
 
+        // When a key is up
         private void GlobalHookKeyUp(object sender, KeyEventArgs e)
         {
+            KeyboardInputsUnsubscribe();
+            AutoCompleteDB db = new AutoCompleteDB();
+            List<string> topThree = db.GetTopThreeWords(typedWord);
+            if (topThree.Count > 0)
+            {
+                string w = topThree[0].Substring(topThree[0].IndexOf(typedWord)+ typedWord.ToCharArray().Length);
+                Log.GetLogger().Info("typedword length: " + typedWord.ToCharArray().Length);
+                Log.GetLogger().Info("subword: " + w);
 
+                XKeyBoard keyboard = new XKeyBoard();
+                keyboard.PressKeysFromString(w);
+                char[] array = w.ToArray<char>();
+                Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
+                systemWrapper.Press((byte)Keys.LShiftKey);
+                foreach (char c in array)
+                {
+                    systemWrapper.Press((byte)Keys.Left);
+                    systemWrapper.Release((byte)Keys.Left);
+                }
+                systemWrapper.Release((byte)Keys.LShiftKey);
+            }
+            KeyboardInputsSubscribe();
         }
 
         private void AutoCompleteTimer_Tick(object sender, EventArgs e)
         {
-            if (enableWordPrediction && !subscribed)
-            { KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
+            //if (enableWordPrediction && !subscribed)
+            //{ KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
 
-            if (!enableWordPrediction && subscribed)
-            { KeyboardInputsUnsubscribe(); } // Unsubscribe to stop reading keyboard inputs
+            //if (!enableWordPrediction && subscribed)
+            //{ KeyboardInputsUnsubscribe(); } // Unsubscribe to stop reading keyboard inputs
         }
 
     }

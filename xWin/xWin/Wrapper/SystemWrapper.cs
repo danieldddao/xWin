@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
+using WindowsInput;
 
 namespace xWin.Wrapper
 {
@@ -11,6 +12,10 @@ namespace xWin.Wrapper
     {
         void Press(byte key);
         void Release(byte key);
+        void SimulateKeyDown(WindowsInput.Native.VirtualKeyCode key);
+        void SimulateKeyUp(WindowsInput.Native.VirtualKeyCode key);
+        void SimulateKeyPress(WindowsInput.Native.VirtualKeyCode key);
+        void SimulateText(string text);
         short ScanKey(char c);
         bool IsFileExist(string path);
         void StartProcess(string path);
@@ -25,6 +30,7 @@ namespace xWin.Wrapper
         public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
         [DllImport("user32.dll")]
         public static extern short VkKeyScan(char s);
+        InputSimulator inputSimulator = new InputSimulator();
 
         public void Press(byte key)
         {
@@ -36,6 +42,26 @@ namespace xWin.Wrapper
         {
             // Releases the key  
             keybd_event(key, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+        }
+
+        public void SimulateKeyDown(WindowsInput.Native.VirtualKeyCode key)
+        {
+            inputSimulator.Keyboard.KeyDown(key);
+        }
+
+        public void SimulateKeyUp(WindowsInput.Native.VirtualKeyCode key)
+        {
+            inputSimulator.Keyboard.KeyUp(key);
+        }
+
+        public void SimulateKeyPress(WindowsInput.Native.VirtualKeyCode key)
+        {
+            inputSimulator.Keyboard.KeyPress(key);
+        }
+
+        public void SimulateText(string text)
+        {
+            inputSimulator.Keyboard.TextEntry(text);
         }
 
         public short ScanKey(char c)

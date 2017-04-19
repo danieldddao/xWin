@@ -49,8 +49,10 @@
             this.MessageHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
+            this.Settings.SuspendLayout();
             this.log.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,6 +139,7 @@
             // 
             // Settings
             // 
+            this.Settings.Controls.Add(this.panel1);
             this.Settings.Location = new System.Drawing.Point(8, 39);
             this.Settings.Margin = new System.Windows.Forms.Padding(4);
             this.Settings.Name = "Settings";
@@ -262,6 +265,13 @@
             this.AutoCompleteTimer.Interval = 10;
             this.AutoCompleteTimer.Tick += new System.EventHandler(this.AutoCompleteTimer_Tick);
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(586, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(599, 332);
+            this.panel1.TabIndex = 0;
+            // 
             // XWinPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -278,6 +288,7 @@
             this.Load += new System.EventHandler(this.XWinPanel_Load);
             this.ControllerPanel.ResumeLayout(false);
             this.controllersPanel.ResumeLayout(false);
+            this.Settings.ResumeLayout(false);
             this.log.ResumeLayout(false);
             this.log.PerformLayout();
             this.ResumeLayout(false);
@@ -305,5 +316,6 @@
         private System.Windows.Forms.Button openLogFileButton;
         private System.Windows.Forms.Button reportError;
         private System.Windows.Forms.Timer AutoCompleteTimer;
+        private System.Windows.Forms.Panel panel1;
     }
 }
