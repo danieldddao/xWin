@@ -173,5 +173,12 @@ namespace MSTest.Library
                 }
             }
         }
+
+        [TestMethod]
+        public void TestDI2XIStickSetup()
+        {
+            // TODO 
+            // How TF does this class even work and what does it even do
+        }
     }
 }

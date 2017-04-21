@@ -103,12 +103,18 @@ namespace xWin.Library
             var joystickGuid = Guid.Empty;
 
             foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Gamepad, DeviceEnumerationFlags.AllDevices))
+            {
                 joystickGuid = deviceInstance.InstanceGuid;
+            }
 
             // If Gamepad not found, look for a Joystick
             if (joystickGuid == Guid.Empty)
+            {
                 foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
+                {
                     joystickGuid = deviceInstance.InstanceGuid;
+                }
+            }
 
             // If Joystick not found, throws an error
             if (joystickGuid == Guid.Empty)
