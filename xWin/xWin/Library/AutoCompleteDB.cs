@@ -52,7 +52,7 @@ namespace xWin.Library
                     using (SQLiteCommand cmd = new SQLiteCommand(query, dbConnection))
                     {
                         int status = cmd.ExecuteNonQuery();
-                        Log.GetLogger().Info("Create Table's status= " + status);
+                        Log.GetLogger().Debug("Create Table's status= " + status);
 
                         // Insert commonly used words into the newly created database
                         if (status == 0)
@@ -72,7 +72,7 @@ namespace xWin.Library
                         }
                     }
                 }
-                Log.GetLogger().Info("Finished initialized AutoCompleteDB Object");
+                Log.GetLogger().Debug("Finished initialized AutoCompleteDB Object");
             }
             catch (Exception e)
             {
@@ -97,7 +97,7 @@ namespace xWin.Library
                             while (reader.Read())
                             { topThree.Add((string)reader["word"]); }
                             if (topThree.Count == 0)
-                            { Log.GetLogger().Error("Error when executing query: " + query); }
+                            { Log.GetLogger().Info("Couldn't find " + subword + " in the database"); }
                         }
                     }
                 }
@@ -152,6 +152,80 @@ namespace xWin.Library
                                 }
                             }
                         }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+            }
+        }
+
+        public List<string> GetAllWords()
+        {
+            List<string> allWords = new List<string>();
+            try
+            {
+                using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
+                {
+                    string query = "SELECT word FROM Dictionary;";
+                    dbConnection.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, dbConnection))
+                    {
+                        using (SQLiteDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            { allWords.Add((string)reader["word"]); }
+                            if (allWords.Count == 0)
+                            { Log.GetLogger().Info("Database is empty"); }
+                        }
+                    }
+                }
+                return allWords;
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+                return allWords;
+            }
+        }
+
+        public bool RemoveWord(string word)
+        {
+            List<string> allWords = new List<string>();
+            bool status = false;
+            try
+            {
+                using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
+                {
+                    string query = "DELETE FROM Dictionary WHERE word='" + word + "';";
+                    dbConnection.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, dbConnection))
+                    {
+                        int s = cmd.ExecuteNonQuery();
+                        if (s == 1) { status = true; }
+                    }
+                }
+                return status;
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+                return status;
+            }
+        }
+
+        public void ClearDictionary()
+        {
+            try
+            {
+                using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
+                {
+                    string query = "DELETE FROM Dictionary;";
+                    dbConnection.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, dbConnection))
+                    {
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }

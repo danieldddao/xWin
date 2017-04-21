@@ -194,28 +194,6 @@ namespace xWin.Library
             }
         }
 
-        // Convert a key to a coressponding character if key is alphanumeric character
-        public char KeyToChar(Keys key)
-        {
-            char c = '\0';
-            try
-            {
-                if ((key >= Keys.A) && (key <= Keys.Z))
-                {
-                    c = (char)((int)'a' + (int)(key - Keys.A));
-                }
-                else if ((key >= Keys.D0) && (key <= Keys.D9))
-                {
-                    c = (char)((int)'0' + (int)(key - Keys.D0));
-                }
-                return c;
-            } catch (Exception e)
-            {
-                Log.GetLogger().Error(e);
-                return c;
-            }
-        }
-
         /*
          * Execute based on the Action
          */

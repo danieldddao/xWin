@@ -76,8 +76,9 @@ namespace xWin.Forms
         private void XWinPanel_Load(object sender, EventArgs e)
         {
             UpdateControllers();
-            if (enableWordPrediction)
-            { KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
+            if (enableWordPrediction || enableQuickType) { KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
+            if (enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
+            if (enableQuickType) { quickTypeCheckBox.Checked = true; }
             Log.GetLogger().Info("Application started");
         }
 
@@ -277,7 +278,7 @@ namespace xWin.Forms
                         }
                     }
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -453,62 +454,260 @@ namespace xWin.Forms
          */
         private IKeyboardMouseEvents keyboardGlobalHook; // events to read keyboard's keydown and keypress.
         private bool enableWordPrediction = true;
-        private bool subscribed = false; // indicate whether we need to read the keyboard inputs
+        private bool enableQuickType = false;
+        private bool subscribed = false; // indicate whether we've already subscribed to read the keyboard inputs
+        private Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
         private string typedWord = ""; // word that user's typing
+        private string predictiveSubWord = "";
+
+        private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (wordPredictionCheckBox.Checked)
+            { enableWordPrediction = true; }
+            else
+            { enableWordPrediction = false; }
+        }
+
+        private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (quickTypeCheckBox.Checked)
+            { enableQuickType = true; }
+            else
+            { enableQuickType = false; }
+        }
 
         public void KeyboardInputsSubscribe()
         {
-            keyboardGlobalHook = Hook.GlobalEvents();
-            keyboardGlobalHook.KeyDown += GlobalHookKeyDown;
-            keyboardGlobalHook.KeyUp += GlobalHookKeyUp;
-            subscribed = true;
-            Log.GetLogger().Info("Subscribed to read keyboard inputs");
+            try
+            {
+                keyboardGlobalHook = Hook.GlobalEvents();
+                keyboardGlobalHook.KeyDown += GlobalHookKeyDown;
+                keyboardGlobalHook.KeyUp += GlobalHookKeyUp;
+                subscribed = true;
+                Log.GetLogger().Debug("Subscribed to read keyboard inputs");
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+            }
         }
 
         public void KeyboardInputsUnsubscribe()
         {
-            keyboardGlobalHook.KeyDown -= GlobalHookKeyDown;
-            keyboardGlobalHook.KeyUp -= GlobalHookKeyUp;
-            keyboardGlobalHook.Dispose();
-            subscribed = false;
-            Log.GetLogger().Info("Unsubscribed to stop reading keyboard inputs");
+            try
+            {
+                keyboardGlobalHook.KeyDown -= GlobalHookKeyDown;
+                keyboardGlobalHook.KeyUp -= GlobalHookKeyUp;
+                keyboardGlobalHook.Dispose();
+                subscribed = false;
+                Log.GetLogger().Debug("Unsubscribed to stop reading keyboard inputs");
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+            }
+        }
+
+        // Convert a key to a coressponding character
+        public char KeyToChar(Keys[] keys)
+        {
+            char c = '\0'; // default null char
+            try
+            {
+                Keys key = keys[1];
+                if ((key >= Keys.A) && (key <= Keys.Z))
+                {
+                    c = (char)((int)'a' + (int)(key - Keys.A));
+                }
+                else if ((key >= Keys.D0) && (key <= Keys.D9))
+                {
+                    if (keys[0] == Keys.Shift)
+                    {
+                        switch (key)
+                        {
+                            case Keys.D0:
+                                c = ')';
+                                break;
+                            case Keys.D1:
+                                c = '!';
+                                break;
+                            case Keys.D2:
+                                c = '@';
+                                break;
+                            case Keys.D3:
+                                c = '#';
+                                break;
+                            case Keys.D4:
+                                c = '$';
+                                break;
+                            case Keys.D5:
+                                c = '%';
+                                break;
+                            case Keys.D6:
+                                c = '^';
+                                break;
+                            case Keys.D7:
+                                c = '&';
+                                break;
+                            case Keys.D8:
+                                c = '*';
+                                break;
+                            case Keys.D9:
+                                c = '(';
+                                break;
+                        }
+                    }
+                    else { c = (char)((int)'0' + (int)(key - Keys.D0)); }
+                }
+                else
+                {
+                    switch (key)
+                    { 
+                        case Keys.ShiftKey: // ignore shift key
+                        case Keys.LShiftKey:
+                        case Keys.RShiftKey:
+                            break;
+                        case Keys.Oem1:
+                            {
+                                if (keys[0] == Keys.Shift) { c = ':'; }
+                                else { c = ';'; }
+                                break;
+                            }
+                        case Keys.Oem7:
+                            {
+                                if (keys[0] == Keys.Shift) { c = '"'; }
+                                else { c = (char) 39; }
+                                break;
+                            }
+                        case Keys.Oemtilde:
+                            {
+                                if (keys[0] != Keys.Shift) { c = '~'; }
+                                c = '`';
+                                break;
+                            }
+                        case Keys.Oemcomma:
+                            {
+                                if (keys[0] != Keys.Shift) { c = ','; }
+                                break;
+                            }
+                        case Keys.OemPeriod:
+                            {
+                                if (keys[0] != Keys.Shift) { c = '.'; }
+                                break;
+                            }
+                        case Keys.OemQuestion:
+                            {
+                                if (keys[0] == Keys.Shift) { c = '?'; }
+                                else { c = '/'; }
+                                break;
+                            }
+                    }
+                }
+                return c;
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+                return c;
+            }
         }
 
         // When a key is down
         private void GlobalHookKeyDown(object sender, KeyEventArgs e)
         {
-            KeysConverter kc = new KeysConverter();
-            string keyChar = kc.ConvertToString(e.KeyData);
-            typedWord += keyChar.ToLower();
-            Log.GetLogger().Info("word typed: " +typedWord);
-            
+            try
+            {
+                KeyboardInputsUnsubscribe();
+                // If keydown is Tab key
+                // and currently typed word is not empty and it doesn't contain null character
+                // Suppress actual tab key and complete the predictive word
+                if (e.KeyCode == Keys.Tab && typedWord != "" && !typedWord.Contains('\0'))
+                {
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+
+                    // Complete the predictive word
+                    char[] array = predictiveSubWord.ToArray<char>();
+                    Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
+                    foreach (char c in array)
+                    { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Right); }
+
+                    typedWord = ""; // reset currently typed word
+                    Log.GetLogger().Info("Reset currently typed word");
+                }
+                // New word
+                else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
+                {
+                    AutoCompleteDB db = new AutoCompleteDB();
+                    if (typedWord != "") { db.UpdateOrInsertWord(typedWord); } // Update non-empty word into database
+                    typedWord = ""; // reset the word
+                }
+                else if (e.KeyCode == Keys.Back) // Delete character
+                {
+                    if (predictiveSubWord != "") // If there's a predictive subword, remove it.
+                    {
+                        Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
+                        systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Back);
+                    }
+                    if (typedWord.Length > 0) { typedWord = typedWord.Remove(typedWord.Length - 1); }
+                    Log.GetLogger().Info("Backspace: removed last character, currently typed word is " + typedWord);
+                }
+                else
+                {
+                    keys[1] = e.KeyCode;
+                    char c = KeyToChar(keys);
+                    Log.GetLogger().Info("KeyToChar: " + c);
+                    typedWord += c;
+                    Log.GetLogger().Info("word typed: " + typedWord + " (length: " + typedWord.Length + ")");
+                    Log.GetLogger().Info("Contain null char: " + typedWord.Contains('\0'));
+                }
+                KeyboardInputsSubscribe();
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
         }
 
         // When a key is up
         private void GlobalHookKeyUp(object sender, KeyEventArgs e)
         {
-            KeyboardInputsUnsubscribe();
-            AutoCompleteDB db = new AutoCompleteDB();
-            List<string> topThree = db.GetTopThreeWords(typedWord);
-            if (topThree.Count > 0)
+            try
             {
-                string w = topThree[0].Substring(topThree[0].IndexOf(typedWord)+ typedWord.ToCharArray().Length);
-                Log.GetLogger().Info("typedword length: " + typedWord.ToCharArray().Length);
-                Log.GetLogger().Info("subword: " + w);
-
-                XKeyBoard keyboard = new XKeyBoard();
-                keyboard.PressKeysFromString(w);
-                char[] array = w.ToArray<char>();
-                Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                systemWrapper.Press((byte)Keys.LShiftKey);
-                foreach (char c in array)
+                KeyboardInputsUnsubscribe();
+                predictiveSubWord = ""; // reset predictive Subword
+                if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Space && e.KeyCode != Keys.Tab)
                 {
-                    systemWrapper.Press((byte)Keys.Left);
-                    systemWrapper.Release((byte)Keys.Left);
+                    AutoCompleteDB db = new AutoCompleteDB();
+                    List<string> topThree = db.GetTopThreeWords(typedWord);
+                    if (topThree.Count > 0)
+                    {
+                        if (topThree[0] != typedWord) // if Top Word is not the same as currently typed word
+                        {
+                            predictiveSubWord = topThree[0].Substring(topThree[0].IndexOf(typedWord) + typedWord.ToCharArray().Length);
+                            Log.GetLogger().Debug("typedword length: " + typedWord.ToCharArray().Length);
+                            Log.GetLogger().Info("predictive word (top word): " + topThree[0]);
+                            Log.GetLogger().Info("subWord: " + predictiveSubWord + ", length: " + predictiveSubWord.Length);
+
+                            Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
+                            systemWrapper.SimulateText(predictiveSubWord); // show predictive subword
+                            // highlight predictive subword
+                            char[] array = predictiveSubWord.ToArray<char>();
+                            systemWrapper.SimulateKeyDown((WindowsInput.Native.VirtualKeyCode)Keys.ShiftKey);
+                            foreach (char c in array)
+                            { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Left); }
+                            systemWrapper.SimulateKeyUp((WindowsInput.Native.VirtualKeyCode)Keys.ShiftKey);
+                        }
+                    }
                 }
-                systemWrapper.Release((byte)Keys.LShiftKey);
+                keys[0] = e.KeyCode;
+                KeyboardInputsSubscribe();
             }
-            KeyboardInputsSubscribe();
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+                Log.GetLogger().Error("Error when key is up :");
+            }
         }
 
         private void AutoCompleteTimer_Tick(object sender, EventArgs e)
@@ -520,5 +719,10 @@ namespace xWin.Forms
             //{ KeyboardInputsUnsubscribe(); } // Unsubscribe to stop reading keyboard inputs
         }
 
+        private void buttonViewDictionary_Click(object sender, EventArgs e)
+        {
+            AutoCompleteDictionary dictionary = new AutoCompleteDictionary();
+            dictionary.ShowDialog();
+        }
     }
 }

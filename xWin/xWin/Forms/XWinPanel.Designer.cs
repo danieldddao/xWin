@@ -37,6 +37,13 @@
             this.Controller2 = new System.Windows.Forms.Button();
             this.Controller1 = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonViewDictionary = new System.Windows.Forms.Button();
+            this.quickTypeTipsButton = new System.Windows.Forms.Button();
+            this.wordPredictionTipsButton = new System.Windows.Forms.Button();
+            this.quickTypeCheckBox = new System.Windows.Forms.CheckBox();
+            this.wordPredictionCheckBox = new System.Windows.Forms.CheckBox();
+            this.labelAutocomplete = new System.Windows.Forms.Label();
             this.log = new System.Windows.Forms.TabPage();
             this.reportError = new System.Windows.Forms.Button();
             this.openLogFileButton = new System.Windows.Forms.Button();
@@ -49,10 +56,10 @@
             this.MessageHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
             this.Settings.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.log.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,6 +155,92 @@
             this.Settings.TabIndex = 1;
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.buttonViewDictionary);
+            this.panel1.Controls.Add(this.quickTypeTipsButton);
+            this.panel1.Controls.Add(this.wordPredictionTipsButton);
+            this.panel1.Controls.Add(this.quickTypeCheckBox);
+            this.panel1.Controls.Add(this.wordPredictionCheckBox);
+            this.panel1.Controls.Add(this.labelAutocomplete);
+            this.panel1.Location = new System.Drawing.Point(586, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(599, 662);
+            this.panel1.TabIndex = 0;
+            // 
+            // buttonViewDictionary
+            // 
+            this.buttonViewDictionary.BackColor = System.Drawing.Color.Transparent;
+            this.buttonViewDictionary.BackgroundImage = global::xWin.Properties.Resources.buttonBackground;
+            this.buttonViewDictionary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonViewDictionary.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonViewDictionary.Location = new System.Drawing.Point(217, 542);
+            this.buttonViewDictionary.Name = "buttonViewDictionary";
+            this.buttonViewDictionary.Size = new System.Drawing.Size(209, 71);
+            this.buttonViewDictionary.TabIndex = 4;
+            this.buttonViewDictionary.Text = "View Dictionary";
+            this.buttonViewDictionary.UseVisualStyleBackColor = false;
+            this.buttonViewDictionary.Click += new System.EventHandler(this.buttonViewDictionary_Click);
+            // 
+            // quickTypeTipsButton
+            // 
+            this.quickTypeTipsButton.AutoSize = true;
+            this.quickTypeTipsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.quickTypeTipsButton.BackColor = System.Drawing.Color.LemonChiffon;
+            this.quickTypeTipsButton.Location = new System.Drawing.Point(432, 199);
+            this.quickTypeTipsButton.Name = "quickTypeTipsButton";
+            this.quickTypeTipsButton.Size = new System.Drawing.Size(56, 35);
+            this.quickTypeTipsButton.TabIndex = 3;
+            this.quickTypeTipsButton.Text = "tips";
+            this.quickTypeTipsButton.UseVisualStyleBackColor = false;
+            // 
+            // wordPredictionTipsButton
+            // 
+            this.wordPredictionTipsButton.AutoSize = true;
+            this.wordPredictionTipsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.wordPredictionTipsButton.BackColor = System.Drawing.Color.LemonChiffon;
+            this.wordPredictionTipsButton.Location = new System.Drawing.Point(355, 115);
+            this.wordPredictionTipsButton.Name = "wordPredictionTipsButton";
+            this.wordPredictionTipsButton.Size = new System.Drawing.Size(56, 35);
+            this.wordPredictionTipsButton.TabIndex = 1;
+            this.wordPredictionTipsButton.Text = "tips";
+            this.wordPredictionTipsButton.UseVisualStyleBackColor = false;
+            // 
+            // quickTypeCheckBox
+            // 
+            this.quickTypeCheckBox.AutoSize = true;
+            this.quickTypeCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quickTypeCheckBox.Location = new System.Drawing.Point(44, 205);
+            this.quickTypeCheckBox.Name = "quickTypeCheckBox";
+            this.quickTypeCheckBox.Size = new System.Drawing.Size(382, 31);
+            this.quickTypeCheckBox.TabIndex = 2;
+            this.quickTypeCheckBox.Text = "Enable QuickType Suggestions";
+            this.quickTypeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // wordPredictionCheckBox
+            // 
+            this.wordPredictionCheckBox.AutoSize = true;
+            this.wordPredictionCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wordPredictionCheckBox.Location = new System.Drawing.Point(44, 122);
+            this.wordPredictionCheckBox.Name = "wordPredictionCheckBox";
+            this.wordPredictionCheckBox.Size = new System.Drawing.Size(299, 31);
+            this.wordPredictionCheckBox.TabIndex = 1;
+            this.wordPredictionCheckBox.Text = "Enable Word Prediction";
+            this.wordPredictionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // labelAutocomplete
+            // 
+            this.labelAutocomplete.AutoSize = true;
+            this.labelAutocomplete.Font = new System.Drawing.Font("Arial", 13.125F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAutocomplete.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.labelAutocomplete.Location = new System.Drawing.Point(37, 28);
+            this.labelAutocomplete.Name = "labelAutocomplete";
+            this.labelAutocomplete.Size = new System.Drawing.Size(274, 41);
+            this.labelAutocomplete.TabIndex = 0;
+            this.labelAutocomplete.Text = "Auto-Complete:";
             // 
             // log
             // 
@@ -265,13 +358,6 @@
             this.AutoCompleteTimer.Interval = 10;
             this.AutoCompleteTimer.Tick += new System.EventHandler(this.AutoCompleteTimer_Tick);
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(586, 7);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 332);
-            this.panel1.TabIndex = 0;
-            // 
             // XWinPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -289,6 +375,8 @@
             this.ControllerPanel.ResumeLayout(false);
             this.controllersPanel.ResumeLayout(false);
             this.Settings.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.log.ResumeLayout(false);
             this.log.PerformLayout();
             this.ResumeLayout(false);
@@ -317,5 +405,11 @@
         private System.Windows.Forms.Button reportError;
         private System.Windows.Forms.Timer AutoCompleteTimer;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox quickTypeCheckBox;
+        private System.Windows.Forms.CheckBox wordPredictionCheckBox;
+        private System.Windows.Forms.Label labelAutocomplete;
+        private System.Windows.Forms.Button wordPredictionTipsButton;
+        private System.Windows.Forms.Button quickTypeTipsButton;
+        private System.Windows.Forms.Button buttonViewDictionary;
     }
 }

@@ -103,6 +103,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AutoCompleteDictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoCompleteDictionary.Designer.cs">
+      <DependentUpon>AutoCompleteDictionary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ButtonMaps\ShortcutMapping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\AutoCompleteDictionary.resx">
+      <DependentUpon>AutoCompleteDictionary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ButtonMaps\ShortcutMapping.resx">
       <DependentUpon>ShortcutMapping.cs</DependentUpon>
     </EmbeddedResource>
@@ -220,6 +229,8 @@
     <None Include="Resources\xboxDPadUp.png" />
     <None Include="Resources\xboxLeftShield.png" />
     <None Include="Resources\xboxRightShield.png" />
+    <None Include="Resources\button_background.png" />
+    <None Include="Resources\buttonBackground.jpg" />
     <Content Include="Resources\XWin.ico" />
     <Content Include="Resources\XWin1.ico" />
     <Content Include="Resources\XWin2.ico" />
