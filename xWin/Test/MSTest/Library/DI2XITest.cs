@@ -26,8 +26,13 @@ namespace MSTest.Library
             foreach( DI2XI.Buttons f in Enum.GetValues(typeof(DI2XI.Buttons)))
             {
                 if (f != DI2XI.Buttons.LeftTrigger && f != DI2XI.Buttons.RightTrigger)
-                { Assert.AreEqual(DI2XI.ConvertFlags(f).ToString(), f.ToString(),f.ToString()); }
-                else { Assert.AreEqual(DI2XI.ConvertFlags(f), SharpDX.XInput.GamepadButtonFlags.None, f.ToString()); }
+                {
+                    Assert.AreEqual(DI2XI.ConvertFlags(f).ToString(), f.ToString(),f.ToString());
+                }
+                else
+                {
+                    Assert.AreEqual(DI2XI.ConvertFlags(f), SharpDX.XInput.GamepadButtonFlags.None, f.ToString());
+                }
             }
         }
         
@@ -50,20 +55,41 @@ namespace MSTest.Library
                     for (var i = 0; i < 6; ++i)
                     {
                         if (js.Buttons[i])
-                            Assert.IsTrue(state.Gamepad.Buttons.HasFlag(DI2XI.ConvertFlags((DI2XI.Buttons)i)),"1");
+                        {
+                            Assert.IsTrue(state.Gamepad.Buttons.HasFlag(DI2XI.ConvertFlags((DI2XI.Buttons)i)), "1");
+                        }
                         else
+                        {
                             Assert.IsFalse(state.Gamepad.Buttons.HasFlag(DI2XI.ConvertFlags((DI2XI.Buttons)i)), "2");
+                        }
                     }
-                    if(js.Buttons[6]) { Assert.AreEqual(state.Gamepad.LeftTrigger, (byte)255, "5"); }
-                    else { Assert.AreEqual(state.Gamepad.LeftTrigger, (byte)0, "3"); }
-                    if(js.Buttons[7]) { Assert.AreEqual(state.Gamepad.RightTrigger, (byte)255, "6"); }
-                    else { Assert.AreEqual(state.Gamepad.RightTrigger, (byte)0, "4"); }
+                    if(js.Buttons[6])
+                    {
+                        Assert.AreEqual(state.Gamepad.LeftTrigger, (byte)255, "5");
+                    }
+                    else
+                    {
+                        Assert.AreEqual(state.Gamepad.LeftTrigger, (byte)0, "3");
+                    }
+                    if(js.Buttons[7])
+                    {
+                        Assert.AreEqual(state.Gamepad.RightTrigger, (byte)255, "6");
+                    }
+                    else
+                    {
+                        Assert.AreEqual(state.Gamepad.RightTrigger, (byte)0, "4");
+                    }
+
                     for (var i = 8; i < 12; ++i)
                     {
                         if (js.Buttons[i])
+                        {
                             Assert.IsTrue(state.Gamepad.Buttons.HasFlag(DI2XI.ConvertFlags((DI2XI.Buttons)i)), "7");
+                        }
                         else
+                        {
                             Assert.IsFalse(state.Gamepad.Buttons.HasFlag(DI2XI.ConvertFlags((DI2XI.Buttons)i)), "8");
+                        }
                     }
                     int total = 0;
                     total += (byte)(state.Gamepad.Buttons.HasFlag(GamepadButtonFlags.DPadUp) ? 1 : 0);
