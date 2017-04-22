@@ -5,11 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using xWin.Wrapper;
 
 namespace xWin.Library
 {
     public class AutoCompleteDB
     {
+        ISystemWrapper systemWrapper; // for testing Exceptions
+
         private string[] commonlyUsedWords = {
                                                "the", "be", "to", "of", "and", "a", "in", "that", "have",
                                                "I", "it", "for", "not", "on", "with", "he", "as", "you",
@@ -28,19 +31,23 @@ namespace xWin.Library
         public AutoCompleteDB() 
         {
             CreateDB();
+            systemWrapper = new SystemWrapper();
         }
 
-        public AutoCompleteDB(string db, string[] words)
+        public AutoCompleteDB(string db, string[] words, ISystemWrapper systemWrapper)
         {
             dbFile = db;
             commonlyUsedWords = words;
             CreateDB();
+            this.systemWrapper = systemWrapper;
         }
 
         public void CreateDB() 
         {
             try
             {
+                systemWrapper.ThrowException();
+
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
                     string query = "CREATE TABLE IF NOT EXISTS Dictionary (" +
@@ -86,6 +93,8 @@ namespace xWin.Library
             List<string> topThree = new List<string>();
             try 
             {
+                systemWrapper.ThrowException();
+
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
                     string query = "SELECT word FROM Dictionary WHERE word LIKE '" + subword.ToLower() + "%' ORDER BY typed_count DESC LIMIT 3;";
@@ -101,7 +110,7 @@ namespace xWin.Library
                         }
                     }
                 }
-                
+
                 return topThree;
             }
             catch (Exception e ) 
@@ -115,6 +124,8 @@ namespace xWin.Library
         {
             try
             {
+                systemWrapper.ThrowException();
+
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
                     string query = "SELECT word FROM Dictionary WHERE word='" + word.ToLower() + "';";
@@ -166,6 +177,8 @@ namespace xWin.Library
             List<string> allWords = new List<string>();
             try
             {
+                systemWrapper.ThrowException();
+
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
                     string query = "SELECT word FROM Dictionary;";
@@ -196,6 +209,8 @@ namespace xWin.Library
             bool status = false;
             try
             {
+                systemWrapper.ThrowException();
+
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
                     string query = "DELETE FROM Dictionary WHERE word='" + word + "';";
@@ -219,6 +234,8 @@ namespace xWin.Library
         {
             try
             {
+                systemWrapper.ThrowException();
+
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
                     string query = "DELETE FROM Dictionary;";

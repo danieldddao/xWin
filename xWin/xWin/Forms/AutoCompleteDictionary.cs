@@ -24,7 +24,8 @@ namespace xWin.Forms
             Library.Log.GetLogger().Info("Number of words in dictionary table: " + allWords.Count);
             foreach (string word in allWords)
             {
-                ListViewItem list = new ListViewItem(word);
+                ListViewItem list = new ListViewItem();
+                list.SubItems.Add(word);
                 DictionaryListView.Items.Add(list);
             }
         }
@@ -78,8 +79,23 @@ namespace xWin.Forms
 
         private void addWordButton_Click(object sender, EventArgs e)
         {
-            FontDialog dialog = new FontDialog();
-            dialog.ShowDialog();
+            try
+            {
+                AutoCompleteAddNewWord dialog = new AutoCompleteAddNewWord();
+                dialog.ShowDialog();
+                Library.AutoCompleteDB db = new Library.AutoCompleteDB();
+                if (dialog.newWord != "")
+                {
+                    db.UpdateOrInsertWord(dialog.newWord);
+                    ListViewItem list = new ListViewItem();
+                    list.SubItems.Add(dialog.newWord);
+                    DictionaryListView.Items.Add(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                Library.Log.GetLogger().Error(ex);
+            }
         }
     }
 }

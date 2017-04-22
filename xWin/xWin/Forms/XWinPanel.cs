@@ -459,6 +459,13 @@ namespace xWin.Forms
         private Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
         private string typedWord = ""; // word that user's typing
         private string predictiveSubWord = "";
+        QuickTypeBar quickTypeBar = new QuickTypeBar();
+
+        private void buttonViewDictionary_Click(object sender, EventArgs e)
+        {
+            AutoCompleteDictionary dictionary = new AutoCompleteDictionary();
+            dictionary.ShowDialog();
+        }
 
         private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -674,6 +681,11 @@ namespace xWin.Forms
         {
             try
             {
+                // reset quicktype bar
+                quickTypeBar.SetQuickTypeButton1("");
+                quickTypeBar.SetQuickTypeButton2("");
+                quickTypeBar.SetQuickTypeButton3("");
+
                 KeyboardInputsUnsubscribe();
                 predictiveSubWord = ""; // reset predictive Subword
                 if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Space && e.KeyCode != Keys.Tab)
@@ -698,10 +710,25 @@ namespace xWin.Forms
                             { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Left); }
                             systemWrapper.SimulateKeyUp((WindowsInput.Native.VirtualKeyCode)Keys.ShiftKey);
                         }
+
+                        string[] topTmp = { "", "", "" };
+
+                        for (int i = 0; i < topThree.Count; i++)
+                        {
+                            topTmp[i] = topThree[i];
+                        }
+                        quickTypeBar.SetQuickTypeButton1(topTmp[0]);
+                        quickTypeBar.SetQuickTypeButton2(topTmp[1]);
+                        quickTypeBar.SetQuickTypeButton3(topTmp[2]);
                     }
                 }
                 keys[0] = e.KeyCode;
                 KeyboardInputsSubscribe();
+
+                QuickTypeBarTimer.Stop();
+                quickTypeBar.TopMost = true;
+                quickTypeBar.Show();
+                QuickTypeBarTimer.Start();
             }
             catch (Exception ex)
             {
@@ -719,10 +746,11 @@ namespace xWin.Forms
             //{ KeyboardInputsUnsubscribe(); } // Unsubscribe to stop reading keyboard inputs
         }
 
-        private void buttonViewDictionary_Click(object sender, EventArgs e)
+        private void QuickTypeBarTimer_Tick(object sender, EventArgs e)
         {
-            AutoCompleteDictionary dictionary = new AutoCompleteDictionary();
-            dictionary.ShowDialog();
+            QuickTypeBarTimer.Stop();
+            quickTypeBar.Hide();
+
         }
     }
 }

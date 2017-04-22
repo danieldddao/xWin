@@ -19,6 +19,7 @@ namespace xWin.Wrapper
         short ScanKey(char c);
         bool IsFileExist(string path);
         void StartProcess(string path);
+        void ThrowException();
     }
 
     public class SystemWrapper : ISystemWrapper
@@ -79,5 +80,6 @@ namespace xWin.Wrapper
             Process.Start(path);
         }
 
+        public void ThrowException() { } // for testing exceptions
     }
 }

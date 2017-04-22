@@ -103,6 +103,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AutoCompleteAddNewWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoCompleteAddNewWord.Designer.cs">
+      <DependentUpon>AutoCompleteAddNewWord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AutoCompleteDictionary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,15 @@
     </Compile>
     <Compile Include="Forms\EmailError.Designer.cs">
       <DependentUpon>EmailError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QuickTypeBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QuickTypeBar.Designer.cs">
+      <DependentUpon>QuickTypeBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QuickTypeButton.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Library\AutoCompleteDB.cs" />
     <Compile Include="Library\Buttons.cs" />
@@ -189,6 +204,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\AutoCompleteAddNewWord.resx">
+      <DependentUpon>AutoCompleteAddNewWord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AutoCompleteDictionary.resx">
       <DependentUpon>AutoCompleteDictionary.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmailError.resx">
       <DependentUpon>EmailError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QuickTypeBar.resx">
+      <DependentUpon>QuickTypeBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\XWinPanel.resx">
       <DependentUpon>XWinPanel.cs</DependentUpon>

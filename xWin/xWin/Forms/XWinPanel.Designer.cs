@@ -56,6 +56,10 @@
             this.MessageHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
+            this.QuickTypeBarTimer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -160,6 +164,9 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.buttonViewDictionary);
             this.panel1.Controls.Add(this.quickTypeTipsButton);
             this.panel1.Controls.Add(this.wordPredictionTipsButton);
@@ -168,7 +175,7 @@
             this.panel1.Controls.Add(this.labelAutocomplete);
             this.panel1.Location = new System.Drawing.Point(586, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 662);
+            this.panel1.Size = new System.Drawing.Size(599, 519);
             this.panel1.TabIndex = 0;
             // 
             // buttonViewDictionary
@@ -176,8 +183,8 @@
             this.buttonViewDictionary.BackColor = System.Drawing.Color.Transparent;
             this.buttonViewDictionary.BackgroundImage = global::xWin.Properties.Resources.buttonBackground;
             this.buttonViewDictionary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonViewDictionary.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonViewDictionary.Location = new System.Drawing.Point(217, 542);
+            this.buttonViewDictionary.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonViewDictionary.Location = new System.Drawing.Point(202, 97);
             this.buttonViewDictionary.Name = "buttonViewDictionary";
             this.buttonViewDictionary.Size = new System.Drawing.Size(209, 71);
             this.buttonViewDictionary.TabIndex = 4;
@@ -190,7 +197,7 @@
             this.quickTypeTipsButton.AutoSize = true;
             this.quickTypeTipsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.quickTypeTipsButton.BackColor = System.Drawing.Color.LemonChiffon;
-            this.quickTypeTipsButton.Location = new System.Drawing.Point(432, 199);
+            this.quickTypeTipsButton.Location = new System.Drawing.Point(432, 287);
             this.quickTypeTipsButton.Name = "quickTypeTipsButton";
             this.quickTypeTipsButton.Size = new System.Drawing.Size(56, 35);
             this.quickTypeTipsButton.TabIndex = 3;
@@ -202,7 +209,7 @@
             this.wordPredictionTipsButton.AutoSize = true;
             this.wordPredictionTipsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.wordPredictionTipsButton.BackColor = System.Drawing.Color.LemonChiffon;
-            this.wordPredictionTipsButton.Location = new System.Drawing.Point(355, 115);
+            this.wordPredictionTipsButton.Location = new System.Drawing.Point(355, 203);
             this.wordPredictionTipsButton.Name = "wordPredictionTipsButton";
             this.wordPredictionTipsButton.Size = new System.Drawing.Size(56, 35);
             this.wordPredictionTipsButton.TabIndex = 1;
@@ -213,7 +220,7 @@
             // 
             this.quickTypeCheckBox.AutoSize = true;
             this.quickTypeCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quickTypeCheckBox.Location = new System.Drawing.Point(44, 205);
+            this.quickTypeCheckBox.Location = new System.Drawing.Point(44, 293);
             this.quickTypeCheckBox.Name = "quickTypeCheckBox";
             this.quickTypeCheckBox.Size = new System.Drawing.Size(382, 31);
             this.quickTypeCheckBox.TabIndex = 2;
@@ -224,7 +231,7 @@
             // 
             this.wordPredictionCheckBox.AutoSize = true;
             this.wordPredictionCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.wordPredictionCheckBox.Location = new System.Drawing.Point(44, 122);
+            this.wordPredictionCheckBox.Location = new System.Drawing.Point(44, 210);
             this.wordPredictionCheckBox.Name = "wordPredictionCheckBox";
             this.wordPredictionCheckBox.Size = new System.Drawing.Size(299, 31);
             this.wordPredictionCheckBox.TabIndex = 1;
@@ -236,7 +243,7 @@
             this.labelAutocomplete.AutoSize = true;
             this.labelAutocomplete.Font = new System.Drawing.Font("Arial", 13.125F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAutocomplete.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.labelAutocomplete.Location = new System.Drawing.Point(37, 28);
+            this.labelAutocomplete.Location = new System.Drawing.Point(167, 39);
             this.labelAutocomplete.Name = "labelAutocomplete";
             this.labelAutocomplete.Size = new System.Drawing.Size(274, 41);
             this.labelAutocomplete.TabIndex = 0;
@@ -358,6 +365,37 @@
             this.AutoCompleteTimer.Interval = 10;
             this.AutoCompleteTimer.Tick += new System.EventHandler(this.AutoCompleteTimer_Tick);
             // 
+            // QuickTypeBarTimer
+            // 
+            this.QuickTypeBarTimer.Enabled = true;
+            this.QuickTypeBarTimer.Interval = 5000;
+            this.QuickTypeBarTimer.Tick += new System.EventHandler(this.QuickTypeBarTimer_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(109, 347);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(234, 50);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "* When not typing, \r\nautomatically hide after";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(358, 357);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(53, 31);
+            this.textBox1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(436, 360);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 25);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "second(s)";
+            // 
             // XWinPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -411,5 +449,9 @@
         private System.Windows.Forms.Button wordPredictionTipsButton;
         private System.Windows.Forms.Button quickTypeTipsButton;
         private System.Windows.Forms.Button buttonViewDictionary;
+        private System.Windows.Forms.Timer QuickTypeBarTimer;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
