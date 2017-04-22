@@ -727,7 +727,7 @@ namespace xWin.Forms
 
                 QuickTypeBarTimer.Stop();
                 quickTypeBar.TopMost = true;
-                quickTypeBar.Show();
+                //quickTypeBar.Show();
                 QuickTypeBarTimer.Start();
             }
             catch (Exception ex)

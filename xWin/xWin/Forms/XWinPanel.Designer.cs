@@ -38,6 +38,9 @@
             this.Controller1 = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.buttonViewDictionary = new System.Windows.Forms.Button();
             this.quickTypeTipsButton = new System.Windows.Forms.Button();
             this.wordPredictionTipsButton = new System.Windows.Forms.Button();
@@ -57,9 +60,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
             this.QuickTypeBarTimer = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -178,6 +178,31 @@
             this.panel1.Size = new System.Drawing.Size(599, 519);
             this.panel1.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(436, 360);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 25);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "second(s)";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(358, 357);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(53, 31);
+            this.textBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(109, 347);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(234, 50);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "* When not typing, \r\nautomatically hide after";
+            // 
             // buttonViewDictionary
             // 
             this.buttonViewDictionary.BackColor = System.Drawing.Color.Transparent;
@@ -188,7 +213,7 @@
             this.buttonViewDictionary.Name = "buttonViewDictionary";
             this.buttonViewDictionary.Size = new System.Drawing.Size(209, 71);
             this.buttonViewDictionary.TabIndex = 4;
-            this.buttonViewDictionary.Text = "View Dictionary";
+            this.buttonViewDictionary.Text = "Manage Dictionary";
             this.buttonViewDictionary.UseVisualStyleBackColor = false;
             this.buttonViewDictionary.Click += new System.EventHandler(this.buttonViewDictionary_Click);
             // 
@@ -370,31 +395,6 @@
             this.QuickTypeBarTimer.Enabled = true;
             this.QuickTypeBarTimer.Interval = 5000;
             this.QuickTypeBarTimer.Tick += new System.EventHandler(this.QuickTypeBarTimer_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 347);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(234, 50);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "* When not typing, \r\nautomatically hide after";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(358, 357);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(53, 31);
-            this.textBox1.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(436, 360);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 25);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "second(s)";
             // 
             // XWinPanel
             // 
