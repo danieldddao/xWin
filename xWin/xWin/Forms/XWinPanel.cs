@@ -452,14 +452,17 @@ namespace xWin.Forms
         /*
          * Code for AutoComplete feature
          */
+        AutoCompleteDB db = new AutoCompleteDB();
+        QuickTypeBar quickTypeBar = new QuickTypeBar();
+
         private IKeyboardMouseEvents keyboardGlobalHook; // events to read keyboard's keydown and keypress.
         private bool enableWordPrediction = true;
-        private bool enableQuickType = false;
+        private bool enableQuickType = true;
         private bool subscribed = false; // indicate whether we've already subscribed to read the keyboard inputs
+
         private Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
         private string typedWord = ""; // word that user's typing
-        private string predictiveSubWord = "";
-        QuickTypeBar quickTypeBar = new QuickTypeBar();
+        private string predictiveSubWord = ""; // subword of the word that needs to be showed to the user
 
         private void buttonViewDictionary_Click(object sender, EventArgs e)
         {
@@ -515,16 +518,16 @@ namespace xWin.Forms
             }
         }
 
-        // Convert a key to a coressponding character
-        public char KeyToChar(Keys[] keys)
+        // Convert a key to a coressponding character, which is returned as a string
+        public string KeyToChar(Keys[] keys)
         {
-            char c = '\0'; // default null char
+            string c = "\0"; // default null char
             try
             {
                 Keys key = keys[1];
                 if ((key >= Keys.A) && (key <= Keys.Z))
                 {
-                    c = (char)((int)'a' + (int)(key - Keys.A));
+                    c = "" + (char)((int)'a' + (int)(key - Keys.A));
                 }
                 else if ((key >= Keys.D0) && (key <= Keys.D9))
                 {
@@ -533,38 +536,38 @@ namespace xWin.Forms
                         switch (key)
                         {
                             case Keys.D0:
-                                c = ')';
+                                c = "" + ')';
                                 break;
                             case Keys.D1:
-                                c = '!';
+                                c = "" + '!';
                                 break;
                             case Keys.D2:
-                                c = '@';
+                                c = "" + '@';
                                 break;
                             case Keys.D3:
-                                c = '#';
+                                c = "" + '#';
                                 break;
                             case Keys.D4:
-                                c = '$';
+                                c = "" + '$';
                                 break;
                             case Keys.D5:
-                                c = '%';
+                                c = "" + '%';
                                 break;
                             case Keys.D6:
-                                c = '^';
+                                c = "" + '^';
                                 break;
                             case Keys.D7:
-                                c = '&';
+                                c = "" + '&';
                                 break;
                             case Keys.D8:
-                                c = '*';
+                                c = "" + '*';
                                 break;
                             case Keys.D9:
-                                c = '(';
+                                c = "" + '(';
                                 break;
                         }
                     }
-                    else { c = (char)((int)'0' + (int)(key - Keys.D0)); }
+                    else { c = "" + (char)((int)'0' + (int)(key - Keys.D0)); }
                 }
                 else
                 {
@@ -573,39 +576,40 @@ namespace xWin.Forms
                         case Keys.ShiftKey: // ignore shift key
                         case Keys.LShiftKey:
                         case Keys.RShiftKey:
+                            c = "";
                             break;
                         case Keys.Oem1:
                             {
-                                if (keys[0] == Keys.Shift) { c = ':'; }
-                                else { c = ';'; }
+                                if (keys[0] == Keys.Shift) { c = "" + ':'; }
+                                else { c = "" + ';'; }
                                 break;
                             }
                         case Keys.Oem7:
                             {
-                                if (keys[0] == Keys.Shift) { c = '"'; }
-                                else { c = (char) 39; }
+                                if (keys[0] == Keys.Shift) { c = "" + '"'; }
+                                else { c = "" + (char) 39; }
                                 break;
                             }
                         case Keys.Oemtilde:
                             {
-                                if (keys[0] != Keys.Shift) { c = '~'; }
-                                c = '`';
+                                if (keys[0] != Keys.Shift) { c = "" + '~'; }
+                                c = "" + '`';
                                 break;
                             }
                         case Keys.Oemcomma:
                             {
-                                if (keys[0] != Keys.Shift) { c = ','; }
+                                if (keys[0] != Keys.Shift) { c = "" + ','; }
                                 break;
                             }
                         case Keys.OemPeriod:
                             {
-                                if (keys[0] != Keys.Shift) { c = '.'; }
+                                if (keys[0] != Keys.Shift) { c = "" + '.'; }
                                 break;
                             }
                         case Keys.OemQuestion:
                             {
-                                if (keys[0] == Keys.Shift) { c = '?'; }
-                                else { c = '/'; }
+                                if (keys[0] == Keys.Shift) { c = "" + '?'; }
+                                else { c = "" + '/'; }
                                 break;
                             }
                     }
@@ -625,6 +629,12 @@ namespace xWin.Forms
             try
             {
                 KeyboardInputsUnsubscribe();
+                if (enableQuickType)
+                {
+                    quickTypeBar.TopMost = true;
+                    quickTypeBar.Show();
+                }
+
                 // If keydown is Tab key
                 // and currently typed word is not empty and it doesn't contain null character
                 // Suppress actual tab key and complete the predictive word
@@ -645,7 +655,6 @@ namespace xWin.Forms
                 // New word
                 else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
                 {
-                    AutoCompleteDB db = new AutoCompleteDB();
                     if (typedWord != "") { db.UpdateOrInsertWord(typedWord); } // Update non-empty word into database
                     typedWord = ""; // reset the word
                 }
@@ -662,7 +671,7 @@ namespace xWin.Forms
                 else
                 {
                     keys[1] = e.KeyCode;
-                    char c = KeyToChar(keys);
+                    string c = KeyToChar(keys);
                     Log.GetLogger().Info("KeyToChar: " + c);
                     typedWord += c;
                     Log.GetLogger().Info("word typed: " + typedWord + " (length: " + typedWord.Length + ")");
@@ -690,7 +699,6 @@ namespace xWin.Forms
                 predictiveSubWord = ""; // reset predictive Subword
                 if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Space && e.KeyCode != Keys.Tab)
                 {
-                    AutoCompleteDB db = new AutoCompleteDB();
                     List<string> topThree = db.GetTopThreeWords(typedWord);
                     if (topThree.Count > 0)
                     {
@@ -712,11 +720,8 @@ namespace xWin.Forms
                         }
 
                         string[] topTmp = { "", "", "" };
-
                         for (int i = 0; i < topThree.Count; i++)
-                        {
-                            topTmp[i] = topThree[i];
-                        }
+                        { if (typedWord != topThree[i]) { topTmp[i] = topThree[i]; } }
                         quickTypeBar.SetQuickTypeButton1(topTmp[0]);
                         quickTypeBar.SetQuickTypeButton2(topTmp[1]);
                         quickTypeBar.SetQuickTypeButton3(topTmp[2]);
@@ -725,10 +730,8 @@ namespace xWin.Forms
                 keys[0] = e.KeyCode;
                 KeyboardInputsSubscribe();
 
-                QuickTypeBarTimer.Stop();
-                quickTypeBar.TopMost = true;
-                //quickTypeBar.Show();
-                QuickTypeBarTimer.Start();
+                QuickTypeBarTimer.Stop(); // stop previous timer
+                QuickTypeBarTimer.Start(); // start new timer
             }
             catch (Exception ex)
             {

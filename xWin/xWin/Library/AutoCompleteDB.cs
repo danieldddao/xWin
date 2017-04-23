@@ -11,7 +11,7 @@ namespace xWin.Library
 {
     public class AutoCompleteDB
     {
-        ISystemWrapper systemWrapper; // for testing Exceptions
+        ISystemWrapper systemWrapper = new SystemWrapper(); // for testing Exceptions
 
         private string[] commonlyUsedWords = {
                                                "the", "be", "to", "of", "and", "a", "in", "that", "have",
@@ -71,9 +71,9 @@ namespace xWin.Library
                                 {
                                     status = cmdi.ExecuteNonQuery();
                                     if (status == 1)
-                                    { Log.GetLogger().Info("Successfully inserted word '" + word + "' into Dictionary table"); }
+                                    { Log.GetLogger().Debug("Successfully inserted word '" + word + "' into Dictionary table"); }
                                     else
-                                    { Log.GetLogger().Info("Failed to insert word '" + word + "' into Dictionary table"); }
+                                    { Log.GetLogger().Debug("Failed to insert word '" + word + "' into Dictionary table"); }
                                 }
                             }
                         }
@@ -94,21 +94,24 @@ namespace xWin.Library
             try 
             {
                 systemWrapper.ThrowException();
-
-                using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
+                if (subword != "")
                 {
-                    string query = "SELECT word FROM Dictionary WHERE word LIKE '" + subword.ToLower() + "%' ORDER BY typed_count DESC LIMIT 3;";
-                    dbConnection.Open();
-                    using (SQLiteCommand cmd = new SQLiteCommand(query, dbConnection))
+                    using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                     {
-                        using (SQLiteDataReader reader = cmd.ExecuteReader())
+                        string query = "SELECT word FROM Dictionary WHERE word LIKE \"" + subword.ToLower() + "%\" ORDER BY typed_count DESC LIMIT 3;";
+                        dbConnection.Open();
+                        using (SQLiteCommand cmd = new SQLiteCommand(query, dbConnection))
                         {
-                            while (reader.Read())
-                            { topThree.Add((string)reader["word"]); }
-                            if (topThree.Count == 0)
-                            { Log.GetLogger().Info("Couldn't find " + subword + " in the database"); }
+                            using (SQLiteDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                { topThree.Add((string)reader["word"]); }
+                                if (topThree.Count == 0)
+                                { Log.GetLogger().Info("Couldn't find " + subword + " in the database"); }
+                            }
                         }
                     }
+
                 }
 
                 return topThree;
