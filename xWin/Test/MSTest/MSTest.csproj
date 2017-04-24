@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\MSTest.TestAdapter.1.1.12\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\..\packages\MSTest.TestAdapter.1.1.12\build\net45\MSTest.TestAdapter.props')" />
   <PropertyGroup>
@@ -76,12 +76,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Library\GamepadFlagsTests.cs" />
     <Compile Include="Library\TypingInterpreterTests.cs" />
-=======
     <Compile Include="Library\LogTest.cs" />
->>>>>>> master
     <Compile Include="Library\XKeyBoardTest.cs" />
     <Compile Include="Library\XControllerTest.cs" />
     <Compile Include="Library\ActionsTests.cs" />
