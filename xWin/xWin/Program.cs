@@ -21,13 +21,13 @@ namespace xWin
 {
     class Program
     {
-        public static int shortbound(int i)
+        public static short shortbound(int i)
         {
             if (i < -32767)
                 return -32767;
             if (i > 32767)
                 return 32767;
-            return i;
+            return (short)i;
         }
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
@@ -87,172 +87,64 @@ namespace xWin
             Application.Run(panel);
         }
 
+
+        public static void MoveCursor( float x, float y, int dpi = 10)
+        {
+            const short MAX_INPUT = 32767;
+            x /= MAX_INPUT;
+            x *= dpi;
+            
+            y /= MAX_INPUT;
+            y *= dpi;
+
+            Cursor.Position = new Point(Cursor.Position.X + (short)Math.Floor(x), Cursor.Position.Y + (short)Math.Floor(y));
+        }
+
+
+
         [STAThread]
         static void Main(string[] args)
         {
             //RunFormApplicationForTesting();
             RunFormApplication();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            var l = new List<string>();
+            l.Add(@"C:\Users\Tim\Documents\Classes\software project\Project\xWin\config");
+            l.Add(@"..\..\..\config");
+            var cfw = new GUI.ConfigWindow(new Configuration(), l);
+            //Application.Run(cfw);
+            //return;
+            cfw.ShowDialog();
+            GenericController controller = null;
+            var a = new byte[16];
+            a[0] = 1;
+            //Joystick joystick = null;
 
-            /*
-            while (true)
-            {
-                
-                if (c.IsConnected())
-                {
-                    c.UpdateState();
-                    foreach(var button in c.ButtonsPressed())
-                    {
-                        Console.WriteLine(button.Key + " is pressed: " + button.Value);
-                    }
-                    foreach(var thumb in c.GetLeftCart())
-                    {
-                        Console.WriteLine("Left stick " + thumb.Key + ": " + thumb.Value);
-                    }
-                    foreach(var thumb in c.GetRightCart())
-                    {
-                        Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
-                    }
-                    Console.WriteLine("Left trigger: " + c.GetLeftTrigger());
-                    Console.WriteLine("Right trigger:" + c.GetRightTrigger());
-                    c.MoveCursor();
-                    //if (c.ButtonsPressed()["A"]) c.LeftDown();
-                    //else c.LeftUp();
-                    //if (c.ButtonsPressed()["B"]) c.RightClick();
-                    //Thread.Sleep(200);
-                    Console.Clear();  
-            }*/
-            //*
-            //// Initialize DirectInput
-            //var directInput = new DirectInput();
-            //// Find a Joystick Guid
-            //var joystickGuid = Guid.Empty;
-            //foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Gamepad, DeviceEnumerationFlags.AllDevices))
-            //    joystickGuid = deviceInstance.InstanceGuid;
-            //// If Gamepad not found, look for a Joystick
-            //if (joystickGuid == Guid.Empty)
-            //    foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
-            //        joystickGuid = deviceInstance.InstanceGuid;
-            //// If Joystick not found, throws an error
-            //if (joystickGuid == Guid.Empty)
-            //{
-            //    Console.WriteLine("No joystick/Gamepad found.");
-            //    Console.ReadKey();
-            //    Environment.Exit(1);
-            //}
-            //// Instantiate the joystick
-            //var joystick = new Joystick(directInput, joystickGuid);
-            //Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
-            //// Set BufferSize in order to use buffered data.
-            //joystick.Properties.BufferSize = 128;
-            //foreach (DeviceObjectInstance doi in joystick.GetObjects(DeviceObjectTypeFlags.Axis))
-            //{
-            //    joystick.GetObjectPropertiesById(doi.ObjectId).Range = new InputRange(-32767, 32767);
-            //}
-            //// Acquire the joystick
-            //joystick.Acquire();
-            //// Poll events from joystick
-            //var i = new Interpreter(Defaults.DefaultConfiguration());
+            var XCon1 = new Controller(UserIndex.One);
 
-            //System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
+            if (XCon1.IsConnected)
+                controller = new XBXController(XCon1);
+            else
+                controller = new DIController(DI2XI.setup_stick());
 
-            //int lx, ly, rx, ry;
+            var cc = new ControllerCalibration();
+            State datas = controller.GetState();
+            cc.lx = datas.Gamepad.LeftThumbX;
+            cc.ly = datas.Gamepad.LeftThumbY;
+            cc.rx = datas.Gamepad.RightThumbX;
+            cc.ry = datas.Gamepad.RightThumbY;
+            cc.deadzone = 7000;
+
+            //var io = new IO<Configuration>(l,".dat");
+            //io.WriteToFile(Defaults.DefaultConfiguration(), "default");
+            //var c = io.ReadFromFile("default");
+            //Defaults.DefaultConfiguration();
 
 
-            //var datas = joystick.GetCurrentState();
-            //lx = datas.X;
-            //ly = datas.Y;
-            //rx = datas.RotationX;
-            //ry = datas.RotationY;
-            //var index = 0;
 
 
-            //var wrapper = new SystemWrapper();
-
-
-            //while (true)
-            //{
-            //    //*
-            //    st.Start();
-            //    joystick.Poll();
-            //    datas = joystick.GetCurrentState();
-
-            //    datas.X = shortbound(datas.X - lx);
-            //    datas.Y = shortbound(datas.Y - ly);
-            //    datas.RotationX = shortbound(datas.RotationX - rx);
-            //    datas.RotationY = shortbound(datas.RotationY - ry);
-            //    var state = DI2XI.di2xi(datas);
-            //    var kms = i.NextState(state.Gamepad);
-            //    Console.WriteLine(kms.mouse_movement.x.ToString() + "," + kms.mouse_movement.y.ToString());
-            //    Cursor.Position = new Point(Cursor.Position.X + (kms.mouse_movement.x / 100), Cursor.Position.Y + (kms.mouse_movement.y / 100));
-            //    Console.Write("Pressed: ");
-            //    foreach (var l in kms.pressed)
-            //    {
-            //        Console.Write(l.ToString() + ",");
-            //        wrapper.Press((byte)l);
-            //    }
-            //    Console.WriteLine();
-            //    Console.Write("Released: ");
-            //    foreach (var l in kms.released)
-            //    {
-            //        Console.Write(l.ToString() + ",");
-            //        wrapper.Release((byte)l);
-            //    }
-            //    Console.WriteLine();
-            //    Console.Write("Pressed: ");
-            //    foreach (var l in kms.special)
-            //    {
-            //        Console.Write(l.ToString() + ",");
-            //    }
-            //    Console.WriteLine();
-            //    Console.Write("Released: ");
-            //    foreach (var l in kms.r_special)
-            //    {
-            //        Console.Write(l.ToString() + ",");
-            //    }
-            //    Console.WriteLine();
-            //    st.Stop();
-            //    Console.WriteLine(st.Elapsed.ToString());
-            //    Thread.Sleep(300);
-            //    Console.Clear();
-            //    st.Reset();
-            //    //*/
-            //    /*
-            //    joystick.Poll();
-            //    datas = joystick.GetCurrentState();
-            //    var state =  DI2XI.di2xi(datas);
-            //    foreach (GamepadButtonFlags b in Enum.GetValues(typeof(GamepadButtonFlags)))
-            //    {
-            //        if (state.Gamepad.Buttons.HasFlag(b))
-            //        {
-            //            Console.Write(b);
-            //            Console.Write(",");
-            //        }
-            //    }
-            //    if (state.Gamepad.LeftTrigger > 0)
-            //        Console.Write("LeftTrigger,");
-            //    if (state.Gamepad.RightTrigger > 0)
-            //        Console.Write("RightTrigger,");
-            //    var ps = new PolarStick(state.Gamepad.LeftThumbX, state.Gamepad.LeftThumbY, 1000);
-            //    Console.WriteLine("");
-            //    Console.WriteLine("Left Stick:");
-            //    Console.Write("Direction: ");
-            //    Console.WriteLine(ps.theta);
-            //    Console.Write("Distance: ");
-            //    Console.WriteLine(ps.R);
-            //    ps = new PolarStick(state.Gamepad.RightThumbX, state.Gamepad.RightThumbY, 1000);
-            //    Console.WriteLine("");
-            //    Console.WriteLine("Right Stick:");
-            //    Console.Write("Direction: ");
-            //    Console.WriteLine(ps.theta);
-            //    Console.Write("Distance: ");
-            //    Console.WriteLine(ps.R);
-            //    Console.WriteLine(index.ToString());
-            //    index++;
-            //    Thread.Sleep(300);
-            //    Console.Clear();
-            //   // */
-
-            //}
+            InteractionLoop(controller, cfw.c, cc, 20000);
 
         }
     }
