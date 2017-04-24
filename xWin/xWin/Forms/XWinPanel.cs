@@ -174,7 +174,9 @@ namespace xWin.Forms
         {
             if (XCon1.IsConnected())
             {
+                autoComplete.usingxWin = true;
                 OpXCon1.ShowDialog();
+                autoComplete.usingxWin = false;
                 Log.GetLogger().Info("Opened Controller 1's Dialog");
             }
         }
@@ -183,7 +185,9 @@ namespace xWin.Forms
         {
             if (XCon2.IsConnected())
             {
+                autoComplete.usingxWin = true;
                 OpXCon2.ShowDialog();
+                autoComplete.usingxWin = false;
                 Log.GetLogger().Info("Opened Controller 2's Dialog");
             }
         }
@@ -192,7 +196,9 @@ namespace xWin.Forms
         {
             if (XCon3.IsConnected())
             {
+                autoComplete.usingxWin = true;
                 OpXCon3.ShowDialog();
+                autoComplete.usingxWin = false;
                 Log.GetLogger().Info("Opened Controller 3's Dialog");
             }
         }
@@ -201,7 +207,9 @@ namespace xWin.Forms
         {
             if (XCon4.IsConnected())
             {
+                autoComplete.usingxWin = true;
                 OpXCon4.ShowDialog();
+                autoComplete.usingxWin = false;
                 Log.GetLogger().Info("Opened Controller 4's Dialog");
             }
         }
@@ -443,7 +451,9 @@ namespace xWin.Forms
             try
             {
                 EmailError emailError = new EmailError();
+                autoComplete.usingxWin = true;
                 emailError.ShowDialog();
+                autoComplete.usingxWin = false;
             }
             catch (Exception ex)
             {
@@ -474,7 +484,9 @@ namespace xWin.Forms
         private void buttonViewDictionary_Click(object sender, EventArgs e)
         {
             AutoCompleteDictionary dictionary = new AutoCompleteDictionary();
+            autoComplete.usingxWin = true;
             dictionary.ShowDialog();
+            autoComplete.usingxWin = false;
         }
 
         private void quickBarHideTimeTextBox_TextChanged(object sender, EventArgs e)
