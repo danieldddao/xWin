@@ -24,13 +24,13 @@ namespace xWin
 
     class Program
     {
-        public static int shortbound(int i)
+        public static short shortbound(int i)
         {
             if (i < -32767)
                 return -32767;
             if (i > 32767)
                 return 32767;
-            return i;
+            return (short)i;
         }
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
@@ -90,70 +90,68 @@ namespace xWin
             Application.Run(panel);
         }
 
+
+        public static void MoveCursor( float x, float y, int dpi = 10)
+        {
+            const short MAX_INPUT = 32767;
+            x /= MAX_INPUT;
+            x *= dpi;
+            
+            y /= MAX_INPUT;
+            y *= dpi;
+
+            Cursor.Position = new Point(Cursor.Position.X + (short)Math.Floor(x), Cursor.Position.Y + (short)Math.Floor(y));
+        }
+
+
+
         [STAThread]
         static void Main(string[] args)
         {
             //RunFormApplicationForTesting();
             //RunFormApplication();
 
-            /*
-            while (true)
-            {
-                
-                if (c.IsConnected())
+            bool XCONTROLLER = false;
+
+
+
+            Controller XCon1 = new Controller();
+            var a = new byte[16];
+            a[0] = 1;
+            Joystick joystick = null;
+            if (XCONTROLLER)
+                XCon1 = new Controller(UserIndex.One);
+            else {
+                // Initialize DirectInput
+                DirectInput directInput = new DirectInput();
+                // Find a Joystick Guid
+                var joystickGuid = Guid.Empty;
+                foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Gamepad, DeviceEnumerationFlags.AllDevices))
+                    joystickGuid = deviceInstance.InstanceGuid;
+                // If Gamepad not found, look for a Joystick
+                if (joystickGuid == Guid.Empty)
+                    foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
+                        joystickGuid = deviceInstance.InstanceGuid;
+                // If Joystick not found, throws an error
+                if (joystickGuid == Guid.Empty)
                 {
-                    c.UpdateState();
-                    foreach(var button in c.ButtonsPressed())
-                    {
-                        Console.WriteLine(button.Key + " is pressed: " + button.Value);
-                    }
-                    foreach(var thumb in c.GetLeftCart())
-                    {
-                        Console.WriteLine("Left stick " + thumb.Key + ": " + thumb.Value);
-                    }
-                    foreach(var thumb in c.GetRightCart())
-                    {
-                        Console.WriteLine("Right " + thumb.Key + ": " + thumb.Value);
-                    }
-                    Console.WriteLine("Left trigger: " + c.GetLeftTrigger());
-                    Console.WriteLine("Right trigger:" + c.GetRightTrigger());
-                    c.MoveCursor();
-                    //if (c.ButtonsPressed()["A"]) c.LeftDown();
-                    //else c.LeftUp();
-                    //if (c.ButtonsPressed()["B"]) c.RightClick();
-                    //Thread.Sleep(200);
-                    Console.Clear();  
-            }*/
-            //*
-           // Initialize DirectInput
-           var directInput = new DirectInput();
-           // Find a Joystick Guid
-           var joystickGuid = Guid.Empty;
-           foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Gamepad, DeviceEnumerationFlags.AllDevices))
-               joystickGuid = deviceInstance.InstanceGuid;
-           // If Gamepad not found, look for a Joystick
-           if (joystickGuid == Guid.Empty)
-               foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
-                   joystickGuid = deviceInstance.InstanceGuid;
-           // If Joystick not found, throws an error
-           if (joystickGuid == Guid.Empty)
-           {
-               Console.WriteLine("No joystick/Gamepad found.");
-               Console.ReadKey();
-               Environment.Exit(1);
-           }
-           // Instantiate the joystick
-           var joystick = new Joystick(directInput, joystickGuid);
-           Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
-           // Set BufferSize in order to use buffered data.
-           joystick.Properties.BufferSize = 128;
-           foreach (DeviceObjectInstance doi in joystick.GetObjects(DeviceObjectTypeFlags.Axis))
-           {
-               joystick.GetObjectPropertiesById(doi.ObjectId).Range = new InputRange(-32767, 32767);
-           }
-           // Acquire the joystick
-           joystick.Acquire();
-            // Poll events from joystick
+                    Console.WriteLine("No joystick/Gamepad found.");
+                    Console.ReadKey();
+                    Environment.Exit(1);
+                }
+                // Instantiate the joystick
+                joystick = new Joystick(directInput, joystickGuid);
+                Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
+                // Set BufferSize in order to use buffered data.
+                joystick.Properties.BufferSize = 128;
+                foreach (DeviceObjectInstance doi in joystick.GetObjects(DeviceObjectTypeFlags.Axis))
+                {
+                    joystick.GetObjectPropertiesById(doi.ObjectId).Range = new InputRange(-32767, 32767);
+                }
+                // Acquire the joystick
+                joystick.Acquire();
+                // Poll events from joystick
+            }
             var i = new Interpreter(Defaults.DefaultConfiguration());
 
             System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
@@ -161,44 +159,64 @@ namespace xWin
             int lx, ly, rx, ry;
 
 
-            var datas = joystick.GetCurrentState();
-            lx = datas.X;
-            ly = datas.Y;
-            rx = datas.RotationX;
-            ry = datas.RotationY;
+            //var datas = joystick.GetCurrentState();
+            State datas;
+            if (XCONTROLLER)
+                datas = XCon1.GetState();
+            else
+                datas = DI2XI.di2xi(joystick.GetCurrentState());
+            lx = datas.Gamepad.LeftThumbX;
+            ly = datas.Gamepad.LeftThumbY;
+            rx = datas.Gamepad.RightThumbX;
+            ry = datas.Gamepad.RightThumbY; ;
             var index = 0;
 
 
             var wrapper = new SystemWrapper();
 
-
+            TimeSpan TickSpeed = new TimeSpan(20);
             while (true)
             {
                 //*
                 st.Start();
                 joystick.Poll();
-                datas = joystick.GetCurrentState();
+                if (XCONTROLLER)
+                    datas = XCon1.GetState();
+                else
+                    datas = DI2XI.di2xi(joystick.GetCurrentState());
 
-                datas.X = shortbound(datas.X - lx);
-                datas.Y = shortbound(datas.Y - ly);
-                datas.RotationX = shortbound(datas.RotationX - rx);
-                datas.RotationY = shortbound(datas.RotationY - ry);
-                var state = DI2XI.di2xi(datas);
-                var kms = i.NextState(state.Gamepad);
-                Console.WriteLine(kms.mouse_movement.x.ToString() + "," + kms.mouse_movement.y.ToString());
-                Cursor.Position = new Point(Cursor.Position.X + (kms.mouse_movement.x / 100), Cursor.Position.Y + (kms.mouse_movement.y / 100));
+                datas.Gamepad.LeftThumbX = shortbound((int)datas.Gamepad.LeftThumbX - lx);
+                datas.Gamepad.LeftThumbY = shortbound((int)datas.Gamepad.LeftThumbY - ly);
+                datas.Gamepad.RightThumbX = shortbound((int)datas.Gamepad.RightThumbX - rx);
+                datas.Gamepad.RightThumbY = shortbound((int)datas.Gamepad.RightThumbY - ry);
+                var kms = i.NextState(datas.Gamepad);
+                MoveCursor(kms.mouse_movement.x, kms.mouse_movement.y);
                 Console.Write("Pressed: ");
                 foreach (var l in kms.pressed)
                 {
                     Console.Write(l.ToString() + ",");
-                    wrapper.Press((byte)l);
+                    if(l == Keys.LButton)
+                        ControllerWrapper.mouse_event(0x0002, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                    else if(l == Keys.RButton)
+                        ControllerWrapper.mouse_event(0x0008, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                    else if(l == Keys.MButton)
+                        ControllerWrapper.mouse_event(0x0020, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                    else
+                        wrapper.Press((byte)l);
                 }
                 Console.WriteLine();
                 Console.Write("Released: ");
                 foreach (var l in kms.released)
                 {
                     Console.Write(l.ToString() + ",");
-                    wrapper.Release((byte)l);
+                    if (l == Keys.LButton)
+                        ControllerWrapper.mouse_event(0x0004, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                    else if (l == Keys.RButton)
+                        ControllerWrapper.mouse_event(0x0010, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                    else if (l == Keys.MButton)
+                        ControllerWrapper.mouse_event(0x0040, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+                    else
+                        wrapper.Release((byte)l);
                 }
                 Console.WriteLine();
                 Console.Write("Pressed: ");
@@ -213,9 +231,10 @@ namespace xWin
                     Console.Write(l.ToString() + ",");
                 }
                 Console.WriteLine();
+                while (st.Elapsed < TickSpeed) { }
                 st.Stop();
-                Console.WriteLine(st.Elapsed.ToString());
-                Thread.Sleep(300);
+                //Console.WriteLine(st.Elapsed.ToString());
+                //Thread.Sleep(300);
                 Console.Clear();
                 st.Reset();
                 //*/
@@ -253,7 +272,7 @@ namespace xWin
                 index++;
                 Thread.Sleep(300);
                 Console.Clear();
-               // */
+                // */
   
             }
 
