@@ -19,8 +19,36 @@ using System.Diagnostics;
 
 namespace xWin
 {
+    public interface GenericController
+    {
+        State GetState();
+    }
 
+    class DIController : GenericController
+    {
+        Joystick J;
+        public DIController(Joystick J)
+        {
+            this.J = J;
+        }
+        public State GetState()
+        {
+            return DI2XI.di2xi(J.GetCurrentState());
+        }
+    }
 
+    class XBXController : GenericController
+    {
+        Controller C;
+        public XBXController(Controller C)
+        {
+            this.C = C;
+        }
+        public State GetState()
+        {
+            return C.GetState();
+        }
+    }
 
     class Program
     {
@@ -113,12 +141,12 @@ namespace xWin
 
 
 
-            Controller XCon1 = new Controller();
+            GenericController XCon1 = null;
             var a = new byte[16];
             a[0] = 1;
-            Joystick joystick = null;
+            //Joystick joystick = null;
             if (XCONTROLLER)
-                XCon1 = new Controller(UserIndex.One);
+                XCon1 = new XBXController(new Controller(UserIndex.One));
             else {
                 // Initialize DirectInput
                 DirectInput directInput = new DirectInput();
@@ -138,7 +166,7 @@ namespace xWin
                     Environment.Exit(1);
                 }
                 // Instantiate the joystick
-                joystick = new Joystick(directInput, joystickGuid);
+                var joystick = new Joystick(directInput, joystickGuid);
                 Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
                 // Set BufferSize in order to use buffered data.
                 joystick.Properties.BufferSize = 128;
@@ -148,6 +176,7 @@ namespace xWin
                 }
                 // Acquire the joystick
                 joystick.Acquire();
+                XCon1 = new DIController(joystick);
                 // Poll events from joystick
             }
             var i = new Interpreter(Defaults.DefaultConfiguration());
@@ -158,11 +187,7 @@ namespace xWin
 
 
             //var datas = joystick.GetCurrentState();
-            State datas;
-            if (XCONTROLLER)
-                datas = XCon1.GetState();
-            else
-                datas = DI2XI.di2xi(joystick.GetCurrentState());
+            State datas = XCon1.GetState();
             lx = datas.Gamepad.LeftThumbX;
             ly = datas.Gamepad.LeftThumbY;
             rx = datas.Gamepad.RightThumbX;
@@ -177,11 +202,7 @@ namespace xWin
             {
                 //*
                 st.Start();
-                joystick.Poll();
-                if (XCONTROLLER)
-                    datas = XCon1.GetState();
-                else
-                    datas = DI2XI.di2xi(joystick.GetCurrentState());
+                datas = XCon1.GetState();
 
                 datas.Gamepad.LeftThumbX = shortbound((int)datas.Gamepad.LeftThumbX - lx);
                 datas.Gamepad.LeftThumbY = shortbound((int)datas.Gamepad.LeftThumbY - ly);
