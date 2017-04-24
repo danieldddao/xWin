@@ -139,11 +139,11 @@
     <Compile Include="Forms\EmailError.Designer.cs">
       <DependentUpon>EmailError.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\QuickTypeBar.cs">
+    <Compile Include="Forms\AutoComplete.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\QuickTypeBar.Designer.cs">
-      <DependentUpon>QuickTypeBar.cs</DependentUpon>
+    <Compile Include="Forms\AutoComplete.Designer.cs">
+      <DependentUpon>AutoComplete.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\QuickTypeButton.cs">
       <SubType>Component</SubType>
@@ -228,8 +228,8 @@
     <EmbeddedResource Include="Forms\EmailError.resx">
       <DependentUpon>EmailError.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\QuickTypeBar.resx">
-      <DependentUpon>QuickTypeBar.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AutoComplete.resx">
+      <DependentUpon>AutoComplete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\XWinPanel.resx">
       <DependentUpon>XWinPanel.cs</DependentUpon>

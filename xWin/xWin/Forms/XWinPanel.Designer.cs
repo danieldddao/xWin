@@ -39,7 +39,7 @@
             this.Settings = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.quickBarHideTimeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonViewDictionary = new System.Windows.Forms.Button();
             this.quickTypeTipsButton = new System.Windows.Forms.Button();
@@ -165,7 +165,7 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.quickBarHideTimeTextBox);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.buttonViewDictionary);
             this.panel1.Controls.Add(this.quickTypeTipsButton);
@@ -187,12 +187,13 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "second(s)";
             // 
-            // textBox1
+            // quickBarHideTimeTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(358, 357);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(53, 31);
-            this.textBox1.TabIndex = 1;
+            this.quickBarHideTimeTextBox.Location = new System.Drawing.Point(358, 357);
+            this.quickBarHideTimeTextBox.Name = "quickBarHideTimeTextBox";
+            this.quickBarHideTimeTextBox.Size = new System.Drawing.Size(53, 31);
+            this.quickBarHideTimeTextBox.TabIndex = 1;
+            this.quickBarHideTimeTextBox.TextChanged += new System.EventHandler(this.quickBarHideTimeTextBox_TextChanged);
             // 
             // label1
             // 
@@ -388,13 +389,11 @@
             // 
             this.AutoCompleteTimer.Enabled = true;
             this.AutoCompleteTimer.Interval = 10;
-            this.AutoCompleteTimer.Tick += new System.EventHandler(this.AutoCompleteTimer_Tick);
             // 
             // QuickTypeBarTimer
             // 
             this.QuickTypeBarTimer.Enabled = true;
             this.QuickTypeBarTimer.Interval = 5000;
-            this.QuickTypeBarTimer.Tick += new System.EventHandler(this.QuickTypeBarTimer_Tick);
             // 
             // XWinPanel
             // 
@@ -451,7 +450,7 @@
         private System.Windows.Forms.Button buttonViewDictionary;
         private System.Windows.Forms.Timer QuickTypeBarTimer;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox quickBarHideTimeTextBox;
         private System.Windows.Forms.Label label1;
     }
 }

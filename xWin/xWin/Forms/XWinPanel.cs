@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -76,15 +77,16 @@ namespace xWin.Forms
         private void XWinPanel_Load(object sender, EventArgs e)
         {
             UpdateControllers();
-            if (enableWordPrediction || enableQuickType) { KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
-            if (enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
-            if (enableQuickType) { quickTypeCheckBox.Checked = true; }
+            if (autoComplete.enableWordPrediction || autoComplete.enableQuickType) { autoComplete.KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
+            if (autoComplete.enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
+            if (autoComplete.enableQuickType) { quickTypeCheckBox.Checked = true; }
+            quickBarHideTimeTextBox.Text = "" + autoComplete.quickTypeTimerInterval/1000;
             Log.GetLogger().Info("Application started");
         }
 
         private void XWinPanel_FormClosed(object sender, FormClosedEventArgs e)
         {
-            KeyboardInputsUnsubscribe(); // Unsubscribe to unread keyboard inputs
+            autoComplete.KeyboardInputsUnsubscribe(); // Unsubscribe to unread keyboard inputs
         }
 
         private void UpdateControllers()
@@ -452,17 +454,22 @@ namespace xWin.Forms
         /*
          * Code for AutoComplete feature
          */
-        AutoCompleteDB db = new AutoCompleteDB();
-        QuickTypeBar quickTypeBar = new QuickTypeBar();
+        AutoComplete autoComplete = new AutoComplete();
+        private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (wordPredictionCheckBox.Checked)
+            { autoComplete.enableWordPrediction = true; }
+            else
+            { autoComplete.enableWordPrediction = false; }
+        }
 
-        private IKeyboardMouseEvents keyboardGlobalHook; // events to read keyboard's keydown and keypress.
-        private bool enableWordPrediction = true;
-        private bool enableQuickType = true;
-        private bool subscribed = false; // indicate whether we've already subscribed to read the keyboard inputs
-
-        private Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
-        private string typedWord = ""; // word that user's typing
-        private string predictiveSubWord = ""; // subword of the word that needs to be showed to the user
+        private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (quickTypeCheckBox.Checked)
+            { autoComplete.enableQuickType = true; }
+            else
+            { autoComplete.enableQuickType = false; }
+        }
 
         private void buttonViewDictionary_Click(object sender, EventArgs e)
         {
@@ -470,290 +477,36 @@ namespace xWin.Forms
             dictionary.ShowDialog();
         }
 
-        private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (wordPredictionCheckBox.Checked)
-            { enableWordPrediction = true; }
-            else
-            { enableWordPrediction = false; }
-        }
-
-        private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (quickTypeCheckBox.Checked)
-            { enableQuickType = true; }
-            else
-            { enableQuickType = false; }
-        }
-
-        public void KeyboardInputsSubscribe()
+        private void quickBarHideTimeTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                keyboardGlobalHook = Hook.GlobalEvents();
-                keyboardGlobalHook.KeyDown += GlobalHookKeyDown;
-                keyboardGlobalHook.KeyUp += GlobalHookKeyUp;
-                subscribed = true;
-                Log.GetLogger().Debug("Subscribed to read keyboard inputs");
-            }
-            catch (Exception e)
-            {
-                Log.GetLogger().Error(e);
-            }
-        }
-
-        public void KeyboardInputsUnsubscribe()
-        {
-            try
-            {
-                keyboardGlobalHook.KeyDown -= GlobalHookKeyDown;
-                keyboardGlobalHook.KeyUp -= GlobalHookKeyUp;
-                keyboardGlobalHook.Dispose();
-                subscribed = false;
-                Log.GetLogger().Debug("Unsubscribed to stop reading keyboard inputs");
-            }
-            catch (Exception e)
-            {
-                Log.GetLogger().Error(e);
-            }
-        }
-
-        // Convert a key to a coressponding character, which is returned as a string
-        public string KeyToChar(Keys[] keys)
-        {
-            string c = "\0"; // default null char
-            try
-            {
-                Keys key = keys[1];
-                if ((key >= Keys.A) && (key <= Keys.Z))
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("^[0-9]+$");
+                Match match = regex.Match(quickBarHideTimeTextBox.Text);
+                if (match.Success)
                 {
-                    c = "" + (char)((int)'a' + (int)(key - Keys.A));
-                }
-                else if ((key >= Keys.D0) && (key <= Keys.D9))
-                {
-                    if (keys[0] == Keys.Shift)
+                    int interval = Int32.Parse(quickBarHideTimeTextBox.Text);
+                    if (interval == 0)
                     {
-                        switch (key)
-                        {
-                            case Keys.D0:
-                                c = "" + ')';
-                                break;
-                            case Keys.D1:
-                                c = "" + '!';
-                                break;
-                            case Keys.D2:
-                                c = "" + '@';
-                                break;
-                            case Keys.D3:
-                                c = "" + '#';
-                                break;
-                            case Keys.D4:
-                                c = "" + '$';
-                                break;
-                            case Keys.D5:
-                                c = "" + '%';
-                                break;
-                            case Keys.D6:
-                                c = "" + '^';
-                                break;
-                            case Keys.D7:
-                                c = "" + '&';
-                                break;
-                            case Keys.D8:
-                                c = "" + '*';
-                                break;
-                            case Keys.D9:
-                                c = "" + '(';
-                                break;
-                        }
+                        autoComplete.quickTypeTimerInterval = 5000;
+                        quickBarHideTimeTextBox.Text = "5";
+                        MessageBox.Show("Please enter a positive integer!");
                     }
-                    else { c = "" + (char)((int)'0' + (int)(key - Keys.D0)); }
-                }
-                else
+                    else
+                    { autoComplete.quickTypeTimerInterval = Int32.Parse(quickBarHideTimeTextBox.Text) * 1000; }
+                } else
                 {
-                    switch (key)
-                    { 
-                        case Keys.ShiftKey: // ignore shift key
-                        case Keys.LShiftKey:
-                        case Keys.RShiftKey:
-                            c = "";
-                            break;
-                        case Keys.Oem1:
-                            {
-                                if (keys[0] == Keys.Shift) { c = "" + ':'; }
-                                else { c = "" + ';'; }
-                                break;
-                            }
-                        case Keys.Oem7:
-                            {
-                                if (keys[0] == Keys.Shift) { c = "" + '"'; }
-                                else { c = "" + (char) 39; }
-                                break;
-                            }
-                        case Keys.Oemtilde:
-                            {
-                                if (keys[0] != Keys.Shift) { c = "" + '~'; }
-                                c = "" + '`';
-                                break;
-                            }
-                        case Keys.Oemcomma:
-                            {
-                                if (keys[0] != Keys.Shift) { c = "" + ','; }
-                                break;
-                            }
-                        case Keys.OemPeriod:
-                            {
-                                if (keys[0] != Keys.Shift) { c = "" + '.'; }
-                                break;
-                            }
-                        case Keys.OemQuestion:
-                            {
-                                if (keys[0] == Keys.Shift) { c = "" + '?'; }
-                                else { c = "" + '/'; }
-                                break;
-                            }
-                    }
-                }
-                return c;
-            }
-            catch (Exception e)
-            {
-                Log.GetLogger().Error(e);
-                return c;
-            }
-        }
-
-        // When a key is down
-        private void GlobalHookKeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                KeyboardInputsUnsubscribe();
-                if (enableQuickType)
-                {
-                    quickTypeBar.TopMost = true;
-                    quickTypeBar.Show();
+                    autoComplete.quickTypeTimerInterval = 5000;
+                    quickBarHideTimeTextBox.Text = "5";
+                    MessageBox.Show("Please enter an integer!");
                 }
 
-                // If keydown is Tab key
-                // and currently typed word is not empty and it doesn't contain null character
-                // Suppress actual tab key and complete the predictive word
-                if (e.KeyCode == Keys.Tab && typedWord != "" && !typedWord.Contains('\0'))
-                {
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-
-                    // Complete the predictive word
-                    char[] array = predictiveSubWord.ToArray<char>();
-                    Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                    foreach (char c in array)
-                    { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Right); }
-
-                    typedWord = ""; // reset currently typed word
-                    Log.GetLogger().Info("Reset currently typed word");
-                }
-                // New word
-                else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
-                {
-                    if (typedWord != "") { db.UpdateOrInsertWord(typedWord); } // Update non-empty word into database
-                    typedWord = ""; // reset the word
-                }
-                else if (e.KeyCode == Keys.Back) // Delete character
-                {
-                    if (predictiveSubWord != "") // If there's a predictive subword, remove it.
-                    {
-                        Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                        systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Back);
-                    }
-                    if (typedWord.Length > 0) { typedWord = typedWord.Remove(typedWord.Length - 1); }
-                    Log.GetLogger().Info("Backspace: removed last character, currently typed word is " + typedWord);
-                }
-                else
-                {
-                    keys[1] = e.KeyCode;
-                    string c = KeyToChar(keys);
-                    Log.GetLogger().Info("KeyToChar: " + c);
-                    typedWord += c;
-                    Log.GetLogger().Info("word typed: " + typedWord + " (length: " + typedWord.Length + ")");
-                    Log.GetLogger().Info("Contain null char: " + typedWord.Contains('\0'));
-                }
-                KeyboardInputsSubscribe();
+                Log.GetLogger().Info("Set new interval for QuickType bar: " + autoComplete.quickTypeTimerInterval);
             }
             catch (Exception ex)
             {
                 Log.GetLogger().Error(ex);
             }
-        }
-
-        // When a key is up
-        private void GlobalHookKeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                // reset quicktype bar
-                quickTypeBar.SetQuickTypeButton1("");
-                quickTypeBar.SetQuickTypeButton2("");
-                quickTypeBar.SetQuickTypeButton3("");
-
-                KeyboardInputsUnsubscribe();
-                predictiveSubWord = ""; // reset predictive Subword
-                if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Space && e.KeyCode != Keys.Tab)
-                {
-                    List<string> topThree = db.GetTopThreeWords(typedWord);
-                    if (topThree.Count > 0)
-                    {
-                        if (topThree[0] != typedWord) // if Top Word is not the same as currently typed word
-                        {
-                            predictiveSubWord = topThree[0].Substring(topThree[0].IndexOf(typedWord) + typedWord.ToCharArray().Length);
-                            Log.GetLogger().Debug("typedword length: " + typedWord.ToCharArray().Length);
-                            Log.GetLogger().Info("predictive word (top word): " + topThree[0]);
-                            Log.GetLogger().Info("subWord: " + predictiveSubWord + ", length: " + predictiveSubWord.Length);
-
-                            Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                            systemWrapper.SimulateText(predictiveSubWord); // show predictive subword
-                            // highlight predictive subword
-                            char[] array = predictiveSubWord.ToArray<char>();
-                            systemWrapper.SimulateKeyDown((WindowsInput.Native.VirtualKeyCode)Keys.ShiftKey);
-                            foreach (char c in array)
-                            { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Left); }
-                            systemWrapper.SimulateKeyUp((WindowsInput.Native.VirtualKeyCode)Keys.ShiftKey);
-                        }
-
-                        string[] topTmp = { "", "", "" };
-                        for (int i = 0; i < topThree.Count; i++)
-                        { if (typedWord != topThree[i]) { topTmp[i] = topThree[i]; } }
-                        quickTypeBar.SetQuickTypeButton1(topTmp[0]);
-                        quickTypeBar.SetQuickTypeButton2(topTmp[1]);
-                        quickTypeBar.SetQuickTypeButton3(topTmp[2]);
-                    }
-                }
-                keys[0] = e.KeyCode;
-                KeyboardInputsSubscribe();
-
-                QuickTypeBarTimer.Stop(); // stop previous timer
-                QuickTypeBarTimer.Start(); // start new timer
-            }
-            catch (Exception ex)
-            {
-                Log.GetLogger().Error(ex);
-                Log.GetLogger().Error("Error when key is up :");
-            }
-        }
-
-        private void AutoCompleteTimer_Tick(object sender, EventArgs e)
-        {
-            //if (enableWordPrediction && !subscribed)
-            //{ KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
-
-            //if (!enableWordPrediction && subscribed)
-            //{ KeyboardInputsUnsubscribe(); } // Unsubscribe to stop reading keyboard inputs
-        }
-
-        private void QuickTypeBarTimer_Tick(object sender, EventArgs e)
-        {
-            QuickTypeBarTimer.Stop();
-            quickTypeBar.Hide();
-
         }
     }
 }
