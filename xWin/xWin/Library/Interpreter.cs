@@ -22,6 +22,8 @@ namespace xWin.Library
         {
             public Queue<Keys> pressed;
             public Queue<SpecialAction> special;
+            public Queue<Keys> released;
+            public Queue<SpecialAction> r_special;
 
             public struct coord { public int x; public int y; }; 
             public coord mouse_movement;
@@ -64,6 +66,8 @@ namespace xWin.Library
             kms.mouse_movement = new KeyboardMouseState.coord();
             kms.pressed = new Queue<Keys>();
             kms.special = new Queue<SpecialAction>();
+            kms.released = new Queue<Keys>();
+            kms.r_special = new Queue<SpecialAction>();
             /*
                 Get Stick and Trigger Regions, and put them into the GamepadFlags constructor
             */

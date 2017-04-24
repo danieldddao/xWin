@@ -13,12 +13,14 @@ namespace xWin.Library
         {
             public class AnAction
             {
-                private readonly List<Keys> ks;
-                private readonly List<SpecialAction> sas;
-                public AnAction(Actions a)
+                private readonly List<Keys> ks,release_ks;
+                private readonly List<SpecialAction> sas,release_sas;
+                public AnAction(Actions a, Actions b)
                 {
                     ks = new List<Keys>();
                     sas = new List<SpecialAction>();
+                    release_ks = new List<Keys>();
+                    release_sas = new List<SpecialAction>();
                     if (a != null)
                     {
                         if (a.Keybinds != null)
@@ -26,11 +28,30 @@ namespace xWin.Library
                         if (a.SpecialActions != null)
                             foreach (var aa in a.SpecialActions) { sas.Add(aa); }
                     }
+                    if (b != null)
+                    {
+                        if (b.Keybinds != null)
+                        {
+                            foreach (var bb in b.Keybinds)
+                            {
+                                if (!ks.Contains((Keys)bb)) { release_ks.Add((Keys)bb); }
+                            }
+                        }
+                        if (b.SpecialActions != null)
+                        {
+                            foreach (var bb in b.SpecialActions)
+                            {
+                                if (!sas.Contains(bb)) { release_sas.Add(bb); }
+                            }
+                        }
+                    }
                 }
                 public void feed(KeyboardMouseState kmstate)
                 {
                     foreach (var k in ks) { kmstate.pressed.Enqueue(k); }
                     foreach (var sa in sas) { kmstate.special.Enqueue(sa); }
+                    foreach (var k in release_ks) { kmstate.released.Enqueue(k); }
+                    foreach (var sa in release_sas) { kmstate.r_special.Enqueue(sa); }
                 }
             }
             private AnAction press, hold, release, stay;
@@ -46,11 +67,11 @@ namespace xWin.Library
             public ButtonBehavior(Behavior b)
             {
 
-                press = new AnAction(b.OnPress);
+                press = new AnAction(b.OnPress, b.OnStay);
 
-                hold = new AnAction(b.OnHold);
-                release = new AnAction(b.OnRelease);
-                stay = new AnAction(b.OnStay);
+                hold = new AnAction(b.OnHold, b.OnPress);
+                release = new AnAction(b.OnRelease, b.OnHold);
+                stay = new AnAction(b.OnStay, b.OnRelease);
                 toggle_press = b.OnPressToggle;
                 toggle_release = b.OnReleaseToggle;
                 press_state = false;
@@ -151,8 +172,7 @@ namespace xWin.Library
                 }
                 return (byte)region;
             }
-
-
+            
         }
 
         private static StickBehavior GetStickBehavior(Stick s)

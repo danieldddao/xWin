@@ -135,11 +135,11 @@ namespace xWin.Config
                 {
                     {
                         (int)new GamepadFlags(0,false,false,true),
-                        new KeyboardActionContainer {Binding = KeyboardAction.Confirm, Inverted = false }
+                        new KeyboardActionContainer {Binding = KeyboardAction.Confirm, WhenActive=ActiveWhen.Released }
                     },
                     {
                         (int)new GamepadFlags(0,false,false,false,true),
-                        new KeyboardActionContainer {Binding = KeyboardAction.LeaveTyping, Inverted = false }
+                        new KeyboardActionContainer {Binding = KeyboardAction.LeaveTyping, WhenActive=ActiveWhen.Pressed }
                     }
                 }
             };

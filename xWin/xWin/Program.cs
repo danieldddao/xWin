@@ -7,10 +7,11 @@ using System.Threading;
 using xWin.Library;
 using SharpDX.XInput;
 using xWin.Forms;
+using xWin.Wrapper;
 //using static Configuration.Types;
 using SharpDX.DirectInput;
 using xWin.Config;
-
+using System.Drawing;
 
 namespace xWin
 {
@@ -112,6 +113,11 @@ namespace xWin
             rx = datas.RotationX;
             ry = datas.RotationY;
             var index = 0;
+
+
+            var wrapper = new SystemWrapper();
+            
+            
             while (true)
             {
                 //*
@@ -126,16 +132,36 @@ namespace xWin
                 var state = DI2XI.di2xi(datas);
                 var kms = i.NextState(state.Gamepad);
                 Console.WriteLine(kms.mouse_movement.x.ToString()+","+kms.mouse_movement.y.ToString());
+                Cursor.Position = new Point(Cursor.Position.X+ (kms.mouse_movement.x / 100), Cursor.Position.Y+ (kms.mouse_movement.y /100));
+                Console.Write("Pressed: ");
                 foreach (var l in kms.pressed)
                 {
-                    Console.WriteLine(l.ToString());
+                    Console.Write(l.ToString() + ",");
+                    wrapper.Press((byte)l);
                 }
+                Console.WriteLine();
+                Console.Write("Released: ");
+                foreach (var l in kms.released)
+                {
+                    Console.Write(l.ToString() + ",");
+                    wrapper.Release((byte)l);
+                }
+                Console.WriteLine();
+                Console.Write("Pressed: ");
                 foreach (var l in kms.special)
                 {
-                    Console.WriteLine(l.ToString());
+                    Console.Write(l.ToString() + ",");
                 }
+                Console.WriteLine();
+                Console.Write("Released: ");
+                foreach (var l in kms.r_special)
+                {
+                    Console.Write(l.ToString() + ",");
+                }
+                Console.WriteLine();
                 st.Stop();
-                Console.WriteLine(st.Elapsed.Milliseconds.ToString());
+                Console.WriteLine(st.Elapsed.ToString());
+                Thread.Sleep(300);
                 Console.Clear();
                 st.Reset();
                 //*/
