@@ -70,6 +70,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\KeyboardControl.cs" />
+    <Compile Include="Config\IO.cs" />
+    <Compile Include="Config\SaveFormat.cs" />
     <Compile Include="Library\Buttons.cs" />
     <Compile Include="Forms\ButtonOptions.cs">
       <SubType>Form</SubType>
@@ -102,6 +105,7 @@
     <Compile Include="Library\GamepadFlags.cs" />
     <Compile Include="Library\Interpreter.cs" />
     <Compile Include="Library\PolarStick.cs" />
+    <Compile Include="Library\TypingInterpreter.cs" />
     <Compile Include="Library\XAction.cs" />
     <Compile Include="Library\XKeyBoard.cs" />
     <Compile Include="Library\XController.cs" />

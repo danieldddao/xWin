@@ -8,6 +8,7 @@ using xWin.Library;
 using xWin.Config;
 using SharpDX.XInput;
 using System.Windows.Forms;
+
 namespace MSTest.Library
 {
     [TestClass]

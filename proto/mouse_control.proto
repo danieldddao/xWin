@@ -1,5 +1,19 @@
 syntax = "proto3";
 
+message Stick {
+  uint32 deadzone = 1;//how far must the stick go to count as moved
+  bool control_mouse = 2;
+  int32 region_start = 3;//the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
+  repeated uint32 regions = 4;
+  bool invert_ud = 5;
+  bool invert_lr = 6;
+}
+  
+message Trigger {
+  uint32 deadzone = 1;
+  repeated uint32 regions = 2;//must add to 255 - deadzone
+}
+
 message BasicControl {
   
   enum SpecialAction {
@@ -38,21 +52,6 @@ message BasicControl {
     repeated int32 blacklist = 7;
   }
   
-  message Stick {
-    uint32 deadzone = 1;//how far must the stick go to count as moved
-    bool control_mouse = 2;
-    int32 region_start = 3;//the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
-    repeated uint32 regions = 4;
-    bool invert_ud = 5;
-    bool invert_lr = 6;
-  }
-  
-  message Trigger {
-    uint32 deadzone = 1;
-    repeated uint32 regions = 2;//must add to 255 - deadzone
-  }
-
-  
   Stick left_stick = 1;
   Stick right_stick = 2;
   
@@ -62,4 +61,7 @@ message BasicControl {
   //use the sharpdx enum for key
   map<int32, Behavior> button_map = 5;
   
+  
+  string name = 6;
+  string description = 7;
 }

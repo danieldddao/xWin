@@ -1,7 +1,12 @@
 syntax = "proto3";
 
+import "mouse_control.proto";
+import "keyboard_control.proto";
+
 message Configuration
 {
   BasicControl basic = 1;
   TypingControl typing = 2;
+  string name = 3;
+  string description = 4;
 }

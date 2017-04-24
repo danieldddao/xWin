@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\GamepadFlagsTests.cs" />
+    <Compile Include="Library\TypingInterpreterTests.cs" />
     <Compile Include="Library\XKeyBoardTest.cs" />
     <Compile Include="Library\XControllerTest.cs" />
     <Compile Include="Library\ActionsTests.cs" />

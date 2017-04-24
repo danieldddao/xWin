@@ -68,10 +68,12 @@ namespace xWin.Library
                 Get Stick and Trigger Regions, and put them into the GamepadFlags constructor
             */
 
-            byte lt = LeftTrigger.GetRegion(g.LeftTrigger);
-            byte rt = RightTrigger.GetRegion(g.RightTrigger);
-            byte ls = LeftStick.Act(g.LeftThumbX, g.LeftThumbY, kms);
-            byte rs = RightStick.Act(g.RightThumbX, g.RightThumbY, kms);
+            byte lt =  LeftTrigger.GetRegion(g.LeftTrigger);
+            byte rt =  RightTrigger.GetRegion(g.RightTrigger);
+            byte ls = LeftStick.Act(g.LeftThumbX, g.LeftThumbY, ref kms);
+            //Console.WriteLine(kms.mouse_movement.x.ToString() + "," + kms.mouse_movement.y.ToString());
+
+            byte rs = RightStick.Act(g.RightThumbX, g.RightThumbY, ref kms);
             var state = new GamepadFlags(g.Buttons, lt, rt, ls, rs);
 
             foreach (GamepadFlags flags in input_mapping.Keys)

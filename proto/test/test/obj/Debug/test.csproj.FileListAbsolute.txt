@@ -16,3 +16,5 @@ C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\
 C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\SharpDX.XInput.dll
 C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\SharpDX.xml
 C:\Users\Tim\Documents\Classes\software project\Team4\proto\test\test\bin\Debug\SharpDX.XInput.xml
+C:\Users\Tim\Documents\Classes\software project\Project\proto\test\test\bin\Debug\test.exe.config
+C:\Users\Tim\Documents\Classes\software project\Project\proto\test\test\obj\Debug\test.exe

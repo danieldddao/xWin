@@ -9,12 +9,24 @@ using SharpDX.XInput;
 using xWin.Forms;
 //using static Configuration.Types;
 using SharpDX.DirectInput;
+using xWin.Config;
 
 
 namespace xWin
 {
+
+
+
     class Program
     {
+        public static int shortbound(int i)
+        {
+            if (i < -32767)
+                return -32767;
+            if (i > 32767)
+                return 32767;
+            return i;
+        }
         public static void RunFormApplication()
         {
             Application.EnableVisualStyles();
@@ -86,11 +98,51 @@ namespace xWin
             // Acquire the joystick
             joystick.Acquire();
             // Poll events from joystick
+
+            var i = new Interpreter(Defaults.DefaultConfiguration());
+
+            System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
+
+            int lx, ly, rx, ry;
+
+
+            var datas = joystick.GetCurrentState();
+            lx = datas.X;
+            ly = datas.Y;
+            rx = datas.RotationX;
+            ry = datas.RotationY;
+            var index = 0;
             while (true)
             {
+                //*
+                st.Start();
                 joystick.Poll();
-                var datas = joystick.GetCurrentState();
+                datas = joystick.GetCurrentState();
+
+                datas.X = shortbound(datas.X - lx);
+                datas.Y = shortbound(datas.Y - ly);
+                datas.RotationX = shortbound(datas.RotationX - rx);
+                datas.RotationY = shortbound(datas.RotationY - ry);
                 var state = DI2XI.di2xi(datas);
+                var kms = i.NextState(state.Gamepad);
+                Console.WriteLine(kms.mouse_movement.x.ToString()+","+kms.mouse_movement.y.ToString());
+                foreach (var l in kms.pressed)
+                {
+                    Console.WriteLine(l.ToString());
+                }
+                foreach (var l in kms.special)
+                {
+                    Console.WriteLine(l.ToString());
+                }
+                st.Stop();
+                Console.WriteLine(st.Elapsed.Milliseconds.ToString());
+                Console.Clear();
+                st.Reset();
+                //*/
+                /*
+                joystick.Poll();
+                datas = joystick.GetCurrentState();
+                var state =  DI2XI.di2xi(datas);
                 foreach (GamepadButtonFlags b in Enum.GetValues(typeof(GamepadButtonFlags)))
                 {
                     if (state.Gamepad.Buttons.HasFlag(b))
@@ -118,8 +170,11 @@ namespace xWin
                 Console.WriteLine(ps.theta);
                 Console.Write("Distance: ");
                 Console.WriteLine(ps.R);
+                Console.WriteLine(index.ToString());
+                index++;
                 Thread.Sleep(300);
                 Console.Clear();
+               // */
             }
 
         }

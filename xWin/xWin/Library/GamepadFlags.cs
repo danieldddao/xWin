@@ -44,6 +44,11 @@ namespace xWin.Library
         {
             flags = f;
         }
+        
+        public static GamepadFlags operator ~(GamepadFlags g)
+        {
+            return new GamepadFlags(~g.flags);
+        }
 
         public static explicit operator GamepadFlags(Int32 i)
         {
@@ -63,15 +68,15 @@ namespace xWin.Library
 
             //Check if Trigger Regions work
             //3145728 = 0x00300000
-            if ((g2.flags & 3145728) > 0 && (g1.flags & 3145728) != (g2.flags & 3145728))  { return false; }
+            if ((g2.flags & 3145728) != 0 && ((g1.flags & 3145728) != (g2.flags & 3145728)) ) { return false; }
             
             //12582912 = 0x00C00000
-            if ((g2.flags & 12582912) > 0  && (g1.flags & 12582912) != (g2.flags & 12582912))    { return false; }
+            if ((g2.flags & 12582912) != 0  && ((g1.flags & 12582912) != (g2.flags & 12582912))  )  { return false; }
             
             //251658240 = 0x0F000000
-            if ((g2.flags & 251658240) > 0  && (g1.flags & 251658240) != (g2.flags & 251658240))    { return false; }
+            if ((g2.flags & 251658240) != 0  && ((g1.flags & 251658240) != (g2.flags & 251658240)) )   { return false; }
             //-268435456 = 0xF0000000
-            if ((g2.flags & -268435456) > 0   && (g1.flags & -268435456) != (g2.flags & -268435456))      { return false; }
+            if ((g2.flags & -268435456) != 0  && ((g1.flags & -268435456) != (g2.flags & -268435456)) )     { return false; }
             
             return true;
         }
@@ -94,6 +99,38 @@ namespace xWin.Library
             return g1 != g2.flags;
         }
 
+        public static GamepadFlags operator *(GamepadFlags g1, GamepadFlags g2)
+        {
+            Int32 f = g1.flags & g2.flags & 1048575;
+            if ((g2.flags & 3145728) == (g1.flags & 3145728))
+                f &= (g1.flags & 3145728);
+            if ((g2.flags & 12582912) == (g1.flags & 12582912))
+                f &= (g1.flags & 12582912);
+            if ((g2.flags & 251658240) == (g1.flags & 251658240))
+                f &= (g1.flags & 251658240);
+            if ((g2.flags & -268435456) == (g1.flags & -268435456))
+                f &= (g1.flags & -268435456);
+
+            return new GamepadFlags(f);
+            
+        }
+
+
+        /*for creating masks*/
+        public static GamepadFlags operator |(GamepadFlags g1, GamepadFlags g2)
+        {
+            var q = g1.flags | g2.flags;
+            Int32 f = q & 1048575;
+            if ((q & 3145728)!=0)
+                f &= 3145728;
+            if ((q & 12582912)!=0)
+                f &= 12582912;
+            if ((q & 251658240)!=0)
+                f &=  251658240;
+            if ((q & -268435456)!=0)
+                f &= -268435456;
+            return new GamepadFlags(f);
+        }
 
         public override string ToString()
         {

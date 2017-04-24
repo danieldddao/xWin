@@ -20,37 +20,36 @@ public static partial class MouseControlReflection {
   static MouseControlReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChNtb3VzZV9jb250cm9sLnByb3RvIvkHCgxCYXNpY0NvbnRyb2wSJwoKbGVm",
-          "dF9zdGljaxgBIAEoCzITLkJhc2ljQ29udHJvbC5TdGljaxIoCgtyaWdodF9z",
-          "dGljaxgCIAEoCzITLkJhc2ljQ29udHJvbC5TdGljaxIrCgxsZWZ0X3RyaWdn",
-          "ZXIYAyABKAsyFS5CYXNpY0NvbnRyb2wuVHJpZ2dlchIsCg1yaWdodF90cmln",
-          "Z2VyGAQgASgLMhUuQmFzaWNDb250cm9sLlRyaWdnZXISMAoKYnV0dG9uX21h",
-          "cBgFIAMoCzIcLkJhc2ljQ29udHJvbC5CdXR0b25NYXBFbnRyeRpRCgdBY3Rp",
-          "b25zEhAKCGtleWJpbmRzGAEgAygFEjQKD3NwZWNpYWxfYWN0aW9ucxgCIAMo",
-          "DjIbLkJhc2ljQ29udHJvbC5TcGVjaWFsQWN0aW9uGvUBCghCZWhhdmlvchIn",
-          "Cghvbl9wcmVzcxgBIAEoCzIVLkJhc2ljQ29udHJvbC5BY3Rpb25zEhcKD29u",
-          "X3ByZXNzX3RvZ2dsZRgFIAEoCBImCgdvbl9ob2xkGAIgASgLMhUuQmFzaWND",
-          "b250cm9sLkFjdGlvbnMSKQoKb25fcmVsZWFzZRgDIAEoCzIVLkJhc2ljQ29u",
-          "dHJvbC5BY3Rpb25zEhkKEW9uX3JlbGVhc2VfdG9nZ2xlGAYgASgIEiYKB29u",
-          "X3N0YXkYBCABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIRCglibGFja2xp",
-          "c3QYByADKAUafQoFU3RpY2sSEAoIZGVhZHpvbmUYASABKA0SFQoNY29udHJv",
-          "bF9tb3VzZRgCIAEoCBIUCgxyZWdpb25fc3RhcnQYAyABKAUSDwoHcmVnaW9u",
-          "cxgEIAMoDRIRCglpbnZlcnRfdWQYBSABKAgSEQoJaW52ZXJ0X2xyGAYgASgI",
-          "GiwKB1RyaWdnZXISEAoIZGVhZHpvbmUYASABKA0SDwoHcmVnaW9ucxgCIAMo",
-          "DRpICg5CdXR0b25NYXBFbnRyeRILCgNrZXkYASABKAUSJQoFdmFsdWUYAiAB",
-          "KAsyFi5CYXNpY0NvbnRyb2wuQmVoYXZpb3I6AjgBIsYBCg1TcGVjaWFsQWN0",
-          "aW9uEgwKCE9wZW5NZW51EAASDQoJTW91c2VEb3duEAESDQoJTW91c2VMZWZ0",
-          "EAISDgoKTW91c2VSaWdodBADEgsKB01vdXNlVXAQBBIOCgpTY3JvbGxEb3du",
-          "EAkSDgoKU2Nyb2xsTGVmdBAHEg8KC1Njcm9sbFJpZ2h0EAgSDAoIU2Nyb2xs",
-          "VXAQChIJCgVUdXJibxAFEhMKD0VudGVyVHlwaW5nTW9kZRAGEg0KCVByZWNp",
-          "c2lvbhALYgZwcm90bzM="));
+          "ChNtb3VzZV9jb250cm9sLnByb3RvIn0KBVN0aWNrEhAKCGRlYWR6b25lGAEg",
+          "ASgNEhUKDWNvbnRyb2xfbW91c2UYAiABKAgSFAoMcmVnaW9uX3N0YXJ0GAMg",
+          "ASgFEg8KB3JlZ2lvbnMYBCADKA0SEQoJaW52ZXJ0X3VkGAUgASgIEhEKCWlu",
+          "dmVydF9schgGIAEoCCIsCgdUcmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8K",
+          "B3JlZ2lvbnMYAiADKA0iuwYKDEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNr",
+          "GAEgASgLMgYuU3RpY2sSGwoLcmlnaHRfc3RpY2sYAiABKAsyBi5TdGljaxIe",
+          "CgxsZWZ0X3RyaWdnZXIYAyABKAsyCC5UcmlnZ2VyEh8KDXJpZ2h0X3RyaWdn",
+          "ZXIYBCABKAsyCC5UcmlnZ2VyEjAKCmJ1dHRvbl9tYXAYBSADKAsyHC5CYXNp",
+          "Y0NvbnRyb2wuQnV0dG9uTWFwRW50cnkSDAoEbmFtZRgGIAEoCRITCgtkZXNj",
+          "cmlwdGlvbhgHIAEoCRpRCgdBY3Rpb25zEhAKCGtleWJpbmRzGAEgAygFEjQK",
+          "D3NwZWNpYWxfYWN0aW9ucxgCIAMoDjIbLkJhc2ljQ29udHJvbC5TcGVjaWFs",
+          "QWN0aW9uGvUBCghCZWhhdmlvchInCghvbl9wcmVzcxgBIAEoCzIVLkJhc2lj",
+          "Q29udHJvbC5BY3Rpb25zEhcKD29uX3ByZXNzX3RvZ2dsZRgFIAEoCBImCgdv",
+          "bl9ob2xkGAIgASgLMhUuQmFzaWNDb250cm9sLkFjdGlvbnMSKQoKb25fcmVs",
+          "ZWFzZRgDIAEoCzIVLkJhc2ljQ29udHJvbC5BY3Rpb25zEhkKEW9uX3JlbGVh",
+          "c2VfdG9nZ2xlGAYgASgIEiYKB29uX3N0YXkYBCABKAsyFS5CYXNpY0NvbnRy",
+          "b2wuQWN0aW9ucxIRCglibGFja2xpc3QYByADKAUaSAoOQnV0dG9uTWFwRW50",
+          "cnkSCwoDa2V5GAEgASgFEiUKBXZhbHVlGAIgASgLMhYuQmFzaWNDb250cm9s",
+          "LkJlaGF2aW9yOgI4ASLGAQoNU3BlY2lhbEFjdGlvbhIMCghPcGVuTWVudRAA",
+          "Eg0KCU1vdXNlRG93bhABEg0KCU1vdXNlTGVmdBACEg4KCk1vdXNlUmlnaHQQ",
+          "AxILCgdNb3VzZVVwEAQSDgoKU2Nyb2xsRG93bhAJEg4KClNjcm9sbExlZnQQ",
+          "BxIPCgtTY3JvbGxSaWdodBAIEgwKCFNjcm9sbFVwEAoSCQoFVHVyYm8QBRIT",
+          "Cg9FbnRlclR5cGluZ01vZGUQBhINCglQcmVjaXNpb24QC2IGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Stick), global::Stick.Parser, new[]{ "Deadzone", "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Trigger), global::Trigger.Parser, new[]{ "Deadzone", "Regions" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Behavior), global::BasicControl.Types.Behavior.Parser, new[]{ "OnPress", "OnPressToggle", "OnHold", "OnRelease", "OnReleaseToggle", "OnStay", "Blacklist" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Stick), global::BasicControl.Types.Stick.Parser, new[]{ "Deadzone", "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Trigger), global::BasicControl.Types.Trigger.Parser, new[]{ "Deadzone", "Regions" }, null, null, null),
           null, })
         }));
   }
@@ -58,6 +57,403 @@ public static partial class MouseControlReflection {
 
 }
 #region Messages
+public sealed partial class Stick : pb::IMessage<Stick> {
+  private static readonly pb::MessageParser<Stick> _parser = new pb::MessageParser<Stick>(() => new Stick());
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pb::MessageParser<Stick> Parser { get { return _parser; } }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pbr::MessageDescriptor Descriptor {
+    get { return global::MouseControlReflection.Descriptor.MessageTypes[0]; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  pbr::MessageDescriptor pb::IMessage.Descriptor {
+    get { return Descriptor; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Stick() {
+    OnConstruction();
+  }
+
+  partial void OnConstruction();
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Stick(Stick other) : this() {
+    deadzone_ = other.deadzone_;
+    controlMouse_ = other.controlMouse_;
+    regionStart_ = other.regionStart_;
+    regions_ = other.regions_.Clone();
+    invertUd_ = other.invertUd_;
+    invertLr_ = other.invertLr_;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Stick Clone() {
+    return new Stick(this);
+  }
+
+  /// <summary>Field number for the "deadzone" field.</summary>
+  public const int DeadzoneFieldNumber = 1;
+  private uint deadzone_;
+  /// <summary>
+  ///how far must the stick go to count as moved
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public uint Deadzone {
+    get { return deadzone_; }
+    set {
+      deadzone_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "control_mouse" field.</summary>
+  public const int ControlMouseFieldNumber = 2;
+  private bool controlMouse_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public bool ControlMouse {
+    get { return controlMouse_; }
+    set {
+      controlMouse_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "region_start" field.</summary>
+  public const int RegionStartFieldNumber = 3;
+  private int regionStart_;
+  /// <summary>
+  ///the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int RegionStart {
+    get { return regionStart_; }
+    set {
+      regionStart_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "regions" field.</summary>
+  public const int RegionsFieldNumber = 4;
+  private static readonly pb::FieldCodec<uint> _repeated_regions_codec
+      = pb::FieldCodec.ForUInt32(34);
+  private readonly pbc::RepeatedField<uint> regions_ = new pbc::RepeatedField<uint>();
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public pbc::RepeatedField<uint> Regions {
+    get { return regions_; }
+  }
+
+  /// <summary>Field number for the "invert_ud" field.</summary>
+  public const int InvertUdFieldNumber = 5;
+  private bool invertUd_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public bool InvertUd {
+    get { return invertUd_; }
+    set {
+      invertUd_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "invert_lr" field.</summary>
+  public const int InvertLrFieldNumber = 6;
+  private bool invertLr_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public bool InvertLr {
+    get { return invertLr_; }
+    set {
+      invertLr_ = value;
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override bool Equals(object other) {
+    return Equals(other as Stick);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public bool Equals(Stick other) {
+    if (ReferenceEquals(other, null)) {
+      return false;
+    }
+    if (ReferenceEquals(other, this)) {
+      return true;
+    }
+    if (Deadzone != other.Deadzone) return false;
+    if (ControlMouse != other.ControlMouse) return false;
+    if (RegionStart != other.RegionStart) return false;
+    if(!regions_.Equals(other.regions_)) return false;
+    if (InvertUd != other.InvertUd) return false;
+    if (InvertLr != other.InvertLr) return false;
+    return true;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override int GetHashCode() {
+    int hash = 1;
+    if (Deadzone != 0) hash ^= Deadzone.GetHashCode();
+    if (ControlMouse != false) hash ^= ControlMouse.GetHashCode();
+    if (RegionStart != 0) hash ^= RegionStart.GetHashCode();
+    hash ^= regions_.GetHashCode();
+    if (InvertUd != false) hash ^= InvertUd.GetHashCode();
+    if (InvertLr != false) hash ^= InvertLr.GetHashCode();
+    return hash;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override string ToString() {
+    return pb::JsonFormatter.ToDiagnosticString(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void WriteTo(pb::CodedOutputStream output) {
+    if (Deadzone != 0) {
+      output.WriteRawTag(8);
+      output.WriteUInt32(Deadzone);
+    }
+    if (ControlMouse != false) {
+      output.WriteRawTag(16);
+      output.WriteBool(ControlMouse);
+    }
+    if (RegionStart != 0) {
+      output.WriteRawTag(24);
+      output.WriteInt32(RegionStart);
+    }
+    regions_.WriteTo(output, _repeated_regions_codec);
+    if (InvertUd != false) {
+      output.WriteRawTag(40);
+      output.WriteBool(InvertUd);
+    }
+    if (InvertLr != false) {
+      output.WriteRawTag(48);
+      output.WriteBool(InvertLr);
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int CalculateSize() {
+    int size = 0;
+    if (Deadzone != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Deadzone);
+    }
+    if (ControlMouse != false) {
+      size += 1 + 1;
+    }
+    if (RegionStart != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(RegionStart);
+    }
+    size += regions_.CalculateSize(_repeated_regions_codec);
+    if (InvertUd != false) {
+      size += 1 + 1;
+    }
+    if (InvertLr != false) {
+      size += 1 + 1;
+    }
+    return size;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(Stick other) {
+    if (other == null) {
+      return;
+    }
+    if (other.Deadzone != 0) {
+      Deadzone = other.Deadzone;
+    }
+    if (other.ControlMouse != false) {
+      ControlMouse = other.ControlMouse;
+    }
+    if (other.RegionStart != 0) {
+      RegionStart = other.RegionStart;
+    }
+    regions_.Add(other.regions_);
+    if (other.InvertUd != false) {
+      InvertUd = other.InvertUd;
+    }
+    if (other.InvertLr != false) {
+      InvertLr = other.InvertLr;
+    }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(pb::CodedInputStream input) {
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          input.SkipLastField();
+          break;
+        case 8: {
+          Deadzone = input.ReadUInt32();
+          break;
+        }
+        case 16: {
+          ControlMouse = input.ReadBool();
+          break;
+        }
+        case 24: {
+          RegionStart = input.ReadInt32();
+          break;
+        }
+        case 34:
+        case 32: {
+          regions_.AddEntriesFrom(input, _repeated_regions_codec);
+          break;
+        }
+        case 40: {
+          InvertUd = input.ReadBool();
+          break;
+        }
+        case 48: {
+          InvertLr = input.ReadBool();
+          break;
+        }
+      }
+    }
+  }
+
+}
+
+public sealed partial class Trigger : pb::IMessage<Trigger> {
+  private static readonly pb::MessageParser<Trigger> _parser = new pb::MessageParser<Trigger>(() => new Trigger());
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pb::MessageParser<Trigger> Parser { get { return _parser; } }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public static pbr::MessageDescriptor Descriptor {
+    get { return global::MouseControlReflection.Descriptor.MessageTypes[1]; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  pbr::MessageDescriptor pb::IMessage.Descriptor {
+    get { return Descriptor; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Trigger() {
+    OnConstruction();
+  }
+
+  partial void OnConstruction();
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Trigger(Trigger other) : this() {
+    deadzone_ = other.deadzone_;
+    regions_ = other.regions_.Clone();
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public Trigger Clone() {
+    return new Trigger(this);
+  }
+
+  /// <summary>Field number for the "deadzone" field.</summary>
+  public const int DeadzoneFieldNumber = 1;
+  private uint deadzone_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public uint Deadzone {
+    get { return deadzone_; }
+    set {
+      deadzone_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "regions" field.</summary>
+  public const int RegionsFieldNumber = 2;
+  private static readonly pb::FieldCodec<uint> _repeated_regions_codec
+      = pb::FieldCodec.ForUInt32(18);
+  private readonly pbc::RepeatedField<uint> regions_ = new pbc::RepeatedField<uint>();
+  /// <summary>
+  ///must add to 255 - deadzone
+  /// </summary>
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public pbc::RepeatedField<uint> Regions {
+    get { return regions_; }
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override bool Equals(object other) {
+    return Equals(other as Trigger);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public bool Equals(Trigger other) {
+    if (ReferenceEquals(other, null)) {
+      return false;
+    }
+    if (ReferenceEquals(other, this)) {
+      return true;
+    }
+    if (Deadzone != other.Deadzone) return false;
+    if(!regions_.Equals(other.regions_)) return false;
+    return true;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override int GetHashCode() {
+    int hash = 1;
+    if (Deadzone != 0) hash ^= Deadzone.GetHashCode();
+    hash ^= regions_.GetHashCode();
+    return hash;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public override string ToString() {
+    return pb::JsonFormatter.ToDiagnosticString(this);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void WriteTo(pb::CodedOutputStream output) {
+    if (Deadzone != 0) {
+      output.WriteRawTag(8);
+      output.WriteUInt32(Deadzone);
+    }
+    regions_.WriteTo(output, _repeated_regions_codec);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int CalculateSize() {
+    int size = 0;
+    if (Deadzone != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Deadzone);
+    }
+    size += regions_.CalculateSize(_repeated_regions_codec);
+    return size;
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(Trigger other) {
+    if (other == null) {
+      return;
+    }
+    if (other.Deadzone != 0) {
+      Deadzone = other.Deadzone;
+    }
+    regions_.Add(other.regions_);
+  }
+
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public void MergeFrom(pb::CodedInputStream input) {
+    uint tag;
+    while ((tag = input.ReadTag()) != 0) {
+      switch(tag) {
+        default:
+          input.SkipLastField();
+          break;
+        case 8: {
+          Deadzone = input.ReadUInt32();
+          break;
+        }
+        case 18:
+        case 16: {
+          regions_.AddEntriesFrom(input, _repeated_regions_codec);
+          break;
+        }
+      }
+    }
+  }
+
+}
+
 public sealed partial class BasicControl : pb::IMessage<BasicControl> {
   private static readonly pb::MessageParser<BasicControl> _parser = new pb::MessageParser<BasicControl>(() => new BasicControl());
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -65,7 +461,7 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static pbr::MessageDescriptor Descriptor {
-    get { return global::MouseControlReflection.Descriptor.MessageTypes[0]; }
+    get { return global::MouseControlReflection.Descriptor.MessageTypes[2]; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -87,6 +483,8 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     LeftTrigger = other.leftTrigger_ != null ? other.LeftTrigger.Clone() : null;
     RightTrigger = other.rightTrigger_ != null ? other.RightTrigger.Clone() : null;
     buttonMap_ = other.buttonMap_.Clone();
+    name_ = other.name_;
+    description_ = other.description_;
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -96,9 +494,9 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
 
   /// <summary>Field number for the "left_stick" field.</summary>
   public const int LeftStickFieldNumber = 1;
-  private global::BasicControl.Types.Stick leftStick_;
+  private global::Stick leftStick_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::BasicControl.Types.Stick LeftStick {
+  public global::Stick LeftStick {
     get { return leftStick_; }
     set {
       leftStick_ = value;
@@ -107,9 +505,9 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
 
   /// <summary>Field number for the "right_stick" field.</summary>
   public const int RightStickFieldNumber = 2;
-  private global::BasicControl.Types.Stick rightStick_;
+  private global::Stick rightStick_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::BasicControl.Types.Stick RightStick {
+  public global::Stick RightStick {
     get { return rightStick_; }
     set {
       rightStick_ = value;
@@ -118,9 +516,9 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
 
   /// <summary>Field number for the "left_trigger" field.</summary>
   public const int LeftTriggerFieldNumber = 3;
-  private global::BasicControl.Types.Trigger leftTrigger_;
+  private global::Trigger leftTrigger_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::BasicControl.Types.Trigger LeftTrigger {
+  public global::Trigger LeftTrigger {
     get { return leftTrigger_; }
     set {
       leftTrigger_ = value;
@@ -129,9 +527,9 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
 
   /// <summary>Field number for the "right_trigger" field.</summary>
   public const int RightTriggerFieldNumber = 4;
-  private global::BasicControl.Types.Trigger rightTrigger_;
+  private global::Trigger rightTrigger_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public global::BasicControl.Types.Trigger RightTrigger {
+  public global::Trigger RightTrigger {
     get { return rightTrigger_; }
     set {
       rightTrigger_ = value;
@@ -149,6 +547,28 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public pbc::MapField<int, global::BasicControl.Types.Behavior> ButtonMap {
     get { return buttonMap_; }
+  }
+
+  /// <summary>Field number for the "name" field.</summary>
+  public const int NameFieldNumber = 6;
+  private string name_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Name {
+    get { return name_; }
+    set {
+      name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "description" field.</summary>
+  public const int DescriptionFieldNumber = 7;
+  private string description_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Description {
+    get { return description_; }
+    set {
+      description_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -169,6 +589,8 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     if (!object.Equals(LeftTrigger, other.LeftTrigger)) return false;
     if (!object.Equals(RightTrigger, other.RightTrigger)) return false;
     if (!ButtonMap.Equals(other.ButtonMap)) return false;
+    if (Name != other.Name) return false;
+    if (Description != other.Description) return false;
     return true;
   }
 
@@ -180,6 +602,8 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     if (leftTrigger_ != null) hash ^= LeftTrigger.GetHashCode();
     if (rightTrigger_ != null) hash ^= RightTrigger.GetHashCode();
     hash ^= ButtonMap.GetHashCode();
+    if (Name.Length != 0) hash ^= Name.GetHashCode();
+    if (Description.Length != 0) hash ^= Description.GetHashCode();
     return hash;
   }
 
@@ -207,6 +631,14 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
       output.WriteMessage(RightTrigger);
     }
     buttonMap_.WriteTo(output, _map_buttonMap_codec);
+    if (Name.Length != 0) {
+      output.WriteRawTag(50);
+      output.WriteString(Name);
+    }
+    if (Description.Length != 0) {
+      output.WriteRawTag(58);
+      output.WriteString(Description);
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -225,6 +657,12 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
       size += 1 + pb::CodedOutputStream.ComputeMessageSize(RightTrigger);
     }
     size += buttonMap_.CalculateSize(_map_buttonMap_codec);
+    if (Name.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+    }
+    if (Description.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Description);
+    }
     return size;
   }
 
@@ -235,29 +673,35 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     }
     if (other.leftStick_ != null) {
       if (leftStick_ == null) {
-        leftStick_ = new global::BasicControl.Types.Stick();
+        leftStick_ = new global::Stick();
       }
       LeftStick.MergeFrom(other.LeftStick);
     }
     if (other.rightStick_ != null) {
       if (rightStick_ == null) {
-        rightStick_ = new global::BasicControl.Types.Stick();
+        rightStick_ = new global::Stick();
       }
       RightStick.MergeFrom(other.RightStick);
     }
     if (other.leftTrigger_ != null) {
       if (leftTrigger_ == null) {
-        leftTrigger_ = new global::BasicControl.Types.Trigger();
+        leftTrigger_ = new global::Trigger();
       }
       LeftTrigger.MergeFrom(other.LeftTrigger);
     }
     if (other.rightTrigger_ != null) {
       if (rightTrigger_ == null) {
-        rightTrigger_ = new global::BasicControl.Types.Trigger();
+        rightTrigger_ = new global::Trigger();
       }
       RightTrigger.MergeFrom(other.RightTrigger);
     }
     buttonMap_.Add(other.buttonMap_);
+    if (other.Name.Length != 0) {
+      Name = other.Name;
+    }
+    if (other.Description.Length != 0) {
+      Description = other.Description;
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -270,34 +714,42 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
           break;
         case 10: {
           if (leftStick_ == null) {
-            leftStick_ = new global::BasicControl.Types.Stick();
+            leftStick_ = new global::Stick();
           }
           input.ReadMessage(leftStick_);
           break;
         }
         case 18: {
           if (rightStick_ == null) {
-            rightStick_ = new global::BasicControl.Types.Stick();
+            rightStick_ = new global::Stick();
           }
           input.ReadMessage(rightStick_);
           break;
         }
         case 26: {
           if (leftTrigger_ == null) {
-            leftTrigger_ = new global::BasicControl.Types.Trigger();
+            leftTrigger_ = new global::Trigger();
           }
           input.ReadMessage(leftTrigger_);
           break;
         }
         case 34: {
           if (rightTrigger_ == null) {
-            rightTrigger_ = new global::BasicControl.Types.Trigger();
+            rightTrigger_ = new global::Trigger();
           }
           input.ReadMessage(rightTrigger_);
           break;
         }
         case 42: {
           buttonMap_.AddEntriesFrom(input, _map_buttonMap_codec);
+          break;
+        }
+        case 50: {
+          Name = input.ReadString();
+          break;
+        }
+        case 58: {
+          Description = input.ReadString();
           break;
         }
       }
@@ -751,400 +1203,6 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
             case 58:
             case 56: {
               blacklist_.AddEntriesFrom(input, _repeated_blacklist_codec);
-              break;
-            }
-          }
-        }
-      }
-
-    }
-
-    public sealed partial class Stick : pb::IMessage<Stick> {
-      private static readonly pb::MessageParser<Stick> _parser = new pb::MessageParser<Stick>(() => new Stick());
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pb::MessageParser<Stick> Parser { get { return _parser; } }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pbr::MessageDescriptor Descriptor {
-        get { return global::BasicControl.Descriptor.NestedTypes[2]; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      pbr::MessageDescriptor pb::IMessage.Descriptor {
-        get { return Descriptor; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Stick() {
-        OnConstruction();
-      }
-
-      partial void OnConstruction();
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Stick(Stick other) : this() {
-        deadzone_ = other.deadzone_;
-        controlMouse_ = other.controlMouse_;
-        regionStart_ = other.regionStart_;
-        regions_ = other.regions_.Clone();
-        invertUd_ = other.invertUd_;
-        invertLr_ = other.invertLr_;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Stick Clone() {
-        return new Stick(this);
-      }
-
-      /// <summary>Field number for the "deadzone" field.</summary>
-      public const int DeadzoneFieldNumber = 1;
-      private uint deadzone_;
-      /// <summary>
-      ///how far must the stick go to count as moved
-      /// </summary>
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public uint Deadzone {
-        get { return deadzone_; }
-        set {
-          deadzone_ = value;
-        }
-      }
-
-      /// <summary>Field number for the "control_mouse" field.</summary>
-      public const int ControlMouseFieldNumber = 2;
-      private bool controlMouse_;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool ControlMouse {
-        get { return controlMouse_; }
-        set {
-          controlMouse_ = value;
-        }
-      }
-
-      /// <summary>Field number for the "region_start" field.</summary>
-      public const int RegionStartFieldNumber = 3;
-      private int regionStart_;
-      /// <summary>
-      ///the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
-      /// </summary>
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int RegionStart {
-        get { return regionStart_; }
-        set {
-          regionStart_ = value;
-        }
-      }
-
-      /// <summary>Field number for the "regions" field.</summary>
-      public const int RegionsFieldNumber = 4;
-      private static readonly pb::FieldCodec<uint> _repeated_regions_codec
-          = pb::FieldCodec.ForUInt32(34);
-      private readonly pbc::RepeatedField<uint> regions_ = new pbc::RepeatedField<uint>();
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public pbc::RepeatedField<uint> Regions {
-        get { return regions_; }
-      }
-
-      /// <summary>Field number for the "invert_ud" field.</summary>
-      public const int InvertUdFieldNumber = 5;
-      private bool invertUd_;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool InvertUd {
-        get { return invertUd_; }
-        set {
-          invertUd_ = value;
-        }
-      }
-
-      /// <summary>Field number for the "invert_lr" field.</summary>
-      public const int InvertLrFieldNumber = 6;
-      private bool invertLr_;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool InvertLr {
-        get { return invertLr_; }
-        set {
-          invertLr_ = value;
-        }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override bool Equals(object other) {
-        return Equals(other as Stick);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool Equals(Stick other) {
-        if (ReferenceEquals(other, null)) {
-          return false;
-        }
-        if (ReferenceEquals(other, this)) {
-          return true;
-        }
-        if (Deadzone != other.Deadzone) return false;
-        if (ControlMouse != other.ControlMouse) return false;
-        if (RegionStart != other.RegionStart) return false;
-        if(!regions_.Equals(other.regions_)) return false;
-        if (InvertUd != other.InvertUd) return false;
-        if (InvertLr != other.InvertLr) return false;
-        return true;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override int GetHashCode() {
-        int hash = 1;
-        if (Deadzone != 0) hash ^= Deadzone.GetHashCode();
-        if (ControlMouse != false) hash ^= ControlMouse.GetHashCode();
-        if (RegionStart != 0) hash ^= RegionStart.GetHashCode();
-        hash ^= regions_.GetHashCode();
-        if (InvertUd != false) hash ^= InvertUd.GetHashCode();
-        if (InvertLr != false) hash ^= InvertLr.GetHashCode();
-        return hash;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override string ToString() {
-        return pb::JsonFormatter.ToDiagnosticString(this);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void WriteTo(pb::CodedOutputStream output) {
-        if (Deadzone != 0) {
-          output.WriteRawTag(8);
-          output.WriteUInt32(Deadzone);
-        }
-        if (ControlMouse != false) {
-          output.WriteRawTag(16);
-          output.WriteBool(ControlMouse);
-        }
-        if (RegionStart != 0) {
-          output.WriteRawTag(24);
-          output.WriteInt32(RegionStart);
-        }
-        regions_.WriteTo(output, _repeated_regions_codec);
-        if (InvertUd != false) {
-          output.WriteRawTag(40);
-          output.WriteBool(InvertUd);
-        }
-        if (InvertLr != false) {
-          output.WriteRawTag(48);
-          output.WriteBool(InvertLr);
-        }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int CalculateSize() {
-        int size = 0;
-        if (Deadzone != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Deadzone);
-        }
-        if (ControlMouse != false) {
-          size += 1 + 1;
-        }
-        if (RegionStart != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeInt32Size(RegionStart);
-        }
-        size += regions_.CalculateSize(_repeated_regions_codec);
-        if (InvertUd != false) {
-          size += 1 + 1;
-        }
-        if (InvertLr != false) {
-          size += 1 + 1;
-        }
-        return size;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(Stick other) {
-        if (other == null) {
-          return;
-        }
-        if (other.Deadzone != 0) {
-          Deadzone = other.Deadzone;
-        }
-        if (other.ControlMouse != false) {
-          ControlMouse = other.ControlMouse;
-        }
-        if (other.RegionStart != 0) {
-          RegionStart = other.RegionStart;
-        }
-        regions_.Add(other.regions_);
-        if (other.InvertUd != false) {
-          InvertUd = other.InvertUd;
-        }
-        if (other.InvertLr != false) {
-          InvertLr = other.InvertLr;
-        }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(pb::CodedInputStream input) {
-        uint tag;
-        while ((tag = input.ReadTag()) != 0) {
-          switch(tag) {
-            default:
-              input.SkipLastField();
-              break;
-            case 8: {
-              Deadzone = input.ReadUInt32();
-              break;
-            }
-            case 16: {
-              ControlMouse = input.ReadBool();
-              break;
-            }
-            case 24: {
-              RegionStart = input.ReadInt32();
-              break;
-            }
-            case 34:
-            case 32: {
-              regions_.AddEntriesFrom(input, _repeated_regions_codec);
-              break;
-            }
-            case 40: {
-              InvertUd = input.ReadBool();
-              break;
-            }
-            case 48: {
-              InvertLr = input.ReadBool();
-              break;
-            }
-          }
-        }
-      }
-
-    }
-
-    public sealed partial class Trigger : pb::IMessage<Trigger> {
-      private static readonly pb::MessageParser<Trigger> _parser = new pb::MessageParser<Trigger>(() => new Trigger());
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pb::MessageParser<Trigger> Parser { get { return _parser; } }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public static pbr::MessageDescriptor Descriptor {
-        get { return global::BasicControl.Descriptor.NestedTypes[3]; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      pbr::MessageDescriptor pb::IMessage.Descriptor {
-        get { return Descriptor; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Trigger() {
-        OnConstruction();
-      }
-
-      partial void OnConstruction();
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Trigger(Trigger other) : this() {
-        deadzone_ = other.deadzone_;
-        regions_ = other.regions_.Clone();
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public Trigger Clone() {
-        return new Trigger(this);
-      }
-
-      /// <summary>Field number for the "deadzone" field.</summary>
-      public const int DeadzoneFieldNumber = 1;
-      private uint deadzone_;
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public uint Deadzone {
-        get { return deadzone_; }
-        set {
-          deadzone_ = value;
-        }
-      }
-
-      /// <summary>Field number for the "regions" field.</summary>
-      public const int RegionsFieldNumber = 2;
-      private static readonly pb::FieldCodec<uint> _repeated_regions_codec
-          = pb::FieldCodec.ForUInt32(18);
-      private readonly pbc::RepeatedField<uint> regions_ = new pbc::RepeatedField<uint>();
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public pbc::RepeatedField<uint> Regions {
-        get { return regions_; }
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override bool Equals(object other) {
-        return Equals(other as Trigger);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public bool Equals(Trigger other) {
-        if (ReferenceEquals(other, null)) {
-          return false;
-        }
-        if (ReferenceEquals(other, this)) {
-          return true;
-        }
-        if (Deadzone != other.Deadzone) return false;
-        if(!regions_.Equals(other.regions_)) return false;
-        return true;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override int GetHashCode() {
-        int hash = 1;
-        if (Deadzone != 0) hash ^= Deadzone.GetHashCode();
-        hash ^= regions_.GetHashCode();
-        return hash;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public override string ToString() {
-        return pb::JsonFormatter.ToDiagnosticString(this);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void WriteTo(pb::CodedOutputStream output) {
-        if (Deadzone != 0) {
-          output.WriteRawTag(8);
-          output.WriteUInt32(Deadzone);
-        }
-        regions_.WriteTo(output, _repeated_regions_codec);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public int CalculateSize() {
-        int size = 0;
-        if (Deadzone != 0) {
-          size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Deadzone);
-        }
-        size += regions_.CalculateSize(_repeated_regions_codec);
-        return size;
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(Trigger other) {
-        if (other == null) {
-          return;
-        }
-        if (other.Deadzone != 0) {
-          Deadzone = other.Deadzone;
-        }
-        regions_.Add(other.regions_);
-      }
-
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-      public void MergeFrom(pb::CodedInputStream input) {
-        uint tag;
-        while ((tag = input.ReadTag()) != 0) {
-          switch(tag) {
-            default:
-              input.SkipLastField();
-              break;
-            case 8: {
-              Deadzone = input.ReadUInt32();
-              break;
-            }
-            case 18:
-            case 16: {
-              regions_.AddEntriesFrom(input, _repeated_regions_codec);
               break;
             }
           }

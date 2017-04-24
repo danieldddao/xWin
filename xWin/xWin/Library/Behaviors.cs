@@ -106,10 +106,10 @@ namespace xWin.Library
 
         private interface StickBehavior
         {
-            byte Act(short x, short y, KeyboardMouseState kms);
+            byte Act(short x, short y, ref KeyboardMouseState kms);
         }
 
-        protected class RegionStickBehavior : StickBehavior
+        public class RegionStickBehavior : StickBehavior
         {
             private readonly List<short> region_sizes;
             private readonly ushort deadzone;
@@ -129,7 +129,7 @@ namespace xWin.Library
                 else if (totalsize > 360) { throw new Exception("Regions not fully defined, size must be less than or equal to 360"); }
             }
             //region 0 is the deadzone
-            public byte Act(short x, short y, KeyboardMouseState kms)
+            public byte Act(short x, short y, ref KeyboardMouseState kms)
             {
                 var ps = new PolarStick(x, y, deadzone);
                 byte? region;
@@ -151,6 +151,8 @@ namespace xWin.Library
                 }
                 return (byte)region;
             }
+
+
         }
 
         private static StickBehavior GetStickBehavior(Stick s)
@@ -159,7 +161,7 @@ namespace xWin.Library
             return s.ControlMouse ? (StickBehavior) new MouseStickBehavior(s) : new RegionStickBehavior(s);
         }
 
-        protected class MouseStickBehavior : StickBehavior
+        private class MouseStickBehavior : StickBehavior
         {
             private readonly ushort deadzone;
             private readonly bool invert_lr, invert_ud;
@@ -169,19 +171,23 @@ namespace xWin.Library
                 invert_lr = s.InvertLr;
                 invert_ud = s.InvertUd;
             }
-            public byte Act(short x, short y, KeyboardMouseState kmstate)
+            public byte Act(short x, short y, ref KeyboardMouseState kmstate)
             {
                 if(Math.Sqrt(x*x+y*y) < deadzone)
                 {
-                    kmstate.mouse_movement = new KeyboardMouseState.coord { x = 0, y = 0 };
+                    kmstate.mouse_movement.x = 0;
+                    kmstate.mouse_movement.y = 0;
                     return 0;
                 }
-                kmstate.mouse_movement = new KeyboardMouseState.coord {x = x, y = y};
-                    return 1;
+                kmstate.mouse_movement.x = x;
+                kmstate.mouse_movement.y = y;
+
+                //Console.WriteLine(kmstate.mouse_movement.x.ToString()+","+ kmstate.mouse_movement.y.ToString());
+                return 1;
             }
         }
 
-        protected class TriggerBehavior
+        public class TriggerBehavior
         {
             private readonly List<Int16> regions;
             public TriggerBehavior(Trigger t)
@@ -205,7 +211,7 @@ namespace xWin.Library
             {
                 byte r = 0;
                 while (r < regions.Count && regions[r] < value) { r++; }
-                
+                //Console.WriteLine(value.ToString()+","+r.ToString());
                 return r;
             }
         }
