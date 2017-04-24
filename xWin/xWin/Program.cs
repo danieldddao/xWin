@@ -91,16 +91,14 @@ namespace xWin
         }
 
 
-        public static void MoveCursor( float x, float y, int dpi = 10)
+        public static void MoveCursor( short x, short y, int dpi = 10)
         {
-            const short MAX_INPUT = 32767;
-            x /= MAX_INPUT;
-            x *= dpi;
-            
-            y /= MAX_INPUT;
-            y *= dpi;
-
-            Cursor.Position = new Point(Cursor.Position.X + (short)Math.Floor(x), Cursor.Position.Y + (short)Math.Floor(y));
+            if(x!=0 && y!=0)
+            {
+                var t = Math.Atan2(x, y);
+                Console.WriteLine(Math.Sin(t)+","+Math.Cos(t));
+                Cursor.Position = new Point(Cursor.Position.X + (int)(Math.Sin(t) * dpi), Cursor.Position.Y + (int)(Math.Cos(t) * dpi));
+            }
         }
 
 
@@ -190,7 +188,7 @@ namespace xWin
                 datas.Gamepad.RightThumbX = shortbound((int)datas.Gamepad.RightThumbX - rx);
                 datas.Gamepad.RightThumbY = shortbound((int)datas.Gamepad.RightThumbY - ry);
                 var kms = i.NextState(datas.Gamepad);
-                MoveCursor(kms.mouse_movement.x, kms.mouse_movement.y);
+                MoveCursor((short)kms.mouse_movement.x, (short)kms.mouse_movement.y, 5);
                 Console.Write("Pressed: ");
                 foreach (var l in kms.pressed)
                 {
