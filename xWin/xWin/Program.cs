@@ -16,19 +16,13 @@ using Moq;
 using xWin.Wrapper;
 using xWin.Forms.ButtonMaps;
 using System.Diagnostics;
-
+using static TypingControl.Types;
+using static xWin.Library.WI;
 namespace xWin
 {
     class Program
     {
-        public static short shortbound(int i)
-        {
-            if (i < -32767)
-                return -32767;
-            if (i > 32767)
-                return 32767;
-            return (short)i;
-        }
+
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
         {
@@ -75,7 +69,7 @@ namespace xWin
             Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
         }
-        
+
         public static void RunFormApplication()
         {
             Application.EnableVisualStyles();
@@ -87,24 +81,12 @@ namespace xWin
             Application.Run(panel);
         }
 
-
-        public static void MoveCursor( short x, short y, int dpi = 10)
-        {
-            if(x!=0 && y!=0)
-            {
-                var t = Math.Atan2(x, y);
-                Console.WriteLine(Math.Sin(t)+","+Math.Cos(t));
-                Cursor.Position = new Point(Cursor.Position.X + (int)(Math.Sin(t) * dpi), Cursor.Position.Y + (int)(Math.Cos(t) * dpi));
-            }
-        }
-
-
-
         [STAThread]
         static void Main(string[] args)
         {
             //RunFormApplicationForTesting();
-            RunFormApplication();
+            //RunFormApplication();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var l = new List<string>();
@@ -141,9 +123,8 @@ namespace xWin
 
 
 
-            
+
             InteractionLoop(controller, cfw.c, cc, 20000);
-               
         }
     }
 }
