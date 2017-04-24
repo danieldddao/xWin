@@ -10,15 +10,12 @@ using xWin.Forms;
 using xWin.Wrapper;
 //using static Configuration.Types;
 using SharpDX.DirectInput;
-<<<<<<< HEAD
 using xWin.Config;
 using System.Drawing;
-=======
 using Moq;
 using xWin.Wrapper;
 using xWin.Forms.ButtonMaps;
 using System.Diagnostics;
->>>>>>> master
 
 namespace xWin
 {
@@ -27,7 +24,6 @@ namespace xWin
 
     class Program
     {
-<<<<<<< HEAD
         public static int shortbound(int i)
         {
             if (i < -32767)
@@ -36,8 +32,6 @@ namespace xWin
                 return 32767;
             return i;
         }
-=======
-
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
         {
@@ -84,8 +78,7 @@ namespace xWin
             Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
         }
-
->>>>>>> master
+        
         public static void RunFormApplication()
         {
             Application.EnableVisualStyles();
@@ -101,7 +94,7 @@ namespace xWin
         static void Main(string[] args)
         {
             //RunFormApplicationForTesting();
-            RunFormApplication();
+            //RunFormApplication();
 
             /*
             while (true)
@@ -131,7 +124,7 @@ namespace xWin
                     //Thread.Sleep(200);
                     Console.Clear();  
             }*/
-            /*
+            //*
            // Initialize DirectInput
            var directInput = new DirectInput();
            // Find a Joystick Guid
@@ -160,56 +153,7 @@ namespace xWin
            }
            // Acquire the joystick
            joystick.Acquire();
-           // Poll events from joystick
-           while (true)
-           {
-               joystick.Poll();
-               var datas = joystick.GetCurrentState();
-               var state = DI2XI.di2xi(datas);
-               foreach (GamepadButtonFlags b in Enum.GetValues(typeof(GamepadButtonFlags)))
-               {
-                   if (state.Gamepad.Buttons.HasFlag(b))
-                   {
-                       Console.Write(b);
-                       Console.Write(",");
-                   }
-               }
-               if (state.Gamepad.LeftTrigger > 0)
-                   Console.Write("LeftTrigger,");
-               if (state.Gamepad.RightTrigger > 0)
-                   Console.Write("RightTrigger,");
-
-<<<<<<< HEAD
-            // Initialize DirectInput
-            var directInput = new DirectInput();
-            // Find a Joystick Guid
-            var joystickGuid = Guid.Empty;
-            foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Gamepad, DeviceEnumerationFlags.AllDevices))
-                joystickGuid = deviceInstance.InstanceGuid;
-            // If Gamepad not found, look for a Joystick
-            if (joystickGuid == Guid.Empty)
-                foreach (var deviceInstance in directInput.GetDevices(SharpDX.DirectInput.DeviceType.Joystick, DeviceEnumerationFlags.AllDevices))
-                    joystickGuid = deviceInstance.InstanceGuid;
-            // If Joystick not found, throws an error
-            if (joystickGuid == Guid.Empty)
-            {
-                Console.WriteLine("No joystick/Gamepad found.");
-                Console.ReadKey();
-                Environment.Exit(1);
-            }
-            // Instantiate the joystick
-            var joystick = new Joystick(directInput, joystickGuid);
-            Console.WriteLine("Found Joystick/Gamepad with GUID: {0}", joystickGuid);
-            // Set BufferSize in order to use buffered data.
-            joystick.Properties.BufferSize = 128;
-            foreach (DeviceObjectInstance doi in joystick.GetObjects(DeviceObjectTypeFlags.Axis))
-            {
-                joystick.GetObjectPropertiesById(doi.ObjectId).Range = new InputRange(-32767, 32767);
-            }
-            // Acquire the joystick
-            joystick.Acquire();
             // Poll events from joystick
-
             var i = new Interpreter(Defaults.DefaultConfiguration());
 
             System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
@@ -226,8 +170,8 @@ namespace xWin
 
 
             var wrapper = new SystemWrapper();
-            
-            
+
+
             while (true)
             {
                 //*
@@ -241,8 +185,8 @@ namespace xWin
                 datas.RotationY = shortbound(datas.RotationY - ry);
                 var state = DI2XI.di2xi(datas);
                 var kms = i.NextState(state.Gamepad);
-                Console.WriteLine(kms.mouse_movement.x.ToString()+","+kms.mouse_movement.y.ToString());
-                Cursor.Position = new Point(Cursor.Position.X+ (kms.mouse_movement.x / 100), Cursor.Position.Y+ (kms.mouse_movement.y /100));
+                Console.WriteLine(kms.mouse_movement.x.ToString() + "," + kms.mouse_movement.y.ToString());
+                Cursor.Position = new Point(Cursor.Position.X + (kms.mouse_movement.x / 100), Cursor.Position.Y + (kms.mouse_movement.y / 100));
                 Console.Write("Pressed: ");
                 foreach (var l in kms.pressed)
                 {
@@ -291,7 +235,6 @@ namespace xWin
                     Console.Write("LeftTrigger,");
                 if (state.Gamepad.RightTrigger > 0)
                     Console.Write("RightTrigger,");
-
                 var ps = new PolarStick(state.Gamepad.LeftThumbX, state.Gamepad.LeftThumbY, 1000);
                 Console.WriteLine("");
                 Console.WriteLine("Left Stick:");
@@ -311,26 +254,8 @@ namespace xWin
                 Thread.Sleep(300);
                 Console.Clear();
                // */
+  
             }
-=======
-               var ps = new PolarStick(state.Gamepad.LeftThumbX, state.Gamepad.LeftThumbY, 1000);
-               Console.WriteLine("");
-               Console.WriteLine("Left Stick:");
-               Console.Write("Direction: ");
-               Console.WriteLine(ps.theta);
-               Console.Write("Distance: ");
-               Console.WriteLine(ps.R);
-               ps = new PolarStick(state.Gamepad.RightThumbX, state.Gamepad.RightThumbY, 1000);
-               Console.WriteLine("");
-               Console.WriteLine("Right Stick:");
-               Console.Write("Direction: ");
-               Console.WriteLine(ps.theta);
-               Console.Write("Distance: ");
-               Console.WriteLine(ps.R);
-               Thread.Sleep(300);
-               Console.Clear();
-           }*/
->>>>>>> master
 
         }
     }
