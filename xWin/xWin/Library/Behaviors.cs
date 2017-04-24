@@ -8,13 +8,13 @@ using static BasicControl.Types;
 namespace xWin.Library
 {
     public partial class Interpreter : IInterpreter
-    { 
+    {
         protected class ButtonBehavior
         {
             public class AnAction
             {
-                private readonly List<Keys> ks,release_ks;
-                private readonly List<SpecialAction> sas,release_sas;
+                private readonly List<Keys> ks, release_ks;
+                private readonly List<SpecialAction> sas, release_sas;
                 public AnAction(Actions a, Actions b)
                 {
                     ks = new List<Keys>();
@@ -58,7 +58,7 @@ namespace xWin.Library
             private readonly bool toggle_press, toggle_release;
 
             private bool press_state, release_state;
-            
+
             private bool previous_state;
 
             private readonly List<GamepadFlags> blacklist;
@@ -78,7 +78,7 @@ namespace xWin.Library
                 release_state = false;
                 previous_state = false;
                 blacklist = new List<GamepadFlags>();
-                if (b.Blacklist != null) 
+                if (b.Blacklist != null)
                     foreach (var bl in b.Blacklist) { blacklist.Add(new GamepadFlags(bl)); }
             }
             private bool IsBlacklisted(GamepadFlags g)
@@ -91,15 +91,15 @@ namespace xWin.Library
             }
             public void Act(bool state, GamepadFlags g, KeyboardMouseState kmstate)
             {
-                
-                if(IsBlacklisted(g))
+
+                if (IsBlacklisted(g))
                 {
                     if (toggle_press && press_state) { press.feed(kmstate); }
                     if (toggle_release && release_state) { release.feed(kmstate); }
                     return;
                 }
-                
-                
+
+
                 if (previous_state)
                 {
                     if (state) /*hold*/ { hold.feed(kmstate); }
@@ -120,7 +120,7 @@ namespace xWin.Library
                 }
                 if (toggle_press && press_state) { press.feed(kmstate); }
                 if (toggle_release && release_state) { release.feed(kmstate); }
-                
+
                 previous_state = state;
             }
         }
@@ -172,13 +172,13 @@ namespace xWin.Library
                 }
                 return (byte)region;
             }
-            
+
         }
 
         private static StickBehavior GetStickBehavior(Stick s)
         {
             if (s == null) { return new RegionStickBehavior(new Stick()); }
-            return s.ControlMouse ? (StickBehavior) new MouseStickBehavior(s) : new RegionStickBehavior(s);
+            return s.ControlMouse ? (StickBehavior)new MouseStickBehavior(s) : new RegionStickBehavior(s);
         }
 
         private class MouseStickBehavior : StickBehavior
@@ -193,7 +193,7 @@ namespace xWin.Library
             }
             public byte Act(short x, short y, ref KeyboardMouseState kmstate)
             {
-                if(Math.Sqrt(x*x+y*y) < deadzone)
+                if (Math.Sqrt(x * x + y * y) < deadzone)
                 {
                     kmstate.mouse_movement.x = 0;
                     kmstate.mouse_movement.y = 0;
@@ -212,7 +212,7 @@ namespace xWin.Library
             private readonly List<Int16> regions;
             public TriggerBehavior(Trigger t)
             {
-                if(t == null) { t = new Trigger(); t.Deadzone = 255; }
+                if (t == null) { t = new Trigger(); t.Deadzone = 255; }
                 var size = t.Deadzone;
                 if (t.Deadzone == 0) { throw new Exception("Deadzone must be greater than 0"); }
                 regions = new List<Int16>();

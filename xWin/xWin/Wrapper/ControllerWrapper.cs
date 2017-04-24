@@ -10,9 +10,11 @@ using System.Drawing;
 
 namespace xWin.Wrapper
 {
-    public interface IXControllerWrapper
+    public interface IControllerWrapper
     {
         bool IsConnected();
+        State GetState();
+        void UpdateState();
         void LeftClick();
         void LeftDown();
         void LeftUp();
@@ -21,11 +23,13 @@ namespace xWin.Wrapper
         void RightUp();
         void MoveCursor(int dpi, int deadZoneRad);
         void MoveCursor(int flag,int deadZoneRad,int dpi);
+        bool IsButtonPressed(GamepadButtonFlags button);
+        void MouseWheel(int WHEEL_DATA);
     }
 
-    public class XControllerWrapper : IXControllerWrapper
+    public class ControllerWrapper : IControllerWrapper
     {
-        SharpDX.XInput.Controller controller;
+        Controller controller;
         private State currentControllerState;
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
@@ -37,10 +41,40 @@ namespace xWin.Wrapper
         private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
         private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
         private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        private const int MOUSEEVENTF_WHEEL = 0x0800;
+
+        public ControllerWrapper(Controller controller)
+        {
+            this.controller = controller;
+            if (controller.IsConnected)
+            {
+                currentControllerState = controller.GetState();
+            }
+        }
 
         public virtual bool IsConnected()
         {
             return controller.IsConnected;
+        }
+
+        public State GetState()
+        {
+            return currentControllerState;
+        }
+
+        public void UpdateState()
+        {
+            try
+            {
+                if (controller.IsConnected)
+                {
+                    currentControllerState = controller.GetState();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}", e);
+            }
         }
 
         public virtual void LeftClick()
@@ -73,6 +107,11 @@ namespace xWin.Wrapper
         public virtual void RightUp()
         {
             mouse_event(MOUSEEVENTF_RIGHTUP, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
+        }
+
+        public virtual void MouseWheel(int WHEEL_DATA)
+        {
+            mouse_event(MOUSEEVENTF_WHEEL, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, WHEEL_DATA, 0);
         }
 
         public virtual void MoveCursor(int dpi = 10, int deadZoneRad = 7000)
@@ -128,6 +167,11 @@ namespace xWin.Wrapper
 
                 Cursor.Position = new Point(Cursor.Position.X, Cursor.Position.Y + (short)Math.Floor(yDiff));
             }
+        }
+
+        public bool IsButtonPressed(GamepadButtonFlags button)
+        {
+            return currentControllerState.Gamepad.Buttons.HasFlag(button);
         }
     }
 }

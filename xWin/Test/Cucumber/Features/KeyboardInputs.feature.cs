@@ -24,7 +24,7 @@ namespace Cucumber.Features
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Keyboard_Inputs.feature"
+#line 1 "KeyboardInputs.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
@@ -65,18 +65,16 @@ namespace Cucumber.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press a key on keyboard using Windows.Forms.Keys")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressAKeyOnKeyboardUsingWindows_Forms_Keys()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press a key on keyboard using Windows.Forms.Keys", new string[] {
-                        "mytag"});
-#line 4
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press a key on keyboard using Windows.Forms.Keys", ((string[])(null)));
+#line 3
 this.ScenarioSetup(scenarioInfo);
-#line 5
+#line 4
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 6
+#line 5
  testRunner.When("I press key Keys.B", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 7
+#line 6
  testRunner.Then("It should be pressed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -84,18 +82,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press a key on keyboard using lowercase character")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressAKeyOnKeyboardUsingLowercaseCharacter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press a key on keyboard using lowercase character", new string[] {
-                        "mytag"});
-#line 10
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press a key on keyboard using lowercase character", ((string[])(null)));
+#line 8
 this.ScenarioSetup(scenarioInfo);
-#line 11
+#line 9
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 12
+#line 10
  testRunner.When("I press key \'a\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 13
+#line 11
  testRunner.Then("It should be pressed without shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -103,18 +99,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press a key on keyboard using uppercase character")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressAKeyOnKeyboardUsingUppercaseCharacter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press a key on keyboard using uppercase character", new string[] {
-                        "mytag"});
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press a key on keyboard using uppercase character", ((string[])(null)));
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line 16
+#line 14
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
+#line 15
  testRunner.When("I press key \'A\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
+#line 16
  testRunner.Then("It should be pressed with shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -125,13 +119,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void PressAKeyOnKeyboardUsingShiftedkeyCharacter()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press a key on keyboard using shiftedkey character", ((string[])(null)));
-#line 19
+#line 17
 this.ScenarioSetup(scenarioInfo);
-#line 20
+#line 18
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
+#line 19
  testRunner.When("I press key \'!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
+#line 20
  testRunner.Then("It should be pressed with shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -139,18 +133,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press keys from given lowercase string")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressKeysFromGivenLowercaseString()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given lowercase string", new string[] {
-                        "mytag"});
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given lowercase string", ((string[])(null)));
+#line 22
 this.ScenarioSetup(scenarioInfo);
-#line 26
+#line 23
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
+#line 24
  testRunner.When("I press keys from string \'abc\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
+#line 25
  testRunner.Then("It should be pressed without shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -158,18 +150,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press keys from given uppercase-lowercase string")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressKeysFromGivenUppercase_LowercaseString()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given uppercase-lowercase string", new string[] {
-                        "mytag"});
-#line 30
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given uppercase-lowercase string", ((string[])(null)));
+#line 26
 this.ScenarioSetup(scenarioInfo);
-#line 31
+#line 27
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
+#line 28
  testRunner.When("I press keys from string \'Abc\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 33
+#line 29
  testRunner.Then("It should be pressed with shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -177,18 +167,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press keys from given shiftedkeys-lowercase string")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressKeysFromGivenShiftedkeys_LowercaseString()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given shiftedkeys-lowercase string", new string[] {
-                        "mytag"});
-#line 35
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given shiftedkeys-lowercase string", ((string[])(null)));
+#line 30
 this.ScenarioSetup(scenarioInfo);
-#line 36
+#line 31
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
+#line 32
  testRunner.When("I press keys from string \'!@bc\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
+#line 33
  testRunner.Then("It should be pressed with shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -196,18 +184,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press keys from given uppercase string")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressKeysFromGivenUppercaseString()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given uppercase string", new string[] {
-                        "mytag"});
-#line 40
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given uppercase string", ((string[])(null)));
+#line 34
 this.ScenarioSetup(scenarioInfo);
-#line 41
+#line 35
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
+#line 36
  testRunner.When("I press keys from string \'ABC\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 43
+#line 37
  testRunner.Then("It should be pressed with shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -215,18 +201,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press keys from given shiftedkeys string")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressKeysFromGivenShiftedkeysString()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given shiftedkeys string", new string[] {
-                        "mytag"});
-#line 45
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press keys from given shiftedkeys string", ((string[])(null)));
+#line 38
 this.ScenarioSetup(scenarioInfo);
-#line 46
+#line 39
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 47
+#line 40
  testRunner.When("I press keys from string \'#$#\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 48
+#line 41
  testRunner.Then("It should be pressed with shift key", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -234,18 +218,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Press shortcut from given valid shortcut")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void PressShortcutFromGivenValidShortcut()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press shortcut from given valid shortcut", new string[] {
-                        "mytag"});
-#line 51
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Press shortcut from given valid shortcut", ((string[])(null)));
+#line 43
 this.ScenarioSetup(scenarioInfo);
-#line 52
+#line 44
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
+#line 45
  testRunner.When("I press the shortcut Ctrl+R", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
+#line 46
  testRunner.Then("It should be pressed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -253,18 +235,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Open application from invalid path")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void OpenApplicationFromInvalidPath()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open application from invalid path", new string[] {
-                        "mytag"});
-#line 57
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open application from invalid path", ((string[])(null)));
+#line 48
 this.ScenarioSetup(scenarioInfo);
-#line 58
+#line 49
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
+#line 50
  testRunner.When("I open the application from invalid path \"file\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 60
+#line 51
  testRunner.Then("It should not open the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -272,18 +252,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Open application from valid path")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void OpenApplicationFromValidPath()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open application from valid path", new string[] {
-                        "mytag"});
-#line 63
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open application from valid path", ((string[])(null)));
+#line 53
 this.ScenarioSetup(scenarioInfo);
-#line 64
+#line 54
  testRunner.Given("I have keyboard set up", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
+#line 55
  testRunner.When("I open the application from valid path \"file\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 66
+#line 56
  testRunner.Then("It should open the application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
