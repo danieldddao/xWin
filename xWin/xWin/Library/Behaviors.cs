@@ -15,6 +15,7 @@ namespace xWin.Library
             {
                 private readonly List<Keys> ks, release_ks;
                 private readonly List<SpecialAction> sas, release_sas;
+                private bool justdone;
                 public AnAction(Actions a, Actions b)
                 {
                     ks = new List<Keys>();
@@ -45,13 +46,22 @@ namespace xWin.Library
                             }
                         }
                     }
+                    justdone = false;
                 }
                 public void feed(KeyboardMouseState kmstate)
                 {
-                    foreach (var k in ks) { kmstate.pressed.Enqueue(k); }
-                    foreach (var sa in sas) { kmstate.special.Enqueue(sa); }
-                    foreach (var k in release_ks) { kmstate.released.Enqueue(k); }
-                    foreach (var sa in release_sas) { kmstate.r_special.Enqueue(sa); }
+                    if (!justdone)
+                    {
+                        foreach (var k in ks) { kmstate.pressed.Enqueue(k); }
+                        foreach (var sa in sas) { kmstate.special.Enqueue(sa); }
+                        foreach (var k in release_ks) { kmstate.released.Enqueue(k); }
+                        foreach (var sa in release_sas) { kmstate.r_special.Enqueue(sa); }
+                    }
+                    justdone = true;
+                }
+                public void Pass()
+                {
+                    justdone = false;
                 }
             }
             private AnAction press, hold, release, stay;
@@ -102,21 +112,48 @@ namespace xWin.Library
 
                 if (previous_state)
                 {
-                    if (state) /*hold*/ { hold.feed(kmstate); }
+                    if (state) /*hold*/
+                    {
+                        press.Pass();
+                        hold.feed(kmstate);
+                        release.Pass();
+                        stay.Pass();
+                    }
                     else//release
                     {
-                        if (!toggle_release) { release.feed(kmstate); }
-                        else { release_state = !release_state; }
+                        if (!toggle_release)
+                        {
+                            press.Pass();
+                            hold.Pass();
+                            release.feed(kmstate);
+                            stay.Pass();
+                        }
+                        else
+                        {
+                            release_state = !release_state;
+                        }
                     }
                 }
                 else
                 {
                     if (state)//press
                     {
-                        if (!toggle_press) { press.feed(kmstate); }
+                        if (!toggle_press)
+                        {
+                            press.feed(kmstate);
+                            hold.Pass();
+                            release.Pass();
+                            stay.Pass();
+                        }
                         else { press_state = !press_state; }
                     }
-                    else /*stay*/ { stay.feed(kmstate); }
+                    else /*stay*/
+                    {
+                        press.Pass();
+                        hold.Pass();
+                        release.Pass();
+                        stay.feed(kmstate);
+                    }
                 }
                 if (toggle_press && press_state) { press.feed(kmstate); }
                 if (toggle_release && release_state) { release.feed(kmstate); }
