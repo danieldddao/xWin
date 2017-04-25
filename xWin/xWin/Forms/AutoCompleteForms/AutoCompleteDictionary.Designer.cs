@@ -1,4 +1,4 @@
-﻿namespace xWin.Forms
+﻿namespace xWin.Forms.AutoCompleteForms
 {
     partial class AutoCompleteDictionary
     {

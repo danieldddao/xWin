@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using xWin.Library;
 
-namespace xWin.Forms
+namespace xWin.Forms.AutoCompleteForms
 {
     public partial class AutoComplete : Form
     {
@@ -17,7 +17,6 @@ namespace xWin.Forms
 
         public bool enableWordPrediction = true;
         public bool enableQuickType = true;
-        public bool usingxWin = false;
 
         public Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
         public string typedWord = ""; // word that user's typing
@@ -199,28 +198,24 @@ namespace xWin.Forms
         {
             try
             {
+                currentWindow = GetCurrentWindow();
+                Log.GetLogger().Info("[Key Down] Current Active Window: " + currentWindow);
+                // Get the Id of xWin App
+                IntPtr xWinId = IntPtr.Zero;
+                foreach (Process p in Process.GetProcessesByName("xWin"))
+                {
+                    xWinId = p.MainWindowHandle;
+                }
+                Log.GetLogger().Info("[Key Down] xWin Window ID: " + xWinId);
+
                 // If not interacting with xWin App
-                if (usingxWin == false)
+                if (currentWindow != xWinId)
                 {
                     KeyboardInputsUnsubscribe();
-                    currentWindow = GetCurrentWindow();
-                    Log.GetLogger().Info("Current Active Window " + currentWindow);
-
                     if (enableQuickType)
                     {
-                        // Get the Id of xWin App
-                        IntPtr xWinId = IntPtr.Zero;
-                        foreach (Process p in Process.GetProcessesByName("xWin"))
-                        {
-                            xWinId = p.MainWindowHandle;
-                        }
-                        //Log.GetLogger().Info("xWin Window ID: " + xWinId);
-                        // show quicktype bar if current active window is not xWin
-                        if (currentWindow != xWinId)
-                        {
-                            this.TopMost = true;
-                            this.Show();
-                        }
+                        this.TopMost = true;
+                        this.Show();
                     }
 
                     // If keydown is Tab key
@@ -238,7 +233,7 @@ namespace xWin.Forms
                         { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Right); }
 
                         typedWord += predictiveSubWord; // Apply the currently typed word
-                        Log.GetLogger().Info("Applied currently typed word: " + typedWord);
+                        Log.GetLogger().Info("[Key Down] Applied currently typed word: " + typedWord);
                     }
                     // New word
                     else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
@@ -254,16 +249,16 @@ namespace xWin.Forms
                             systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Back);
                         }
                         if (typedWord.Length > 0) { typedWord = typedWord.Remove(typedWord.Length - 1); }
-                        Log.GetLogger().Info("Backspace: removed last character, currently typed word is " + typedWord);
+                        Log.GetLogger().Info("[Key Down] Backspace: removed last character, currently typed word is " + typedWord);
                     }
                     else
                     {
                         keys[1] = e.KeyCode;
                         string c = KeyToChar(keys);
-                        Log.GetLogger().Info("KeyToChar: " + c);
+                        Log.GetLogger().Info("[Key Down] KeyToChar: " + c);
                         typedWord += c;
-                        Log.GetLogger().Info("word typed: " + typedWord + " (length: " + typedWord.Length + ")");
-                        Log.GetLogger().Info("Contain null char: " + typedWord.Contains('\0'));
+                        Log.GetLogger().Info("[Key Down] word typed: " + typedWord + " (length: " + typedWord.Length + ")");
+                        Log.GetLogger().Info("[Key Down] Contain null char: " + typedWord.Contains('\0'));
                     }
                     KeyboardInputsSubscribe();
                 }
@@ -271,6 +266,7 @@ namespace xWin.Forms
             catch (Exception ex)
             {
                 Log.GetLogger().Error(ex);
+                Log.GetLogger().Error("[Key Down]:");
             }
         }
 
@@ -279,8 +275,18 @@ namespace xWin.Forms
         {
             try
             {
+                currentWindow = GetCurrentWindow();
+                Log.GetLogger().Info("[Key Up] Current Active Window: " + currentWindow);
+                // Get the Id of xWin App
+                IntPtr xWinId = IntPtr.Zero;
+                foreach (Process p in Process.GetProcessesByName("xWin"))
+                {
+                    xWinId = p.MainWindowHandle;
+                }
+                Log.GetLogger().Info("[Key Up] xWin Window ID: " + xWinId);
+
                 // If not interacting with xWin App
-                if (usingxWin == false)
+                if (currentWindow != xWinId)
                 {
                     KeyboardInputsUnsubscribe(); // Stop reading keyboard inputs
 
@@ -295,7 +301,7 @@ namespace xWin.Forms
                         List<string> topThree = db.GetTopThreeWords(typedWord);
                         string logMsg = "top three words: ";
                         foreach (string word in topThree) { logMsg += word + " "; }
-                        Log.GetLogger().Info(logMsg);
+                        Log.GetLogger().Info("[Key Up] " + logMsg);
 
                         // If there exists at least a word that matches the currently typed word
                         if (topThree.Count > 0)
@@ -333,7 +339,7 @@ namespace xWin.Forms
             catch (Exception ex)
             {
                 Log.GetLogger().Error(ex);
-                Log.GetLogger().Error("Error when key is up :");
+                Log.GetLogger().Error("[Key Up] Error when key is up :");
             }
         }
 
@@ -354,35 +360,31 @@ namespace xWin.Forms
         {
             try
             {
-                // If not interacting with xWin App
-                if (usingxWin == false)
+                Log.GetLogger().Info("[QuickTypeBar] Switch to last window used to type: " + currentWindow);
+                FocusToPreviousWindow();
+
+                if (word != "")
                 {
-                    Log.GetLogger().Info("[QuickTypeBar] Switch to last window used to type: " + currentWindow);
-                    FocusToPreviousWindow();
+                    Log.GetLogger().Info("[QuickTypeBar] Applying Word: " + word);
+                    KeyboardInputsUnsubscribe();
 
-                    if (word != "")
-                    {
-                        Log.GetLogger().Info("[QuickTypeBar] Applying Word: " + word);
-                        KeyboardInputsUnsubscribe();
+                    // Apply the predictive word
+                    string subword = word.Substring(word.IndexOf(typedWord) + typedWord.ToCharArray().Length);
+                    Log.GetLogger().Info("[QuickTypeBar] Subword: " + subword);
 
-                        // Apply the predictive word
-                        string subword = word.Substring(word.IndexOf(typedWord) + typedWord.ToCharArray().Length);
-                        Log.GetLogger().Info("[QuickTypeBar] Subword: " + subword);
+                    Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
+                    systemWrapper.SimulateText(subword);
 
-                        Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                        systemWrapper.SimulateText(subword);
+                    typedWord = word; // Apply the currently typed word
+                    quickTypeButton1.Text = "";
+                    quickTypeButton2.Text = "";
+                    quickTypeButton3.Text = "";
+                    Log.GetLogger().Info("[QuickTypeBar] Applied currently typed word: " + typedWord);
 
-                        typedWord = word; // Apply the currently typed word
-                        quickTypeButton1.Text = "";
-                        quickTypeButton2.Text = "";
-                        quickTypeButton3.Text = "";
-                        Log.GetLogger().Info("[QuickTypeBar] Applied currently typed word: " + typedWord);
-
-                        QuickTypeBarTimer.Stop(); // stop previous timer
-                        QuickTypeBarTimer.Interval = quickTypeTimerInterval;
-                        QuickTypeBarTimer.Start(); // start new timer
-                        KeyboardInputsSubscribe();
-                    }
+                    QuickTypeBarTimer.Stop(); // stop previous timer
+                    QuickTypeBarTimer.Interval = quickTypeTimerInterval;
+                    QuickTypeBarTimer.Start(); // start new timer
+                    KeyboardInputsSubscribe();
                 }
             }
             catch (Exception e)

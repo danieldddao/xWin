@@ -103,17 +103,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AutoCompleteAddNewWord.cs">
+    <Compile Include="Forms\AutoCompleteForms\AutoCompleteAddNewWord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AutoCompleteAddNewWord.Designer.cs">
+    <Compile Include="Forms\AutoCompleteForms\AutoCompleteAddNewWord.Designer.cs">
       <DependentUpon>AutoCompleteAddNewWord.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AutoCompleteDictionary.cs">
+    <Compile Include="Forms\AutoCompleteForms\AutoCompleteDictionary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AutoCompleteDictionary.Designer.cs">
+    <Compile Include="Forms\AutoCompleteForms\AutoCompleteDictionary.Designer.cs">
       <DependentUpon>AutoCompleteDictionary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AutoCompleteForms\QuickTypeSuggesstionsTips.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoCompleteForms\QuickTypeSuggesstionsTips.Designer.cs">
+      <DependentUpon>QuickTypeSuggesstionsTips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AutoCompleteForms\WordPredictionTips.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AutoCompleteForms\WordPredictionTips.Designer.cs">
+      <DependentUpon>WordPredictionTips.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ButtonMaps\ShortcutMapping.cs">
       <SubType>Form</SubType>
@@ -139,10 +151,10 @@
     <Compile Include="Forms\EmailError.Designer.cs">
       <DependentUpon>EmailError.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AutoComplete.cs">
+    <Compile Include="Forms\AutoCompleteForms\AutoComplete.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AutoComplete.Designer.cs">
+    <Compile Include="Forms\AutoCompleteForms\AutoComplete.Designer.cs">
       <DependentUpon>AutoComplete.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\QuickTypeButton.cs">
@@ -204,11 +216,17 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\AutoCompleteAddNewWord.resx">
+    <EmbeddedResource Include="Forms\AutoCompleteForms\AutoCompleteAddNewWord.resx">
       <DependentUpon>AutoCompleteAddNewWord.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AutoCompleteDictionary.resx">
+    <EmbeddedResource Include="Forms\AutoCompleteForms\AutoCompleteDictionary.resx">
       <DependentUpon>AutoCompleteDictionary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AutoCompleteForms\QuickTypeSuggesstionsTips.resx">
+      <DependentUpon>QuickTypeSuggesstionsTips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AutoCompleteForms\WordPredictionTips.resx">
+      <DependentUpon>WordPredictionTips.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ButtonMaps\ShortcutMapping.resx">
       <DependentUpon>ShortcutMapping.cs</DependentUpon>
@@ -228,7 +246,7 @@
     <EmbeddedResource Include="Forms\EmailError.resx">
       <DependentUpon>EmailError.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AutoComplete.resx">
+    <EmbeddedResource Include="Forms\AutoCompleteForms\AutoComplete.resx">
       <DependentUpon>AutoComplete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\XWinPanel.resx">
@@ -252,6 +270,8 @@
     <None Include="Resources\xboxRightShield.png" />
     <None Include="Resources\button_background.png" />
     <None Include="Resources\buttonBackground.jpg" />
+    <None Include="Resources\wordpredictiontips.gif" />
+    <None Include="Resources\quicktypetips.gif" />
     <Content Include="Resources\XWin.ico" />
     <Content Include="Resources\XWin1.ico" />
     <Content Include="Resources\XWin2.ico" />

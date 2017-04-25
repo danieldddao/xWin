@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xWin.Forms.AutoCompleteForms;
 using xWin.Library;
 
 namespace xWin.Forms
@@ -174,9 +175,9 @@ namespace xWin.Forms
         {
             if (XCon1.IsConnected())
             {
-                autoComplete.usingxWin = true;
+                autoComplete.KeyboardInputsUnsubscribe();
                 OpXCon1.ShowDialog();
-                autoComplete.usingxWin = false;
+                autoComplete.KeyboardInputsSubscribe();
                 Log.GetLogger().Info("Opened Controller 1's Dialog");
             }
         }
@@ -185,9 +186,9 @@ namespace xWin.Forms
         {
             if (XCon2.IsConnected())
             {
-                autoComplete.usingxWin = true;
+                autoComplete.KeyboardInputsUnsubscribe();
                 OpXCon2.ShowDialog();
-                autoComplete.usingxWin = false;
+                autoComplete.KeyboardInputsSubscribe();
                 Log.GetLogger().Info("Opened Controller 2's Dialog");
             }
         }
@@ -196,9 +197,9 @@ namespace xWin.Forms
         {
             if (XCon3.IsConnected())
             {
-                autoComplete.usingxWin = true;
+                autoComplete.KeyboardInputsUnsubscribe();
                 OpXCon3.ShowDialog();
-                autoComplete.usingxWin = false;
+                autoComplete.KeyboardInputsSubscribe();
                 Log.GetLogger().Info("Opened Controller 3's Dialog");
             }
         }
@@ -207,9 +208,9 @@ namespace xWin.Forms
         {
             if (XCon4.IsConnected())
             {
-                autoComplete.usingxWin = true;
+                autoComplete.KeyboardInputsUnsubscribe();
                 OpXCon4.ShowDialog();
-                autoComplete.usingxWin = false;
+                autoComplete.KeyboardInputsSubscribe();
                 Log.GetLogger().Info("Opened Controller 4's Dialog");
             }
         }
@@ -451,9 +452,9 @@ namespace xWin.Forms
             try
             {
                 EmailError emailError = new EmailError();
-                autoComplete.usingxWin = true;
+                autoComplete.KeyboardInputsUnsubscribe();
                 emailError.ShowDialog();
-                autoComplete.usingxWin = false;
+                autoComplete.KeyboardInputsSubscribe();
             }
             catch (Exception ex)
             {
@@ -465,12 +466,14 @@ namespace xWin.Forms
          * Code for AutoComplete feature
          */
         AutoComplete autoComplete = new AutoComplete();
+
         private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (wordPredictionCheckBox.Checked)
             { autoComplete.enableWordPrediction = true; }
             else
             { autoComplete.enableWordPrediction = false; }
+            Log.GetLogger().Info("Word Prediction option changed:" + autoComplete.enableWordPrediction);
         }
 
         private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -479,14 +482,15 @@ namespace xWin.Forms
             { autoComplete.enableQuickType = true; }
             else
             { autoComplete.enableQuickType = false; }
+            Log.GetLogger().Info("Quicktype option changed:" + autoComplete.enableQuickType);
         }
 
         private void buttonViewDictionary_Click(object sender, EventArgs e)
         {
             AutoCompleteDictionary dictionary = new AutoCompleteDictionary();
-            autoComplete.usingxWin = true;
+            autoComplete.KeyboardInputsUnsubscribe();
             dictionary.ShowDialog();
-            autoComplete.usingxWin = false;
+            autoComplete.KeyboardInputsSubscribe();
         }
 
         private void quickBarHideTimeTextBox_TextChanged(object sender, EventArgs e)
@@ -520,5 +524,23 @@ namespace xWin.Forms
                 Log.GetLogger().Error(ex);
             }
         }
+
+        private void wordPredictionTipsButton_Click(object sender, EventArgs e)
+        {
+            WordPredictionTips wordPredictionTips = new WordPredictionTips();
+            wordPredictionTips.Show();
+        }
+
+        private void quickTypeTipsButton_Click(object sender, EventArgs e)
+        {
+            QuickTypeSuggesstionsTips quickTypeSuggesstionsTips = new QuickTypeSuggesstionsTips();
+            quickTypeSuggesstionsTips.Show();
+        }
+
+        private void customizeQuickTypeBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

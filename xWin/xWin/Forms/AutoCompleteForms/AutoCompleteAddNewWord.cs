@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace xWin.Forms
+namespace xWin.Forms.AutoCompleteForms
 {
     public partial class AutoCompleteAddNewWord : Form
     {

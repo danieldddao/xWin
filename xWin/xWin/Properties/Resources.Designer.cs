@@ -83,6 +83,26 @@ namespace xWin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap quicktypetips {
+            get {
+                object obj = ResourceManager.GetObject("quicktypetips", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wordpredictiontips {
+            get {
+                object obj = ResourceManager.GetObject("wordpredictiontips", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap xbox360controller {
             get {
                 object obj = ResourceManager.GetObject("xbox360controller", resourceCulture);

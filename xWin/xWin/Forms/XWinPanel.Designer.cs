@@ -38,6 +38,7 @@
             this.Controller1 = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.customizeQuickTypeBar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.quickBarHideTimeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -164,6 +165,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.customizeQuickTypeBar);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.quickBarHideTimeTextBox);
             this.panel1.Controls.Add(this.label1);
@@ -175,8 +177,19 @@
             this.panel1.Controls.Add(this.labelAutocomplete);
             this.panel1.Location = new System.Drawing.Point(586, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 519);
+            this.panel1.Size = new System.Drawing.Size(599, 565);
             this.panel1.TabIndex = 0;
+            // 
+            // customizeQuickTypeBar
+            // 
+            this.customizeQuickTypeBar.BackColor = System.Drawing.Color.FloralWhite;
+            this.customizeQuickTypeBar.Location = new System.Drawing.Point(114, 420);
+            this.customizeQuickTypeBar.Name = "customizeQuickTypeBar";
+            this.customizeQuickTypeBar.Size = new System.Drawing.Size(317, 64);
+            this.customizeQuickTypeBar.TabIndex = 7;
+            this.customizeQuickTypeBar.Text = "Customize QuickType Bar";
+            this.customizeQuickTypeBar.UseVisualStyleBackColor = false;
+            this.customizeQuickTypeBar.Click += new System.EventHandler(this.customizeQuickTypeBar_Click);
             // 
             // label2
             // 
@@ -202,7 +215,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(234, 50);
             this.label1.TabIndex = 5;
-            this.label1.Text = "* When not typing, \r\nautomatically hide after";
+            this.label1.Text = "When not typing, \r\nautomatically hide after";
             // 
             // buttonViewDictionary
             // 
@@ -229,6 +242,7 @@
             this.quickTypeTipsButton.TabIndex = 3;
             this.quickTypeTipsButton.Text = "tips";
             this.quickTypeTipsButton.UseVisualStyleBackColor = false;
+            this.quickTypeTipsButton.Click += new System.EventHandler(this.quickTypeTipsButton_Click);
             // 
             // wordPredictionTipsButton
             // 
@@ -241,6 +255,7 @@
             this.wordPredictionTipsButton.TabIndex = 1;
             this.wordPredictionTipsButton.Text = "tips";
             this.wordPredictionTipsButton.UseVisualStyleBackColor = false;
+            this.wordPredictionTipsButton.Click += new System.EventHandler(this.wordPredictionTipsButton_Click);
             // 
             // quickTypeCheckBox
             // 
@@ -252,6 +267,7 @@
             this.quickTypeCheckBox.TabIndex = 2;
             this.quickTypeCheckBox.Text = "Enable QuickType Suggestions";
             this.quickTypeCheckBox.UseVisualStyleBackColor = true;
+            this.quickTypeCheckBox.CheckedChanged += new System.EventHandler(this.quickTypeCheckBox_CheckedChanged);
             // 
             // wordPredictionCheckBox
             // 
@@ -263,6 +279,7 @@
             this.wordPredictionCheckBox.TabIndex = 1;
             this.wordPredictionCheckBox.Text = "Enable Word Prediction";
             this.wordPredictionCheckBox.UseVisualStyleBackColor = true;
+            this.wordPredictionCheckBox.CheckedChanged += new System.EventHandler(this.wordPredictionCheckBox_CheckedChanged);
             // 
             // labelAutocomplete
             // 
@@ -452,5 +469,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox quickBarHideTimeTextBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button customizeQuickTypeBar;
     }
 }
