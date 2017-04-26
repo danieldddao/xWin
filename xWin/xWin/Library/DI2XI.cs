@@ -9,7 +9,7 @@ using SharpDX.XInput;
 
 namespace xWin.Library
 {
-    public class DI2XI : Controller
+    public class DI2XI
     {
         public enum DPAD
         {
@@ -139,17 +139,6 @@ namespace xWin.Library
             joystick.Acquire();
             return joystick;
         }
-
-        Joystick J;
-        public DI2XI(Joystick J)
-        {
-            this.J = J;
-        }
-
-        public new State GetState()
-        {
-            Console.WriteLine("here");
-            return di2xi(J.GetCurrentState());
-        }
+        
     }
 }

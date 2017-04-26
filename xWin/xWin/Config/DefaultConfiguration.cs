@@ -36,11 +36,21 @@ namespace xWin.Config
             };
         }
 
+        public static Configuration DefaultConfiguration()
+        {
+            return new Configuration
+            {
+                Basic = DefaultBasicControl(),
+                Typing = DefaultTypingConfiguration()
+            };
+        }
+
+
         /*
         **Left Stick controls mouse, Right Stick does Page Up and Page Down, Dpad is Arrow Keys, Left Thumb is middle click
         **A is Left Click, B is Right Click, Y is Turbo
         */
-        public static BasicControl DefaultConfiguration()
+        public static BasicControl DefaultBasicControl()
         {
             return new BasicControl
             {
@@ -70,13 +80,17 @@ namespace xWin.Config
                     { (int)new GamepadFlags(GamepadButtonFlags.B),         NormalButtonPress(Keys.RButton) },
                     { (int)new GamepadFlags(GamepadButtonFlags.LeftThumb), NormalButtonPress(Keys.MButton) },
                     { (int)new GamepadFlags(GamepadButtonFlags.Y),         NormalButtonPress(SpecialAction.Turbo) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.X),         NormalButtonPress(SpecialAction.Precision) },
                     { (int)new GamepadFlags(GamepadButtonFlags.DPadUp),    NormalButtonPress(Keys.Up) },
                     { (int)new GamepadFlags(GamepadButtonFlags.DPadRight), NormalButtonPress(Keys.Right) },
                     { (int)new GamepadFlags(GamepadButtonFlags.DPadDown),  NormalButtonPress(Keys.Down) },
                     { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NormalButtonPress(Keys.Left) },
-                    { (int)new GamepadFlags(0,false,false,false,false,0,0,0,1), NormalButtonPress(Keys.PageUp) },
-                    { (int)new GamepadFlags(0,false,false,false,false,0,0,0,2), NormalButtonPress(Keys.PageDown) },
-                    { (int)new GamepadFlags(0,false,false,false,false,0,1,0,0), NormalButtonPress(SpecialAction.EnterTypingMode) }
+                    //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,1), NormalButtonPress(Keys.PageUp) },
+                    //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,2), NormalButtonPress(Keys.PageDown) },
+                    { (int)new GamepadFlags(0,false,false,false,true),
+                       new Behavior { OnRelease = new Actions{ SpecialActions = { SpecialAction.EnterTypingMode }
+                    }
+            } }
 
                 }
             };
@@ -90,11 +104,7 @@ namespace xWin.Config
                 Tier1 = {   (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 1),
                             (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 2),
                             (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 3),
-                            (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 4),
-                            (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 5),
-                            (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 6),
-                            (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 7),
-                            (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 8)
+                            (int)new GamepadFlags(0, false, false, false, false, 0, 0, 0, 4)
                 },
                 Tier2 = {   (int)new GamepadFlags(0, false, false, false, false, 0, 0, 1),
                             (int)new GamepadFlags(0, false, false, false, false, 0, 0, 2),
@@ -113,11 +123,11 @@ namespace xWin.Config
                 RightStick = new Stick
                 {
                     Deadzone = DEADZONE,
-                    Regions = { 45, 45, 45, 45, 45, 45, 45, 45 }
+                    Regions = { 90, 90, 90, 90 }
                 },
                 Base = new KeyboardSet
                 {
-                    Count = 8,
+                    Count = 4,
                     Subcount = 8,
                     Set =
                     {
@@ -125,20 +135,35 @@ namespace xWin.Config
                         new StringChoice { Subset = { "i","j","k","l","m","n","o","p"} },
                         new StringChoice { Subset = { "q","r","s","t","u","v","w","x"} },
                         new StringChoice { Subset = { "y","z","0","1","2","3","4","5"} },
-                        new StringChoice { Subset = { "A","B","C","D","E","F","G","H"} },
-                        new StringChoice { Subset = { "I","J","K","L","M","N","O","P"} },
-                        new StringChoice { Subset = { "Q","R","S","T","U","V","W","X"} },
-                        new StringChoice { Subset = { "Y","Z","6","7","8","9",".","?"} },
                     }
                 },
+
+                KeyboardSelect =
+                {
+                    { (int)new GamepadFlags(GamepadButtonFlags.RightShoulder),
+                        new KeyboardSet
+                        {
+                            Count = 4,
+                            Subcount = 8,
+                            Set =
+                            {
+                                new StringChoice { Subset = { "A","B","C","D","E","F","G","H"} },
+                                new StringChoice { Subset = { "I","J","K","L","M","N","O","P"} },
+                                new StringChoice { Subset = { "Q","R","S","T","U","V","W","X"} },
+                                new StringChoice { Subset = { "Y","Z","6","7","8","9",".","?"} },
+                            }
+                        }
+                    }
+                },
+
                 Bindings =
                 {
                     {
-                        (int)new GamepadFlags(0,false,false,true),
-                        new KeyboardActionContainer {Binding = KeyboardAction.Confirm, WhenActive=ActiveWhen.Released }
+                        (int)new GamepadFlags(GamepadButtonFlags.None,false,false,true),
+                        new KeyboardActionContainer {Binding = KeyboardAction.Confirm, WhenActive=ActiveWhen.Pressed }
                     },
                     {
-                        (int)new GamepadFlags(0,false,false,false,true),
+                        (int)new GamepadFlags(GamepadButtonFlags.None,false,false,false,true),
                         new KeyboardActionContainer {Binding = KeyboardAction.LeaveTyping, WhenActive=ActiveWhen.Pressed }
                     }
                 }

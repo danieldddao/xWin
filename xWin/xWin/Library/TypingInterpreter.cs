@@ -44,6 +44,7 @@ namespace xWin.Library
             public int t1, t2;
         }
 
+        private GamepadFlags previous_state;
         public TypingInterpreter(TypingControl tc)
         {
             current = "";
@@ -55,32 +56,44 @@ namespace xWin.Library
 
             t1 = new Dictionary<GamepadFlags, int>();
             t2 = new Dictionary<GamepadFlags, int>();
-            var index = 1;
+            var index = 0;
             t1_mask = new GamepadFlags(0);
             foreach (var a in tc.Tier1)
             {
                 t1.Add(new GamepadFlags(a), index++);
                 t1_mask |= new GamepadFlags(a);
             }
-            index = 1;
+            index = 0;
             t2_mask = new GamepadFlags(0);
             foreach (var a in tc.Tier2)
             {
                 t2.Add(new GamepadFlags(a), index++);
                 t2_mask |= new GamepadFlags(a);
             }
-
-            defaultset = tc.Base;
+            if (tc.Tier1.Count == tc.Base.Count && tc.Tier2.Count == tc.Base.Subcount)
+                defaultset = tc.Base;
+            else
+                throw new IndexOutOfRangeException("Keyset does not match the shape of the selection array");
             keysets = new Dictionary<GamepadFlags, KeyboardSet>();
-            foreach(var a in tc.KeyboardSelect.Keys)
+            var ks = tc.KeyboardSelect;
+            select_mask = new GamepadFlags(0);
+            foreach (var a in ks.Keys)
             {
-                keysets.Add(new GamepadFlags(a), tc.KeyboardSelect[a]);
+                select_mask |= new GamepadFlags(a);
+                if (tc.Tier1.Count == ks[a].Count && tc.Tier2.Count == ks[a].Subcount)
+                    keysets.Add(new GamepadFlags(a), tc.KeyboardSelect[a]);
+                else
+                    throw new IndexOutOfRangeException("Keyset does not match the shape of the selection array");
             }
             pressed = new Dictionary<GamepadFlags, KApack>();
             held = new Dictionary<GamepadFlags, KApack>();
             released = new Dictionary<GamepadFlags, KApack>();
             stayed = new Dictionary<GamepadFlags, KApack>();
             var tcb = tc.Bindings;
+            if(tcb == null)
+            {
+                tcb = new Google.Protobuf.Collections.MapField<int, KeyboardActionContainer>();
+            }
             foreach(var a in tcb.Keys)
             {
                 var ka = new KApack();
@@ -104,30 +117,37 @@ namespace xWin.Library
 
             }
 
+            previous_state = new GamepadFlags(0,true,true,true,true);
+            Console.WriteLine("t1_mask:" + t1_mask.ToString());
+            Console.WriteLine("t2_mask:" + t2_mask.ToString());
 
+            Console.WriteLine("select_mask:" + select_mask.ToString());
         }
 
-        private GamepadFlags previous_state;
+        public void Reset()
+        {
+            previous_state = new GamepadFlags(0);
+        }
 
         public TypingState NextState(Gamepad g)
         {
             var ts = new TypingState();
             ts.Text = current;
-            
+            ts.Actions = new Queue<KeyboardAction>();
             byte lt = LT.GetRegion(g.LeftTrigger);
             byte rt = RT.GetRegion(g.RightTrigger);
             Interpreter.KeyboardMouseState k = new Interpreter.KeyboardMouseState();
             byte ls = LS.Act(g.LeftThumbX, g.LeftThumbY, ref k);
             byte rs = RS.Act(g.RightThumbX, g.RightThumbY, ref k);
             var state = new GamepadFlags(g.Buttons, lt, rt, ls, rs);
-
+            //Console.WriteLine((state * act_mask).ToString());
             /*
                 Check Keyboard Actions
                 Then Determine the Keyset
                 Get the current string and save it to "current"
                 if new is not null, replace ts.Text
             */
-            foreach(var flags in pressed.Keys)
+            foreach (var flags in pressed.Keys)
             {
                 if(! (previous_state & flags))
                 {
@@ -175,12 +195,12 @@ namespace xWin.Library
 
             }
             ts.t1 = t1.ContainsKey(state * t1_mask) ? t1[state * t1_mask] : -1;
-            ts.t2 = t2.ContainsKey(state * t2_mask) ? t1[state * t2_mask] : -1;
+            ts.t2 = t2.ContainsKey(state * t2_mask) ? t2[state * t2_mask] : -1;
             if (!(ts.t1 > -1 && ts.t2 > -1)) { current = ""; }
-            else { current = keysets.ContainsKey(state * select_mask) ? keysets[state * select_mask].Set[ts.t1].Subset[ts.t2] : ""; }
+            else { current = keysets.ContainsKey(state * select_mask) ? keysets[state * select_mask].Set[ts.t1].Subset[ts.t2] : defaultset.Set[ts.t1].Subset[ts.t2]; }
             
             if (current.Length != 0) { ts.Text = current; }
-
+            previous_state = state;
             return ts;
         }
     }
