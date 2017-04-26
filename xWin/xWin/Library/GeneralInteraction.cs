@@ -16,7 +16,7 @@ namespace xWin.Library
 {
     public enum Mode
     {
-        Normal = 0, Typing
+        Normal = 0, Typing, Stopped
     }
 
     public struct ControllerCalibration
@@ -127,6 +127,10 @@ namespace xWin.Library
             uint dpi = config.Basic.Dpi;
             TimeSpan TickSpeed = new TimeSpan(tick);
             var text = "";
+            bool just_toggled = false;
+
+            GamepadFlags toggle = new GamepadFlags(config.Togglestop);
+
             while (true)
             {
                 st.Start();
@@ -136,7 +140,14 @@ namespace xWin.Library
                 datas.Gamepad.LeftThumbY = shortbound(datas.Gamepad.LeftThumbY - cc.ly);
                 datas.Gamepad.RightThumbX = shortbound(datas.Gamepad.RightThumbX - cc.rx);
                 datas.Gamepad.RightThumbY = shortbound(datas.Gamepad.RightThumbY - cc.ry);
-                var wrapper = new SystemWrapper();
+                //var wrapper = new SystemWrapper();
+
+                if (just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
+                {
+                    just_toggled = true;
+                }
+                else
+                    just_toggled = false;
                 switch (m)
                 {
                     case Mode.Normal:
@@ -194,6 +205,11 @@ namespace xWin.Library
                             }
                             Console.WriteLine();
                             MoveCursor((short)kms.mouse_movement.x, (short)kms.mouse_movement.y, (int)dpi);
+                            if (!just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
+                            {
+                                m = Mode.Stopped;
+                                just_toggled = true;
+                            }
                             break;
                         }
                     case Mode.Typing:
@@ -206,7 +222,7 @@ namespace xWin.Library
                                 if (act == KeyboardAction.Confirm)
                                 {
                                     text += ts.Text;
-                                    SendString(ts.Text);
+                                    //SendString(ts.Text);
                                 }
                                 else if (act == KeyboardAction.LeaveTyping)
                                 {
@@ -220,10 +236,21 @@ namespace xWin.Library
                             Console.WriteLine("Current String:" + text);
                             break;
                         }
+                    case Mode.Stopped:
+                        {
+                            Console.WriteLine("STOPPED");
+                            if (!just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
+                            {
+                                m = Mode.Normal;
+                                just_toggled = true;
+                            }
+                            break;
+                        }
                 }
 
                 while (st.Elapsed < TickSpeed) { }
                 st.Stop();
+                st.Reset();
                 Console.Clear();
             }
             }
