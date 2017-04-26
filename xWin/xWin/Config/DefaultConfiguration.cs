@@ -134,7 +134,8 @@ namespace xWin.Config
             return new Configuration
             {
                 Basic = DefaultBasicControl(),
-                Typing = DefaultTypingConfiguration()
+                Typing = DefaultTypingConfiguration(),
+                Togglestop = (int)new GamepadFlags(GamepadButtonFlags.Start | GamepadButtonFlags.Back)
             };
         }
         public static Configuration DefaultConfiguration2()
@@ -142,7 +143,8 @@ namespace xWin.Config
             return new Configuration
             {
                 Basic = DefaultBasicControl2(),
-                Typing = DefaultTypingConfiguration2()
+                Typing = DefaultTypingConfiguration2(),
+                Togglestop = (int)new GamepadFlags(GamepadButtonFlags.Start | GamepadButtonFlags.Back)
             };
         }
 
@@ -187,7 +189,7 @@ namespace xWin.Config
                     { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NormalButtonPress(Keys.Left) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,1), NormalButtonPress(Keys.PageUp) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,2), NormalButtonPress(Keys.PageDown) },
-                    { (int)new GamepadFlags(0,false,false,false,true), NoHoldButtonPress(SpecialAction.EnterTypingMode) }
+                    { (int)new GamepadFlags(0,false,false,false,true), NoHoldButtonRelease(SpecialAction.EnterTypingMode) }
 
 
                 }
@@ -341,6 +343,11 @@ namespace xWin.Config
                     Deadzone = DEADZONE,
                     Regions = { 90, 90, 90, 90 }
                 },
+                RightTrigger = new Trigger
+                {
+                    Deadzone = TRIGGER_DEADZONE,
+                    //Regions = {250}
+                },
                 Base = new KeyboardSet
                 {
                     Count = 4,
@@ -375,7 +382,6 @@ namespace xWin.Config
                 Bindings =
                 {
                     { (int)new GamepadFlags(GamepadButtonFlags.None,false,false,true),ActionOnPress(KeyboardAction.Confirm) },
-
                     { (int)new GamepadFlags(GamepadButtonFlags.None,false,true),ActionOnPress(KeyboardAction.LeaveTyping) }
                 }
             };

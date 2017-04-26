@@ -21,14 +21,14 @@ public static partial class SaveFormatReflection {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
           "ChFzYXZlX2Zvcm1hdC5wcm90bxoTbW91c2VfY29udHJvbC5wcm90bxoWa2V5",
-          "Ym9hcmRfY29udHJvbC5wcm90byJwCg1Db25maWd1cmF0aW9uEhwKBWJhc2lj",
-          "GAEgASgLMg0uQmFzaWNDb250cm9sEh4KBnR5cGluZxgCIAEoCzIOLlR5cGlu",
-          "Z0NvbnRyb2wSDAoEbmFtZRgDIAEoCRITCgtkZXNjcmlwdGlvbhgEIAEoCWIG",
-          "cHJvdG8z"));
+          "Ym9hcmRfY29udHJvbC5wcm90byKEAQoNQ29uZmlndXJhdGlvbhIcCgViYXNp",
+          "YxgBIAEoCzINLkJhc2ljQ29udHJvbBIeCgZ0eXBpbmcYAiABKAsyDi5UeXBp",
+          "bmdDb250cm9sEgwKBG5hbWUYAyABKAkSEwoLZGVzY3JpcHRpb24YBCABKAkS",
+          "EgoKdG9nZ2xlc3RvcBgFIAEoBWIGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::MouseControlReflection.Descriptor, global::KeyboardControlReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::Configuration), global::Configuration.Parser, new[]{ "Basic", "Typing", "Name", "Description" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::Configuration), global::Configuration.Parser, new[]{ "Basic", "Typing", "Name", "Description", "Togglestop" }, null, null, null)
         }));
   }
   #endregion
@@ -63,6 +63,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
     Typing = other.typing_ != null ? other.Typing.Clone() : null;
     name_ = other.name_;
     description_ = other.description_;
+    togglestop_ = other.togglestop_;
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -114,6 +115,17 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
     }
   }
 
+  /// <summary>Field number for the "togglestop" field.</summary>
+  public const int TogglestopFieldNumber = 5;
+  private int togglestop_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public int Togglestop {
+    get { return togglestop_; }
+    set {
+      togglestop_ = value;
+    }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
     return Equals(other as Configuration);
@@ -131,6 +143,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
     if (!object.Equals(Typing, other.Typing)) return false;
     if (Name != other.Name) return false;
     if (Description != other.Description) return false;
+    if (Togglestop != other.Togglestop) return false;
     return true;
   }
 
@@ -141,6 +154,7 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
     if (typing_ != null) hash ^= Typing.GetHashCode();
     if (Name.Length != 0) hash ^= Name.GetHashCode();
     if (Description.Length != 0) hash ^= Description.GetHashCode();
+    if (Togglestop != 0) hash ^= Togglestop.GetHashCode();
     return hash;
   }
 
@@ -167,6 +181,10 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
       output.WriteRawTag(34);
       output.WriteString(Description);
     }
+    if (Togglestop != 0) {
+      output.WriteRawTag(40);
+      output.WriteInt32(Togglestop);
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -183,6 +201,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
     }
     if (Description.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(Description);
+    }
+    if (Togglestop != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(Togglestop);
     }
     return size;
   }
@@ -209,6 +230,9 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
     }
     if (other.Description.Length != 0) {
       Description = other.Description;
+    }
+    if (other.Togglestop != 0) {
+      Togglestop = other.Togglestop;
     }
   }
 
@@ -240,6 +264,10 @@ public sealed partial class Configuration : pb::IMessage<Configuration> {
         }
         case 34: {
           Description = input.ReadString();
+          break;
+        }
+        case 40: {
+          Togglestop = input.ReadInt32();
           break;
         }
       }
