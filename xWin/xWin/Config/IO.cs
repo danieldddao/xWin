@@ -17,7 +17,7 @@ namespace xWin.Config
         {
             SearchPaths = paths;
             this.ext = ext;
-            var parser = new MessageParser<T>(() => new T());
+            parser = new MessageParser<T>(() => new T());
         }
         
         public T ReadFromFile(string name)
@@ -25,11 +25,13 @@ namespace xWin.Config
             foreach (var s in SearchPaths)
             {
                 var path = s + "/" + name + ext;
+                Console.WriteLine(path);
                 if (File.Exists(path))
                 {
                     using (Stream input = File.OpenRead(path))
                     {
-                        return parser.ParseFrom(input);
+                        var c =  parser.ParseFrom(input);
+                        return c;
                     }
                 }
             }

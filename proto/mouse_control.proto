@@ -64,4 +64,8 @@ message BasicControl {
   
   string name = 6;
   string description = 7;
+  
+  uint32 dpi = 8;
+  uint32 slow_dpi = 9;
+  uint32 fast_dpi = 10;
 }

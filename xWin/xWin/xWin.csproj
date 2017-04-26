@@ -195,6 +195,7 @@
     <Compile Include="Library\Buttons.cs" />
     <Compile Include="Library\DI2XI.cs" />
     <Compile Include="Library\GamepadFlags.cs" />
+    <Compile Include="Library\GeneralInteraction.cs" />
     <Compile Include="Library\Interpreter.cs" />
     <Compile Include="Forms\KeyboardWindow.cs">
       <SubType>Form</SubType>

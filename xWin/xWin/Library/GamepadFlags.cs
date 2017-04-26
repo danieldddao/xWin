@@ -8,10 +8,18 @@ using System.Collections;
 
 namespace xWin.Library
 {
-    public class GamepadFlags
+    public struct GamepadFlags
     {
         private Int32 flags;
-        
+
+        private static int BUTTONMASK = 0x000FFFFF;
+        private static int RTMASK = 0x00300000;
+        private static int LTMASK = 0x00C00000;
+        private static int RSMASK = 0x0F000000;
+        private static int LSMASK = -268435456;
+
+
+        /*Should be used when defining states*/
         public GamepadFlags(GamepadButtonFlags f, bool lt0 = false, bool rt0 = false, bool ls0 = false, bool rs0 = false, byte lt = 0, byte rt = 0, byte ls = 0, byte rs = 0, bool x1 = false, bool x2 = false)
         {
             flags = 0;
@@ -37,6 +45,7 @@ namespace xWin.Library
             flags |= x2 ? 1 << 13 : 0;
         }
 
+        /*Should be used with controller reads*/
         public GamepadFlags(GamepadButtonFlags f, byte lt, byte rt, byte ls, byte rs, bool x1 = false, bool x2 = false) :
         this(f, lt == 0, rt == 0, ls == 0, rs == 0, lt, rt, ls, rs, x1, x2){ }
 
@@ -64,19 +73,19 @@ namespace xWin.Library
         {
             //Check if correct buttons are pressed
             //1048575 = 0x000FFFFF
-            if ((g1.flags & g2.flags & 1048575) != (g2.flags & 1048575))          { return false; }
+            if ((g1.flags & g2.flags & BUTTONMASK) != (g2.flags & BUTTONMASK))              { return false; }
 
             //Check if Trigger Regions work
             //3145728 = 0x00300000
-            if ((g2.flags & 3145728) != 0 && ((g1.flags & 3145728) != (g2.flags & 3145728)) ) { return false; }
+            if ((g2.flags & RTMASK) != 0 && ((g1.flags & RTMASK) != (g2.flags & RTMASK)) )  { return false; }
             
             //12582912 = 0x00C00000
-            if ((g2.flags & 12582912) != 0  && ((g1.flags & 12582912) != (g2.flags & 12582912))  )  { return false; }
+            if ((g2.flags & LTMASK) != 0  && ((g1.flags & LTMASK) != (g2.flags & LTMASK))  ){ return false; }
             
             //251658240 = 0x0F000000
-            if ((g2.flags & 251658240) != 0  && ((g1.flags & 251658240) != (g2.flags & 251658240)) )   { return false; }
+            if ((g2.flags & RSMASK) != 0  && ((g1.flags & RSMASK) != (g2.flags & RSMASK)) ) { return false; }
             //-268435456 = 0xF0000000
-            if ((g2.flags & -268435456) != 0  && ((g1.flags & -268435456) != (g2.flags & -268435456)) )     { return false; }
+            if ((g2.flags & LSMASK) != 0  && ((g1.flags & LSMASK) != (g2.flags & LSMASK)) ) { return false; }
             
             return true;
         }
@@ -90,45 +99,35 @@ namespace xWin.Library
             return g1.flags != g2.flags;
         }
 
-        public static bool operator ==(int g1, GamepadFlags g2)
+        public static bool operator ==(GamepadFlags g2, int g1)
         {
             return g1 == g2.flags;
         }
-        public static bool operator !=(int g1, GamepadFlags g2)
+        public static bool operator !=(GamepadFlags g2, int g1)
         {
             return g1 != g2.flags;
         }
-
+        
+        /*for applying masks*/
         public static GamepadFlags operator *(GamepadFlags g1, GamepadFlags g2)
         {
-            Int32 f = g1.flags & g2.flags & 1048575;
-            if ((g2.flags & 3145728) == (g1.flags & 3145728))
-                f &= (g1.flags & 3145728);
-            if ((g2.flags & 12582912) == (g1.flags & 12582912))
-                f &= (g1.flags & 12582912);
-            if ((g2.flags & 251658240) == (g1.flags & 251658240))
-                f &= (g1.flags & 251658240);
-            if ((g2.flags & -268435456) == (g1.flags & -268435456))
-                f &= (g1.flags & -268435456);
-
+            Int32 f = g1.flags & g2.flags & BUTTONMASK;
+            f += ((g1.flags & g2.flags & RTMASK) == (g1.flags & RTMASK)) ? g1.flags & RTMASK : 0;
+            f += ((g1.flags & g2.flags & LTMASK) == (g1.flags & LTMASK)) ? g1.flags & LTMASK : 0;
+            f += ((g1.flags & g2.flags & RSMASK) == (g1.flags & RSMASK)) ? g1.flags & RSMASK : 0;
+            f += ((g1.flags & g2.flags & LSMASK) == (g1.flags & LSMASK)) ? g1.flags & LSMASK : 0;
             return new GamepadFlags(f);
-            
         }
-
 
         /*for creating masks*/
         public static GamepadFlags operator |(GamepadFlags g1, GamepadFlags g2)
         {
             var q = g1.flags | g2.flags;
-            Int32 f = q & 1048575;
-            if ((q & 3145728)!=0)
-                f &= 3145728;
-            if ((q & 12582912)!=0)
-                f &= 12582912;
-            if ((q & 251658240)!=0)
-                f &=  251658240;
-            if ((q & -268435456)!=0)
-                f &= -268435456;
+            Int32 f = q & BUTTONMASK;
+            f += ((q & RTMASK) != 0) ? RTMASK : 0;
+            f += ((q & LTMASK) != 0) ? LTMASK : 0;
+            f += ((q & RSMASK) != 0) ? RSMASK : 0;
+            f += ((q & LSMASK) != 0) ? LSMASK : 0;
             return new GamepadFlags(f);
         }
 

@@ -51,6 +51,7 @@ message TypingControl {
 
 message KeyboardSet {
   message StringChoice {
+    string display = 1;
     repeated string subset = 2;
   }
   int32 count = 1;
