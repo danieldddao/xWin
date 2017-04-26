@@ -19,6 +19,11 @@ namespace xWin.Forms.ButtonMaps
             shortcut = new List<Keys>();
         }
 
+        public void SetLabel(string label)
+        {
+            label2.Text = label;
+        }
+
         public void Subscribe()
         {
             m_GlobalHook = Hook.GlobalEvents();

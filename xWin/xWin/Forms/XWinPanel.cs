@@ -539,7 +539,17 @@ namespace xWin.Forms
 
         private void customizeQuickTypeBar_Click(object sender, EventArgs e)
         {
-
+            QuickTypeBarCustomization qtbar = new QuickTypeBarCustomization(autoComplete.suggestion1Shortcut, autoComplete.suggestion2Shortcut, autoComplete.suggestion3Shortcut);
+            autoComplete.KeyboardInputsUnsubscribe();
+            qtbar.ShowDialog();
+            autoComplete.suggestion1Shortcut = qtbar.qtButton1Shortcut;
+            autoComplete.suggestion2Shortcut = qtbar.qtButton2Shortcut;
+            autoComplete.suggestion3Shortcut = qtbar.qtButton3Shortcut;
+            autoComplete.KeyboardInputsSubscribe();
+            Log.GetLogger().Info("Successfully updated the shortcuts for quicktype bar");
+            Log.GetLogger().Info("Suggestion 1's shortcut: (" + autoComplete.suggestion1Shortcut.Count + ") " + string.Join("+ ", autoComplete.suggestion1Shortcut.ToArray()));
+            Log.GetLogger().Info("Suggestion 2's shortcut: (" + autoComplete.suggestion2Shortcut.Count + ")" + string.Join("+ ", autoComplete.suggestion2Shortcut.ToArray()));
+            Log.GetLogger().Info("Suggestion 3's shortcut: (" + autoComplete.suggestion3Shortcut.Count + ")" + string.Join("+ ", autoComplete.suggestion3Shortcut.ToArray()));
         }
 
     }

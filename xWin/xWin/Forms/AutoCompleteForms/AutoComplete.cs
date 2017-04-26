@@ -18,10 +18,14 @@ namespace xWin.Forms.AutoCompleteForms
         public bool enableWordPrediction = true;
         public bool enableQuickType = true;
 
-        public Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
-        public string typedWord = ""; // word that user's typing
-        public string predictiveSubWord = ""; // subword of the word that needs to be showed to the user
+        private Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
+        private string typedWord = ""; // word that user's typing
+        private string predictiveSubWord = ""; // subword of the word that needs to be showed to the user
+
         public int quickTypeTimerInterval = 5000;
+        public List<Keys> suggestion1Shortcut = new List<Keys>();
+        public List<Keys> suggestion2Shortcut = new List<Keys>();
+        public List<Keys> suggestion3Shortcut = new List<Keys>();
 
         public AutoComplete()
         {

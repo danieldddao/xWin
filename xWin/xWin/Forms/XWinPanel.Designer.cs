@@ -42,7 +42,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.quickBarHideTimeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonViewDictionary = new System.Windows.Forms.Button();
             this.quickTypeTipsButton = new System.Windows.Forms.Button();
             this.wordPredictionTipsButton = new System.Windows.Forms.Button();
             this.quickTypeCheckBox = new System.Windows.Forms.CheckBox();
@@ -61,6 +60,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
             this.QuickTypeBarTimer = new System.Windows.Forms.Timer(this.components);
+            this.buttonViewDictionary = new System.Windows.Forms.Button();
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -175,9 +175,9 @@
             this.panel1.Controls.Add(this.quickTypeCheckBox);
             this.panel1.Controls.Add(this.wordPredictionCheckBox);
             this.panel1.Controls.Add(this.labelAutocomplete);
-            this.panel1.Location = new System.Drawing.Point(586, 7);
+            this.panel1.Location = new System.Drawing.Point(563, 79);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 565);
+            this.panel1.Size = new System.Drawing.Size(599, 532);
             this.panel1.TabIndex = 0;
             // 
             // customizeQuickTypeBar
@@ -216,20 +216,6 @@
             this.label1.Size = new System.Drawing.Size(234, 50);
             this.label1.TabIndex = 5;
             this.label1.Text = "When not typing, \r\nautomatically hide after";
-            // 
-            // buttonViewDictionary
-            // 
-            this.buttonViewDictionary.BackColor = System.Drawing.Color.Transparent;
-            this.buttonViewDictionary.BackgroundImage = global::xWin.Properties.Resources.buttonBackground;
-            this.buttonViewDictionary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonViewDictionary.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonViewDictionary.Location = new System.Drawing.Point(202, 97);
-            this.buttonViewDictionary.Name = "buttonViewDictionary";
-            this.buttonViewDictionary.Size = new System.Drawing.Size(209, 71);
-            this.buttonViewDictionary.TabIndex = 4;
-            this.buttonViewDictionary.Text = "Manage Dictionary";
-            this.buttonViewDictionary.UseVisualStyleBackColor = false;
-            this.buttonViewDictionary.Click += new System.EventHandler(this.buttonViewDictionary_Click);
             // 
             // quickTypeTipsButton
             // 
@@ -411,6 +397,20 @@
             // 
             this.QuickTypeBarTimer.Enabled = true;
             this.QuickTypeBarTimer.Interval = 5000;
+            // 
+            // buttonViewDictionary
+            // 
+            this.buttonViewDictionary.BackColor = System.Drawing.Color.Transparent;
+            this.buttonViewDictionary.BackgroundImage = global::xWin.Properties.Resources.buttonBackground;
+            this.buttonViewDictionary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonViewDictionary.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonViewDictionary.Location = new System.Drawing.Point(202, 97);
+            this.buttonViewDictionary.Name = "buttonViewDictionary";
+            this.buttonViewDictionary.Size = new System.Drawing.Size(209, 71);
+            this.buttonViewDictionary.TabIndex = 4;
+            this.buttonViewDictionary.Text = "Manage Dictionary";
+            this.buttonViewDictionary.UseVisualStyleBackColor = false;
+            this.buttonViewDictionary.Click += new System.EventHandler(this.buttonViewDictionary_Click);
             // 
             // XWinPanel
             // 
