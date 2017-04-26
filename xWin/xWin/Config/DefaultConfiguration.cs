@@ -189,7 +189,7 @@ namespace xWin.Config
                     { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NormalButtonPress(Keys.Left) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,1), NormalButtonPress(Keys.PageUp) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,2), NormalButtonPress(Keys.PageDown) },
-                    { (int)new GamepadFlags(0,false,false,false,true), NoHoldButtonRelease(SpecialAction.EnterTypingMode) }
+                    { (int)new GamepadFlags(0,false,false,false,true), NormalButtonRelease(SpecialAction.EnterTypingMode) }
 
 
                 }
@@ -306,10 +306,7 @@ namespace xWin.Config
                     { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NormalButtonPress(Keys.Left) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,1), NormalButtonPress(Keys.PageUp) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,2), NormalButtonPress(Keys.PageDown) },
-                    { (int)new GamepadFlags(0,false,true),
-                       new Behavior { OnRelease = new Actions{ SpecialActions = { SpecialAction.EnterTypingMode }
-                    }
-            } }
+                    { (int)new GamepadFlags(0,false,true), NormalButtonRelease(SpecialAction.EnterTypingMode) }
 
                 }
             };
@@ -381,8 +378,8 @@ namespace xWin.Config
 
                 Bindings =
                 {
-                    { (int)new GamepadFlags(GamepadButtonFlags.None,false,false,true),ActionOnPress(KeyboardAction.Confirm) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.None,false,true),ActionOnPress(KeyboardAction.LeaveTyping) }
+                    { (int)new GamepadFlags(0,false,false,true),ActionOnPress(KeyboardAction.Confirm) },
+                    { (int)new GamepadFlags(0,false,true),ActionOnPress(KeyboardAction.LeaveTyping) }
                 }
             };
         }

@@ -222,7 +222,7 @@ namespace xWin.Library
                                 if (act == KeyboardAction.Confirm)
                                 {
                                     text += ts.Text;
-                                    //SendString(ts.Text);
+                                    SendString(ts.Text);
                                 }
                                 else if (act == KeyboardAction.LeaveTyping)
                                 {
