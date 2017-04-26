@@ -56,13 +56,14 @@ namespace xWin.Library
                                     bbb = Keys.Menu;
                                 else if (bbb == Keys.KeyCode)
                                     continue;
-                                ks.Add(bbb);
+                                if (!ks.Contains(bbb)) { release_ks.Add(bbb); }
                             }
                         }
                         if (b.SpecialActions != null)
                         {
                             foreach (var bb in b.SpecialActions)
                             {
+
                                 if (!sas.Contains(bb)) { release_sas.Add(bb); }
                             }
                         }
