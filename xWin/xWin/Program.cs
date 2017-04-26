@@ -110,8 +110,8 @@ namespace xWin
             var l = new List<string>();
             l.Add("../../../config");
             var io = new IO<Configuration>(l,".dat");
-            io.WriteToFile(Defaults.DefaultConfiguration(), "default");
-            var c = io.ReadFromFile("default");
+            io.WriteToFile(Defaults.DefaultConfiguration2(), "default2");
+            var c = io.ReadFromFile("default2");
             //Defaults.DefaultConfiguration();
             InteractionLoop(controller, c, cc, 20);
         }
