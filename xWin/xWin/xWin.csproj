@@ -204,6 +204,7 @@
       <DependentUpon>KeyboardWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\PolarStick.cs" />
+    <Compile Include="Library\StringSendingImports.cs" />
     <Compile Include="Library\TypingInterpreter.cs" />
     <Compile Include="Library\XAction.cs" />
     <Compile Include="Library\Log.cs" />

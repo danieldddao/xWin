@@ -25,7 +25,19 @@ namespace xWin.Library
                     if (a != null)
                     {
                         if (a.Keybinds != null)
-                            foreach (var aa in a.Keybinds) { ks.Add((Keys)aa); }
+                            foreach (var aa in a.Keybinds)
+                            {
+                                Keys aaa = (Keys)aa;
+                                if (aaa == Keys.Shift)
+                                    aaa = Keys.ShiftKey;
+                                else if (aaa == Keys.Control)
+                                    aaa = Keys.ControlKey;
+                                else if (aaa == Keys.Alt)
+                                    aaa = Keys.Menu;
+                                else if (aaa == Keys.KeyCode)
+                                    continue;
+                                ks.Add(aaa);
+                            }
                         if (a.SpecialActions != null)
                             foreach (var aa in a.SpecialActions) { sas.Add(aa); }
                     }
@@ -35,7 +47,16 @@ namespace xWin.Library
                         {
                             foreach (var bb in b.Keybinds)
                             {
-                                if (!ks.Contains((Keys)bb)) { release_ks.Add((Keys)bb); }
+                                Keys bbb = (Keys)bb;
+                                if (bbb == Keys.Shift)
+                                    bbb = Keys.ShiftKey;
+                                else if (bbb == Keys.Control)
+                                    bbb = Keys.ControlKey;
+                                else if (bbb == Keys.Alt)
+                                    bbb = Keys.Menu;
+                                else if (bbb == Keys.KeyCode)
+                                    continue;
+                                ks.Add(bbb);
                             }
                         }
                         if (b.SpecialActions != null)

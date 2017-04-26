@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using xWin.Wrapper;
 using static BasicControl.Types;
 using static TypingControl.Types;
-
+using static xWin.Library.StringSendingImports;
 namespace xWin.Library
 {
     public enum Mode
@@ -49,6 +49,9 @@ namespace xWin.Library
         private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
+
+        [DllImport("user32.dll")]
+        private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
 
         public static void LDown()
         {
@@ -90,6 +93,24 @@ namespace xWin.Library
             // Releases the key  
             keybd_event(key, 0, 3, 0);
         }
+
+        public static void SendString(string s)
+        {
+            INPUT[] input = new INPUT[s.Length];
+            for(int i = 0; i < input.Length; ++i)
+            {
+                input[i] = new INPUT();
+                input[i].type = 1;//keyboard
+                input[i].data.ki.Vk = 0;
+                input[i].data.ki.Scan = (ushort)s[i];
+                input[i].data.ki.Time = 0;
+                input[i].data.ki.Flags = 0x0004;//unicode
+                input[i].data.ki.ExtraInfo = IntPtr.Zero;
+            }
+            SendInput((uint)input.Length, input, Marshal.SizeOf(typeof(INPUT)));
+        }
+
+
 
         public static void InteractionLoop(GenericController c, Configuration config, ControllerCalibration cc, int tick, Mode m = Mode.Normal)
         {
@@ -183,7 +204,10 @@ namespace xWin.Library
                             {
                                 Console.Write(act.ToString());
                                 if (act == KeyboardAction.Confirm)
+                                {
                                     text += ts.Text;
+                                    SendString(ts.Text);
+                                }
                                 else if (act == KeyboardAction.LeaveTyping)
                                 {
                                     m = Mode.Normal;
