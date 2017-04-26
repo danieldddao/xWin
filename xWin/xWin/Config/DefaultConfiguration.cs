@@ -347,7 +347,7 @@ namespace xWin.Config
                     Subcount = 8,
                     Set =
                     {
-                        new StringChoice { Subset = { "a","b","c","d","e","f","g","h"} },
+                        new StringChoice { Subset = { "τ","µ","σ","Σ","π","Γ","ß","α"} },
                         new StringChoice { Subset = { "i","j","k","l","m","n","o","p"} },
                         new StringChoice { Subset = { "q","r","s","t","u","v","w","x"} },
                         new StringChoice { Subset = { "y","z","0","1","2","3","4","5"} },
