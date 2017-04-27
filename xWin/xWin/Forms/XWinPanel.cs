@@ -227,7 +227,7 @@ namespace xWin.Forms
                 while (true)
                 {
                     list = controller.GetCurrentlyPressedButtons();
-                    Log.GetLogger().Debug("list of currently pressed buttons : " + list);
+                    //Log.GetLogger().Debug("list of currently pressed buttons : " + list);
                     // If the list has only 1 button pressed
                     if (list.Count == 1)
                     {

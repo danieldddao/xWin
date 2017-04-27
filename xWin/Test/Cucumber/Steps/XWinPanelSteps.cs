@@ -120,9 +120,9 @@ namespace Cucumber.Steps
                     logShowed = true;
                 }
             }
-            Assert.IsTrue(logShowed);
             foreach (var process in System.Diagnostics.Process.GetProcessesByName("notepad"))
             { process.Kill(); }
+            Assert.IsTrue(logShowed);
         }
 
         [When(@"I enable debug mode for logging")]

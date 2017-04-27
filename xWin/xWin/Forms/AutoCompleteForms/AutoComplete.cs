@@ -21,11 +21,12 @@ namespace xWin.Forms.AutoCompleteForms
         private Keys[] keys = { Keys.None, Keys.None }; // array of 2 keys, Keys[0] is the previously entered key, Keys[1] is the currently entered key.
         private string typedWord = ""; // word that user's typing
         private string predictiveSubWord = ""; // subword of the word that needs to be showed to the user
+        private List<Keys> currentlyPressedShortcut = new List<Keys>();
 
         public int quickTypeTimerInterval = 5000;
-        public List<Keys> suggestion1Shortcut = new List<Keys>();
-        public List<Keys> suggestion2Shortcut = new List<Keys>();
-        public List<Keys> suggestion3Shortcut = new List<Keys>();
+        public List<Keys> suggestion1Shortcut = new List<Keys>(); // shortcut for suggestion 1
+        public List<Keys> suggestion2Shortcut = new List<Keys>(); // shortcut for suggestion 2
+        public List<Keys> suggestion3Shortcut = new List<Keys>(); // shortcut for suggestion 3
 
         public AutoComplete()
         {
@@ -38,7 +39,7 @@ namespace xWin.Forms.AutoCompleteForms
         // Convert a key to a coressponding character, which is returned as a string
         public string KeyToChar(Keys[] keys)
         {
-            string c = "\0"; // default null char
+            string c = ""; // default empty string
             try
             {
                 Keys key = keys[1];
@@ -202,15 +203,17 @@ namespace xWin.Forms.AutoCompleteForms
         {
             try
             {
+                if (!currentlyPressedShortcut.Contains(e.KeyCode)) { currentlyPressedShortcut.Add(e.KeyCode); }
+
                 currentWindow = GetCurrentWindow();
-                Log.GetLogger().Info("[Key Down] Current Active Window: " + currentWindow);
+                Log.GetLogger().Debug("[Key Down] Current Active Window: " + currentWindow);
                 // Get the Id of xWin App
                 IntPtr xWinId = IntPtr.Zero;
                 foreach (Process p in Process.GetProcessesByName("xWin"))
                 {
                     xWinId = p.MainWindowHandle;
                 }
-                Log.GetLogger().Info("[Key Down] xWin Window ID: " + xWinId);
+                Log.GetLogger().Debug("[Key Down] xWin Window ID: " + xWinId);
 
                 // If not interacting with xWin App
                 if (currentWindow != xWinId)
@@ -222,14 +225,15 @@ namespace xWin.Forms.AutoCompleteForms
                         this.Show();
                     }
 
+                    // Suppress to bind key down
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+
                     // If keydown is Tab key
                     // and currently typed word is not empty and it doesn't contain null character
                     // Suppress actual tab key and complete the predictive word
-                    if (e.KeyCode == Keys.Tab && typedWord != "" && !typedWord.Contains('\0'))
+                    if (e.KeyCode == Keys.Tab && typedWord != "" && predictiveSubWord != "")
                     {
-                        e.Handled = true;
-                        e.SuppressKeyPress = true;
-
                         // Complete the predictive word
                         char[] array = predictiveSubWord.ToArray<char>();
                         Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
@@ -237,10 +241,11 @@ namespace xWin.Forms.AutoCompleteForms
                         { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Right); }
 
                         typedWord += predictiveSubWord; // Apply the currently typed word
+                        predictiveSubWord = ""; // reset predictive Subword
                         Log.GetLogger().Info("[Key Down] Applied currently typed word: " + typedWord);
                     }
                     // New word
-                    else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
+                    else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space || (e.KeyCode == Keys.Tab && predictiveSubWord == ""))
                     {
                         if (typedWord != "") { db.UpdateOrInsertWord(typedWord); } // Update non-empty word into database
                         typedWord = ""; // reset the word
@@ -294,43 +299,74 @@ namespace xWin.Forms.AutoCompleteForms
                 {
                     KeyboardInputsUnsubscribe(); // Stop reading keyboard inputs
 
-                    // reset quicktype bar
-                    SetQuickTypeButton1("");
-                    SetQuickTypeButton2("");
-                    SetQuickTypeButton3("");
-                    predictiveSubWord = ""; // reset predictive Subword
-
-                    if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Space && e.KeyCode != Keys.Tab)
+                    Log.GetLogger().Info("[Key Up] Currently pressed shortcut" + string.Join("+ ", currentlyPressedShortcut.ToArray()));
+                    // If suggestion 1's shortcut is pressed
+                    if ((suggestion1Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion1Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion1Shortcut).Any())
                     {
-                        List<string> topThree = db.GetTopThreeWords(typedWord);
-                        string logMsg = "top three words: ";
-                        foreach (string word in topThree) { logMsg += word + " "; }
-                        Log.GetLogger().Info("[Key Up] " + logMsg);
+                        Log.GetLogger().Info("[Key Up] Applying suggestion 1 using shortcut!");
+                        ApplyWord(quickTypeButton1.Text);
+                    }
+                    // If suggestion 2's shortcut is pressed
+                    else if ((suggestion2Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion2Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion2Shortcut).Any())
+                    {
+                        Log.GetLogger().Info("[Key Up] Applying suggestion 2 using shortcut!");
+                        ApplyWord(quickTypeButton2.Text);
+                    }
+                    // If suggestion 3's shortcut is pressed
+                    else if ((suggestion3Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion3Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion3Shortcut).Any())
+                    {
+                        Log.GetLogger().Info("[Key Up] Applying suggestion 3 using shortcut!");
+                        ApplyWord(quickTypeButton3.Text);
+                    }
+                    else
+                    {
+                        
+                        // reset quicktype bar
+                        SetQuickTypeButton1("");
+                        SetQuickTypeButton2("");
+                        SetQuickTypeButton3("");
 
-                        // If there exists at least a word that matches the currently typed word
-                        if (topThree.Count > 0)
+                        Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
+                        if (e.KeyCode == Keys.Tab && predictiveSubWord == "")
                         {
-                            if (topThree[0] != typedWord) // Use Top 1 Word as word prediction if it is not the same as currently typed word
-                            {
-                                PredictWord(topThree[0]);
-                            }
-                            else if (topThree.Count >= 2 && topThree[1] != typedWord) // Use Top 2 Word as word prediction if it exists and is not the same as currently typed word
-                            {
-                                PredictWord(topThree[1]);
-                            }
-                            else if (topThree.Count >= 3 && topThree[2] != typedWord) // Use Top 3 Word as word prediction if it exists and is not the same as currently typed word
-                            {
-                                PredictWord(topThree[2]);
-                            }
-
-                            // Set word suggestions for quicktype bar
-                            string[] topTmp = { "", "", "" };
-                            for (int i = 0; i < topThree.Count; i++)
-                            { if (typedWord != topThree[i]) { topTmp[i] = topThree[i]; } }
-                            SetQuickTypeButton1(topTmp[0]);
-                            SetQuickTypeButton2(topTmp[1]);
-                            SetQuickTypeButton3(topTmp[2]);
+                            // press tab key when there's no word prediction
+                            systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)e.KeyCode);
                         }
+                        else if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Space && e.KeyCode != Keys.Tab)
+                        {
+                            // press the key
+                            systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)e.KeyCode);
+
+                            List<string> topThree = db.GetTopThreeWords(typedWord);
+                            string logMsg = "top three words: ";
+                            foreach (string word in topThree) { logMsg += word + " "; }
+                            Log.GetLogger().Info("[Key Up] " + logMsg);
+
+                            // If there exists at least a word that matches the currently typed word
+                            if (topThree.Count > 0)
+                            {
+                                if (topThree[0] != typedWord) // Use Top 1 Word as word prediction if it is not the same as currently typed word
+                                {
+                                    PredictWord(topThree[0]);
+                                }
+                                else if (topThree.Count >= 2 && topThree[1] != typedWord) // Use Top 2 Word as word prediction if it exists and is not the same as currently typed word
+                                {
+                                    PredictWord(topThree[1]);
+                                }
+                                else if (topThree.Count >= 3 && topThree[2] != typedWord) // Use Top 3 Word as word prediction if it exists and is not the same as currently typed word
+                                {
+                                    PredictWord(topThree[2]);
+                                }
+
+                                // Set word suggestions for quicktype bar
+                                string[] topTmp = { "", "", "" };
+                                for (int i = 0; i < topThree.Count; i++)
+                                { if (typedWord != topThree[i]) { topTmp[i] = topThree[i]; } }
+                                SetQuickTypeButton1(topTmp[0]);
+                                SetQuickTypeButton2(topTmp[1]);
+                                SetQuickTypeButton3(topTmp[2]);
+                            }
+                        }                        
                     }
 
                     keys[0] = e.KeyCode;
@@ -338,6 +374,7 @@ namespace xWin.Forms.AutoCompleteForms
                     QuickTypeBarTimer.Interval = quickTypeTimerInterval;
                     QuickTypeBarTimer.Start(); // start new timer
                     KeyboardInputsSubscribe(); // Start reading keyboard inputs
+                    currentlyPressedShortcut.Clear(); // reset currently pressed shortcut
                 }
             }
             catch (Exception ex)
@@ -364,22 +401,22 @@ namespace xWin.Forms.AutoCompleteForms
         {
             try
             {
-                Log.GetLogger().Info("[QuickTypeBar] Switch to last window used to type: " + currentWindow);
-                FocusToPreviousWindow();
-
                 if (word != "")
                 {
                     Log.GetLogger().Info("[QuickTypeBar] Applying Word: " + word);
                     KeyboardInputsUnsubscribe();
 
                     // Apply the predictive word
-                    string subword = word.Substring(word.IndexOf(typedWord) + typedWord.ToCharArray().Length);
+                    Log.GetLogger().Info("[QuickTypeBar] TypedWord: " + typedWord);
+                    Log.GetLogger().Info("[QuickTypeBar] typedWord.ToArray().Length: " + typedWord.ToArray().Length);
+                    string subword = word.Substring(word.IndexOf(typedWord) + typedWord.ToArray().Length);
                     Log.GetLogger().Info("[QuickTypeBar] Subword: " + subword);
 
                     Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
                     systemWrapper.SimulateText(subword);
 
                     typedWord = word; // Apply the currently typed word
+                    // reset all suggestions
                     quickTypeButton1.Text = "";
                     quickTypeButton2.Text = "";
                     quickTypeButton3.Text = "";
@@ -400,18 +437,24 @@ namespace xWin.Forms.AutoCompleteForms
         private void quickTypeButton1_Click(object sender, EventArgs e)
         {
             Log.GetLogger().Info("QuickTypeBtn1 pressed");
+            Log.GetLogger().Info("Switch to last window used to type: " + currentWindow);
+            FocusToPreviousWindow();
             ApplyWord(quickTypeButton1.Text);
         }
 
         private void quickTypeButton2_Click(object sender, EventArgs e)
         {
             Log.GetLogger().Info("QuickTypeBtn2 pressed");
+            Log.GetLogger().Info("Switch to last window used to type: " + currentWindow);
+            FocusToPreviousWindow();
             ApplyWord(quickTypeButton2.Text);
         }
 
         private void quickTypeButton3_Click(object sender, EventArgs e)
         {
             Log.GetLogger().Info("QuickTypeBtn3 pressed");
+            Log.GetLogger().Info("Switch to last window used to type: " + currentWindow);
+            FocusToPreviousWindow();
             ApplyWord(quickTypeButton3.Text);
         }
 

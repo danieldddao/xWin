@@ -108,12 +108,12 @@ namespace xWin.Forms.AutoCompleteForms
                 shortcutM.SetLabel("Enter Your Shortcut below:");
                 shortcutM.ShowDialog();
                 // If suggestion 2's shortcut is the same as new shortcut
-                if ((shortcutM.shortcut.Count == qtTmpButton2Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton2Shortcut).Any())
+                if (shortcutM.shortcut.Count != 0 && (shortcutM.shortcut.Count == qtTmpButton2Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton2Shortcut).Any())
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 2");
                 }
                 // If suggestion 3's shortcut is the same as new shortcut
-                else if ((shortcutM.shortcut.Count == qtTmpButton3Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton3Shortcut).Any())
+                else if (shortcutM.shortcut.Count != 0 && (shortcutM.shortcut.Count == qtTmpButton3Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton3Shortcut).Any())
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 3");
                 }
@@ -138,12 +138,12 @@ namespace xWin.Forms.AutoCompleteForms
                 shortcutM.SetLabel("Enter Your Shortcut below:");
                 shortcutM.ShowDialog();
                 // If suggestion 1's shortcut is the same as new shortcut
-                if ((shortcutM.shortcut.Count == qtTmpButton1Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton1Shortcut).Any())
+                if (shortcutM.shortcut.Count != 0 && (shortcutM.shortcut.Count == qtTmpButton1Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton1Shortcut).Any())
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 1");
                 }
                 // If suggestion 3's shortcut is the same as new shortcut
-                else if ((shortcutM.shortcut.Count == qtTmpButton3Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton3Shortcut).Any())
+                else if (shortcutM.shortcut.Count != 0 && (shortcutM.shortcut.Count == qtTmpButton3Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton3Shortcut).Any())
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 3");
                 }
@@ -168,12 +168,12 @@ namespace xWin.Forms.AutoCompleteForms
                 shortcutM.SetLabel("Enter Your Shortcut below:");
                 shortcutM.ShowDialog();
                 // If suggestion 1's shortcut is the same as new shortcut
-                if ((shortcutM.shortcut.Count == qtTmpButton1Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton1Shortcut).Any())
+                if (shortcutM.shortcut.Count != 0 && (shortcutM.shortcut.Count == qtTmpButton1Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton1Shortcut).Any())
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 1");
                 }
                 // If suggestion 2's shortcut is the same as new shortcut
-                else if ((shortcutM.shortcut.Count == qtTmpButton2Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton2Shortcut).Any())
+                else if (shortcutM.shortcut.Count != 0 && (shortcutM.shortcut.Count == qtTmpButton2Shortcut.Count) && !shortcutM.shortcut.Except(qtTmpButton2Shortcut).Any())
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 2");
                 }
