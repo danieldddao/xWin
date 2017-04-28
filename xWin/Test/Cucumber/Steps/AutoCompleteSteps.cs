@@ -239,6 +239,43 @@ namespace Cucumber.Steps
             buttonMessageBoxClose.Click();
         }
 
+        [When(@"I check using shortcuts checkbox")]
+        public void WhenICheckUsingShortcutsCheckbox()
+        {
+            List<Window> listWindows = application.GetWindows();
+            CheckBox checkbox = listWindows[1].Get<CheckBox>("usingShortcutsCheckBox");
+            checkbox.Checked = true;
+        }
+
+        [Then(@"It should check the checkbox")]
+        public void ThenItShouldCheckTheCheckbox()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Button button = listWindows[0].Get<Button>("customizeQuickTypeBar");
+            button.Click();
+            listWindows = application.GetWindows();
+            CheckBox checkbox = listWindows[1].Get<CheckBox>("usingShortcutsCheckBox");
+            Assert.IsTrue(checkbox.Checked);
+        }
+
+        [When(@"I uncheck using shortcuts checkbox")]
+        public void WhenIUncheckUsingShortcutsCheckbox()
+        {
+            List<Window> listWindows = application.GetWindows();
+            CheckBox checkbox = listWindows[1].Get<CheckBox>("usingShortcutsCheckBox");
+            checkbox.Checked = false;
+        }
+
+        [Then(@"It should uncheck the checkbox")]
+        public void ThenItUncheckTheCheckbox()
+        {
+            List<Window> listWindows = application.GetWindows();
+            Button button = listWindows[0].Get<Button>("customizeQuickTypeBar");
+            button.Click();
+            listWindows = application.GetWindows();
+            CheckBox checkbox = listWindows[1].Get<CheckBox>("usingShortcutsCheckBox");
+            Assert.IsFalse(checkbox.Checked);
+        }
 
     }
 }

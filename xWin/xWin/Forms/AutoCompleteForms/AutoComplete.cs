@@ -27,6 +27,7 @@ namespace xWin.Forms.AutoCompleteForms
         public List<Keys> suggestion1Shortcut = new List<Keys>(); // shortcut for suggestion 1
         public List<Keys> suggestion2Shortcut = new List<Keys>(); // shortcut for suggestion 2
         public List<Keys> suggestion3Shortcut = new List<Keys>(); // shortcut for suggestion 3
+        public bool usingShortcuts = false;
 
         public AutoComplete()
         {
@@ -305,20 +306,20 @@ namespace xWin.Forms.AutoCompleteForms
                     KeyboardInputsUnsubscribe(); // Stop reading keyboard inputs
 
                     Log.GetLogger().Info("[Key Up] Currently pressed shortcut: " + string.Join("+ ", currentlyPressedShortcut.ToArray()));
-                    // If suggestion 1's shortcut is pressed
-                    if ((suggestion1Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion1Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion1Shortcut).Any())
+                    // If suggestion 1's shortcut is pressed and usingShortcuts is enabled
+                    if (usingShortcuts && (suggestion1Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion1Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion1Shortcut).Any())
                     {
                         Log.GetLogger().Info("[Key Up] Applying suggestion 1 using shortcut!");
                         ApplyWord(quickTypeButton1.Text);
                     }
-                    // If suggestion 2's shortcut is pressed
-                    else if ((suggestion2Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion2Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion2Shortcut).Any())
+                    // If suggestion 2's shortcut is pressed and usingShortcuts is enabled
+                    else if (usingShortcuts && (suggestion2Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion2Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion2Shortcut).Any())
                     {
                         Log.GetLogger().Info("[Key Up] Applying suggestion 2 using shortcut!");
                         ApplyWord(quickTypeButton2.Text);
                     }
-                    // If suggestion 3's shortcut is pressed
-                    else if ((suggestion3Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion3Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion3Shortcut).Any())
+                    // If suggestion 3's shortcut is pressed and usingShortcuts is enabled
+                    else if (usingShortcuts && (suggestion3Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion3Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion3Shortcut).Any())
                     {
                         Log.GetLogger().Info("[Key Up] Applying suggestion 3 using shortcut!");
                         ApplyWord(quickTypeButton3.Text);
@@ -331,7 +332,6 @@ namespace xWin.Forms.AutoCompleteForms
                     }
                     else
                     {
-                        
                         // reset quicktype bar
                         SetQuickTypeButton1("");
                         SetQuickTypeButton2("");

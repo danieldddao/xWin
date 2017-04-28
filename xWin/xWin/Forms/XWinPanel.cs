@@ -81,7 +81,6 @@ namespace xWin.Forms
             if (autoComplete.enableWordPrediction || autoComplete.enableQuickType) { autoComplete.KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
             if (autoComplete.enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
             if (autoComplete.enableQuickType) { quickTypeCheckBox.Checked = true; }
-            quickBarHideTimeTextBox.Text = "" + autoComplete.quickTypeTimerInterval/1000;
             Log.GetLogger().Info("Application started");
         }
 
@@ -493,38 +492,6 @@ namespace xWin.Forms
             autoComplete.KeyboardInputsSubscribe();
         }
 
-        private void quickBarHideTimeTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("^[0-9]+$");
-                Match match = regex.Match(quickBarHideTimeTextBox.Text);
-                if (match.Success)
-                {
-                    int interval = Int32.Parse(quickBarHideTimeTextBox.Text);
-                    if (interval == 0)
-                    {
-                        autoComplete.quickTypeTimerInterval = 5000;
-                        quickBarHideTimeTextBox.Text = "5";
-                        MessageBox.Show("Please enter a positive integer!");
-                    }
-                    else
-                    { autoComplete.quickTypeTimerInterval = Int32.Parse(quickBarHideTimeTextBox.Text) * 1000; }
-                } else
-                {
-                    autoComplete.quickTypeTimerInterval = 5000;
-                    quickBarHideTimeTextBox.Text = "5";
-                    MessageBox.Show("Please enter an integer!");
-                }
-
-                Log.GetLogger().Info("Set new interval for QuickType bar: " + autoComplete.quickTypeTimerInterval);
-            }
-            catch (Exception ex)
-            {
-                Log.GetLogger().Error(ex);
-            }
-        }
-
         private void wordPredictionTipsButton_Click(object sender, EventArgs e)
         {
             WordPredictionTips wordPredictionTips = new WordPredictionTips();
@@ -539,12 +506,14 @@ namespace xWin.Forms
 
         private void customizeQuickTypeBar_Click(object sender, EventArgs e)
         {
-            QuickTypeBarCustomization qtbar = new QuickTypeBarCustomization(autoComplete.suggestion1Shortcut, autoComplete.suggestion2Shortcut, autoComplete.suggestion3Shortcut);
+            QuickTypeBarCustomization qtbar = new QuickTypeBarCustomization(autoComplete.suggestion1Shortcut, autoComplete.suggestion2Shortcut, autoComplete.suggestion3Shortcut, autoComplete.usingShortcuts, autoComplete.quickTypeTimerInterval);
             autoComplete.KeyboardInputsUnsubscribe();
             qtbar.ShowDialog();
             autoComplete.suggestion1Shortcut = qtbar.qtButton1Shortcut;
             autoComplete.suggestion2Shortcut = qtbar.qtButton2Shortcut;
             autoComplete.suggestion3Shortcut = qtbar.qtButton3Shortcut;
+            autoComplete.usingShortcuts = qtbar.usingShortcuts;
+            autoComplete.quickTypeTimerInterval = qtbar.quickTypeTimerInterval;
             autoComplete.KeyboardInputsSubscribe();
             Log.GetLogger().Info("Successfully updated the shortcuts for quicktype bar");
             Log.GetLogger().Info("Suggestion 1's shortcut: (" + autoComplete.suggestion1Shortcut.Count + ") " + string.Join("+ ", autoComplete.suggestion1Shortcut.ToArray()));

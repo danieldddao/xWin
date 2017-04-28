@@ -182,3 +182,19 @@ Scenario: Can't set the suggestion 3's shortcut for suggestion 1
 	And I click on Suggestion 1
 	And I enter shortcut F3 for suggestion 1
 	Then I should receive a message box
+
+Scenario: Check Using shortcuts for QuickType Bar
+	Given XWin program is set up and launched
+	When I click on Settings tab
+	And I click on customize quicktype bar
+	And I check using shortcuts checkbox
+	And I save customization
+	Then It should check the checkbox
+
+Scenario: Uncheck Using shortcuts for QuickType Bar
+	Given XWin program is set up and launched
+	When I click on Settings tab
+	And I click on customize quicktype bar
+	And I uncheck using shortcuts checkbox
+	And I save customization
+	Then It should uncheck the checkbox

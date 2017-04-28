@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using xWin.Forms.ButtonMaps;
 using xWin.Library;
@@ -23,7 +19,13 @@ namespace xWin.Forms.AutoCompleteForms
         public List<Keys> qtButton3Shortcut = new List<Keys>();
         private List<Keys> qtTmpButton3Shortcut = new List<Keys>();
 
-        public QuickTypeBarCustomization(List<Keys> button1Shortcut, List<Keys> button2Shortcut, List<Keys> button3Shortcut)
+        public bool usingShortcuts = false;
+        private bool usingShortcutsTmp = false;
+
+        public int quickTypeTimerInterval = 5000;
+        private int quickTypeTimerIntervalTmp = 5000;
+
+        public QuickTypeBarCustomization(List<Keys> button1Shortcut, List<Keys> button2Shortcut, List<Keys> button3Shortcut, bool shortcuts, int interval)
         {
             InitializeComponent();;
 
@@ -34,6 +36,12 @@ namespace xWin.Forms.AutoCompleteForms
             qtTmpButton1Shortcut = qtButton1Shortcut;
             qtTmpButton2Shortcut = qtButton2Shortcut;
             qtTmpButton3Shortcut = qtButton3Shortcut;
+
+            usingShortcuts = shortcuts;
+            usingShortcutsTmp = usingShortcuts;
+
+            quickTypeTimerInterval = interval;
+            quickTypeTimerIntervalTmp = quickTypeTimerInterval;
         }
 
         private void QuickTypeBarCustomization_Load(object sender, EventArgs e)
@@ -92,6 +100,17 @@ namespace xWin.Forms.AutoCompleteForms
                     }
                     quickTypeButton3TextBox.Text = shortcut;
                 }
+
+                if (usingShortcutsTmp)
+                {
+                    usingShortcutsCheckBox.Checked = true;
+                }
+                else
+                {
+                    usingShortcutsCheckBox.Checked = false;
+                }
+
+                quickBarHideTimeTextBox.Text = "" + quickTypeTimerIntervalTmp/1000;
             }
             catch (Exception ex)
             {
@@ -194,7 +213,54 @@ namespace xWin.Forms.AutoCompleteForms
             qtButton1Shortcut = qtTmpButton1Shortcut;
             qtButton2Shortcut = qtTmpButton2Shortcut;
             qtButton3Shortcut = qtTmpButton3Shortcut;
+            usingShortcuts = usingShortcutsTmp;
+            quickTypeTimerInterval = quickTypeTimerIntervalTmp;
             this.Close();
+        }
+
+        private void usingShortcutsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (usingShortcutsCheckBox.Checked)
+            {
+                usingShortcutsTmp = true;
+            }
+            else
+            {
+                usingShortcutsTmp = false;
+            }
+        }
+
+        private void quickBarHideTimeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("^[0-9]+$");
+                Match match = regex.Match(quickBarHideTimeTextBox.Text);
+                if (match.Success)
+                {
+                    int interval = Int32.Parse(quickBarHideTimeTextBox.Text);
+                    if (interval == 0)
+                    {
+                        quickTypeTimerIntervalTmp = 5000;
+                        quickBarHideTimeTextBox.Text = "5";
+                        MessageBox.Show("Please enter a positive integer!");
+                    }
+                    else
+                    { quickTypeTimerIntervalTmp = Int32.Parse(quickBarHideTimeTextBox.Text) * 1000; }
+                }
+                else
+                {
+                    quickTypeTimerIntervalTmp = 5000;
+                    quickBarHideTimeTextBox.Text = "5";
+                    MessageBox.Show("Please enter an integer!");
+                }
+
+                Log.GetLogger().Info("Set new interval for QuickType bar: " + quickTypeTimerIntervalTmp);
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
         }
     }
 }
