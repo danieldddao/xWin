@@ -229,46 +229,51 @@ namespace xWin.Forms.AutoCompleteForms
                     e.Handled = true;
                     e.SuppressKeyPress = true;
 
-                    // If keydown is Tab key
-                    // and currently typed word is not empty and it doesn't contain null character
-                    // Suppress actual tab key and complete the predictive word
-                    if (e.KeyCode == Keys.Tab && typedWord != "" && predictiveSubWord != "")
+                    // If there's no shortcut currently being pressed
+                    if (currentlyPressedShortcut.Count == 1)
                     {
-                        // Complete the predictive word
-                        char[] array = predictiveSubWord.ToArray<char>();
-                        Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                        foreach (char c in array)
-                        { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Right); }
-
-                        typedWord += predictiveSubWord; // Apply the currently typed word
-                        predictiveSubWord = ""; // reset predictive Subword
-                        Log.GetLogger().Info("[Key Down] Applied currently typed word: " + typedWord);
-                    }
-                    // New word
-                    else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space || (e.KeyCode == Keys.Tab && predictiveSubWord == ""))
-                    {
-                        if (typedWord != "") { db.UpdateOrInsertWord(typedWord); } // Update non-empty word into database
-                        typedWord = ""; // reset the word
-                    }
-                    else if (e.KeyCode == Keys.Back) // Delete character
-                    {
-                        if (predictiveSubWord != "") // If there's a predictive subword, remove it.
+                        // If keydown is Tab key
+                        // and currently typed word is not empty and it doesn't contain null character
+                        // Suppress actual tab key and complete the predictive word
+                        if (e.KeyCode == Keys.Tab && typedWord != "" && predictiveSubWord != "")
                         {
+                            // Complete the predictive word
+                            char[] array = predictiveSubWord.ToArray<char>();
                             Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                            systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Back);
+                            foreach (char c in array)
+                            { systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Right); }
+
+                            typedWord += predictiveSubWord; // Apply the currently typed word
+                            predictiveSubWord = ""; // reset predictive Subword
+                            Log.GetLogger().Info("[Key Down] Applied currently typed word: " + typedWord);
                         }
-                        if (typedWord.Length > 0) { typedWord = typedWord.Remove(typedWord.Length - 1); }
-                        Log.GetLogger().Info("[Key Down] Backspace: removed last character, currently typed word is " + typedWord);
+                        // New word
+                        else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space || (e.KeyCode == Keys.Tab && predictiveSubWord == ""))
+                        {
+                            if (typedWord != "") { db.UpdateOrInsertWord(typedWord); } // Update non-empty word into database
+                            typedWord = ""; // reset the word
+                        }
+                        else if (e.KeyCode == Keys.Back) // Delete character
+                        {
+                            if (predictiveSubWord != "") // If there's a predictive subword, remove it.
+                            {
+                                Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
+                                systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)Keys.Back);
+                            }
+                            if (typedWord.Length > 0) { typedWord = typedWord.Remove(typedWord.Length - 1); }
+                            Log.GetLogger().Info("[Key Down] Backspace: removed last character, currently typed word is " + typedWord);
+                        }
+                        else
+                        {
+                            keys[1] = e.KeyCode;
+                            string c = KeyToChar(keys);
+                            Log.GetLogger().Info("[Key Down] KeyToChar: " + c);
+                            typedWord += c;
+                            Log.GetLogger().Info("[Key Down] word typed: " + typedWord + " (length: " + typedWord.Length + ")");
+                            Log.GetLogger().Debug("[Key Down] Contain null char: " + typedWord.Contains('\0'));
+                        }
                     }
-                    else
-                    {
-                        keys[1] = e.KeyCode;
-                        string c = KeyToChar(keys);
-                        Log.GetLogger().Info("[Key Down] KeyToChar: " + c);
-                        typedWord += c;
-                        Log.GetLogger().Info("[Key Down] word typed: " + typedWord + " (length: " + typedWord.Length + ")");
-                        Log.GetLogger().Info("[Key Down] Contain null char: " + typedWord.Contains('\0'));
-                    }
+                    //System.Threading.Thread.Sleep(100);
                     KeyboardInputsSubscribe();
                 }
             }
@@ -285,21 +290,21 @@ namespace xWin.Forms.AutoCompleteForms
             try
             {
                 currentWindow = GetCurrentWindow();
-                Log.GetLogger().Info("[Key Up] Current Active Window: " + currentWindow);
+                Log.GetLogger().Debug("[Key Up] Current Active Window: " + currentWindow);
                 // Get the Id of xWin App
                 IntPtr xWinId = IntPtr.Zero;
                 foreach (Process p in Process.GetProcessesByName("xWin"))
                 {
                     xWinId = p.MainWindowHandle;
                 }
-                Log.GetLogger().Info("[Key Up] xWin Window ID: " + xWinId);
+                Log.GetLogger().Debug("[Key Up] xWin Window ID: " + xWinId);
 
                 // If not interacting with xWin App
                 if (currentWindow != xWinId)
                 {
                     KeyboardInputsUnsubscribe(); // Stop reading keyboard inputs
 
-                    Log.GetLogger().Info("[Key Up] Currently pressed shortcut" + string.Join("+ ", currentlyPressedShortcut.ToArray()));
+                    Log.GetLogger().Info("[Key Up] Currently pressed shortcut: " + string.Join("+ ", currentlyPressedShortcut.ToArray()));
                     // If suggestion 1's shortcut is pressed
                     if ((suggestion1Shortcut.Count != 0) && (currentlyPressedShortcut.Count == suggestion1Shortcut.Count) && !currentlyPressedShortcut.Except(suggestion1Shortcut).Any())
                     {
@@ -318,6 +323,12 @@ namespace xWin.Forms.AutoCompleteForms
                         Log.GetLogger().Info("[Key Up] Applying suggestion 3 using shortcut!");
                         ApplyWord(quickTypeButton3.Text);
                     }
+                    else if (currentlyPressedShortcut.Count > 1)
+                    {
+                        Log.GetLogger().Info("[Key Up] Applying shortcut!");
+                        XKeyBoard keyboard = new XKeyBoard();
+                        keyboard.PressShortcut(currentlyPressedShortcut.ToArray());
+                    }
                     else
                     {
                         
@@ -327,10 +338,12 @@ namespace xWin.Forms.AutoCompleteForms
                         SetQuickTypeButton3("");
 
                         Wrapper.SystemWrapper systemWrapper = new Wrapper.SystemWrapper();
-                        if (e.KeyCode == Keys.Tab && predictiveSubWord == "")
+                        if ((e.KeyCode == Keys.Tab && predictiveSubWord == "") || (e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Space))
                         {
                             // press tab key when there's no word prediction
                             systemWrapper.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode)e.KeyCode);
+                            Log.GetLogger().Info("[Key Up] Pressed Key " + e.KeyCode);
+
                         }
                         else if (e.KeyCode != Keys.Enter && e.KeyCode != Keys.Space && e.KeyCode != Keys.Tab)
                         {
@@ -370,11 +383,12 @@ namespace xWin.Forms.AutoCompleteForms
                     }
 
                     keys[0] = e.KeyCode;
+                    KeyboardInputsSubscribe(); // Start reading keyboard inputs
+                    currentlyPressedShortcut.Clear(); // reset currently pressed shortcut
                     QuickTypeBarTimer.Stop(); // stop previous timer
                     QuickTypeBarTimer.Interval = quickTypeTimerInterval;
                     QuickTypeBarTimer.Start(); // start new timer
-                    KeyboardInputsSubscribe(); // Start reading keyboard inputs
-                    currentlyPressedShortcut.Clear(); // reset currently pressed shortcut
+                    System.Threading.Thread.Sleep(50);
                 }
             }
             catch (Exception ex)
