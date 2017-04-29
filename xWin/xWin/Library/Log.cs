@@ -47,7 +47,7 @@ namespace xWin.Library
             //Logger currentLogger = (Logger)GetLogger().Logger;
             //currentLogger.Level = Level.Debug;
             GetLogger().Debug("Debug Mode");
-            GetLogger().Info("Enabled Debug Mode");
+            GetLogger().Info("Debug Mode enabled");
         }
 
         public static void DisableDebugMode()
@@ -57,7 +57,7 @@ namespace xWin.Library
             //Logger currentLogger = (Logger)GetLogger().Logger;
             //currentLogger.Level = Level.Info;
             GetLogger().Debug("Debug Mode");
-            GetLogger().Info("Disabled Debug Mode");
+            GetLogger().Info("Debug Mode disabled");
         }
 
         public static void OpenLogFile()

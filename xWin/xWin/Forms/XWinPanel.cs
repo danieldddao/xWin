@@ -88,7 +88,7 @@ namespace xWin.Forms
             if (autoComplete.enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
             if (autoComplete.enableQuickType) { quickTypeCheckBox.Checked = true; }
 
-            if (KeyLoc.GetValue("XWin") == null)
+            if (KeyLoc.GetValue("XWinStartUp") == null)
             {
                 // If the value doesn't exist, the application is not set to run at startup
                 StartAtStartupCheckBox.Checked = false;
@@ -98,6 +98,32 @@ namespace xWin.Forms
                 // The value exists, the application is set to run at startup
                 StartAtStartupCheckBox.Checked = true;
             }
+                
+            if (KeyLoc.GetValue("XWinStartMinimized") == null)
+            {
+                // If the value doesn't exist, the application is not set to start minimized
+                StartMinimizedCheckBox.Checked = false;
+            }
+            else
+            {
+                // The value exists, the application is set to start minimized
+                StartMinimizedCheckBox.Checked = true;
+                MinimizeApplication();
+            }
+
+            if (KeyLoc.GetValue("XWinDebugMode") == null)
+            {
+                // If the value doesn't exist, the debug mode is disabled
+                debugModeCheckbox.Checked = false;
+                Log.DisableDebugMode();
+            }
+            else
+            {
+                // The value exists, debug mode is enabled
+                debugModeCheckbox.Checked = true;
+                Log.EnableDebugMode();
+            }
+
             Log.GetLogger().Info("Application started");
         }
 
@@ -424,10 +450,12 @@ namespace xWin.Forms
             {
                 if (debugModeCheckbox.Checked)
                 {
+                    KeyLoc.SetValue("XWinDebugMode", true);
                     Log.EnableDebugMode();
                 }
                 else
                 {
+                    KeyLoc.DeleteValue("XWinDebugMode", false);
                     Log.DisableDebugMode();
                 }
             }
@@ -489,7 +517,7 @@ namespace xWin.Forms
             { autoComplete.enableWordPrediction = true; }
             else
             { autoComplete.enableWordPrediction = false; }
-            Log.GetLogger().Info("Word Prediction option changed:" + autoComplete.enableWordPrediction);
+            Log.GetLogger().Debug("Word Prediction option changed:" + autoComplete.enableWordPrediction);
         }
 
         private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -498,7 +526,7 @@ namespace xWin.Forms
             { autoComplete.enableQuickType = true; }
             else
             { autoComplete.enableQuickType = false; }
-            Log.GetLogger().Info("Quicktype option changed:" + autoComplete.enableQuickType);
+            Log.GetLogger().Debug("Quicktype option changed:" + autoComplete.enableQuickType);
         }
 
         private void buttonViewDictionary_Click(object sender, EventArgs e)
@@ -550,22 +578,34 @@ namespace xWin.Forms
             }
         }
 
-        // Minimize app to system tray when minimizeToSystemTray is true
-        private void XWinPanel_Resize(object sender, EventArgs e)
+        private void MinimizeApplication()
         {
             try
             {
                 systemTrayNotifyIcon.BalloonTipText = "XWin Application is minimized...";
                 systemTrayNotifyIcon.BalloonTipTitle = "XWin";
                 systemTrayNotifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+                systemTrayNotifyIcon.ShowBalloonTip(500);
+                this.ShowInTaskbar = false;
+                systemTrayNotifyIcon.Visible = true;
+                this.Hide();
+                Log.GetLogger().Info("Minimized Application to system tray!");
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+            }
+        }
+
+        // Minimize app to system tray when minimizeToSystemTray is true
+        private void XWinPanel_Resize(object sender, EventArgs e)
+        {
+            try
+            {
                 bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
                 if (minimizeToSystemTray && FormWindowState.Minimized == this.WindowState && cursorNotInBar)
                 {
-                    systemTrayNotifyIcon.ShowBalloonTip(500);
-                    this.ShowInTaskbar = false;
-                    systemTrayNotifyIcon.Visible = true;
-                    this.Hide();
-                    Log.GetLogger().Info("Minimized Application to system tray!");
+                    MinimizeApplication();
                 }
             }
             catch (Exception ex)
@@ -602,17 +642,15 @@ namespace xWin.Forms
                 if (StartAtStartupCheckBox.Checked)
                 {
                     // Add the value in the registry so that the application runs at startup
-                    KeyLoc.SetValue("XWin", Application.ExecutablePath);
+                    KeyLoc.SetValue("XWinStartUp", Application.ExecutablePath);
                     Log.GetLogger().Info("Starting Application at startup is enabled!");
                 }
                 else
                 {
                     // Remove the value from the registry so that the application doesn't start
-                    KeyLoc.DeleteValue("XWin", false);
+                    KeyLoc.DeleteValue("XWinStartUp", false);
                     Log.GetLogger().Info("Starting Application at startup is disabled!");
-
                 }
-                //KeyLoc.DeleteValue("XWin", false);
             }
             catch (Exception ex)
             {
@@ -620,36 +658,26 @@ namespace xWin.Forms
             }
         }
 
-        private void appShortcutToStartup()
+        // Start the app minimized in system tray
+        private void StartMinimizedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Type t = Type.GetTypeFromCLSID(new Guid("72C24DD5-D70A-438B-8A42-98424B88AFB8")); //Windows Script Host Shell Object
-            dynamic shell = Activator.CreateInstance(t);
             try
             {
-                //var lnk = shell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Startup) + "\\XWin.lnk");
-                var lnk = shell.CreateShortcut("XWin.lnk");
-                try
+                if (StartMinimizedCheckBox.Checked)
                 {
-                    string app = Assembly.GetExecutingAssembly().Location;
-                    lnk.TargetPath = Assembly.GetExecutingAssembly().Location;
-                    lnk.Arguments = "-m";
-                    lnk.IconLocation = app.Replace('\\', '/');
-                    lnk.Save();
+                    KeyLoc.SetValue("XWinStartMinimized", true);
+                    Log.GetLogger().Info("Start the Application Minimized!");
                 }
-                finally
+                else
                 {
-                    Marshal.FinalReleaseComObject(lnk);
+                    KeyLoc.DeleteValue("XWinStartMinimized", false);
+                    Log.GetLogger().Info("Start the Application Unminimized!");
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Log.GetLogger().Error(e);
-            } 
-            finally
-            {
-                Marshal.FinalReleaseComObject(shell);
+                Log.GetLogger().Error(ex);
             }
         }
-        
     }
 }
