@@ -1,11 +1,15 @@
 ﻿using Gma.System.MouseKeyHook;
+using Microsoft.Win32;
 using SharpDX.XInput;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -83,6 +87,17 @@ namespace xWin.Forms
             if (autoComplete.enableWordPrediction || autoComplete.enableQuickType) { autoComplete.KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
             if (autoComplete.enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
             if (autoComplete.enableQuickType) { quickTypeCheckBox.Checked = true; }
+
+            if (KeyLoc.GetValue("XWin") == null)
+            {
+                // If the value doesn't exist, the application is not set to run at startup
+                StartAtStartupCheckBox.Checked = false;
+            }
+            else
+            {
+                // The value exists, the application is set to run at startup
+                StartAtStartupCheckBox.Checked = true;
+            }
             Log.GetLogger().Info("Application started");
         }
 
@@ -550,6 +565,7 @@ namespace xWin.Forms
                     this.ShowInTaskbar = false;
                     systemTrayNotifyIcon.Visible = true;
                     this.Hide();
+                    Log.GetLogger().Info("Minimized Application to system tray!");
                 }
             }
             catch (Exception ex)
@@ -567,11 +583,73 @@ namespace xWin.Forms
                 this.ShowInTaskbar = true;
                 systemTrayNotifyIcon.Visible = false;
                 this.Show();
+                Log.GetLogger().Info("Unminimized Application to system tray!");
             }
             catch (Exception ex)
             {
                 Log.GetLogger().Error(ex);
             }
         }
+
+        /*
+         * Start Application when Windows starts 
+         */
+        RegistryKey KeyLoc = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        private void StartAtStartupCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (StartAtStartupCheckBox.Checked)
+                {
+                    // Add the value in the registry so that the application runs at startup
+                    KeyLoc.SetValue("XWin", Application.ExecutablePath);
+                    Log.GetLogger().Info("Starting Application at startup is enabled!");
+                }
+                else
+                {
+                    // Remove the value from the registry so that the application doesn't start
+                    KeyLoc.DeleteValue("XWin", false);
+                    Log.GetLogger().Info("Starting Application at startup is disabled!");
+
+                }
+                //KeyLoc.DeleteValue("XWin", false);
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
+        }
+
+        private void appShortcutToStartup()
+        {
+            Type t = Type.GetTypeFromCLSID(new Guid("72C24DD5-D70A-438B-8A42-98424B88AFB8")); //Windows Script Host Shell Object
+            dynamic shell = Activator.CreateInstance(t);
+            try
+            {
+                //var lnk = shell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Startup) + "\\XWin.lnk");
+                var lnk = shell.CreateShortcut("XWin.lnk");
+                try
+                {
+                    string app = Assembly.GetExecutingAssembly().Location;
+                    lnk.TargetPath = Assembly.GetExecutingAssembly().Location;
+                    lnk.Arguments = "-m";
+                    lnk.IconLocation = app.Replace('\\', '/');
+                    lnk.Save();
+                }
+                finally
+                {
+                    Marshal.FinalReleaseComObject(lnk);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error(e);
+            } 
+            finally
+            {
+                Marshal.FinalReleaseComObject(shell);
+            }
+        }
+        
     }
 }
