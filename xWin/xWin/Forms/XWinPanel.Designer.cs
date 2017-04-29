@@ -58,6 +58,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
             this.QuickTypeBarTimer = new System.Windows.Forms.Timer(this.components);
+            this.MinimizeCheckBox = new System.Windows.Forms.CheckBox();
+            this.systemTrayNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -148,6 +150,7 @@
             // 
             // Settings
             // 
+            this.Settings.Controls.Add(this.MinimizeCheckBox);
             this.Settings.Controls.Add(this.panel1);
             this.Settings.Location = new System.Drawing.Point(8, 39);
             this.Settings.Margin = new System.Windows.Forms.Padding(4);
@@ -380,6 +383,25 @@
             this.QuickTypeBarTimer.Enabled = true;
             this.QuickTypeBarTimer.Interval = 5000;
             // 
+            // MinimizeCheckBox
+            // 
+            this.MinimizeCheckBox.AutoSize = true;
+            this.MinimizeCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimizeCheckBox.Location = new System.Drawing.Point(39, 79);
+            this.MinimizeCheckBox.Name = "MinimizeCheckBox";
+            this.MinimizeCheckBox.Size = new System.Drawing.Size(294, 31);
+            this.MinimizeCheckBox.TabIndex = 1;
+            this.MinimizeCheckBox.Text = "Minimize to system tray";
+            this.MinimizeCheckBox.UseVisualStyleBackColor = true;
+            this.MinimizeCheckBox.CheckedChanged += new System.EventHandler(this.MinimizeCheckBox_CheckedChanged);
+            // 
+            // systemTrayNotifyIcon
+            // 
+            this.systemTrayNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.systemTrayNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("systemTrayNotifyIcon.Icon")));
+            this.systemTrayNotifyIcon.Text = "XWin";
+            this.systemTrayNotifyIcon.DoubleClick += new System.EventHandler(this.systemTrayNotifyIcon_DoubleClick);
+            // 
             // XWinPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -394,9 +416,11 @@
             this.Text = "XWin Panel";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.XWinPanel_FormClosed);
             this.Load += new System.EventHandler(this.XWinPanel_Load);
+            this.Resize += new System.EventHandler(this.XWinPanel_Resize);
             this.ControllerPanel.ResumeLayout(false);
             this.controllersPanel.ResumeLayout(false);
             this.Settings.ResumeLayout(false);
+            this.Settings.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.log.ResumeLayout(false);
@@ -435,5 +459,7 @@
         private System.Windows.Forms.Button buttonViewDictionary;
         private System.Windows.Forms.Timer QuickTypeBarTimer;
         private System.Windows.Forms.Button customizeQuickTypeBar;
+        private System.Windows.Forms.CheckBox MinimizeCheckBox;
+        private System.Windows.Forms.NotifyIcon systemTrayNotifyIcon;
     }
 }

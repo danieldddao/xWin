@@ -35,6 +35,8 @@ namespace xWin.Forms
         Thread XCon3Thread = new Thread(delegate () {; });
         Thread XCon4Thread = new Thread(delegate () {; });
 
+        private bool minimizeToSystemTray = false;
+
         public XWinPanel()
         {
             InitializeComponent();
@@ -521,5 +523,55 @@ namespace xWin.Forms
             Log.GetLogger().Info("Suggestion 3's shortcut: (" + autoComplete.suggestion3Shortcut.Count + ")" + string.Join("+ ", autoComplete.suggestion3Shortcut.ToArray()));
         }
 
+        private void MinimizeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MinimizeCheckBox.Checked)
+            {
+                minimizeToSystemTray = true;
+            }
+            else
+            {
+                minimizeToSystemTray = false;
+            }
+        }
+
+        // Minimize app to system tray when minimizeToSystemTray is true
+        private void XWinPanel_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                systemTrayNotifyIcon.BalloonTipText = "XWin Application is minimized...";
+                systemTrayNotifyIcon.BalloonTipTitle = "XWin";
+                systemTrayNotifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+                bool cursorNotInBar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
+                if (minimizeToSystemTray && FormWindowState.Minimized == this.WindowState && cursorNotInBar)
+                {
+                    systemTrayNotifyIcon.ShowBalloonTip(500);
+                    this.ShowInTaskbar = false;
+                    systemTrayNotifyIcon.Visible = true;
+                    this.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
+        }
+
+        // Unminimize app when double click on the xWin icon in system tray
+        private void systemTrayNotifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+                systemTrayNotifyIcon.Visible = false;
+                this.Show();
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
+        }
     }
 }
