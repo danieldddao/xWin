@@ -1,63 +1,12 @@
 syntax = "proto3";
 
-message Configuration {
-  
-  enum SpecialAction {
-    Pass = 0;
-    MouseDown = 1;
-    MouseLeft = 2;
-    MouseRight = 3;
-    MouseUp = 4;
-    Turbo = 5;
-    TypingMode = 6;
-    //mouse clicks are in the key enumeration
-  }
-  
-  message Action {
-    oneof one_action {
-      int32 keybind = 1;
-      SpecialAction special_action = 2;
-    }
-  }
-  
-  message Behavior{
-    Action on_press = 1;
-    bool on_press_toggle = 5;
-    Action on_hold = 2;
-    Action on_release = 3;
-    bool on_release_toggle = 6;
-    Action on_stay = 4;
-  }
-    
-  message Region {
-    Behavior behavior = 1;
-    uint32 range = 2;//for sticks this is an arc length in degrees, for triggers its a value from 1-255
-  }
-  
-  message Stick {
-    uint32 deadzone = 1;//how far must the stick go to count as moved
-    bool control_mouse = 2;
-    int32 region_start = 3;//the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
-    repeated Region regions = 4;
-    Behavior stay_behavior = 5;
-    bool invert_ud = 6;
-    bool invert_lr = 7;
-  }
-  
-  message Trigger {
-    uint32 deadzone = 1;
-    repeated Region regions = 2;
-    Behavior unpressed = 3;
-  }
+import "mouse_control.proto";
+import "keyboard_control.proto";
 
-  
-  Stick left_stick = 1;
-  Stick right_stick = 2;
-  
-  Trigger left_trigger = 3;
-  Trigger right_trigger = 4;
-  
-  //use the sharpdx enum for key
-  map<int32, Behavior> button_map = 5;
-  
+message Configuration
+{
+  BasicControl basic = 1;
+  TypingControl typing = 2;
+  string name = 3;
+  string description = 4;
 }

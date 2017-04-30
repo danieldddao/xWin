@@ -93,6 +93,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\GamepadFlagsTests.cs" />
+    <Compile Include="Library\TypingInterpreterTests.cs" />
     <Compile Include="Library\LogTest.cs" />
     <Compile Include="Library\AutoCompleteDBTest.cs" />
     <Compile Include="Library\XKeyBoardTest.cs" />
@@ -105,7 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="Solution Items\Unit Testing Metrics\GenerateUnitTestMetrics.bat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\xWin\xWin.csproj">
@@ -118,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Solution Items\GeneratedReports\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

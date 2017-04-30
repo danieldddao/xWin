@@ -50,6 +50,17 @@
 * finishing the button interpretation
 * redoing the save format
 
-#3/1-3/3
+#3/1-3/5
 * Wrote Direct Input Controller Adaptor
 * Unit Test Writing
+
+#3/6-3/10
+* Tweaking Configuration
+* Added button combinations
+* Added key combinations
+* Unit Testing
+
+##SPRING BREAK
+
+#3/19-3/22
+* Unit Testing

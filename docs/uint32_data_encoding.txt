@@ -1,0 +1,22 @@
+in the save format, int32s are sometimes used to represent GamepadButtonFlags flags and also can contain aditional data such as trigger state and stick state
+
+WHAT THE BITS REPRESENT:
+[ RightStick | LeftStick ] [ RTrigger LTrigger | RS0 LS0 rt0 lt0 ] [ Y. x1 x2 X. | B. A. RS LS ] [ RT LT Bk St | dR dL dD dU ]
+0		
+
+left and right might be switched below this
+	       											          32
+0:3 are the left stick region
+4:7 are the right stick region
+8:9 are the left trigger region
+10:11 are the right trigger region
+12 indicates when the left stick is centered
+13 indicates the right stick
+14 indicates that the left trigger is released
+15 indicates the right trigger is released
+16, 14:31 are nmnormal gamepadbuttonflags states
+17, 18 are extra slots for additional di buttons
+
+stick region amount is limited to 15
+the region of a mouse control stick is always 1 when the stick is out of the deadzone
+trigger region amount is limited to 3

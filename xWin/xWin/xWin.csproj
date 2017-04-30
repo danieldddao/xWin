@@ -55,15 +55,16 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.7.1.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.7.1\lib\net45\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="Moq, Version=4.7.8.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.8\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.2.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.2.0\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SharpDX, Version=3.1.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
@@ -133,6 +134,9 @@
     <Compile Include="Forms\AutoCompleteForms\WordPredictionTips.Designer.cs">
       <DependentUpon>WordPredictionTips.cs</DependentUpon>
     </Compile>
+    <Compile Include="Config\KeyboardControl.cs" />
+    <Compile Include="Config\IO.cs" />
+    <Compile Include="Config\SaveFormat.cs" />
     <Compile Include="Forms\ButtonMaps\ShortcutMapping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,7 +171,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Library\AutoCompleteDB.cs" />
-    <Compile Include="Library\Buttons.cs" />
     <Compile Include="Forms\ControllerOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,7 +192,9 @@
     <Compile Include="Config\DefaultConfiguration.cs" />
     <Compile Include="Config\MouseControl.cs" />
     <Compile Include="Library\Behaviors.cs" />
+    <Compile Include="Library\Buttons.cs" />
     <Compile Include="Library\DI2XI.cs" />
+    <Compile Include="Library\GamepadFlags.cs" />
     <Compile Include="Library\Interpreter.cs" />
     <Compile Include="Forms\KeyboardWindow.cs">
       <SubType>Form</SubType>
@@ -198,6 +203,7 @@
       <DependentUpon>KeyboardWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\PolarStick.cs" />
+    <Compile Include="Library\TypingInterpreter.cs" />
     <Compile Include="Library\XAction.cs" />
     <Compile Include="Library\Log.cs" />
     <Compile Include="Library\XKeyBoard.cs" />
@@ -216,7 +222,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

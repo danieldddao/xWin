@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "mouse_control.proto";
+
+message TypingControl {
+
+  enum KeyboardAction {
+    Confirm = 0;
+    LeaveTyping = 1;
+    OpenMenu = 2;
+    CursorLeft = 3;
+    CursorRight = 4;
+    CursorUp = 5;
+    CursorDown = 6;
+    UILeft = 7;
+    UIRight = 8;
+    UIUp = 9;
+    UIDown = 10;
+  }
+
+  repeated int32 tier1 = 1;
+  repeated int32 tier2 = 2;
+  
+  enum ActiveWhen
+  {
+    Pressed = 0;
+    Held = 1;
+    Released = 2;
+    Stayed = 3;
+  }
+  
+  message KeyboardActionContainer {
+    KeyboardAction binding = 1;
+    ActiveWhen when_active = 2;
+  }
+  
+  map<int32,KeyboardActionContainer> bindings = 3;
+  KeyboardSet base = 4;
+  map<int32,KeyboardSet> keyboard_select = 5;
+  
+  
+  Stick left_stick = 6;
+  Stick right_stick = 7;
+  
+  Trigger left_trigger = 8;
+  Trigger right_trigger = 9;
+  
+  string name = 10;
+  string description = 11;
+}
+
+message KeyboardSet {
+  message StringChoice {
+    repeated string subset = 2;
+  }
+  int32 count = 1;
+  int32 subcount = 2;
+  repeated StringChoice set = 3;
+}
