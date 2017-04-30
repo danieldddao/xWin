@@ -23,7 +23,7 @@ namespace xWin.Config
         {
             var b = new Behavior
             {
-                OnPress = new Actions { Keybinds = { (int)k } },
+                //OnPress = new Actions { Keybinds = { (int)k } },
                 OnHold = new Actions { Keybinds = { (int)k } }
             };
             return b;
@@ -32,7 +32,7 @@ namespace xWin.Config
         {
             return new Behavior
             {
-                OnPress = new Actions { SpecialActions = { sa } },
+                //OnPress = new Actions { SpecialActions = { sa } },
                 OnHold = new Actions { SpecialActions = { sa } }
             };
         }
@@ -57,7 +57,7 @@ namespace xWin.Config
         {
             var b = new Behavior
             {
-                OnRelease = new Actions { Keybinds = { (int)k } },
+                //OnRelease = new Actions { Keybinds = { (int)k } },
                 OnStay = new Actions { Keybinds = { (int)k } }
             };
             return b;
@@ -66,7 +66,7 @@ namespace xWin.Config
         {
             return new Behavior
             {
-                OnRelease = new Actions { SpecialActions = { sa } },
+                //OnRelease = new Actions { SpecialActions = { sa } },
                 OnStay = new Actions { SpecialActions = { sa } }
             };
         }
@@ -156,6 +156,8 @@ namespace xWin.Config
         {
             return new BasicControl
             {
+                Repeaterate = 400000,
+                Repeatdelay = 4000000,
                 LeftStick = new Stick
                 {
                     Deadzone = DEADZONE,
@@ -164,7 +166,7 @@ namespace xWin.Config
                 RightStick = new Stick
                 {
                     Deadzone = DEADZONE,
-                    Regions = {180, 180}
+                    Regions = { 180, 180 }
                 },
                 LeftTrigger = new Trigger
                 {
@@ -176,17 +178,17 @@ namespace xWin.Config
                     Deadzone = TRIGGER_DEADZONE,
                     //Regions = {250}
                 },
-                ButtonMap = 
+                ButtonMap =
                 {
                     { (int)new GamepadFlags(GamepadButtonFlags.A),         NormalButtonPress(Keys.LButton) },
                     { (int)new GamepadFlags(GamepadButtonFlags.B),         NormalButtonPress(Keys.RButton) },
                     { (int)new GamepadFlags(GamepadButtonFlags.LeftThumb), NormalButtonPress(Keys.MButton) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.Y),         NormalButtonPress(SpecialAction.Turbo) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.Y),         NormalButtonPress(Keys.A) },
                     { (int)new GamepadFlags(GamepadButtonFlags.X),         NormalButtonPress(SpecialAction.Precision) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadUp),    NormalButtonPress(Keys.Up) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadRight), NormalButtonPress(Keys.Right) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadDown),  NormalButtonPress(Keys.Down) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NormalButtonPress(Keys.Left) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadUp),    NoHoldButtonPress(SpecialAction.ScrollUp) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadRight), NoHoldButtonPress(SpecialAction.ScrollRight) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadDown),  NoHoldButtonPress(SpecialAction.ScrollDown) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NoHoldButtonPress(SpecialAction.ScrollLeft) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,1), NormalButtonPress(Keys.PageUp) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,2), NormalButtonPress(Keys.PageDown) },
                     { (int)new GamepadFlags(0,false,false,false,true), NormalButtonRelease(SpecialAction.EnterTypingMode) }
@@ -264,7 +266,11 @@ namespace xWin.Config
                     {
                         (int)new GamepadFlags(GamepadButtonFlags.None,false,false,false,true),
                         new KeyboardActionContainer {Binding = KeyboardAction.LeaveTyping, WhenActive=ActiveWhen.Pressed }
-                    }
+                    },
+                    {  (int)new GamepadFlags(GamepadButtonFlags.DPadUp),ActionOnHold(KeyboardAction.CursorUp) },
+                    {  (int)new GamepadFlags(GamepadButtonFlags.DPadDown),ActionOnHold(KeyboardAction.CursorDown) },
+                    {  (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),ActionOnHold(KeyboardAction.CursorLeft) },
+                    {  (int)new GamepadFlags(GamepadButtonFlags.DPadRight),ActionOnHold(KeyboardAction.CursorRight) }
                 }
             };
         }
@@ -383,5 +389,6 @@ namespace xWin.Config
                 }
             };
         }
+        
     }
 }
