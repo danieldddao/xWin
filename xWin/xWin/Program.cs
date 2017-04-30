@@ -113,7 +113,7 @@ namespace xWin
             io.WriteToFile(Defaults.DefaultConfiguration(), "default");
             var c = io.ReadFromFile("default");
             //Defaults.DefaultConfiguration();
-            InteractionLoop(controller, c, cc, 20);
+            InteractionLoop(controller, c, cc, 200);
         }
     }
 }

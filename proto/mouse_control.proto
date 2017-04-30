@@ -68,4 +68,6 @@ message BasicControl {
   uint32 dpi = 8;
   uint32 slow_dpi = 9;
   uint32 fast_dpi = 10;
+  uint64 repeatdelay = 11;
+  uint64 repeaterate = 12;
 }

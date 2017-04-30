@@ -24,33 +24,33 @@ public static partial class MouseControlReflection {
           "ASgNEhUKDWNvbnRyb2xfbW91c2UYAiABKAgSFAoMcmVnaW9uX3N0YXJ0GAMg",
           "ASgFEg8KB3JlZ2lvbnMYBCADKA0SEQoJaW52ZXJ0X3VkGAUgASgIEhEKCWlu",
           "dmVydF9schgGIAEoCCIsCgdUcmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8K",
-          "B3JlZ2lvbnMYAiADKA0i7AYKDEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNr",
+          "B3JlZ2lvbnMYAiADKA0ilgcKDEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNr",
           "GAEgASgLMgYuU3RpY2sSGwoLcmlnaHRfc3RpY2sYAiABKAsyBi5TdGljaxIe",
           "CgxsZWZ0X3RyaWdnZXIYAyABKAsyCC5UcmlnZ2VyEh8KDXJpZ2h0X3RyaWdn",
           "ZXIYBCABKAsyCC5UcmlnZ2VyEjAKCmJ1dHRvbl9tYXAYBSADKAsyHC5CYXNp",
           "Y0NvbnRyb2wuQnV0dG9uTWFwRW50cnkSDAoEbmFtZRgGIAEoCRITCgtkZXNj",
           "cmlwdGlvbhgHIAEoCRILCgNkcGkYCCABKA0SEAoIc2xvd19kcGkYCSABKA0S",
-          "EAoIZmFzdF9kcGkYCiABKA0aUQoHQWN0aW9ucxIQCghrZXliaW5kcxgBIAMo",
-          "BRI0Cg9zcGVjaWFsX2FjdGlvbnMYAiADKA4yGy5CYXNpY0NvbnRyb2wuU3Bl",
-          "Y2lhbEFjdGlvbhr1AQoIQmVoYXZpb3ISJwoIb25fcHJlc3MYASABKAsyFS5C",
-          "YXNpY0NvbnRyb2wuQWN0aW9ucxIXCg9vbl9wcmVzc190b2dnbGUYBSABKAgS",
-          "JgoHb25faG9sZBgCIAEoCzIVLkJhc2ljQ29udHJvbC5BY3Rpb25zEikKCm9u",
-          "X3JlbGVhc2UYAyABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIZChFvbl9y",
-          "ZWxlYXNlX3RvZ2dsZRgGIAEoCBImCgdvbl9zdGF5GAQgASgLMhUuQmFzaWND",
-          "b250cm9sLkFjdGlvbnMSEQoJYmxhY2tsaXN0GAcgAygFGkgKDkJ1dHRvbk1h",
-          "cEVudHJ5EgsKA2tleRgBIAEoBRIlCgV2YWx1ZRgCIAEoCzIWLkJhc2ljQ29u",
-          "dHJvbC5CZWhhdmlvcjoCOAEixgEKDVNwZWNpYWxBY3Rpb24SDAoIT3Blbk1l",
-          "bnUQABINCglNb3VzZURvd24QARINCglNb3VzZUxlZnQQAhIOCgpNb3VzZVJp",
-          "Z2h0EAMSCwoHTW91c2VVcBAEEg4KClNjcm9sbERvd24QCRIOCgpTY3JvbGxM",
-          "ZWZ0EAcSDwoLU2Nyb2xsUmlnaHQQCBIMCghTY3JvbGxVcBAKEgkKBVR1cmJv",
-          "EAUSEwoPRW50ZXJUeXBpbmdNb2RlEAYSDQoJUHJlY2lzaW9uEAtiBnByb3Rv",
-          "Mw=="));
+          "EAoIZmFzdF9kcGkYCiABKA0SEwoLcmVwZWF0ZGVsYXkYCyABKAQSEwoLcmVw",
+          "ZWF0ZXJhdGUYDCABKAQaUQoHQWN0aW9ucxIQCghrZXliaW5kcxgBIAMoBRI0",
+          "Cg9zcGVjaWFsX2FjdGlvbnMYAiADKA4yGy5CYXNpY0NvbnRyb2wuU3BlY2lh",
+          "bEFjdGlvbhr1AQoIQmVoYXZpb3ISJwoIb25fcHJlc3MYASABKAsyFS5CYXNp",
+          "Y0NvbnRyb2wuQWN0aW9ucxIXCg9vbl9wcmVzc190b2dnbGUYBSABKAgSJgoH",
+          "b25faG9sZBgCIAEoCzIVLkJhc2ljQ29udHJvbC5BY3Rpb25zEikKCm9uX3Jl",
+          "bGVhc2UYAyABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIZChFvbl9yZWxl",
+          "YXNlX3RvZ2dsZRgGIAEoCBImCgdvbl9zdGF5GAQgASgLMhUuQmFzaWNDb250",
+          "cm9sLkFjdGlvbnMSEQoJYmxhY2tsaXN0GAcgAygFGkgKDkJ1dHRvbk1hcEVu",
+          "dHJ5EgsKA2tleRgBIAEoBRIlCgV2YWx1ZRgCIAEoCzIWLkJhc2ljQ29udHJv",
+          "bC5CZWhhdmlvcjoCOAEixgEKDVNwZWNpYWxBY3Rpb24SDAoIT3Blbk1lbnUQ",
+          "ABINCglNb3VzZURvd24QARINCglNb3VzZUxlZnQQAhIOCgpNb3VzZVJpZ2h0",
+          "EAMSCwoHTW91c2VVcBAEEg4KClNjcm9sbERvd24QCRIOCgpTY3JvbGxMZWZ0",
+          "EAcSDwoLU2Nyb2xsUmlnaHQQCBIMCghTY3JvbGxVcBAKEgkKBVR1cmJvEAUS",
+          "EwoPRW50ZXJUeXBpbmdNb2RlEAYSDQoJUHJlY2lzaW9uEAtiBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::Stick), global::Stick.Parser, new[]{ "Deadzone", "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Trigger), global::Trigger.Parser, new[]{ "Deadzone", "Regions" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description", "Dpi", "SlowDpi", "FastDpi" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description", "Dpi", "SlowDpi", "FastDpi", "Repeatdelay", "Repeaterate" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Behavior), global::BasicControl.Types.Behavior.Parser, new[]{ "OnPress", "OnPressToggle", "OnHold", "OnRelease", "OnReleaseToggle", "OnStay", "Blacklist" }, null, null, null),
           null, })
         }));
@@ -490,6 +490,8 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     dpi_ = other.dpi_;
     slowDpi_ = other.slowDpi_;
     fastDpi_ = other.fastDpi_;
+    repeatdelay_ = other.repeatdelay_;
+    repeaterate_ = other.repeaterate_;
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -609,6 +611,28 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     }
   }
 
+  /// <summary>Field number for the "repeatdelay" field.</summary>
+  public const int RepeatdelayFieldNumber = 11;
+  private ulong repeatdelay_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public ulong Repeatdelay {
+    get { return repeatdelay_; }
+    set {
+      repeatdelay_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "repeaterate" field.</summary>
+  public const int RepeaterateFieldNumber = 12;
+  private ulong repeaterate_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public ulong Repeaterate {
+    get { return repeaterate_; }
+    set {
+      repeaterate_ = value;
+    }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
     return Equals(other as BasicControl);
@@ -632,6 +656,8 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     if (Dpi != other.Dpi) return false;
     if (SlowDpi != other.SlowDpi) return false;
     if (FastDpi != other.FastDpi) return false;
+    if (Repeatdelay != other.Repeatdelay) return false;
+    if (Repeaterate != other.Repeaterate) return false;
     return true;
   }
 
@@ -648,6 +674,8 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     if (Dpi != 0) hash ^= Dpi.GetHashCode();
     if (SlowDpi != 0) hash ^= SlowDpi.GetHashCode();
     if (FastDpi != 0) hash ^= FastDpi.GetHashCode();
+    if (Repeatdelay != 0UL) hash ^= Repeatdelay.GetHashCode();
+    if (Repeaterate != 0UL) hash ^= Repeaterate.GetHashCode();
     return hash;
   }
 
@@ -695,6 +723,14 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
       output.WriteRawTag(80);
       output.WriteUInt32(FastDpi);
     }
+    if (Repeatdelay != 0UL) {
+      output.WriteRawTag(88);
+      output.WriteUInt64(Repeatdelay);
+    }
+    if (Repeaterate != 0UL) {
+      output.WriteRawTag(96);
+      output.WriteUInt64(Repeaterate);
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -727,6 +763,12 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     }
     if (FastDpi != 0) {
       size += 1 + pb::CodedOutputStream.ComputeUInt32Size(FastDpi);
+    }
+    if (Repeatdelay != 0UL) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Repeatdelay);
+    }
+    if (Repeaterate != 0UL) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Repeaterate);
     }
     return size;
   }
@@ -775,6 +817,12 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     }
     if (other.FastDpi != 0) {
       FastDpi = other.FastDpi;
+    }
+    if (other.Repeatdelay != 0UL) {
+      Repeatdelay = other.Repeatdelay;
+    }
+    if (other.Repeaterate != 0UL) {
+      Repeaterate = other.Repeaterate;
     }
   }
 
@@ -836,6 +884,14 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
         }
         case 80: {
           FastDpi = input.ReadUInt32();
+          break;
+        }
+        case 88: {
+          Repeatdelay = input.ReadUInt64();
+          break;
+        }
+        case 96: {
+          Repeaterate = input.ReadUInt64();
           break;
         }
       }

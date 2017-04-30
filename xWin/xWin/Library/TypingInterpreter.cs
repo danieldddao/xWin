@@ -15,7 +15,7 @@ namespace xWin.Library
         private KeyboardSet defaultset;
         private String current;
         private GamepadFlags select_mask, t1_mask, t2_mask;
-        private struct KApack
+        public struct KApack
         {
             public KeyboardAction ka;
             public List<GamepadFlags> blacklist;
@@ -30,6 +30,10 @@ namespace xWin.Library
         }
 
         private Dictionary<GamepadFlags, KApack> pressed,held,released,stayed;
+        private Dictionary<GamepadFlags, KApack> r_pressed, r_held, r_released, r_stayed;
+
+        private Dictionary<GamepadFlags, bool> p, h, r, s, rp, rh, rr, rs;
+
 
         private Dictionary<GamepadFlags, int> t1, t2;
 
@@ -41,6 +45,7 @@ namespace xWin.Library
         {
             public string Text;
             public Queue<KeyboardAction> Actions;
+            public Queue<KeyboardAction> Release;
             public int t1, t2;
         }
 
@@ -89,6 +94,18 @@ namespace xWin.Library
             held = new Dictionary<GamepadFlags, KApack>();
             released = new Dictionary<GamepadFlags, KApack>();
             stayed = new Dictionary<GamepadFlags, KApack>();
+            r_pressed = new Dictionary<GamepadFlags, KApack>();
+            r_held = new Dictionary<GamepadFlags, KApack>();
+            r_released = new Dictionary<GamepadFlags, KApack>();
+            r_stayed = new Dictionary<GamepadFlags, KApack>();
+            r = new Dictionary<GamepadFlags, bool>();
+            p = new Dictionary<GamepadFlags, bool>();
+            h = new Dictionary<GamepadFlags, bool>();
+            s = new Dictionary<GamepadFlags, bool>();
+            rr = new Dictionary<GamepadFlags, bool>();
+            rp = new Dictionary<GamepadFlags, bool>();
+            rh = new Dictionary<GamepadFlags, bool>();
+            rs = new Dictionary<GamepadFlags, bool>();
             var tcb = tc.Bindings;
             if(tcb == null)
             {
@@ -103,15 +120,31 @@ namespace xWin.Library
                 {
                     case ActiveWhen.Pressed:
                         pressed.Add(new GamepadFlags(a), ka);
+                        r_held.Add(new GamepadFlags(a), ka);
+                        r_released.Add(new GamepadFlags(a), ka);
+                        p.Add(new GamepadFlags(a), false);
+                        rh.Add(new GamepadFlags(a), false);
+                        rr.Add(new GamepadFlags(a), false);
                         break;
                     case ActiveWhen.Held:
                         held.Add(new GamepadFlags(a), ka);
+                        r_released.Add(new GamepadFlags(a), ka);
+                        h.Add(new GamepadFlags(a), false);
+                        rr.Add(new GamepadFlags(a), false);
                         break;
                     case ActiveWhen.Released:
                         released.Add(new GamepadFlags(a), ka);
+                        r_stayed.Add(new GamepadFlags(a), ka);
+                        r_pressed.Add(new GamepadFlags(a), ka);
+                        r.Add(new GamepadFlags(a), false);
+                        rs.Add(new GamepadFlags(a), false);
+                        rp.Add(new GamepadFlags(a), false);
                         break;
                     case ActiveWhen.Stayed:
                         stayed.Add(new GamepadFlags(a), ka);
+                        r_pressed.Add(new GamepadFlags(a), ka);
+                        s.Add(new GamepadFlags(a), false);
+                        rp.Add(new GamepadFlags(a), false);
                         break;
                 }
 
@@ -134,6 +167,7 @@ namespace xWin.Library
             var ts = new TypingState();
             ts.Text = current;
             ts.Actions = new Queue<KeyboardAction>();
+            ts.Release = new Queue<KeyboardAction>();
             byte lt = LT.GetRegion(g.LeftTrigger);
             byte rt = RT.GetRegion(g.RightTrigger);
             Interpreter.KeyboardMouseState k = new Interpreter.KeyboardMouseState();
@@ -151,14 +185,17 @@ namespace xWin.Library
             {
                 if(! (previous_state & flags))
                 {
-                    if(state & flags)
+                    if (state & flags)
                     {
-                        if(pressed[flags].isBlacklisted(state)) { continue; }
-                        ts.Actions.Enqueue(pressed[flags].ka);
+                        if (pressed[flags].isBlacklisted(state)) { continue; }
+                        if (!p[flags]) { ts.Actions.Enqueue(pressed[flags].ka); p[flags] = true; }
                     }
+                    else
+                        p[flags] = false;
                 }
+                else
+                    p[flags] = false;
             }
-
             foreach (var flags in held.Keys)
             {
                 if (previous_state & flags)
@@ -166,11 +203,14 @@ namespace xWin.Library
                     if (state & flags)
                     {
                         if (held[flags].isBlacklisted(state)) { continue; }
-                        ts.Actions.Enqueue(held[flags].ka);
+                        if (!h[flags]) { ts.Actions.Enqueue(held[flags].ka); h[flags] = true; }
                     }
+                    else
+                        h[flags] = false;
                 }
+                else
+                    h[flags] = false;
             }
-
             foreach (var flags in released.Keys)
             {
                 if (previous_state & flags)
@@ -178,9 +218,13 @@ namespace xWin.Library
                     if (!(state & flags))
                     {
                         if(released[flags].isBlacklisted(state)) { continue; }
-                        ts.Actions.Enqueue(released[flags].ka);
+                        if (!r[flags]) { ts.Actions.Enqueue(released[flags].ka); r[flags] = true; }
                     }
+                    else
+                        r[flags] = false;
                 }
+                else
+                    r[flags] = false;
             }
             foreach (var flags in stayed.Keys)
             {
@@ -189,10 +233,74 @@ namespace xWin.Library
                     if (!(state & flags))
                     {
                         if (stayed[flags].isBlacklisted(state)) { continue; }
-                        ts.Actions.Enqueue(stayed[flags].ka);
+                        if (!s[flags]) { ts.Actions.Enqueue(stayed[flags].ka); s[flags] = true; }
                     }
+                    else
+                        s[flags] = false;
                 }
+                else
+                    s[flags] = false;
+            }
 
+            foreach (var flags in r_pressed.Keys)
+            {
+                if (!(previous_state & flags))
+                {
+                    if (state & flags)
+                    {
+                        if (r_pressed[flags].isBlacklisted(state)) { continue; }
+                        if (!rp[flags]) { ts.Release.Enqueue(r_pressed[flags].ka); rp[flags] = true; }
+                    }
+                    else
+                        rp[flags] = false;
+                }
+                else
+                    rp[flags] = false;
+            }
+            foreach (var flags in r_held.Keys)
+            {
+                if (previous_state & flags)
+                {
+                    if (state & flags)
+                    {
+                        if (r_held[flags].isBlacklisted(state)) { continue; }
+                        if (!rh[flags]) { ts.Release.Enqueue(r_held[flags].ka); rh[flags] = true; }
+                    }
+                    else
+                        rh[flags] = false;
+                }
+                else
+                    rh[flags] = false;
+            }
+            foreach (var flags in r_released.Keys)
+            {
+                if (previous_state & flags)
+                {
+                    if (!(state & flags))
+                    {
+                        if (r_released[flags].isBlacklisted(state)) { continue; }
+                        if (!rr[flags]) { ts.Release.Enqueue(r_released[flags].ka); rr[flags] = true; }
+                    }
+                    else
+                        rr[flags] = false;
+                }
+                else
+                    rr[flags] = false;
+            }
+            foreach (var flags in r_stayed.Keys)
+            {
+                if (!(previous_state & flags))
+                {
+                    if (!(state & flags))
+                    {
+                        if (r_stayed[flags].isBlacklisted(state)) { continue; }
+                        if (!this.rs[flags]) { ts.Release.Enqueue(r_stayed[flags].ka); this.rs[flags] = true; }
+                    }
+                    else
+                        this.rs[flags] = false;
+                }
+                else
+                    this.rs[flags] = false;
             }
             ts.t1 = t1.ContainsKey(state * t1_mask) ? t1[state * t1_mask] : -1;
             ts.t2 = t2.ContainsKey(state * t2_mask) ? t2[state * t2_mask] : -1;
