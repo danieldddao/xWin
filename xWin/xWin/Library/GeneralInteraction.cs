@@ -31,7 +31,7 @@ namespace xWin.Library
         public static void MoveCursor(short x, short y, int dpi = 10)
         {
             Console.WriteLine(x.ToString() + "," + y.ToString()+","+dpi.ToString());
-            if (x != 0 && y != 0)
+            if (x != 0 || y != 0)
             {
                 var t = Math.Atan2(x, y);
 
@@ -306,7 +306,15 @@ namespace xWin.Library
                                 }
                             }
                             Console.WriteLine();
-                            MoveCursor((short)kms.mouse_movement.x, (short)kms.mouse_movement.y, (int)dpi);
+                            if (M_Down)
+                                kms.mouse_movement.y += 32767;
+                            if (M_Up)
+                                kms.mouse_movement.y -= 32767;
+                            if (M_Right)
+                                kms.mouse_movement.x += 32767;
+                            if (M_Left)
+                                kms.mouse_movement.x -= 32767;
+                            MoveCursor(shortbound(kms.mouse_movement.x), shortbound(kms.mouse_movement.y), (int)dpi);
                             if (!just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
                             {
                                 m = Mode.Stopped;
@@ -477,7 +485,7 @@ namespace xWin.Library
                             break;
                         }
                 }
-
+                Console.WriteLine(st.Elapsed.ToString());
                 while (st.Elapsed < TickSpeed) {  }
                 st.Stop();
                 st.Reset();

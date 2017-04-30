@@ -81,12 +81,11 @@ namespace xWin
             Application.Run(panel);
         }
         
-        [STAThread]
+        //[STAThread]
         static void Main(string[] args)
         {
             //RunFormApplicationForTesting();
             //RunFormApplication();
-                        
             GenericController controller = null;
             var a = new byte[16];
             a[0] = 1;
@@ -113,7 +112,7 @@ namespace xWin
             io.WriteToFile(Defaults.DefaultConfiguration(), "default");
             var c = io.ReadFromFile("default");
             //Defaults.DefaultConfiguration();
-            InteractionLoop(controller, c, cc, 200);
+            InteractionLoop(controller, c, cc, 20000);
         }
     }
 }

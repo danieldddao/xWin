@@ -185,10 +185,10 @@ namespace xWin.Config
                     { (int)new GamepadFlags(GamepadButtonFlags.LeftThumb), NormalButtonPress(Keys.MButton) },
                     { (int)new GamepadFlags(GamepadButtonFlags.Y),         NormalButtonPress(Keys.A) },
                     { (int)new GamepadFlags(GamepadButtonFlags.X),         NormalButtonPress(SpecialAction.Precision) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadUp),    NoHoldButtonPress(SpecialAction.ScrollUp) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadRight), NoHoldButtonPress(SpecialAction.ScrollRight) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadDown),  NoHoldButtonPress(SpecialAction.ScrollDown) },
-                    { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NoHoldButtonPress(SpecialAction.ScrollLeft) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadUp),    NormalButtonPress(SpecialAction.MouseUp) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadRight), NormalButtonPress(SpecialAction.MouseRight) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadDown),  NormalButtonPress(SpecialAction.MouseDown) },
+                    { (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),  NormalButtonPress(SpecialAction.MouseLeft) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,1), NormalButtonPress(Keys.PageUp) },
                     //{ (int)new GamepadFlags(0,false,false,false,false,0,0,0,2), NormalButtonPress(Keys.PageDown) },
                     { (int)new GamepadFlags(0,false,false,false,true), NormalButtonRelease(SpecialAction.EnterTypingMode) }
@@ -225,6 +225,16 @@ namespace xWin.Config
                 {
                     Deadzone = DEADZONE,
                     Regions = { 90, 90, 90, 90 }
+                },
+                LeftTrigger = new Trigger
+                {
+                    Deadzone = TRIGGER_DEADZONE
+                    //one region
+                },
+                RightTrigger = new Trigger
+                {
+                    Deadzone = TRIGGER_DEADZONE,
+                    //Regions = {250}
                 },
                 Base = new KeyboardSet
                 {
@@ -270,7 +280,8 @@ namespace xWin.Config
                     {  (int)new GamepadFlags(GamepadButtonFlags.DPadUp),ActionOnHold(KeyboardAction.CursorUp) },
                     {  (int)new GamepadFlags(GamepadButtonFlags.DPadDown),ActionOnHold(KeyboardAction.CursorDown) },
                     {  (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),ActionOnHold(KeyboardAction.CursorLeft) },
-                    {  (int)new GamepadFlags(GamepadButtonFlags.DPadRight),ActionOnHold(KeyboardAction.CursorRight) }
+                    {  (int)new GamepadFlags(GamepadButtonFlags.DPadRight),ActionOnHold(KeyboardAction.CursorRight) },
+                    {  (int)new GamepadFlags(GamepadButtonFlags.None,false,false,false,false,1,0,0,0),ActionOnHold(KeyboardAction.Ctrlc) }
                 }
             };
         }
