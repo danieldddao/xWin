@@ -25,6 +25,10 @@ namespace Cucumber.Steps
         public void Setup()
         {
             application.Kill();
+            Microsoft.Win32.RegistryKey KeyLoc = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            KeyLoc.DeleteValue("XWinStartUp", false);
+            KeyLoc.DeleteValue("XWinStartMinimized", false);
+            KeyLoc.DeleteValue("XWinDebugMode", false);
         }
 
         [Given(@"XWin program is set up")]
@@ -211,5 +215,76 @@ namespace Cucumber.Steps
             name.Text = p0;
         }
 
+        [When(@"I enable minimize to system tray option")]
+        public void WhenIEnableMinimizeToSystemTrayOption()
+        {
+            Tab controllerPanel = window.Get<Tab>("ControllerPanel");
+            controllerPanel.SelectTabPage("Settings");
+            CheckBox checkbox = window.Get<CheckBox>("MinimizeCheckBox");
+            checkbox.Checked = true;
+        }
+
+        [When(@"I minimize App")]
+        public void WhenIMinimizeApp()
+        {
+            window.DisplayState = DisplayState.Minimized;
+        }
+
+        [Then(@"It should minimize the app to system tray")]
+        public void ThenItShouldMinimizeTheAppToSystemTray()
+        {
+            Assert.IsFalse(window.Visible);
+        }
+
+        [When(@"I enable start app at startup option")]
+        public void WhenIEnableStartAppAtStartupOption()
+        {
+            Tab controllerPanel = window.Get<Tab>("ControllerPanel");
+            controllerPanel.SelectTabPage("Settings");
+            CheckBox checkbox = window.Get<CheckBox>("StartAtStartupCheckBox");
+            checkbox.Checked = true;
+        }
+
+        [Then(@"It should create a register ""(.*)""")]
+        public void ThenItShouldCreateARegister(string p0)
+        {
+            Microsoft.Win32.RegistryKey KeyLoc = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            Assert.IsNotNull(KeyLoc.GetValue(p0));
+            //KeyLoc.DeleteValue(p0, false);
+        }
+
+        [When(@"I disable start app at startup option")]
+        public void WhenIDisableStartAppAtStartupOption()
+        {
+            Tab controllerPanel = window.Get<Tab>("ControllerPanel");
+            controllerPanel.SelectTabPage("Settings");
+            CheckBox checkbox = window.Get<CheckBox>("StartAtStartupCheckBox");
+            checkbox.Checked = false;
+        }
+
+        [Then(@"It should delete a register ""(.*)""")]
+        public void ThenItShouldDeleteARegister(string p0)
+        {
+            Microsoft.Win32.RegistryKey KeyLoc = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            Assert.IsNull(KeyLoc.GetValue(p0));
+        }
+
+        [When(@"I enable start app minimized option")]
+        public void WhenIEnableStartAppMinimizedOption()
+        {
+            Tab controllerPanel = window.Get<Tab>("ControllerPanel");
+            controllerPanel.SelectTabPage("Settings");
+            CheckBox checkbox = window.Get<CheckBox>("StartMinimizedCheckBox");
+            checkbox.Checked = true;
+        }
+
+        [When(@"I disable start app minimized option")]
+        public void WhenIDisableStartAppMinimizedOption()
+        {
+            Tab controllerPanel = window.Get<Tab>("ControllerPanel");
+            controllerPanel.SelectTabPage("Settings");
+            CheckBox checkbox = window.Get<CheckBox>("StartMinimizedCheckBox");
+            checkbox.Checked = false;
+        }
     }
 }

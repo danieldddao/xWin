@@ -67,14 +67,14 @@ Scenario: Enable debug mode in Log successfully
 	When I launch the program
 	And I click on Log tab
 	And I enable debug mode for logging
-	Then Log should show "Enabled Debug Mode"
+	Then Log should show "Debug Mode enabled"
 
 Scenario: Disable debug mode in Log successfully
 	Given XWin program is set up
 	When I launch the program
 	And I click on Log tab
 	And I disabled debug mode for logging
-	Then Log should show "Disabled Debug Mode"
+	Then Log should show "Debug Mode disabled"
 
 Scenario: Clear all logs successfully
 	Given XWin program is set up
@@ -144,3 +144,36 @@ Scenario: correct information will show message
 	And I fill "message" in email message text box
 	And I click on send button to report
 	Then It should show the message box
+
+Scenario: Minimize App to system tray
+	Given XWin program is set up
+	When I launch the program
+	And I enable minimize to system tray option
+	And I minimize App
+	Then It should minimize the app to system tray
+
+Scenario: Start App at startup
+	Given XWin program is set up
+	When I launch the program
+	And I enable start app at startup option
+	Then It should create a register "XWinStartUp"
+
+Scenario: Not start App at startup
+	Given XWin program is set up
+	When I launch the program
+	And I enable start app at startup option
+	And I disable start app at startup option
+	Then It should delete a register "XWinStartUp"
+
+Scenario: Start App minimized
+	Given XWin program is set up
+	When I launch the program
+	And I enable start app minimized option
+	Then It should create a register "XWinStartMinimized"
+
+Scenario: Not start App minimized
+	Given XWin program is set up
+	When I launch the program
+	And I enable start app minimized option
+	And I disable start app minimized option
+	Then It should delete a register "XWinStartMinimized"

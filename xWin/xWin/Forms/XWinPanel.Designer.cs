@@ -37,6 +37,9 @@
             this.Controller2 = new System.Windows.Forms.Button();
             this.Controller1 = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.NotificationsDropdownList = new System.Windows.Forms.ComboBox();
+            this.StartMinimizedCheckBox = new System.Windows.Forms.CheckBox();
             this.StartAtStartupCheckBox = new System.Windows.Forms.CheckBox();
             this.MinimizeCheckBox = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -61,7 +64,6 @@
             this.AutoCompleteTimer = new System.Windows.Forms.Timer(this.components);
             this.QuickTypeBarTimer = new System.Windows.Forms.Timer(this.components);
             this.systemTrayNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.StartMinimizedCheckBox = new System.Windows.Forms.CheckBox();
             this.ControllerPanel.SuspendLayout();
             this.controllersPanel.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -75,7 +77,7 @@
             this.ControllerPanel.Controls.Add(this.Settings);
             this.ControllerPanel.Controls.Add(this.log);
             this.ControllerPanel.Location = new System.Drawing.Point(20, 21);
-            this.ControllerPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ControllerPanel.Margin = new System.Windows.Forms.Padding(4);
             this.ControllerPanel.Multiline = true;
             this.ControllerPanel.Name = "ControllerPanel";
             this.ControllerPanel.SelectedIndex = 0;
@@ -89,9 +91,9 @@
             this.controllersPanel.Controls.Add(this.Controller2);
             this.controllersPanel.Controls.Add(this.Controller1);
             this.controllersPanel.Location = new System.Drawing.Point(8, 39);
-            this.controllersPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.controllersPanel.Margin = new System.Windows.Forms.Padding(4);
             this.controllersPanel.Name = "controllersPanel";
-            this.controllersPanel.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.controllersPanel.Padding = new System.Windows.Forms.Padding(4);
             this.controllersPanel.Size = new System.Drawing.Size(1192, 676);
             this.controllersPanel.TabIndex = 0;
             this.controllersPanel.Text = "Controllers";
@@ -102,7 +104,7 @@
             this.Controller4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(51)))));
             this.Controller4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Controller4.Location = new System.Drawing.Point(704, 373);
-            this.Controller4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Controller4.Margin = new System.Windows.Forms.Padding(4);
             this.Controller4.Name = "Controller4";
             this.Controller4.Size = new System.Drawing.Size(304, 137);
             this.Controller4.TabIndex = 7;
@@ -116,7 +118,7 @@
             this.Controller3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(51)))));
             this.Controller3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.Controller3.Location = new System.Drawing.Point(220, 373);
-            this.Controller3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Controller3.Margin = new System.Windows.Forms.Padding(4);
             this.Controller3.Name = "Controller3";
             this.Controller3.Size = new System.Drawing.Size(302, 137);
             this.Controller3.TabIndex = 6;
@@ -129,7 +131,7 @@
             this.Controller2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(51)))));
             this.Controller2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Controller2.Location = new System.Drawing.Point(704, 112);
-            this.Controller2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Controller2.Margin = new System.Windows.Forms.Padding(4);
             this.Controller2.Name = "Controller2";
             this.Controller2.Size = new System.Drawing.Size(304, 137);
             this.Controller2.TabIndex = 5;
@@ -142,7 +144,7 @@
             this.Controller1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(51)))));
             this.Controller1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.Controller1.Location = new System.Drawing.Point(220, 112);
-            this.Controller1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Controller1.Margin = new System.Windows.Forms.Padding(4);
             this.Controller1.Name = "Controller1";
             this.Controller1.Size = new System.Drawing.Size(302, 137);
             this.Controller1.TabIndex = 4;
@@ -152,25 +154,65 @@
             // 
             // Settings
             // 
+            this.Settings.Controls.Add(this.label1);
+            this.Settings.Controls.Add(this.NotificationsDropdownList);
             this.Settings.Controls.Add(this.StartMinimizedCheckBox);
             this.Settings.Controls.Add(this.StartAtStartupCheckBox);
             this.Settings.Controls.Add(this.MinimizeCheckBox);
             this.Settings.Controls.Add(this.panel1);
             this.Settings.Location = new System.Drawing.Point(8, 39);
-            this.Settings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Settings.Margin = new System.Windows.Forms.Padding(4);
             this.Settings.Name = "Settings";
-            this.Settings.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Settings.Padding = new System.Windows.Forms.Padding(4);
             this.Settings.Size = new System.Drawing.Size(1192, 676);
             this.Settings.TabIndex = 1;
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(35, 306);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(149, 27);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Notifications:";
+            // 
+            // NotificationsDropdownList
+            // 
+            this.NotificationsDropdownList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.NotificationsDropdownList.FormattingEnabled = true;
+            this.NotificationsDropdownList.Items.AddRange(new object[] {
+            "None",
+            "Notify All",
+            "Notify Only Warnings",
+            "Notify Only Errors"});
+            this.NotificationsDropdownList.Location = new System.Drawing.Point(40, 336);
+            this.NotificationsDropdownList.Name = "NotificationsDropdownList";
+            this.NotificationsDropdownList.Size = new System.Drawing.Size(273, 33);
+            this.NotificationsDropdownList.TabIndex = 4;
+            this.NotificationsDropdownList.SelectedIndexChanged += new System.EventHandler(this.NotificationsDropdownList_SelectedIndexChanged);
+            // 
+            // StartMinimizedCheckBox
+            // 
+            this.StartMinimizedCheckBox.AutoSize = true;
+            this.StartMinimizedCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartMinimizedCheckBox.Location = new System.Drawing.Point(40, 216);
+            this.StartMinimizedCheckBox.Margin = new System.Windows.Forms.Padding(4);
+            this.StartMinimizedCheckBox.Name = "StartMinimizedCheckBox";
+            this.StartMinimizedCheckBox.Size = new System.Drawing.Size(210, 31);
+            this.StartMinimizedCheckBox.TabIndex = 3;
+            this.StartMinimizedCheckBox.Text = "Start minimized";
+            this.StartMinimizedCheckBox.UseVisualStyleBackColor = true;
+            this.StartMinimizedCheckBox.CheckedChanged += new System.EventHandler(this.StartMinimizedCheckBox_CheckedChanged);
             // 
             // StartAtStartupCheckBox
             // 
             this.StartAtStartupCheckBox.AutoSize = true;
             this.StartAtStartupCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StartAtStartupCheckBox.Location = new System.Drawing.Point(40, 148);
-            this.StartAtStartupCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.StartAtStartupCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.StartAtStartupCheckBox.Name = "StartAtStartupCheckBox";
             this.StartAtStartupCheckBox.Size = new System.Drawing.Size(454, 31);
             this.StartAtStartupCheckBox.TabIndex = 2;
@@ -183,7 +225,7 @@
             this.MinimizeCheckBox.AutoSize = true;
             this.MinimizeCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimizeCheckBox.Location = new System.Drawing.Point(40, 79);
-            this.MinimizeCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimizeCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.MinimizeCheckBox.Name = "MinimizeCheckBox";
             this.MinimizeCheckBox.Size = new System.Drawing.Size(294, 31);
             this.MinimizeCheckBox.TabIndex = 1;
@@ -203,7 +245,7 @@
             this.panel1.Controls.Add(this.wordPredictionCheckBox);
             this.panel1.Controls.Add(this.labelAutocomplete);
             this.panel1.Location = new System.Drawing.Point(564, 79);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(598, 469);
             this.panel1.TabIndex = 0;
@@ -212,7 +254,7 @@
             // 
             this.customizeQuickTypeBar.BackColor = System.Drawing.Color.FloralWhite;
             this.customizeQuickTypeBar.Location = new System.Drawing.Point(124, 356);
-            this.customizeQuickTypeBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.customizeQuickTypeBar.Margin = new System.Windows.Forms.Padding(4);
             this.customizeQuickTypeBar.Name = "customizeQuickTypeBar";
             this.customizeQuickTypeBar.Size = new System.Drawing.Size(316, 63);
             this.customizeQuickTypeBar.TabIndex = 7;
@@ -227,7 +269,7 @@
             this.buttonViewDictionary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buttonViewDictionary.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonViewDictionary.Location = new System.Drawing.Point(202, 96);
-            this.buttonViewDictionary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonViewDictionary.Margin = new System.Windows.Forms.Padding(4);
             this.buttonViewDictionary.Name = "buttonViewDictionary";
             this.buttonViewDictionary.Size = new System.Drawing.Size(208, 71);
             this.buttonViewDictionary.TabIndex = 4;
@@ -241,7 +283,7 @@
             this.quickTypeTipsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.quickTypeTipsButton.BackColor = System.Drawing.Color.LemonChiffon;
             this.quickTypeTipsButton.Location = new System.Drawing.Point(432, 287);
-            this.quickTypeTipsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.quickTypeTipsButton.Margin = new System.Windows.Forms.Padding(4);
             this.quickTypeTipsButton.Name = "quickTypeTipsButton";
             this.quickTypeTipsButton.Size = new System.Drawing.Size(56, 35);
             this.quickTypeTipsButton.TabIndex = 3;
@@ -255,7 +297,7 @@
             this.wordPredictionTipsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.wordPredictionTipsButton.BackColor = System.Drawing.Color.LemonChiffon;
             this.wordPredictionTipsButton.Location = new System.Drawing.Point(356, 204);
-            this.wordPredictionTipsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wordPredictionTipsButton.Margin = new System.Windows.Forms.Padding(4);
             this.wordPredictionTipsButton.Name = "wordPredictionTipsButton";
             this.wordPredictionTipsButton.Size = new System.Drawing.Size(56, 35);
             this.wordPredictionTipsButton.TabIndex = 1;
@@ -268,7 +310,7 @@
             this.quickTypeCheckBox.AutoSize = true;
             this.quickTypeCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quickTypeCheckBox.Location = new System.Drawing.Point(44, 292);
-            this.quickTypeCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.quickTypeCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.quickTypeCheckBox.Name = "quickTypeCheckBox";
             this.quickTypeCheckBox.Size = new System.Drawing.Size(382, 31);
             this.quickTypeCheckBox.TabIndex = 2;
@@ -281,7 +323,7 @@
             this.wordPredictionCheckBox.AutoSize = true;
             this.wordPredictionCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.wordPredictionCheckBox.Location = new System.Drawing.Point(44, 210);
-            this.wordPredictionCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wordPredictionCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.wordPredictionCheckBox.Name = "wordPredictionCheckBox";
             this.wordPredictionCheckBox.Size = new System.Drawing.Size(299, 31);
             this.wordPredictionCheckBox.TabIndex = 1;
@@ -309,9 +351,9 @@
             this.log.Controls.Add(this.debugModeCheckbox);
             this.log.Controls.Add(this.logListView);
             this.log.Location = new System.Drawing.Point(8, 39);
-            this.log.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.log.Margin = new System.Windows.Forms.Padding(4);
             this.log.Name = "log";
-            this.log.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.log.Padding = new System.Windows.Forms.Padding(4);
             this.log.Size = new System.Drawing.Size(1192, 676);
             this.log.TabIndex = 2;
             this.log.Text = "Log";
@@ -322,7 +364,7 @@
             this.reportError.BackColor = System.Drawing.Color.OrangeRed;
             this.reportError.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reportError.Location = new System.Drawing.Point(1056, 610);
-            this.reportError.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.reportError.Margin = new System.Windows.Forms.Padding(4);
             this.reportError.Name = "reportError";
             this.reportError.Size = new System.Drawing.Size(128, 52);
             this.reportError.TabIndex = 4;
@@ -335,7 +377,7 @@
             this.openLogFileButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.openLogFileButton.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openLogFileButton.Location = new System.Drawing.Point(818, 610);
-            this.openLogFileButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openLogFileButton.Margin = new System.Windows.Forms.Padding(4);
             this.openLogFileButton.Name = "openLogFileButton";
             this.openLogFileButton.Size = new System.Drawing.Size(214, 52);
             this.openLogFileButton.TabIndex = 3;
@@ -347,7 +389,7 @@
             // 
             this.clearLogsButton.Font = new System.Drawing.Font("Arial", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearLogsButton.Location = new System.Drawing.Point(400, 610);
-            this.clearLogsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clearLogsButton.Margin = new System.Windows.Forms.Padding(4);
             this.clearLogsButton.Name = "clearLogsButton";
             this.clearLogsButton.Size = new System.Drawing.Size(352, 52);
             this.clearLogsButton.TabIndex = 2;
@@ -360,7 +402,7 @@
             this.debugModeCheckbox.AutoSize = true;
             this.debugModeCheckbox.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.debugModeCheckbox.Location = new System.Drawing.Point(44, 619);
-            this.debugModeCheckbox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.debugModeCheckbox.Margin = new System.Windows.Forms.Padding(4);
             this.debugModeCheckbox.Name = "debugModeCheckbox";
             this.debugModeCheckbox.Size = new System.Drawing.Size(281, 35);
             this.debugModeCheckbox.TabIndex = 1;
@@ -378,7 +420,7 @@
             this.logListView.FullRowSelect = true;
             this.logListView.GridLines = true;
             this.logListView.Location = new System.Drawing.Point(0, 0);
-            this.logListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.logListView.Margin = new System.Windows.Forms.Padding(4);
             this.logListView.Name = "logListView";
             this.logListView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.logListView.Size = new System.Drawing.Size(1188, 591);
@@ -428,19 +470,6 @@
             this.systemTrayNotifyIcon.Text = "XWin";
             this.systemTrayNotifyIcon.DoubleClick += new System.EventHandler(this.systemTrayNotifyIcon_DoubleClick);
             // 
-            // StartMinimizedCheckBox
-            // 
-            this.StartMinimizedCheckBox.AutoSize = true;
-            this.StartMinimizedCheckBox.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartMinimizedCheckBox.Location = new System.Drawing.Point(40, 216);
-            this.StartMinimizedCheckBox.Margin = new System.Windows.Forms.Padding(4);
-            this.StartMinimizedCheckBox.Name = "StartMinimizedCheckBox";
-            this.StartMinimizedCheckBox.Size = new System.Drawing.Size(210, 31);
-            this.StartMinimizedCheckBox.TabIndex = 3;
-            this.StartMinimizedCheckBox.Text = "Start minimized";
-            this.StartMinimizedCheckBox.UseVisualStyleBackColor = true;
-            this.StartMinimizedCheckBox.CheckedChanged += new System.EventHandler(this.StartMinimizedCheckBox_CheckedChanged);
-            // 
             // XWinPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -449,7 +478,7 @@
             this.Controls.Add(this.ControllerPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "XWinPanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "XWin Panel";
@@ -502,5 +531,7 @@
         private System.Windows.Forms.NotifyIcon systemTrayNotifyIcon;
         private System.Windows.Forms.CheckBox StartAtStartupCheckBox;
         private System.Windows.Forms.CheckBox StartMinimizedCheckBox;
+        private System.Windows.Forms.ComboBox NotificationsDropdownList;
+        private System.Windows.Forms.Label label1;
     }
 }

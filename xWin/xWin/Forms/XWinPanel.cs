@@ -40,6 +40,7 @@ namespace xWin.Forms
         Thread XCon4Thread = new Thread(delegate () {; });
 
         private bool minimizeToSystemTray = false;
+        private string notifications = "";
 
         public XWinPanel()
         {
@@ -411,6 +412,43 @@ namespace xWin.Forms
         {
             try
             {
+                // Notifications
+                systemTrayNotifyIcon.BalloonTipTitle = "XWin";
+                if (loggingEvent.Level == log4net.Core.Level.Warn)
+                    systemTrayNotifyIcon.BalloonTipIcon = ToolTipIcon.Warning;
+                else if (loggingEvent.Level == log4net.Core.Level.Error)
+                    systemTrayNotifyIcon.BalloonTipIcon = ToolTipIcon.Error;
+                else
+                    systemTrayNotifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+
+                switch (notifications)
+                {
+                    case "all":
+                        systemTrayNotifyIcon.BalloonTipText = loggingEvent.MessageObject.ToString();
+                        systemTrayNotifyIcon.ShowBalloonTip(50);
+                        systemTrayNotifyIcon.Visible = true;
+                        break;
+                    case "warnings":
+                        if (loggingEvent.Level == log4net.Core.Level.Warn)
+                        {
+                            systemTrayNotifyIcon.BalloonTipText = loggingEvent.MessageObject.ToString();
+                            systemTrayNotifyIcon.ShowBalloonTip(50);
+                            systemTrayNotifyIcon.Visible = true;
+                        }
+                        break;
+                    case "errors":
+                        if (loggingEvent.Level == log4net.Core.Level.Error)
+                        {
+                            systemTrayNotifyIcon.BalloonTipText = loggingEvent.MessageObject.ToString();
+                            systemTrayNotifyIcon.ShowBalloonTip(50);
+                            systemTrayNotifyIcon.Visible = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                // Log
                 ListViewItem list = new ListViewItem(loggingEvent.TimeStamp.ToString());
                 if (loggingEvent.Level == log4net.Core.Level.Error)
                 {
@@ -436,7 +474,7 @@ namespace xWin.Forms
                 list.SubItems.Add(loggingEvent.LoggerName.Substring(loggingEvent.LoggerName.LastIndexOf("xWin")));
                 list.SubItems.Add(loggingEvent.MessageObject.ToString());
                 logListView.Sorting = System.Windows.Forms.SortOrder.Descending;
-                ControlInvike(logListView, () => logListView.Items.Add(list));
+                ControlInvike(logListView, () => logListView.Items.Add(list));                
             }
             catch (Exception e)
             {
@@ -672,6 +710,36 @@ namespace xWin.Forms
                 {
                     KeyLoc.DeleteValue("XWinStartMinimized", false);
                     Log.GetLogger().Info("Start the Application Unminimized!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.GetLogger().Error(ex);
+            }
+        }
+
+        private void NotificationsDropdownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (NotificationsDropdownList.SelectedItem)
+                {
+                    case "Notify All":
+                        notifications = "all";
+                        Log.GetLogger().Info("Notifications option changed to notify all");
+                        break;
+                    case "Notify Only Warnings":
+                        notifications = "warnings";
+                        Log.GetLogger().Info("Notifications option changed to notify only warnings");
+                        break;
+                    case "Notify Only Errors":
+                        notifications = "errors";
+                        Log.GetLogger().Info("Notifications option changed to notify only errors");
+                        break;
+                    default:
+                        notifications = "none";
+                        Log.GetLogger().Info("Notifications option changed to notify None");
+                        break;
                 }
             }
             catch (Exception ex)
