@@ -496,9 +496,9 @@ namespace xWin.Forms.AutoCompleteForms
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        const uint GA_PARENT = 1;
-        const uint GA_ROOT = 2;
-        const uint GA_ROOTOWNER = 3;
+        //const uint GA_PARENT = 1;
+        //const uint GA_ROOT = 2;
+        //const uint GA_ROOTOWNER = 3;
         IntPtr currentWindow;
 
         public IntPtr GetCurrentWindow()

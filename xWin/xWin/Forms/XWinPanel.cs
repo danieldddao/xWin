@@ -85,7 +85,7 @@ namespace xWin.Forms
         private void XWinPanel_Load(object sender, EventArgs e)
         {
             UpdateControllers();
-            if (autoComplete.enableWordPrediction || autoComplete.enableQuickType) { autoComplete.KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
+            //if (autoComplete.enableWordPrediction || autoComplete.enableQuickType) { autoComplete.KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
             if (autoComplete.enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
             if (autoComplete.enableQuickType) { quickTypeCheckBox.Checked = true; }
 
@@ -116,13 +116,13 @@ namespace xWin.Forms
             {
                 // If the value doesn't exist, the debug mode is disabled
                 debugModeCheckbox.Checked = false;
-                Log.DisableDebugMode();
+                //Log.DisableDebugMode();
             }
             else
             {
                 // The value exists, debug mode is enabled
                 debugModeCheckbox.Checked = true;
-                Log.EnableDebugMode();
+                //Log.EnableDebugMode();
             }
 
             Log.GetLogger().Info("Application started");
@@ -548,22 +548,51 @@ namespace xWin.Forms
          * Code for AutoComplete feature
          */
         AutoComplete autoComplete = new AutoComplete();
+        bool subscribed = false; // indicate whether reading keyboard inputs is subscribed
 
         private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (wordPredictionCheckBox.Checked)
-            { autoComplete.enableWordPrediction = true; }
+            {
+                autoComplete.enableWordPrediction = true;
+                if (!subscribed)
+                {
+                    autoComplete.KeyboardInputsSubscribe();
+                    subscribed = true;
+                }
+            }
             else
-            { autoComplete.enableWordPrediction = false; }
+            {
+                autoComplete.enableWordPrediction = false;
+                if (!quickTypeCheckBox.Checked)
+                {
+                    autoComplete.KeyboardInputsUnsubscribe();
+                    subscribed = false;
+                }
+            }
             Log.GetLogger().Debug("Word Prediction option changed:" + autoComplete.enableWordPrediction);
         }
 
         private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (quickTypeCheckBox.Checked)
-            { autoComplete.enableQuickType = true; }
+            {
+                autoComplete.enableQuickType = true;
+                if (!subscribed)
+                {
+                    autoComplete.KeyboardInputsSubscribe();
+                    subscribed = true;
+                }
+            }
             else
-            { autoComplete.enableQuickType = false; }
+            {
+                autoComplete.enableQuickType = false;
+                if (!wordPredictionCheckBox.Checked)
+                {
+                    autoComplete.KeyboardInputsUnsubscribe();
+                    subscribed = false;
+                }
+            }
             Log.GetLogger().Debug("Quicktype option changed:" + autoComplete.enableQuickType);
         }
 
