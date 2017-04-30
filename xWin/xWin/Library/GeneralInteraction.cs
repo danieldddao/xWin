@@ -28,18 +28,6 @@ namespace xWin.Library
 
     public class WI//Windows Interaction
     {
-        public static int GetKeyboardSpeed()
-        {
-            int keyboardspeed = 31;
-            using (var key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Keyboard"))
-            {
-                Debug.Assert(key != null);
-                int.TryParse((String)key.GetValue("KeyboardSpeed", "31"), out keyboardspeed);
-            }
-            return keyboardspeed;
-        }
-
-
         public static void MoveCursor(short x, short y, int dpi = 10)
         {
             Console.WriteLine(x.ToString() + "," + y.ToString()+","+dpi.ToString());
@@ -162,7 +150,9 @@ namespace xWin.Library
 
             bool M_Up = false, M_Down = false, M_Right = false, M_Left = false;
 
-            
+            bool LButton = false, RButton = false, MButton = false;
+
+
             while (true)
             {
                 st.Start();
@@ -194,12 +184,15 @@ namespace xWin.Library
                                 {
                                     case Keys.LButton:
                                         LUp();
+                                        LButton = false;
                                         break;
                                     case Keys.RButton:
                                         RUp();
+                                        RButton = false;
                                         break;
                                     case Keys.MButton:
                                         MUp();
+                                        MButton = false;
                                         break;
                                     default:
                                         Release(l);
@@ -214,13 +207,25 @@ namespace xWin.Library
                                 switch (l)
                                 {
                                     case Keys.LButton:
-                                        LDown();
+                                        if (!LButton)
+                                        {
+                                            LDown();
+                                            LButton = true;
+                                        }
                                         break;
                                     case Keys.RButton:
-                                        RDown();
+                                        if (!RButton)
+                                        {
+                                            RDown();
+                                            RButton = true;
+                                        }
                                         break;
                                     case Keys.MButton:
-                                        MDown();
+                                        if (!MButton)
+                                        {
+                                            MDown();
+                                            MButton = true;
+                                        }
                                         break;
                                     default:
                                         Press(l);
