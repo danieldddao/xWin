@@ -10,6 +10,9 @@ namespace xWin.Config
 {
     public class IO<T> where T : IMessage<T>, new()
     {
+        public const string CONFIGURATION_EXT = ".cfg";
+        public const string TYPINGCONTROL_EXT = ".tctrl";
+        public const string KEYBOARDSET_EXT = ".kbs";
         public List<string> SearchPaths;
         public readonly string ext;
         private MessageParser<T> parser;

@@ -89,7 +89,9 @@ namespace xWin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var cfw = new GUI.ConfigWindow();
+            var l = new List<string>();
+            l.Add("../../../config");
+            var cfw = new GUI.ConfigWindow(l);
             Application.Run(cfw);
             return;
             GenericController controller = null;
@@ -112,8 +114,6 @@ namespace xWin
             cc.ry = datas.Gamepad.RightThumbY;
 
 
-            var l = new List<string>();
-            l.Add("../../../config");
             var io = new IO<Configuration>(l,".dat");
             io.WriteToFile(Defaults.DefaultConfiguration(), "default");
             var c = io.ReadFromFile("default");

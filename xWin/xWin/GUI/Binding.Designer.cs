@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.ButtonTextBox = new System.Windows.Forms.TextBox();
             this.EditButtons = new System.Windows.Forms.Button();
             this.ClearButtons = new System.Windows.Forms.Button();
             this.BehaviorSelect = new System.Windows.Forms.ComboBox();
+            this.KeybindTextBox = new System.Windows.Forms.TextBox();
             this.EditKeybinds = new System.Windows.Forms.Button();
+            this.ClearKeybinds = new System.Windows.Forms.Button();
             this.ToggleBox = new System.Windows.Forms.CheckBox();
             this.DeleteSelf = new System.Windows.Forms.Button();
-            this.ButtonTextBox = new System.Windows.Forms.TextBox();
-            this.KeybindTextBox = new System.Windows.Forms.TextBox();
-            this.ClearKeybinds = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +58,17 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(551, 30);
             this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // ButtonTextBox
+            // 
+            this.ButtonTextBox.Location = new System.Drawing.Point(3, 3);
+            this.ButtonTextBox.MaximumSize = new System.Drawing.Size(100, 20);
+            this.ButtonTextBox.MinimumSize = new System.Drawing.Size(100, 20);
+            this.ButtonTextBox.Name = "ButtonTextBox";
+            this.ButtonTextBox.ReadOnly = true;
+            this.ButtonTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ButtonTextBox.TabIndex = 17;
+            this.ButtonTextBox.TextChanged += new System.EventHandler(this.ButtonTextBox_TextChanged);
             // 
             // EditButtons
             // 
@@ -96,6 +107,16 @@
             this.BehaviorSelect.Text = "On Hold";
             this.BehaviorSelect.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
+            // KeybindTextBox
+            // 
+            this.KeybindTextBox.Location = new System.Drawing.Point(290, 3);
+            this.KeybindTextBox.MaximumSize = new System.Drawing.Size(100, 20);
+            this.KeybindTextBox.MinimumSize = new System.Drawing.Size(100, 20);
+            this.KeybindTextBox.Name = "KeybindTextBox";
+            this.KeybindTextBox.ReadOnly = true;
+            this.KeybindTextBox.Size = new System.Drawing.Size(100, 20);
+            this.KeybindTextBox.TabIndex = 18;
+            // 
             // EditKeybinds
             // 
             this.EditKeybinds.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -106,6 +127,17 @@
             this.EditKeybinds.Text = "+";
             this.EditKeybinds.UseVisualStyleBackColor = false;
             this.EditKeybinds.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // ClearKeybinds
+            // 
+            this.ClearKeybinds.BackColor = System.Drawing.Color.Red;
+            this.ClearKeybinds.Location = new System.Drawing.Point(423, 3);
+            this.ClearKeybinds.Name = "ClearKeybinds";
+            this.ClearKeybinds.Size = new System.Drawing.Size(21, 21);
+            this.ClearKeybinds.TabIndex = 15;
+            this.ClearKeybinds.Text = "C";
+            this.ClearKeybinds.UseVisualStyleBackColor = false;
+            this.ClearKeybinds.Click += new System.EventHandler(this.button5_Click);
             // 
             // ToggleBox
             // 
@@ -127,37 +159,6 @@
             this.DeleteSelf.Text = "X";
             this.DeleteSelf.UseVisualStyleBackColor = true;
             this.DeleteSelf.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // ButtonTextBox
-            // 
-            this.ButtonTextBox.Location = new System.Drawing.Point(3, 3);
-            this.ButtonTextBox.MaximumSize = new System.Drawing.Size(100, 20);
-            this.ButtonTextBox.MinimumSize = new System.Drawing.Size(100, 20);
-            this.ButtonTextBox.Name = "ButtonTextBox";
-            this.ButtonTextBox.ReadOnly = true;
-            this.ButtonTextBox.Size = new System.Drawing.Size(100, 20);
-            this.ButtonTextBox.TabIndex = 17;
-            // 
-            // KeybindTextBox
-            // 
-            this.KeybindTextBox.Location = new System.Drawing.Point(290, 3);
-            this.KeybindTextBox.MaximumSize = new System.Drawing.Size(100, 20);
-            this.KeybindTextBox.MinimumSize = new System.Drawing.Size(100, 20);
-            this.KeybindTextBox.Name = "KeybindTextBox";
-            this.KeybindTextBox.ReadOnly = true;
-            this.KeybindTextBox.Size = new System.Drawing.Size(100, 20);
-            this.KeybindTextBox.TabIndex = 18;
-            // 
-            // ClearKeybinds
-            // 
-            this.ClearKeybinds.BackColor = System.Drawing.Color.Red;
-            this.ClearKeybinds.Location = new System.Drawing.Point(423, 3);
-            this.ClearKeybinds.Name = "ClearKeybinds";
-            this.ClearKeybinds.Size = new System.Drawing.Size(21, 21);
-            this.ClearKeybinds.TabIndex = 15;
-            this.ClearKeybinds.Text = "C";
-            this.ClearKeybinds.UseVisualStyleBackColor = false;
-            this.ClearKeybinds.Click += new System.EventHandler(this.button5_Click);
             // 
             // Binding
             // 
