@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using xWin.Library;
 using static BasicControl.Types;
+using Google.Protobuf.Collections;
 
 namespace xWin.GUI
 {
@@ -17,6 +18,9 @@ namespace xWin.GUI
         public Binding()
         {
             InitializeComponent();
+            ButtonBox = this.ButtonTextBox;
+            KeyBox = this.KeybindTextBox;
+            BehaviorPick = this.BehaviorSelect;
         }
 
         public int ls_regions = 0;
@@ -24,8 +28,11 @@ namespace xWin.GUI
         public int lt_regions = 0;
         public int rt_regions = 0;
 
-        private GamepadFlags gf;
-        private Actions a;
+        public GamepadFlags gf;
+        public Actions a;
+
+        public TextBox ButtonBox, KeyBox;
+        public ComboBox BehaviorPick;
 
         public Binding(int ls,int rs,int lt,int rt) : this()
         {
@@ -86,10 +93,17 @@ namespace xWin.GUI
             a = d.a;
             KeybindTextBox.Text = d.strrep;
         }
+
+        private void ButtonTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         //make it a toggle
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +22,7 @@ namespace xWin
 {
     class Program
     {
-
+        
         /* Run this method in Main instead of RunFormApplication() for cucumber tests */
         public static void RunFormApplicationForTesting()
         {
@@ -69,7 +69,7 @@ namespace xWin
             Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
         }
-
+        
         public static void RunFormApplication()
         {
             Application.EnableVisualStyles();
@@ -80,7 +80,7 @@ namespace xWin
             Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
         }
-
+        
         [STAThread]
         static void Main(string[] args)
         {
@@ -89,7 +89,6 @@ namespace xWin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< c25c5d1ae5026d701abe2b4ff78f9d4b88dac866
             var l = new List<string>();
             l.Add(@"C:\Users\Tim\Documents\Classes\software project\Project\xWin\config");
             l.Add(@"..\..\..\config");
@@ -97,11 +96,6 @@ namespace xWin
             //Application.Run(cfw);
             //return;
             cfw.ShowDialog();
-=======
-            var cfw = new GUI.ConfigWindow();
-            Application.Run(cfw);
-            return;
->>>>>>> started integrating the saving into a gui
             GenericController controller = null;
             var a = new byte[16];
             a[0] = 1;
@@ -113,7 +107,7 @@ namespace xWin
                 controller = new XBXController(XCon1);
             else
                 controller = new DIController(DI2XI.setup_stick());
-
+                                    
             var cc = new ControllerCalibration();
             State datas = controller.GetState();
             cc.lx = datas.Gamepad.LeftThumbX;
@@ -127,17 +121,10 @@ namespace xWin
             //var c = io.ReadFromFile("default");
             //Defaults.DefaultConfiguration();
 
-<<<<<<< c25c5d1ae5026d701abe2b4ff78f9d4b88dac866
-
-
-
-            InteractionLoop(controller, cfw.c, cc, 20000);
-=======
             
 
 
-            InteractionLoop(controller, c, cc, 20000);
->>>>>>> started integrating the saving into a gui
+            InteractionLoop(controller, cfw.c, cc, 20000);
         }
     }
 }

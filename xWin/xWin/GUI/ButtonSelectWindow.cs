@@ -19,20 +19,26 @@ namespace xWin.GUI
             InitializeComponent();
 
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            b = new GamepadFlags(0);
+            strmade = "";
+            LeftTriggerRegions.Items.Add("None");
+            RightTriggerRegions.Items.Add("None");
+            LeftStickRegions.Items.Add("None");
+            RightStickRegions.Items.Add("None");
+            LeftTriggerRegions.SelectedItem = "None";
+            RightTriggerRegions.SelectedItem = "None";
+            LeftStickRegions.SelectedItem = "None";
+            RightStickRegions.SelectedItem = "None";
             //b = new GamepadFlags(0);
             //strmade = "";
         }
         public ButtonSelectWindow(int lt, int rt, int ls, int rs) : this()
         {
-            //InitializeComponent();
-            b = new GamepadFlags(0);
-            strmade = "";
             initialize_regions(LeftStickRegions, ls);
             initialize_regions(RightStickRegions, rs);
             initialize_regions(LeftTriggerRegions,lt);
             initialize_regions(RightTriggerRegions, rt);
         }
-
         public ButtonSelectWindow(GamepadFlags b, int lt, int rt, int ls, int rs) : this(lt, rt, ls, rs)
         {
             this.b = b;
@@ -57,7 +63,28 @@ namespace xWin.GUI
             LeftStickRegions.SelectedItem = (((int)b & 0x00040000) != 0) ? "Released" : LeftStickRegions.SelectedItem;
             RightStickRegions.SelectedItem = (((int)b & 0x00080000) != 0) ? "Released" : RightStickRegions.SelectedItem;
         }
+        public ButtonSelectWindow(GamepadFlags b) : this()
+        {
+            //InitializeComponent();
+            this.b = b;
+            var s = (GamepadButtonFlags)((int)b & 0x0000FFFF);
+            Console.WriteLine("here");
 
+            foreach (CheckBox cb in this.Controls.OfType<CheckBox>())
+            {
+                try
+                {
+                    var gbf = (GamepadButtonFlags)Enum.Parse(typeof(GamepadButtonFlags), cb.Name.ToString());
+                    if (s.HasFlag(gbf))
+                    {
+                        cb.Checked = true;
+                        cb.CheckState = CheckState.Checked;
+                    }
+                }
+                catch { }
+            }
+
+        }
         private void initialize_regions(ComboBox cb, int r)
         {
             cb.Items.Clear();
@@ -106,9 +133,9 @@ namespace xWin.GUI
             if (DRight.CheckState == CheckState.Checked)
                 addflag(gbf, GamepadButtonFlags.DPadRight);
 
-            if (LeftBumper.CheckState == CheckState.Checked)
+            if (LeftShoulder.CheckState == CheckState.Checked)
                 addflag(gbf, GamepadButtonFlags.LeftShoulder);
-            if (RightBumper.CheckState == CheckState.Checked)
+            if (RightShoulder.CheckState == CheckState.Checked)
                 addflag(gbf, GamepadButtonFlags.RightShoulder);
             if (LeftThumb.CheckState == CheckState.Checked)
                 addflag(gbf, GamepadButtonFlags.LeftThumb);
