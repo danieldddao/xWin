@@ -160,12 +160,12 @@ namespace xWin.Config
                 Repeatdelay = 4000000,
                 LeftStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     ControlMouse = true
                 },
                 RightStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     Regions = { 180, 180 }
                 },
                 LeftTrigger = new Trigger
@@ -218,12 +218,12 @@ namespace xWin.Config
                 },
                 LeftStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     Regions = { 45, 45, 45, 45, 45, 45, 45, 45 }
                 },
                 RightStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     Regions = { 90, 90, 90, 90 }
                 },
                 LeftTrigger = new Trigger
@@ -292,12 +292,12 @@ namespace xWin.Config
             {
                 LeftStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     ControlMouse = true
                 },
                 RightStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     Regions = { 180, 180 }
                 },
                 LeftTrigger = new Trigger
@@ -349,12 +349,12 @@ namespace xWin.Config
                 },
                 LeftStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     Regions = { 45, 45, 45, 45, 45, 45, 45, 45 }
                 },
                 RightStick = new Stick
                 {
-                    Deadzone = DEADZONE,
+                    //Deadzone = DEADZONE,
                     Regions = { 90, 90, 90, 90 }
                 },
                 RightTrigger = new Trigger
