@@ -86,6 +86,18 @@
     <Compile Include="Config\KeyboardControl.cs" />
     <Compile Include="Config\IO.cs" />
     <Compile Include="Config\SaveFormat.cs" />
+    <Compile Include="Forms\CharacterWheels\CharacterWheel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CharacterWheels\CharacterWheel.designer.cs">
+      <DependentUpon>CharacterWheel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CharacterWheels\CharacterWheel8Section.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CharacterWheels\CharacterWheel8Section.designer.cs">
+      <DependentUpon>CharacterWheel8Section.cs</DependentUpon>
+    </Compile>
     <Compile Include="Library\Buttons.cs" />
     <Compile Include="Forms\ButtonMaps\ShortcutMapping.cs">
       <SubType>Form</SubType>
@@ -175,6 +187,12 @@
     <EmbeddedResource Include="Forms\ButtonOptions.resx">
       <DependentUpon>ButtonOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CharacterWheels\CharacterWheel.resx">
+      <DependentUpon>CharacterWheel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CharacterWheels\CharacterWheel8Section.resx">
+      <DependentUpon>CharacterWheel8Section.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ControllerOptions.resx">
       <DependentUpon>ControllerOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -195,8 +213,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +224,7 @@
     <None Include="Resources\xboxDPadUp.png" />
     <None Include="Resources\xboxLeftShield.png" />
     <None Include="Resources\xboxRightShield.png" />
+    <None Include="Resources\letterbackground1.png" />
     <Content Include="Resources\XWin.ico" />
     <Content Include="Resources\XWin1.ico" />
     <Content Include="Resources\XWin2.ico" />

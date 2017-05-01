@@ -8,8 +8,10 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xWin.Forms;
 using xWin.Wrapper;
 using static BasicControl.Types;
 using static TypingControl.Types;
@@ -151,7 +153,7 @@ namespace xWin.Library
             bool M_Up = false, M_Down = false, M_Right = false, M_Left = false;
 
             bool LButton = false, RButton = false, MButton = false;
-
+            Thread typingThread = new Thread(delegate () {; });
 
             while (true)
             {
@@ -317,6 +319,20 @@ namespace xWin.Library
                     case Mode.Typing:
                         {
                             var ts = ki.NextState(datas.Gamepad);
+                            if (!typingThread.IsAlive)
+                            {
+                                Thread.Sleep(50);
+                                typingThread = new Thread(delegate ()
+                                {
+                                    Application.EnableVisualStyles();
+                                    Application.SetCompatibleTextRenderingDefault(false);
+                                    Application.Run(new CharacterWheel(c,config));
+                                });
+                                typingThread.Name = "typing";
+                                typingThread.IsBackground = true;
+                                typingThread.SetApartmentState(ApartmentState.STA);
+                                typingThread.Start();
+                            }
                             Console.Write("Actions: ");
                             foreach (var act in ts.Actions)
                             {
@@ -343,7 +359,6 @@ namespace xWin.Library
                                         Press(Keys.Up);
                                         break;
                                     case KeyboardAction.OpenMenu:
-                                    #warning OPEN MENU CODE NOT DEFINED
                                         break;
                                     case KeyboardAction.Uidown:
                                     #warning UI Movement Code Not Defined
