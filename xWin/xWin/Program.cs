@@ -89,6 +89,7 @@ namespace xWin
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< c25c5d1ae5026d701abe2b4ff78f9d4b88dac866
             var l = new List<string>();
             l.Add(@"C:\Users\Tim\Documents\Classes\software project\Project\xWin\config");
             l.Add(@"..\..\..\config");
@@ -96,6 +97,11 @@ namespace xWin
             //Application.Run(cfw);
             //return;
             cfw.ShowDialog();
+=======
+            var cfw = new GUI.ConfigWindow();
+            Application.Run(cfw);
+            return;
+>>>>>>> started integrating the saving into a gui
             GenericController controller = null;
             var a = new byte[16];
             a[0] = 1;
@@ -121,10 +127,17 @@ namespace xWin
             //var c = io.ReadFromFile("default");
             //Defaults.DefaultConfiguration();
 
+<<<<<<< c25c5d1ae5026d701abe2b4ff78f9d4b88dac866
 
 
 
             InteractionLoop(controller, cfw.c, cc, 20000);
+=======
+            
+
+
+            InteractionLoop(controller, c, cc, 20000);
+>>>>>>> started integrating the saving into a gui
         }
     }
 }

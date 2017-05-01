@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using xWin.Wrapper;
@@ -54,6 +55,28 @@ namespace xWin.Library
 
         [DllImport("user32.dll")]
         private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+        public static string GetActiveProgram()
+        {
+            try
+            {
+                IntPtr active_window = GetForegroundWindow();
+                //return active_window.ToString();
+                uint procID = 0;
+                GetWindowThreadProcessId(active_window, out procID);
+                return Process.GetProcessById((int)procID).MainModule.ToString();
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
+        }
 
         public static void LDown()
         {
@@ -153,6 +176,7 @@ namespace xWin.Library
             bool LButton = false, RButton = false, MButton = false;
 
 
+            Thread.Sleep(5000);
             while (true)
             {
                 st.Start();
@@ -163,7 +187,6 @@ namespace xWin.Library
                 datas.Gamepad.RightThumbX = shortbound(datas.Gamepad.RightThumbX - cc.rx);
                 datas.Gamepad.RightThumbY = shortbound(datas.Gamepad.RightThumbY - cc.ry);
                 //var wrapper = new SystemWrapper();
-                
                 if (just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
                 {
                     just_toggled = true;
@@ -485,6 +508,7 @@ namespace xWin.Library
                             break;
                         }
                 }
+                //Console.WriteLine(GetActiveProgram());
                 Console.WriteLine(st.Elapsed.ToString());
                 while (st.Elapsed < TickSpeed) {  }
                 st.Stop();

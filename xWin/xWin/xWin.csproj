@@ -137,6 +137,40 @@
     <Compile Include="Config\KeyboardControl.cs" />
     <Compile Include="Config\IO.cs" />
     <Compile Include="Config\SaveFormat.cs" />
+<<<<<<< c25c5d1ae5026d701abe2b4ff78f9d4b88dac866
+=======
+    <Compile Include="GUI\Binding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Binding.Designer.cs">
+      <DependentUpon>Binding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ButtonSelectWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ButtonSelectWindow.Designer.cs">
+      <DependentUpon>ButtonSelectWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigWindow.Designer.cs">
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\KeyboardSelectWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\KeyboardSelectWindow.Designer.cs">
+      <DependentUpon>KeyboardSelectWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Buttons.cs" />
+>>>>>>> started integrating the saving into a gui
     <Compile Include="Forms\ButtonMaps\ShortcutMapping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,6 +304,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeyboardWindow.resx">
       <DependentUpon>KeyboardWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Binding.resx">
+      <DependentUpon>Binding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ButtonSelectWindow.resx">
+      <DependentUpon>ButtonSelectWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigWindow.resx">
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\KeyboardSelectWindow.resx">
+      <DependentUpon>KeyboardSelectWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -240,7 +240,7 @@ namespace xWin.Library
         public class RegionStickBehavior : StickBehavior
         {
             private readonly List<short> region_sizes;
-            private readonly ushort deadzone;
+            //private readonly ushort deadzone;
             private readonly short start;
             public RegionStickBehavior(Stick s)
             {
@@ -248,12 +248,12 @@ namespace xWin.Library
                 {
                     s = new Stick
                     {
-                        Deadzone = 1,
+                        //Deadzone = 1,
                         RegionStart = 0,
                         Regions = { }
                     };
                 }
-                deadzone = (ushort)s.Deadzone;
+                //deadzone = (ushort)s.Deadzone;
                 start = (short)s.RegionStart;
                 uint totalsize = 0;
                 region_sizes = new List<short>();
@@ -268,7 +268,7 @@ namespace xWin.Library
             //region 0 is the deadzone
             public byte Act(short x, short y, ref KeyboardMouseState kms)
             {
-                var ps = new PolarStick(x, y, deadzone);
+                var ps = new PolarStick(x, y, 1);
                 byte? region;
                 if (ps.theta == null)
                     region = 0;
@@ -299,17 +299,17 @@ namespace xWin.Library
 
         private class MouseStickBehavior : StickBehavior
         {
-            private readonly ushort deadzone;
+            //private readonly ushort deadzone;
             private readonly bool invert_lr, invert_ud;
             public MouseStickBehavior(Stick s)
             {
-                deadzone = (ushort)s.Deadzone;
+                //deadzone = (ushort)s.Deadzone;
                 invert_lr = s.InvertLr;
                 invert_ud = s.InvertUd;
             }
             public byte Act(short x, short y, ref KeyboardMouseState kmstate)
             {
-                if (Math.Sqrt(x * x + y * y) < deadzone)
+                if (Math.Sqrt(x * x + y * y) == 0)
                 {
                     kmstate.mouse_movement.x = 0;
                     kmstate.mouse_movement.y = 0;
