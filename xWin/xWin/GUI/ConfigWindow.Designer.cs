@@ -267,7 +267,7 @@
             this.ConfigName.Name = "ConfigName";
             this.ConfigName.Size = new System.Drawing.Size(100, 20);
             this.ConfigName.TabIndex = 19;
-            this.ConfigName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.ConfigName.TextChanged += new System.EventHandler(this.ConfigName_TextChanged);
             // 
             // Description
             // 

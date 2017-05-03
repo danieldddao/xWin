@@ -27,6 +27,8 @@ namespace xWin.GUI
             }
             Tier1.ControlRemoved += new ControlEventHandler(this.Tier_ControlRemoved);
             Tier2.ControlRemoved += new ControlEventHandler(this.Tier_ControlRemoved);
+            NameBox.KeyPress += new KeyPressEventHandler(NameBox_KeyPress);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
         }
         private Dictionary<KeyboardAction,PickBinding> bindmap;
 
@@ -366,6 +368,18 @@ namespace xWin.GUI
         private void button2_Click(object sender, EventArgs e)
         {
             var tc = conglomerate();
+            if (tc.Name.Length == 0)
+            {
+                MessageBox.Show("No Name Specified");
+                return;
+            }
+            if (io.CheckExists(tc.Name))
+            {
+                if (MessageBox.Show("Overwrite Existing Version?", "File Already Exists", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
             io.WriteToFile(tc, tc.Name);
         }
 
@@ -373,6 +387,13 @@ namespace xWin.GUI
         {
             tc = conglomerate();
             this.Close();
+        }
+
+        private void NameBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsControl(e.KeyChar)) return;
+            if (System.IO.Path.GetInvalidFileNameChars().Contains(e.KeyChar))
+                e.Handled = true;
         }
     }
 }
