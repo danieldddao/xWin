@@ -47,6 +47,8 @@ namespace xWin.Library
             public Queue<KeyboardAction> Actions;
             public Queue<KeyboardAction> Release;
             public int t1, t2;
+            public KeyboardSet ks;
+            public bool update_ks;
         }
 
         private GamepadFlags previous_state;
@@ -151,6 +153,7 @@ namespace xWin.Library
             }
 
             previous_state = new GamepadFlags(0,true,true,true,true);
+            lastks = defaultset;
             Console.WriteLine("t1_mask:" + t1_mask.ToString());
             Console.WriteLine("t2_mask:" + t2_mask.ToString());
 
@@ -162,6 +165,8 @@ namespace xWin.Library
             previous_state = new GamepadFlags(0);
         }
 
+
+        private KeyboardSet lastks;
         public TypingState NextState(Gamepad g)
         {
             var ts = new TypingState();
@@ -304,9 +309,34 @@ namespace xWin.Library
             }
             ts.t1 = t1.ContainsKey(state * t1_mask) ? t1[state * t1_mask] : -1;
             ts.t2 = t2.ContainsKey(state * t2_mask) ? t2[state * t2_mask] : -1;
-            if (!(ts.t1 > -1 && ts.t2 > -1)) { current = ""; }
-            else { current = keysets.ContainsKey(state * select_mask) ? keysets[state * select_mask].Set[ts.t1].Subset[ts.t2] : defaultset.Set[ts.t1].Subset[ts.t2]; }
-            
+            if (!(ts.t1 > -1 && ts.t2 > -1))
+            {
+                current = "";
+                ts.ks = keysets.ContainsKey(state * select_mask) ? keysets[state * select_mask] : defaultset;
+            }
+            else
+            {
+                if (keysets.ContainsKey(state * select_mask))
+                {
+                    current = keysets[state * select_mask].Set[ts.t1].Subset[ts.t2];
+                    ts.ks = keysets[state * select_mask];
+                }
+                else
+                {
+                    current = defaultset.Set[ts.t1].Subset[ts.t2];
+                    ts.ks = defaultset;
+                }
+            }
+            if(lastks != ts.ks)
+            {
+                ts.update_ks = true;
+                lastks = ts.ks;
+            }
+            else
+                ts.update_ks = false;
+
+            //else { current = keysets.ContainsKey(state * select_mask) ? keysets[state * select_mask].Set[ts.t1].Subset[ts.t2] : defaultset.Set[ts.t1].Subset[ts.t2]; }
+
             if (current.Length != 0) { ts.Text = current; }
             previous_state = state;
             return ts;

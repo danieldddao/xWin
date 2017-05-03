@@ -47,7 +47,7 @@ namespace xWin.Library
             this.deadzone = deadzone;
             _R = r < deadzone ? 0 : r;
             _theta = (short?)(t % 360);
-            _theta += (short?)((_theta < 0) ? 360 : 0);
+            _theta += (short?)((_theta <= 0) ? 360 : 0);
         }
         public PolarStick(short x, short y, ushort deadzone)
         {
@@ -55,7 +55,7 @@ namespace xWin.Library
             _R = (uint)Math.Sqrt(x * x + y * y);
             _R = _R < deadzone ? 0 :_R;
             _theta = (_R == 0) ? null : (short?)(Math.Atan2(x, y) * 57.2958);
-            _theta += (short?)((_theta < 0) ? 360 : 0);
+            _theta += (short?)((_theta <= 0) ? 360 : 0);
         }
     }
 }

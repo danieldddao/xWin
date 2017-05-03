@@ -274,17 +274,21 @@ namespace xWin.Library
                     region = 0;
                 else
                 {
+                    Console.WriteLine(ps.theta);
                     //set region offsets
                     ps.theta -= (short)(region_sizes[0] / 2);
                     ps.theta -= start;
 
                     short? t = ps.theta;
+                    Console.WriteLine(ps.theta);
                     region = 0;
-                    while (t > 0)
+                    while (t >= 0)
                     {
                         region += 1;
                         t = (short)(t - region_sizes[0]);
                     }
+
+                    Console.WriteLine(region);
                 }
                 return (byte)region;
             }

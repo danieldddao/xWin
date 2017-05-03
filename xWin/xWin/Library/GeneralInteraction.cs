@@ -360,6 +360,7 @@ namespace xWin.Library
                     case Mode.Typing:
                         {
                             var ts = ki.NextState(datas.Gamepad);
+                            Console.WriteLine(ts.ks.ToString());
                             Console.Write("Actions: ");
                             foreach (var act in ts.Actions)
                             {
