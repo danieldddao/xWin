@@ -81,7 +81,7 @@ namespace xWin
             Application.Run(panel);
         }
         
-        //[STAThread]
+        [STAThread]
         static void Main(string[] args)
         {
             //RunFormApplicationForTesting();
@@ -90,10 +90,12 @@ namespace xWin
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var l = new List<string>();
-            l.Add("../../../config");
-            var cfw = new GUI.ConfigWindow(l);
-            Application.Run(cfw);
-            return;
+            l.Add(@"C:\Users\Tim\Documents\Classes\software project\Project\xWin\config");
+            l.Add(@"..\..\..\config");
+            var cfw = new GUI.ConfigWindow(new Configuration(), l);
+            //Application.Run(cfw);
+            //return;
+            cfw.ShowDialog();
             GenericController controller = null;
             var a = new byte[16];
             a[0] = 1;
@@ -112,17 +114,17 @@ namespace xWin
             cc.ly = datas.Gamepad.LeftThumbY;
             cc.rx = datas.Gamepad.RightThumbX;
             cc.ry = datas.Gamepad.RightThumbY;
+            cc.deadzone = 7000;
 
-
-            var io = new IO<Configuration>(l,".dat");
-            io.WriteToFile(Defaults.DefaultConfiguration(), "default");
-            var c = io.ReadFromFile("default");
+            //var io = new IO<Configuration>(l,".dat");
+            //io.WriteToFile(Defaults.DefaultConfiguration(), "default");
+            //var c = io.ReadFromFile("default");
             //Defaults.DefaultConfiguration();
 
             
 
 
-            InteractionLoop(controller, c, cc, 20000);
+            InteractionLoop(controller, cfw.c, cc, 20000);
         }
     }
 }

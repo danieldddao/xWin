@@ -281,7 +281,7 @@ namespace xWin.Config
                     {  (int)new GamepadFlags(GamepadButtonFlags.DPadDown),ActionOnHold(KeyboardAction.CursorDown) },
                     {  (int)new GamepadFlags(GamepadButtonFlags.DPadLeft),ActionOnHold(KeyboardAction.CursorLeft) },
                     {  (int)new GamepadFlags(GamepadButtonFlags.DPadRight),ActionOnHold(KeyboardAction.CursorRight) },
-                    {  (int)new GamepadFlags(GamepadButtonFlags.None,false,false,false,false,1,0,0,0),ActionOnHold(KeyboardAction.Ctrlc) }
+                    {  (int)new GamepadFlags(GamepadButtonFlags.None,false,false,false,false,1,0,0,0),ActionOnHold(KeyboardAction.Copy) }
                 }
             };
         }

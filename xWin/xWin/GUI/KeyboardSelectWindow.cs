@@ -13,9 +13,8 @@ namespace xWin.GUI
 {
     public partial class KeyboardSelectWindow : Form
     {
-        public KeyboardSelectWindow(string s)
+        public KeyboardSelectWindow()
         {
-            strrep = "";
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             InitializeComponent();
             a = new Actions();
@@ -197,14 +196,25 @@ namespace xWin.GUI
                         break;
                 }
             }
-            //var ss = s.Split(',');
-            if(s != "")
-                foreach(var ss in s.Split(','))
+            
+        }
+        public KeyboardSelectWindow(Actions A) : this()
+        {
+            /*var s = "";
+            if (s != "")
+                foreach (var ss in s.Split(','))
                 {
                     ((CheckBox)(this.Controls.Find(ss, true)[0])).CheckState = CheckState.Checked;
-                }
+                }*/
+            foreach(var a in A.Keybinds)
+            {
+               ((CheckBox)(this.Controls.Find(((Keys)a).ToString(), true)[0])).CheckState = CheckState.Checked;
+            }
+            foreach(var a in A.SpecialActions)
+            {
+                ((CheckBox)(this.Controls.Find(a.ToString(), true)[0])).CheckState = CheckState.Checked;
+            }
         }
-
         public Actions a;
         public string strrep;
         private void checkBox11_CheckedChanged(object sender, EventArgs e)

@@ -43,10 +43,10 @@
             this.B = new System.Windows.Forms.CheckBox();
             this.X = new System.Windows.Forms.CheckBox();
             this.A = new System.Windows.Forms.CheckBox();
-            this.DLeft = new System.Windows.Forms.CheckBox();
-            this.DDown = new System.Windows.Forms.CheckBox();
-            this.DRight = new System.Windows.Forms.CheckBox();
-            this.DUp = new System.Windows.Forms.CheckBox();
+            this.DPadLeft = new System.Windows.Forms.CheckBox();
+            this.DPadDown = new System.Windows.Forms.CheckBox();
+            this.DPadRight = new System.Windows.Forms.CheckBox();
+            this.DPadUp = new System.Windows.Forms.CheckBox();
             this.RightShoulder = new System.Windows.Forms.CheckBox();
             this.LeftShoulder = new System.Windows.Forms.CheckBox();
             this.controllerPanel.SuspendLayout();
@@ -69,10 +69,10 @@
             this.controllerPanel.Controls.Add(this.B);
             this.controllerPanel.Controls.Add(this.X);
             this.controllerPanel.Controls.Add(this.A);
-            this.controllerPanel.Controls.Add(this.DLeft);
-            this.controllerPanel.Controls.Add(this.DDown);
-            this.controllerPanel.Controls.Add(this.DRight);
-            this.controllerPanel.Controls.Add(this.DUp);
+            this.controllerPanel.Controls.Add(this.DPadLeft);
+            this.controllerPanel.Controls.Add(this.DPadDown);
+            this.controllerPanel.Controls.Add(this.DPadRight);
+            this.controllerPanel.Controls.Add(this.DPadUp);
             this.controllerPanel.Controls.Add(this.RightShoulder);
             this.controllerPanel.Controls.Add(this.LeftShoulder);
             this.controllerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -244,65 +244,65 @@
             this.A.TabIndex = 6;
             this.A.UseVisualStyleBackColor = false;
             // 
-            // DLeft
+            // DPadLeft
             // 
-            this.DLeft.AutoSize = true;
-            this.DLeft.BackColor = System.Drawing.Color.Transparent;
-            this.DLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DLeft.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.DLeft.FlatAppearance.BorderSize = 5;
-            this.DLeft.ForeColor = System.Drawing.Color.Transparent;
-            this.DLeft.Location = new System.Drawing.Point(145, 174);
-            this.DLeft.MinimumSize = new System.Drawing.Size(20, 20);
-            this.DLeft.Name = "DLeft";
-            this.DLeft.Size = new System.Drawing.Size(20, 20);
-            this.DLeft.TabIndex = 5;
-            this.DLeft.UseVisualStyleBackColor = false;
+            this.DPadLeft.AutoSize = true;
+            this.DPadLeft.BackColor = System.Drawing.Color.Transparent;
+            this.DPadLeft.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DPadLeft.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.DPadLeft.FlatAppearance.BorderSize = 5;
+            this.DPadLeft.ForeColor = System.Drawing.Color.Transparent;
+            this.DPadLeft.Location = new System.Drawing.Point(145, 174);
+            this.DPadLeft.MinimumSize = new System.Drawing.Size(20, 20);
+            this.DPadLeft.Name = "DPadLeft";
+            this.DPadLeft.Size = new System.Drawing.Size(20, 20);
+            this.DPadLeft.TabIndex = 5;
+            this.DPadLeft.UseVisualStyleBackColor = false;
             // 
-            // DDown
+            // DPadDown
             // 
-            this.DDown.AutoSize = true;
-            this.DDown.BackColor = System.Drawing.Color.Transparent;
-            this.DDown.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DDown.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.DDown.FlatAppearance.BorderSize = 5;
-            this.DDown.ForeColor = System.Drawing.Color.Transparent;
-            this.DDown.Location = new System.Drawing.Point(171, 198);
-            this.DDown.MinimumSize = new System.Drawing.Size(20, 20);
-            this.DDown.Name = "DDown";
-            this.DDown.Size = new System.Drawing.Size(20, 20);
-            this.DDown.TabIndex = 4;
-            this.DDown.UseVisualStyleBackColor = false;
+            this.DPadDown.AutoSize = true;
+            this.DPadDown.BackColor = System.Drawing.Color.Transparent;
+            this.DPadDown.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DPadDown.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.DPadDown.FlatAppearance.BorderSize = 5;
+            this.DPadDown.ForeColor = System.Drawing.Color.Transparent;
+            this.DPadDown.Location = new System.Drawing.Point(171, 198);
+            this.DPadDown.MinimumSize = new System.Drawing.Size(20, 20);
+            this.DPadDown.Name = "DPadDown";
+            this.DPadDown.Size = new System.Drawing.Size(20, 20);
+            this.DPadDown.TabIndex = 4;
+            this.DPadDown.UseVisualStyleBackColor = false;
             // 
-            // DRight
+            // DPadRight
             // 
-            this.DRight.AutoSize = true;
-            this.DRight.BackColor = System.Drawing.Color.Transparent;
-            this.DRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DRight.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.DRight.FlatAppearance.BorderSize = 5;
-            this.DRight.ForeColor = System.Drawing.Color.Transparent;
-            this.DRight.Location = new System.Drawing.Point(199, 174);
-            this.DRight.MinimumSize = new System.Drawing.Size(20, 20);
-            this.DRight.Name = "DRight";
-            this.DRight.Size = new System.Drawing.Size(20, 20);
-            this.DRight.TabIndex = 3;
-            this.DRight.UseVisualStyleBackColor = false;
+            this.DPadRight.AutoSize = true;
+            this.DPadRight.BackColor = System.Drawing.Color.Transparent;
+            this.DPadRight.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DPadRight.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.DPadRight.FlatAppearance.BorderSize = 5;
+            this.DPadRight.ForeColor = System.Drawing.Color.Transparent;
+            this.DPadRight.Location = new System.Drawing.Point(199, 174);
+            this.DPadRight.MinimumSize = new System.Drawing.Size(20, 20);
+            this.DPadRight.Name = "DPadRight";
+            this.DPadRight.Size = new System.Drawing.Size(20, 20);
+            this.DPadRight.TabIndex = 3;
+            this.DPadRight.UseVisualStyleBackColor = false;
             // 
-            // DUp
+            // DPadUp
             // 
-            this.DUp.AutoSize = true;
-            this.DUp.BackColor = System.Drawing.Color.Transparent;
-            this.DUp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DUp.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.DUp.FlatAppearance.BorderSize = 5;
-            this.DUp.ForeColor = System.Drawing.Color.Transparent;
-            this.DUp.Location = new System.Drawing.Point(171, 150);
-            this.DUp.MinimumSize = new System.Drawing.Size(20, 20);
-            this.DUp.Name = "DUp";
-            this.DUp.Size = new System.Drawing.Size(20, 20);
-            this.DUp.TabIndex = 2;
-            this.DUp.UseVisualStyleBackColor = false;
+            this.DPadUp.AutoSize = true;
+            this.DPadUp.BackColor = System.Drawing.Color.Transparent;
+            this.DPadUp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DPadUp.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.DPadUp.FlatAppearance.BorderSize = 5;
+            this.DPadUp.ForeColor = System.Drawing.Color.Transparent;
+            this.DPadUp.Location = new System.Drawing.Point(171, 150);
+            this.DPadUp.MinimumSize = new System.Drawing.Size(20, 20);
+            this.DPadUp.Name = "DPadUp";
+            this.DPadUp.Size = new System.Drawing.Size(20, 20);
+            this.DPadUp.TabIndex = 2;
+            this.DPadUp.UseVisualStyleBackColor = false;
             // 
             // RightShoulder
             // 
@@ -355,10 +355,10 @@
         private System.Windows.Forms.CheckBox B;
         private System.Windows.Forms.CheckBox X;
         private System.Windows.Forms.CheckBox A;
-        private System.Windows.Forms.CheckBox DLeft;
-        private System.Windows.Forms.CheckBox DDown;
-        private System.Windows.Forms.CheckBox DRight;
-        private System.Windows.Forms.CheckBox DUp;
+        private System.Windows.Forms.CheckBox DPadLeft;
+        private System.Windows.Forms.CheckBox DPadDown;
+        private System.Windows.Forms.CheckBox DPadRight;
+        private System.Windows.Forms.CheckBox DPadUp;
         private System.Windows.Forms.CheckBox RightShoulder;
         private System.Windows.Forms.CheckBox LeftShoulder;
         private System.Windows.Forms.CheckBox LeftThumb;

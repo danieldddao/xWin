@@ -12,7 +12,7 @@ namespace xWin.Config
     {
         public const string CONFIGURATION_EXT = ".cfg";
         public const string TYPINGCONTROL_EXT = ".tctrl";
-        public const string KEYBOARDSET_EXT = ".kbs";
+        public const string KEYBOARDSET_EXT = ".chars";
         public List<string> SearchPaths;
         public readonly string ext;
         private MessageParser<T> parser;
@@ -25,21 +25,17 @@ namespace xWin.Config
         
         public T ReadFromFile(string name)
         {
-            foreach (var s in SearchPaths)
+            Console.WriteLine(name);
+            if (File.Exists(name))
             {
-                var path = s + "/" + name + ext;
-                Console.WriteLine(path);
-                if (File.Exists(path))
+                using (Stream input = File.OpenRead(name))
                 {
-                    using (Stream input = File.OpenRead(path))
-                    {
-                        var c =  parser.ParseFrom(input);
-                        return c;
-                    }
+                    var c =  parser.ParseFrom(input);
+                    return c;
                 }
             }
             throw new FileNotFoundException();
-        }
+    }
 
         public void WriteToFile(T buffer, string name, string folder="")
         {

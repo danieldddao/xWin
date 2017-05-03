@@ -15,7 +15,7 @@ namespace xWin.GUI
 {
     public partial class Binding : UserControl
     {
-        public Binding()
+        private Binding()
         {
             InitializeComponent();
             ButtonBox = this.ButtonTextBox;
@@ -43,7 +43,14 @@ namespace xWin.GUI
             gf = new GamepadFlags(0);
             a = new Actions();
         }
-
+        public Binding(GamepadFlags g, Actions a, string str, int ls, int rs, int lt, int rt) : this(ls,rs,lt,rt)
+        {
+            gf = g;
+            ButtonTextBox.Text = gf.SpecialString();
+            this.a = a;
+            KeybindTextBox.Text = action_parse(this.a);
+            BehaviorSelect.SelectedIndex = BehaviorSelect.FindStringExact(str);
+        }
         //remove button
         private void button6_Click(object sender, EventArgs e)
         {
@@ -60,7 +67,7 @@ namespace xWin.GUI
             var d = new ButtonSelectWindow(gf,lt_regions,rt_regions, ls_regions, rs_regions);
             d.ShowDialog();
             gf = d.b;
-            ButtonTextBox.Text = d.strmade;
+            ButtonTextBox.Text = d.b.SpecialString();
             
         }
         //clear all buttons/regions
@@ -74,11 +81,6 @@ namespace xWin.GUI
         {
 
         }
-        //the keys and special actions its bound to
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         //clear keys/special actions
         private void button5_Click(object sender, EventArgs e)
         {
@@ -88,7 +90,7 @@ namespace xWin.GUI
         //add key/special action
         private void button3_Click(object sender, EventArgs e)
         {
-            var d = new KeyboardSelectWindow(KeybindTextBox.Text);
+            var d = new KeyboardSelectWindow(a);
             d.ShowDialog();
             a = d.a;
             KeybindTextBox.Text = d.strrep;
@@ -105,5 +107,18 @@ namespace xWin.GUI
 
         }
         
+        private string action_parse(Actions A)
+        {
+            string str = "";
+            foreach(var a in A.Keybinds)
+            {
+                str += ((Keys)a).ToString();
+            }
+            foreach(var a in A.SpecialActions)
+            {
+                str += a.ToString();
+            }
+            return str;
+        }
     }
 }

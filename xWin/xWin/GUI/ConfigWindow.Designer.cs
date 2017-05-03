@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.BindingPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.LeftStickRegions = new System.Windows.Forms.NumericUpDown();
             this.RightStickRegions = new System.Windows.Forms.NumericUpDown();
@@ -44,9 +44,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ConfigName = new System.Windows.Forms.TextBox();
             this.Description = new System.Windows.Forms.TextBox();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
+            this.NormalDPI = new System.Windows.Forms.NumericUpDown();
+            this.FastDPI = new System.Windows.Forms.NumericUpDown();
+            this.SlowDPI = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,30 +59,29 @@
             this.Period = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.LoadFromFile = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.TCDescription = new System.Windows.Forms.TextBox();
+            this.TCName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.TCName = new System.Windows.Forms.TextBox();
-            this.TCDescription = new System.Windows.Forms.TextBox();
+            this.EditTyping = new System.Windows.Forms.Button();
             this.ButtonTextBox = new System.Windows.Forms.TextBox();
             this.EditButtons = new System.Windows.Forms.Button();
             this.StopBindingText = new System.Windows.Forms.GroupBox();
+            this.Confirm = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.LeftStickRegions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RightStickRegions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RightTriggerRegions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftTriggerRegions)).BeginInit();
             this.ControlMouse.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TriggerThreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NormalDPI)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FastDPI)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SlowDPI)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -93,15 +92,15 @@
             this.StopBindingText.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // BindingPanel
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(75, 13);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(581, 346);
-            this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            this.BindingPanel.AutoScroll = true;
+            this.BindingPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.BindingPanel.Location = new System.Drawing.Point(75, 13);
+            this.BindingPanel.Name = "BindingPanel";
+            this.BindingPanel.Size = new System.Drawing.Size(581, 346);
+            this.BindingPanel.TabIndex = 0;
+            this.BindingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // button1
             // 
@@ -124,6 +123,7 @@
             this.LeftStickRegions.Name = "LeftStickRegions";
             this.LeftStickRegions.Size = new System.Drawing.Size(39, 20);
             this.LeftStickRegions.TabIndex = 2;
+            this.LeftStickRegions.ValueChanged += new System.EventHandler(this.LeftStickRegions_ValueChanged);
             // 
             // RightStickRegions
             // 
@@ -136,6 +136,7 @@
             this.RightStickRegions.Name = "RightStickRegions";
             this.RightStickRegions.Size = new System.Drawing.Size(39, 20);
             this.RightStickRegions.TabIndex = 3;
+            this.RightStickRegions.ValueChanged += new System.EventHandler(this.RightStickRegions_ValueChanged);
             // 
             // label1
             // 
@@ -167,6 +168,7 @@
             this.RightTriggerRegions.Name = "RightTriggerRegions";
             this.RightTriggerRegions.Size = new System.Drawing.Size(39, 20);
             this.RightTriggerRegions.TabIndex = 10;
+            this.RightTriggerRegions.ValueChanged += new System.EventHandler(this.RightTriggerRegions_ValueChanged);
             // 
             // LeftTriggerRegions
             // 
@@ -179,6 +181,7 @@
             this.LeftTriggerRegions.Name = "LeftTriggerRegions";
             this.LeftTriggerRegions.Size = new System.Drawing.Size(39, 20);
             this.LeftTriggerRegions.TabIndex = 9;
+            this.LeftTriggerRegions.ValueChanged += new System.EventHandler(this.LeftTriggerRegions_ValueChanged);
             // 
             // LeftRadio
             // 
@@ -273,52 +276,52 @@
             this.Description.Size = new System.Drawing.Size(163, 20);
             this.Description.TabIndex = 20;
             // 
-            // numericUpDown6
+            // NormalDPI
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(79, 19);
-            this.numericUpDown6.Maximum = new decimal(new int[] {
+            this.NormalDPI.Location = new System.Drawing.Point(79, 19);
+            this.NormalDPI.Maximum = new decimal(new int[] {
             25,
             0,
             0,
             0});
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(50, 20);
-            this.numericUpDown6.TabIndex = 21;
-            this.numericUpDown6.Value = new decimal(new int[] {
+            this.NormalDPI.Name = "NormalDPI";
+            this.NormalDPI.Size = new System.Drawing.Size(50, 20);
+            this.NormalDPI.TabIndex = 21;
+            this.NormalDPI.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // numericUpDown7
+            // FastDPI
             // 
-            this.numericUpDown7.Location = new System.Drawing.Point(79, 45);
-            this.numericUpDown7.Maximum = new decimal(new int[] {
+            this.FastDPI.Location = new System.Drawing.Point(79, 45);
+            this.FastDPI.Maximum = new decimal(new int[] {
             25,
             0,
             0,
             0});
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(50, 20);
-            this.numericUpDown7.TabIndex = 22;
-            this.numericUpDown7.Value = new decimal(new int[] {
+            this.FastDPI.Name = "FastDPI";
+            this.FastDPI.Size = new System.Drawing.Size(50, 20);
+            this.FastDPI.TabIndex = 22;
+            this.FastDPI.Value = new decimal(new int[] {
             15,
             0,
             0,
             0});
             // 
-            // numericUpDown8
+            // SlowDPI
             // 
-            this.numericUpDown8.Location = new System.Drawing.Point(79, 71);
-            this.numericUpDown8.Maximum = new decimal(new int[] {
+            this.SlowDPI.Location = new System.Drawing.Point(79, 71);
+            this.SlowDPI.Maximum = new decimal(new int[] {
             25,
             0,
             0,
             0});
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(50, 20);
-            this.numericUpDown8.TabIndex = 23;
-            this.numericUpDown8.Value = new decimal(new int[] {
+            this.SlowDPI.Name = "SlowDPI";
+            this.SlowDPI.Size = new System.Drawing.Size(50, 20);
+            this.SlowDPI.TabIndex = 23;
+            this.SlowDPI.Value = new decimal(new int[] {
             5,
             0,
             0,
@@ -329,9 +332,9 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.numericUpDown6);
-            this.groupBox2.Controls.Add(this.numericUpDown8);
-            this.groupBox2.Controls.Add(this.numericUpDown7);
+            this.groupBox2.Controls.Add(this.NormalDPI);
+            this.groupBox2.Controls.Add(this.SlowDPI);
+            this.groupBox2.Controls.Add(this.FastDPI);
             this.groupBox2.Location = new System.Drawing.Point(12, 494);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(142, 100);
@@ -477,24 +480,25 @@
             this.label9.TabIndex = 29;
             this.label9.Text = "Name:";
             // 
-            // button2
+            // LoadFromFile
             // 
-            this.button2.Location = new System.Drawing.Point(554, 399);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 23);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "Load From File";
-            this.button2.UseVisualStyleBackColor = true;
+            this.LoadFromFile.Location = new System.Drawing.Point(554, 399);
+            this.LoadFromFile.Name = "LoadFromFile";
+            this.LoadFromFile.Size = new System.Drawing.Size(129, 23);
+            this.LoadFromFile.TabIndex = 30;
+            this.LoadFromFile.Text = "Load From File";
+            this.LoadFromFile.UseVisualStyleBackColor = true;
+            this.LoadFromFile.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // SaveButton
             // 
-            this.button3.Location = new System.Drawing.Point(608, 437);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 31;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.SaveButton.Location = new System.Drawing.Point(608, 437);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 31;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.button3_Click);
             // 
             // label10
             // 
@@ -512,15 +516,28 @@
             this.groupBox6.Controls.Add(this.label13);
             this.groupBox6.Controls.Add(this.label12);
             this.groupBox6.Controls.Add(this.label11);
-            this.groupBox6.Controls.Add(this.button6);
-            this.groupBox6.Controls.Add(this.button5);
-            this.groupBox6.Controls.Add(this.button4);
-            this.groupBox6.Location = new System.Drawing.Point(366, 489);
+            this.groupBox6.Controls.Add(this.EditTyping);
+            this.groupBox6.Location = new System.Drawing.Point(366, 477);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(372, 121);
+            this.groupBox6.Size = new System.Drawing.Size(327, 82);
             this.groupBox6.TabIndex = 33;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Typing Configuraiton";
+            // 
+            // TCDescription
+            // 
+            this.TCDescription.Location = new System.Drawing.Point(68, 51);
+            this.TCDescription.Name = "TCDescription";
+            this.TCDescription.Size = new System.Drawing.Size(163, 20);
+            this.TCDescription.TabIndex = 40;
+            // 
+            // TCName
+            // 
+            this.TCName.AcceptsReturn = true;
+            this.TCName.Location = new System.Drawing.Point(68, 25);
+            this.TCName.Name = "TCName";
+            this.TCName.Size = new System.Drawing.Size(100, 20);
+            this.TCName.TabIndex = 39;
             // 
             // label13
             // 
@@ -548,48 +565,15 @@
             this.label11.TabIndex = 34;
             this.label11.Text = "Name:";
             // 
-            // button6
+            // EditTyping
             // 
-            this.button6.Location = new System.Drawing.Point(237, 82);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(129, 23);
-            this.button6.TabIndex = 33;
-            this.button6.Text = "Edit";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(237, 51);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(129, 23);
-            this.button5.TabIndex = 32;
-            this.button5.Text = "Create New";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(237, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(129, 23);
-            this.button4.TabIndex = 31;
-            this.button4.Text = "Load From File";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // TCName
-            // 
-            this.TCName.AcceptsReturn = true;
-            this.TCName.Location = new System.Drawing.Point(68, 25);
-            this.TCName.Name = "TCName";
-            this.TCName.Size = new System.Drawing.Size(100, 20);
-            this.TCName.TabIndex = 39;
-            // 
-            // TCDescription
-            // 
-            this.TCDescription.Location = new System.Drawing.Point(68, 51);
-            this.TCDescription.Name = "TCDescription";
-            this.TCDescription.Size = new System.Drawing.Size(163, 20);
-            this.TCDescription.TabIndex = 40;
+            this.EditTyping.Location = new System.Drawing.Point(188, 25);
+            this.EditTyping.Name = "EditTyping";
+            this.EditTyping.Size = new System.Drawing.Size(129, 23);
+            this.EditTyping.TabIndex = 32;
+            this.EditTyping.Text = "Edit";
+            this.EditTyping.UseVisualStyleBackColor = true;
+            this.EditTyping.Click += new System.EventHandler(this.button5_Click);
             // 
             // ButtonTextBox
             // 
@@ -623,16 +607,27 @@
             this.StopBindingText.TabStop = false;
             this.StopBindingText.Text = "StopBinding";
             // 
+            // Confirm
+            // 
+            this.Confirm.Location = new System.Drawing.Point(473, 571);
+            this.Confirm.Name = "Confirm";
+            this.Confirm.Size = new System.Drawing.Size(75, 23);
+            this.Confirm.TabIndex = 37;
+            this.Confirm.Text = "Confirm";
+            this.Confirm.UseVisualStyleBackColor = true;
+            this.Confirm.Click += new System.EventHandler(this.Confirm_Click);
+            // 
             // ConfigWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 611);
+            this.Controls.Add(this.Confirm);
             this.Controls.Add(this.StopBindingText);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.SaveButton);
+            this.Controls.Add(this.LoadFromFile);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -642,7 +637,7 @@
             this.Controls.Add(this.ConfigName);
             this.Controls.Add(this.ControlMouse);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.BindingPanel);
             this.Name = "ConfigWindow";
             this.Text = "ConfigWindow";
             ((System.ComponentModel.ISupportInitialize)(this.LeftStickRegions)).EndInit();
@@ -652,9 +647,9 @@
             this.ControlMouse.ResumeLayout(false);
             this.ControlMouse.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TriggerThreshold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NormalDPI)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FastDPI)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SlowDPI)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -676,7 +671,7 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel BindingPanel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown LeftStickRegions;
         private System.Windows.Forms.NumericUpDown RightStickRegions;
@@ -692,9 +687,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox ConfigName;
         private System.Windows.Forms.TextBox Description;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
+        private System.Windows.Forms.NumericUpDown NormalDPI;
+        private System.Windows.Forms.NumericUpDown FastDPI;
+        private System.Windows.Forms.NumericUpDown SlowDPI;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -707,20 +702,19 @@
         private System.Windows.Forms.NumericUpDown Period;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button LoadFromFile;
+        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button EditTyping;
         private System.Windows.Forms.TextBox TCDescription;
         private System.Windows.Forms.TextBox TCName;
         private System.Windows.Forms.TextBox ButtonTextBox;
         private System.Windows.Forms.Button EditButtons;
         private System.Windows.Forms.GroupBox StopBindingText;
+        private System.Windows.Forms.Button Confirm;
     }
 }
