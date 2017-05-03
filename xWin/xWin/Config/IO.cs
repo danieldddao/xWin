@@ -45,5 +45,11 @@ namespace xWin.Config
                 buffer.WriteTo(output);
             }
         }
+
+        public bool CheckExists(string name, string folder = "")
+        {
+            if (folder.Length == 0) { folder = SearchPaths[0]; }
+            return File.Exists(folder + @"\" + name + ext);
+        }
     }
 }

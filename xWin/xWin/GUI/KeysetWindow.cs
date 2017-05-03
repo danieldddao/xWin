@@ -16,6 +16,7 @@ namespace xWin.GUI
         private KeysetWindow()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
         }
         public KeysetWindow(KeyboardSet ks, List<string> l, int t1, int t2) : this()
         {
@@ -25,7 +26,8 @@ namespace xWin.GUI
             }
             populate(ks);
             io = new IO<KeyboardSet>(l, IO<KeyboardSet>.KEYBOARDSET_EXT);
-            keyboardset = new KeyboardSet(); 
+            keyboardset = new KeyboardSet();
+            NameBox.KeyPress += new KeyPressEventHandler(NameBox_KeyPress);
         }
 
         private void populate(KeyboardSet ks)
@@ -92,13 +94,28 @@ namespace xWin.GUI
             return ks;
         }
 
+        private void NameBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsControl(e.KeyChar)) return;
+            if (System.IO.Path.GetInvalidFileNameChars().Contains(e.KeyChar))
+                e.Handled = true;
+        }
+
         private void Save_Click(object sender, EventArgs e)
         {
-            if(NameBox.Text.Length == 0)
+            var ks = conglomerate();
+            if (ks.Name.Length == 0)
             {
+                MessageBox.Show("No Name Specified");
                 return;
             }
-            var ks = conglomerate();
+            if (io.CheckExists(ks.Name))
+            {
+                if (MessageBox.Show("Overwrite Existing Version?", "File Already Exists", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
             io.WriteToFile(ks, ks.Name);
         }
 

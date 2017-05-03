@@ -12,6 +12,7 @@ using xWin.Config;
 using static BasicControl.Types;
 using xWin.Config;
 using xWin.Library;
+using System.IO;
 
 namespace xWin.GUI
 {
@@ -22,7 +23,8 @@ namespace xWin.GUI
         {
             InitializeComponent();
             //LeftTriggerRegions += new PropertyValueChangedEventHandler(update_bindings);
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            ConfigName.KeyPress += new KeyPressEventHandler(ConfigName_KeyPress);
         }
         public ConfigWindow(Configuration c, List<string> l) : this()
         {
@@ -77,11 +79,16 @@ namespace xWin.GUI
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void ConfigName_TextChanged(object sender, EventArgs e)
         {
 
         }
-
+        private void ConfigName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsControl(e.KeyChar)) return;
+            if (System.IO.Path.GetInvalidFileNameChars().Contains(e.KeyChar))
+                e.Handled = true;
+        }
         private void stick_regions(RepeatedField <uint> rf, int i)
         {
             //rf = new RepeatedField<uint>();
@@ -188,6 +195,19 @@ namespace xWin.GUI
         private void button3_Click(object sender, EventArgs e)
         {
             var c = conglomerate();
+            if (c.Name.Length == 0)
+            {
+                MessageBox.Show("No Name Specified");
+                return;
+            }
+            if(io.CheckExists(c.Name))
+            {
+                if(MessageBox.Show("Overwrite Existing Version?", "File Already Exists", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             io.WriteToFile(c, c.Name);
         }
 
