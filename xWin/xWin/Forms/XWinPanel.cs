@@ -85,6 +85,8 @@ namespace xWin.Forms
         private void XWinPanel_Load(object sender, EventArgs e)
         {
             UpdateControllers();
+
+            autoComplete = new AutoComplete();
             //if (autoComplete.enableWordPrediction || autoComplete.enableQuickType) { autoComplete.KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
             if (autoComplete.enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
             if (autoComplete.enableQuickType) { quickTypeCheckBox.Checked = true; }
@@ -547,7 +549,7 @@ namespace xWin.Forms
         /*
          * Code for AutoComplete feature
          */
-        AutoComplete autoComplete = new AutoComplete();
+        AutoComplete autoComplete;
         bool subscribed = false; // indicate whether reading keyboard inputs is subscribed
 
         private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -567,10 +569,11 @@ namespace xWin.Forms
                 if (!quickTypeCheckBox.Checked)
                 {
                     autoComplete.KeyboardInputsUnsubscribe();
+                    autoComplete = new AutoComplete();
                     subscribed = false;
                 }
             }
-            Log.GetLogger().Debug("Word Prediction option changed:" + autoComplete.enableWordPrediction);
+            Log.GetLogger().Debug("Word Prediction option changed to :" + autoComplete.enableWordPrediction);
         }
 
         private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -590,10 +593,11 @@ namespace xWin.Forms
                 if (!wordPredictionCheckBox.Checked)
                 {
                     autoComplete.KeyboardInputsUnsubscribe();
+                    autoComplete = new AutoComplete();
                     subscribed = false;
                 }
             }
-            Log.GetLogger().Debug("Quicktype option changed:" + autoComplete.enableQuickType);
+            Log.GetLogger().Debug("Quicktype option changed to :" + autoComplete.enableQuickType);
         }
 
         private void buttonViewDictionary_Click(object sender, EventArgs e)

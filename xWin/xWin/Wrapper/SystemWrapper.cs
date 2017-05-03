@@ -2,6 +2,10 @@
 using System.IO;
 using System.Diagnostics;
 using WindowsInput;
+using xWin.Library;
+using System;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace xWin.Wrapper
 {
@@ -47,22 +51,52 @@ namespace xWin.Wrapper
 
         public void SimulateKeyDown(WindowsInput.Native.VirtualKeyCode key)
         {
-            inputSimulator.Keyboard.KeyDown(key);
+            try
+            {
+                inputSimulator.Keyboard.KeyDown(key);
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error("SimulateKeyDown: " + e);
+            }
         }
 
         public void SimulateKeyUp(WindowsInput.Native.VirtualKeyCode key)
         {
-            inputSimulator.Keyboard.KeyUp(key);
+            try
+            {
+                inputSimulator.Keyboard.KeyUp(key);
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error("SimulateKeyUp: " + e);
+            }
         }
 
+        [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptions]
+        [System.Security.SecurityCritical]
         public void SimulateKeyPress(WindowsInput.Native.VirtualKeyCode key)
         {
-            inputSimulator.Keyboard.KeyPress(key);
+            try
+            {
+                inputSimulator.Keyboard.KeyPress(key);
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error("SimulateKeyPress: " + e);
+            }
         }
 
         public void SimulateText(string text)
         {
-            inputSimulator.Keyboard.TextEntry(text);
+            try
+            {
+                inputSimulator.Keyboard.TextEntry(text);
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error("SimulateText: " + e);
+            }
         }
 
         public short ScanKey(char c)
@@ -77,7 +111,14 @@ namespace xWin.Wrapper
 
         public void StartProcess(string path)
         {
-            Process.Start(path);
+            try
+            {
+                Process.Start(path);
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error("StartProcess: " + e);
+            }
         }
 
         public void ThrowException() { } // for testing exceptions

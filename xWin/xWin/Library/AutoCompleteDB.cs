@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using xWin.Wrapper;
 
@@ -11,7 +12,7 @@ namespace xWin.Library
 {
     public class AutoCompleteDB
     {
-        ISystemWrapper systemWrapper = new SystemWrapper(); // for testing Exceptions
+        ISystemWrapper systemWrapper; // for testing Exceptions
 
         private string[] commonlyUsedWords = {
                                                "the", "be", "to", "of", "and", "a", "in", "that", "have",
@@ -30,16 +31,16 @@ namespace xWin.Library
 
         public AutoCompleteDB() 
         {
-            CreateDB();
             systemWrapper = new SystemWrapper();
+            CreateDB();
         }
 
         public AutoCompleteDB(string db, string[] words, ISystemWrapper systemWrapper)
         {
             dbFile = db;
             commonlyUsedWords = words;
-            CreateDB();
             this.systemWrapper = systemWrapper;
+            CreateDB();
         }
 
         public void CreateDB() 
