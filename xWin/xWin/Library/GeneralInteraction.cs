@@ -25,18 +25,19 @@ namespace xWin.Library
     public struct ControllerCalibration
     {
         public int lx, ly, rx, ry;
+        public uint deadzone;
     }
 
     public class WI//Windows Interaction
     {
-        public static void MoveCursor(short x, short y, int dpi = 10)
+        public static void MoveCursor(short x, short y, uint deadzone, int dpi = 10)
         {
             Console.WriteLine(x.ToString() + "," + y.ToString()+","+dpi.ToString());
             if (x != 0 || y != 0)
             {
                 var t = Math.Atan2(x, y);
-
-                Cursor.Position = new Point(Cursor.Position.X + (int)(Math.Sin(t) * dpi), Cursor.Position.Y + (int)(Math.Cos(t) * dpi));
+                if(Math.Sqrt(x*x+y*y)> deadzone)
+                    Cursor.Position = new Point(Cursor.Position.X + (int)(Math.Sin(t) * dpi), Cursor.Position.Y + (int)(Math.Cos(t) * dpi));
             }
         }
         public static short shortbound(int i)
@@ -176,7 +177,7 @@ namespace xWin.Library
             bool LButton = false, RButton = false, MButton = false;
 
 
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
             while (true)
             {
                 st.Start();
@@ -184,8 +185,19 @@ namespace xWin.Library
                 var bs = datas.Gamepad.Buttons;
                 datas.Gamepad.LeftThumbX = shortbound(datas.Gamepad.LeftThumbX - cc.lx);
                 datas.Gamepad.LeftThumbY = shortbound(datas.Gamepad.LeftThumbY - cc.ly);
+                if(Math.Sqrt(datas.Gamepad.LeftThumbX* datas.Gamepad.LeftThumbX + datas.Gamepad.LeftThumbY* datas.Gamepad.LeftThumbY)<cc.deadzone)
+                {
+                    datas.Gamepad.LeftThumbX = 0;
+                    datas.Gamepad.LeftThumbY = 0;
+                }
                 datas.Gamepad.RightThumbX = shortbound(datas.Gamepad.RightThumbX - cc.rx);
                 datas.Gamepad.RightThumbY = shortbound(datas.Gamepad.RightThumbY - cc.ry);
+                if (Math.Sqrt(datas.Gamepad.RightThumbX * datas.Gamepad.RightThumbX + datas.Gamepad.RightThumbY * datas.Gamepad.RightThumbY) < cc.deadzone)
+                {
+                    datas.Gamepad.RightThumbX = 0;
+                    datas.Gamepad.RightThumbY = 0;
+                }
+
                 //var wrapper = new SystemWrapper();
                 if (just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
                 {
@@ -337,7 +349,7 @@ namespace xWin.Library
                                 kms.mouse_movement.x += 32767;
                             if (M_Left)
                                 kms.mouse_movement.x -= 32767;
-                            MoveCursor(shortbound(kms.mouse_movement.x), shortbound(kms.mouse_movement.y), (int)dpi);
+                            MoveCursor(shortbound(kms.mouse_movement.x), shortbound(kms.mouse_movement.y), cc.deadzone,(int)dpi);
                             if (!just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
                             {
                                 m = Mode.Stopped;
@@ -376,14 +388,14 @@ namespace xWin.Library
                                     case KeyboardAction.OpenMenu:
                                     #warning OPEN MENU CODE NOT DEFINED
                                         break;
-                                    case KeyboardAction.Uidown:
+                                    case KeyboardAction.UiDown:
                                     #warning UI Movement Code Not Defined
                                         break;
-                                    case KeyboardAction.Uiup:
+                                    case KeyboardAction.UiUp:
                                         break;
-                                    case KeyboardAction.Uileft:
+                                    case KeyboardAction.UiLeft:
                                         break;
-                                    case KeyboardAction.Uiright:
+                                    case KeyboardAction.UiRight:
                                         break;
                                     case KeyboardAction.Backspace:
                                         Press(Keys.Back);

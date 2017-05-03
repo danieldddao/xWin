@@ -13,10 +13,10 @@ namespace xWin.Library
         private Int32 flags;
 
         private static int BUTTONMASK = 0x000FFFFF;
-        private static int RTMASK = 0x00300000;
-        private static int LTMASK = 0x00C00000;
-        private static int RSMASK = 0x0F000000;
-        private static int LSMASK = -268435456;
+        private static int LTMASK = 0x00300000;
+        private static int RTMASK = 0x00C00000;
+        private static int LSMASK = 0x0F000000;
+        private static int RSMASK = -268435456;
 
 
         /*Should be used when defining states*/
@@ -137,6 +137,50 @@ namespace xWin.Library
             String s = "";
             foreach(bool bit in b) { s = (bit ? "1" : "0") + s; }
             return s;
+        }
+
+        public string SpecialString()
+        {
+            string str = "";
+            GamepadButtonFlags g = (GamepadButtonFlags)((short)(flags & 0x0000FFFF));
+            foreach (GamepadButtonFlags k in Enum.GetValues(typeof(GamepadButtonFlags)))
+            {
+                if (k == GamepadButtonFlags.None)
+                    continue;
+                if (g.HasFlag(k))
+                    str += k.ToString() + ",";
+            }
+            byte b = (byte)((flags & 0x000F0000) >> 16);
+            if ((b & 1) != 0)
+                str += "LeftTriggerReleased,";
+            if ((b & 2) != 0)
+                str += "RightTriggerReleased,";
+            if ((b & 4) != 0)
+                str += "LeftStickCenter,";
+            if ((b & 8) != 0)
+                str += "RightStickCenter,";
+
+            b = (byte)((flags & LTMASK) >> 20);
+            if (b != 0)
+            {
+                str += "LeftTrigger" + b.ToString() + ",";
+            }
+            b = (byte)((flags & RTMASK) >> 22);
+            if(b != 0)
+            {
+                str += "RightTrigger" + b.ToString() + ",";
+            }
+            b = (byte)((flags & LSMASK) >> 24);
+            if (b != 0)
+            {
+                str += "LeftSitck" + b.ToString() + ",";
+            }
+            b = (byte)((flags & RSMASK) >> 28);
+            if (b != 0)
+            {
+                str += "RightSitck" + b.ToString() + ",";
+            }
+            return str.TrimEnd(',');
         }
     }
 }

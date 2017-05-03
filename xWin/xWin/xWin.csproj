@@ -157,17 +157,54 @@
     <Compile Include="GUI\ConfigWindow.Designer.cs">
       <DependentUpon>ConfigWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\CustomFileDialog.cs" />
     <Compile Include="GUI\KeyboardSelectWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\KeyboardSelectWindow.Designer.cs">
       <DependentUpon>KeyboardSelectWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\KeySetBinding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\KeySetBinding.Designer.cs">
+      <DependentUpon>KeySetBinding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\KeysetWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\KeysetWindow.Designer.cs">
+      <DependentUpon>KeysetWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\PickBinding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\PickBinding.Designer.cs">
+      <DependentUpon>PickBinding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\StringListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\StringListControl.Designer.cs">
+      <DependentUpon>StringListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TierSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\TierSelector.Designer.cs">
+      <DependentUpon>TierSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TypingConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\TypingConfigWindow.Designer.cs">
+      <DependentUpon>TypingConfigWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\Buttons.cs" />
 >>>>>>> started integrating the saving into a gui
@@ -317,8 +354,26 @@
     <EmbeddedResource Include="GUI\KeyboardSelectWindow.resx">
       <DependentUpon>KeyboardSelectWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\KeySetBinding.resx">
+      <DependentUpon>KeySetBinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\KeysetWindow.resx">
+      <DependentUpon>KeysetWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\PickBinding.resx">
+      <DependentUpon>PickBinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\StringListControl.resx">
+      <DependentUpon>StringListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\TierSelector.resx">
+      <DependentUpon>TierSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\TypingConfigWindow.resx">
+      <DependentUpon>TypingConfigWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
