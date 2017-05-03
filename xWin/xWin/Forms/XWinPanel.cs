@@ -751,7 +751,7 @@ namespace xWin.Forms
         {
             try
             {
-                switch (NotificationsDropdownList.SelectedItem)
+                switch (NotificationsDropdownList.SelectedItem.ToString())
                 {
                     case "Notify All":
                         notifications = "all";

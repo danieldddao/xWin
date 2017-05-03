@@ -4,8 +4,6 @@ using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.TabItems;
 using TestStack.White;
 using TechTalk.SpecFlow;
-using xWin.Forms;
-using xWin.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestStack.White.Factory;
 using System.IO;
