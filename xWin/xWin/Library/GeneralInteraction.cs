@@ -153,8 +153,12 @@ namespace xWin.Library
             mouse_event(0x1000, 0, 0, 120, 0);
         }
 
-        public static void InteractionLoop(GenericController c, Configuration config, ControllerCalibration cc, int tick, Mode m = Mode.Normal)
+        public static void InteractionLoop()
         {
+            Mode m = Mode.Normal;
+            var config = Program.config;
+            GenericController c = Program.Controller;
+            var cc = Program.cc;
             var i = new Interpreter(config.Basic);
             var ki = new TypingInterpreter(config.Typing);
             System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
@@ -166,7 +170,7 @@ namespace xWin.Library
                 config.Basic.SlowDpi = 5;
 
             uint dpi = config.Basic.Dpi;
-            TimeSpan TickSpeed = new TimeSpan(tick);
+            TimeSpan TickSpeed = new TimeSpan(Program.tick);
             var text = "";
             bool just_toggled = false;
 
@@ -181,6 +185,38 @@ namespace xWin.Library
             while (true)
             {
                 st.Start();
+                if(Program.update_controller)
+                {
+                    c = Program.Controller;
+                    Program.update_controller = false;
+                }
+                if(Program.update_config)
+                {
+                    config = Program.config;
+                    i = new Interpreter(config.Basic);
+                    ki = new TypingInterpreter(config.Typing);
+                    if (config.Basic.Dpi == 0)
+                        config.Basic.Dpi = 10;
+                    if (config.Basic.FastDpi == 0)
+                        config.Basic.FastDpi = 15;
+                    if (config.Basic.SlowDpi == 0)
+                        config.Basic.SlowDpi = 5;
+
+                    dpi = config.Basic.Dpi;
+                    toggle = new GamepadFlags(config.Togglestop);
+                    Program.update_config = false;
+                }
+                if(Program.update_cc)
+                {
+                    cc = Program.cc;
+                    Console.Beep(5000, 1000);
+                    Program.update_cc = false;
+                }
+                if(Program.update_tick)
+                {
+                    TickSpeed = new TimeSpan(Program.tick);
+                    Program.update_tick = false;
+                }
                 var datas = c.GetState();
                 var bs = datas.Gamepad.Buttons;
                 datas.Gamepad.LeftThumbX = shortbound(datas.Gamepad.LeftThumbX - cc.lx);

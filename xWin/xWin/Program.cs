@@ -18,57 +18,13 @@ using xWin.Forms.ButtonMaps;
 using System.Diagnostics;
 using static TypingControl.Types;
 using static xWin.Library.WI;
+using System.IO;
+using xWin.GUI;
+
 namespace xWin
 {
-    class Program
+    public class Program
     {
-        
-        /* Run this method in Main instead of RunFormApplication() for cucumber tests */
-        public static void RunFormApplicationForTesting()
-        {
-            Mock<IXController> mockController1 = new Mock<IXController>();
-            Mock<IXController> mockController2 = new Mock<IXController>();
-            Mock<IXController> mockController3 = new Mock<IXController>();
-            Mock<IXController> mockController4 = new Mock<IXController>();
-            mockController1.Setup(x => x.IsConnected()).Returns(true);
-            mockController2.Setup(x => x.IsConnected()).Returns(false);
-            mockController3.Setup(x => x.IsConnected()).Returns(false);
-            mockController4.Setup(x => x.IsConnected()).Returns(true);
-
-            // List of currently pressed buttons
-            List<GamepadButtonFlags> list1 = new List<GamepadButtonFlags>();
-            List<GamepadButtonFlags> list2 = new List<GamepadButtonFlags>();
-            List<GamepadButtonFlags> list3 = new List<GamepadButtonFlags>();
-            List<GamepadButtonFlags> list4 = new List<GamepadButtonFlags>();
-            mockController1.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list1);
-            mockController2.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list2);
-            mockController3.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list3);
-            mockController4.Setup(x => x.GetCurrentlyPressedButtons()).Returns(list4);
-
-            /* Controller 4 */
-            // XKeyboard for Left Thumb button
-            XKeyBoard keyboardLT4 = new XKeyBoard();
-            keyboardLT4.AppPath = ".../Test.exe";
-            keyboardLT4.Action = XAction.OpenApp;
-            foreach (GamepadButtonFlags button in Enum.GetValues(typeof(GamepadButtonFlags)))
-            {
-                if (button != GamepadButtonFlags.None)
-                {
-                    if (button == GamepadButtonFlags.LeftThumb)
-                    { mockController4.Setup(x => x.GetKeyBoardForButton(button)).Returns(keyboardLT4); }
-                    else
-                    { mockController4.Setup(x => x.GetKeyBoardForButton(button)).Returns(new XKeyBoard()); }
-                }
-            }
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            log4net.Config.XmlConfigurator.Configure();
-            XWinPanel panel = new XWinPanel(mockController1.Object, mockController2.Object, mockController3.Object, mockController4.Object);
-            ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
-            Log.GetLogger().Info("Starting the Application...");
-            Application.Run(panel);
-        }
         
         public static void RunFormApplication()
         {
@@ -80,7 +36,33 @@ namespace xWin
             Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
         }
-        
+
+        public static GenericController Controller;
+        public static bool update_controller;
+
+        public static Configuration config;
+        public static bool update_config;
+
+        public static ControllerCalibration cc;
+        public static bool update_cc;
+
+        public static int tick;
+        public static bool update_tick;
+
+        private static void initialize_datas()
+        {
+            update_controller = false;
+            update_config = false;
+            update_cc = false;
+            config = new Configuration();
+            cc = new ControllerCalibration();
+            cc.lx = 0;
+            cc.ly = 0;
+            cc.rx = 0;
+            cc.ry = 0;
+            cc.deadzone = 5000;
+        }
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -90,12 +72,17 @@ namespace xWin
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var l = new List<string>();
-            l.Add(@"C:\Users\Tim\Documents\Classes\software project\Project\xWin\config");
-            l.Add(@"..\..\..\config");
-            var cfw = new GUI.ConfigWindow(new Configuration(), l);
+            
+            l.Add(Path.GetFullPath(@"..\..\..\config"));
+
+            var io = new IO<Configuration>(l, IO<Configuration>.CONFIGURATION_EXT);
+            //io.WriteToFile(Defaults.DefaultConfiguration(), "default");
+            Program.config = io.ReadFromFile(l[0]+@"\Basic"+io.ext);
+
+            //var cfw = new ConfigWindow(new Configuration(), l);
             //Application.Run(cfw);
             //return;
-            cfw.ShowDialog();
+            //cfw.ShowDialog();
             GenericController controller = null;
             var a = new byte[16];
             a[0] = 1;
@@ -116,15 +103,12 @@ namespace xWin
             cc.ry = datas.Gamepad.RightThumbY;
             cc.deadzone = 7000;
 
-            //var io = new IO<Configuration>(l,".dat");
-            //io.WriteToFile(Defaults.DefaultConfiguration(), "default");
-            //var c = io.ReadFromFile("default");
-            //Defaults.DefaultConfiguration();
-
             
-
-
-            InteractionLoop(controller, cfw.c, cc, 20000);
+            Program.Controller = controller;
+            Program.cc = cc;
+            Program.tick = 2000;
+            var mw = new MainWindow(l);
+            Application.Run(mw);
         }
     }
 }
