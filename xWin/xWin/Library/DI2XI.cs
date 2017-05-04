@@ -91,9 +91,9 @@ namespace xWin.Library
             xi_state.Gamepad.RightTrigger = di_state.Buttons[7] ? (byte)254 : (byte)0;
 
             xi_state.Gamepad.LeftThumbX = (short)di_state.X;
-            xi_state.Gamepad.LeftThumbY = (short)di_state.Y;
+            xi_state.Gamepad.LeftThumbY = (short)-di_state.Y;
             xi_state.Gamepad.RightThumbX = (short)di_state.RotationX;
-            xi_state.Gamepad.RightThumbY = (short)di_state.RotationY;
+            xi_state.Gamepad.RightThumbY = (short)-di_state.RotationY;
 
             return xi_state;
         }

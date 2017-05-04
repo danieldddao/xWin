@@ -320,7 +320,7 @@ namespace xWin.Library
                     return 0;
                 }
                 kmstate.mouse_movement.x = x;
-                kmstate.mouse_movement.y = y;
+                kmstate.mouse_movement.y = -y;
 
                 //Console.WriteLine(kmstate.mouse_movement.x.ToString()+","+ kmstate.mouse_movement.y.ToString());
                 return 1;

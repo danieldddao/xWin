@@ -28,10 +28,50 @@ namespace xWin
         
         public static void RunFormApplication()
         {
+            initialize_datas();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            var l = new List<string>();
+
+            l.Add(Path.GetFullPath(@"..\..\..\config"));
+
+            var io = new IO<Configuration>(l, IO<Configuration>.CONFIGURATION_EXT);
+            //io.WriteToFile(Defaults.DefaultConfiguration(), "default");
+            Program.config = io.ReadFromFile(l[0] + @"\Basic" + io.ext);
+
+            //var cfw = new ConfigWindow(new Configuration(), l);
+            //Application.Run(cfw);
+            //return;
+            //cfw.ShowDialog();
+            GenericController controller = null;
+            var a = new byte[16];
+            a[0] = 1;
+            //Joystick joystick = null;
+
+            var XCon1 = new Controller(UserIndex.One);
+
+            if (XCon1.IsConnected)
+                controller = new XBXController(XCon1);
+            else
+                controller = new DIController(DI2XI.setup_stick());
+
+            var cc = new ControllerCalibration();
+            State datas = controller.GetState();
+            //cc.lx = datas.Gamepad.LeftThumbX;
+            //cc.ly = datas.Gamepad.LeftThumbY;
+            //cc.rx = datas.Gamepad.RightThumbX;
+            //cc.ry = datas.Gamepad.RightThumbY;
+            
+            cc.deadzone = 7000;
+
+
+            Program.Controller = controller;
+            Program.cc = cc;
+            Program.tick = 2000;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             log4net.Config.XmlConfigurator.Configure();
-            XWinPanel panel = new XWinPanel();
+            XWinPanel panel = new XWinPanel(l);
             ((log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository()).Root.AddAppender(panel);
             Log.GetLogger().Info("Starting the Application...");
             Application.Run(panel);
@@ -67,8 +107,8 @@ namespace xWin
         static void Main(string[] args)
         {
             //RunFormApplicationForTesting();
-            //RunFormApplication();
-
+            RunFormApplication();
+            /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var l = new List<string>();
@@ -107,8 +147,8 @@ namespace xWin
             Program.Controller = controller;
             Program.cc = cc;
             Program.tick = 2000;
-            var mw = new MainWindow(l);
-            Application.Run(mw);
+           // var mw = new MainWindow(l);
+           // Application.Run(mw);*/
         }
     }
 }
