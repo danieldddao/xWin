@@ -89,7 +89,7 @@
             this.QuickTypeBarTimer.Interval = 5000;
             this.QuickTypeBarTimer.Tick += new System.EventHandler(this.QuickTypeBarTimer_Tick);
             // 
-            // QuickTypeBar
+            // AutoComplete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -101,7 +101,7 @@
             this.Controls.Add(this.quickTypeButton2);
             this.Controls.Add(this.quickTypeButton1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "QuickTypeBar";
+            this.Name = "AutoComplete";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QuickTypeBar";
             this.ResumeLayout(false);
