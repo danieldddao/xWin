@@ -136,7 +136,7 @@ namespace xWin.Forms.AutoCompleteForms
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 3");
                 }
-                else
+                else if (shortcutM.shortcut.Count > 0)
                 {
                     qtTmpButton1Shortcut = shortcutM.shortcut;
                 }
@@ -166,7 +166,7 @@ namespace xWin.Forms.AutoCompleteForms
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 3");
                 }
-                else
+                else if (shortcutM.shortcut.Count > 0)
                 {
                     qtTmpButton2Shortcut = shortcutM.shortcut;
                 }
@@ -196,7 +196,7 @@ namespace xWin.Forms.AutoCompleteForms
                 {
                     MessageBox.Show("Shortcut already assigned to suggestion 2");
                 }
-                else
+                else if (shortcutM.shortcut.Count > 0)
                 {
                     qtTmpButton3Shortcut = shortcutM.shortcut;
                 }

@@ -62,9 +62,20 @@ namespace xWin.Library
                         int status = cmd.ExecuteNonQuery();
                         Log.GetLogger().Debug("Create Table's status= " + status);
 
-                        // Insert commonly used words into the newly created database
                         if (status == 0)
                         {
+                            // Create index
+                            query = "CREATE INDEX IF NOT EXISTS dictionary_index ON Dictionary(word, typed_count);";
+                            using (SQLiteCommand cmdi = new SQLiteCommand(query, dbConnection))
+                            {
+                                status = cmdi.ExecuteNonQuery();
+                                if (status == 0)
+                                { Log.GetLogger().Debug("Successfully created index into Dictionary table"); }
+                                else
+                                { Log.GetLogger().Debug("Failed to created index into Dictionary table"); }
+                            }
+
+                            // Insert commonly used words into the newly created database
                             foreach (string word in commonlyUsedWords)
                             {
                                 query = "INSERT INTO Dictionary(word) values('" + word.ToLower() + "');";
@@ -79,6 +90,7 @@ namespace xWin.Library
                             }
                         }
                     }
+
                 }
                 Log.GetLogger().Debug("Finished initialized AutoCompleteDB Object");
             }
@@ -142,7 +154,7 @@ namespace xWin.Library
                             if (reader.Read())
                             {
                                 Log.GetLogger().Debug("Word '" + word + "' exists in database, Updating typed_count...");
-                                query = "UPDATE Dictionary SET typed_count = typed_count + 1 WHERE word = '" + word.ToLower() + "';";
+                                query = "UPDATE Dictionary SET typed_count = typed_count + 1 WHERE word = " + word.ToLower() + ";";
                                 using (SQLiteCommand cmdu = new SQLiteCommand(query, dbConnection))
                                 {
                                     int status = cmdu.ExecuteNonQuery();
@@ -152,8 +164,8 @@ namespace xWin.Library
                                     { Log.GetLogger().Error("Failed to update word: '" + word + "' in Dictionary table"); }
                                 }
                             }
-                            // If word doesn't exist in database, insert it into Dictionary table
-                            else
+                            // If word is not empty and doesn't exist in database, insert it into Dictionary table
+                            else if (word != "")
                             {
                                 Log.GetLogger().Debug("Word '" + word + "' doesn't exist in database, Inserting it to database...");
                                 query = "INSERT INTO Dictionary (word) values ('" + word.ToLower() + "');";
