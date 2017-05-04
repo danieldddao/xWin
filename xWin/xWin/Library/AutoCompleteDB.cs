@@ -131,7 +131,7 @@ namespace xWin.Library
             }
             catch (Exception e ) 
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
                 return topThree;
             }
         }
@@ -154,7 +154,7 @@ namespace xWin.Library
                             if (reader.Read())
                             {
                                 Log.GetLogger().Debug("Word '" + word + "' exists in database, Updating typed_count...");
-                                query = "UPDATE Dictionary SET typed_count = typed_count + 1 WHERE word = " + word.ToLower() + ";";
+                                query = "UPDATE Dictionary SET typed_count = typed_count + 1 WHERE word = '" + word.ToLower() + "';";
                                 using (SQLiteCommand cmdu = new SQLiteCommand(query, dbConnection))
                                 {
                                     int status = cmdu.ExecuteNonQuery();
@@ -184,7 +184,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
             }
         }
 
@@ -241,7 +241,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
                 return status;
             }
         }
@@ -264,7 +264,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
             }
         }
     }
