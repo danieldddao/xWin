@@ -79,7 +79,10 @@ namespace xWin.Wrapper
         {
             try
             {
+                //Press((byte) key);
+                //Release((byte)key);
                 inputSimulator.Keyboard.KeyPress(key);
+                //Thread.Sleep(100);
             }
             catch (Exception e)
             {

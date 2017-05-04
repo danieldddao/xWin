@@ -108,7 +108,7 @@ namespace xWin.Library
                                 while (reader.Read())
                                 { topThree.Add((string)reader["word"]); }
                                 if (topThree.Count == 0)
-                                { Log.GetLogger().Info("Couldn't find " + subword + " in the database"); }
+                                { Log.GetLogger().Debug("Couldn't find " + subword + " in the database"); }
                             }
                         }
                     }
@@ -141,7 +141,7 @@ namespace xWin.Library
                             // If word exists in database, update its typed_count
                             if (reader.Read())
                             {
-                                Log.GetLogger().Info("Word '" + word + "' exists in database, Updating typed_count...");
+                                Log.GetLogger().Debug("Word '" + word + "' exists in database, Updating typed_count...");
                                 query = "UPDATE Dictionary SET typed_count = typed_count + 1 WHERE word = '" + word.ToLower() + "';";
                                 using (SQLiteCommand cmdu = new SQLiteCommand(query, dbConnection))
                                 {
@@ -155,7 +155,7 @@ namespace xWin.Library
                             // If word doesn't exist in database, insert it into Dictionary table
                             else
                             {
-                                Log.GetLogger().Info("Word '" + word + "' doesn't exist in database, Inserting it to database...");
+                                Log.GetLogger().Debug("Word '" + word + "' doesn't exist in database, Inserting it to database...");
                                 query = "INSERT INTO Dictionary (word) values ('" + word.ToLower() + "');";
                                 using (SQLiteCommand cmdi = new SQLiteCommand(query, dbConnection))
                                 {
@@ -194,7 +194,7 @@ namespace xWin.Library
                             while (reader.Read())
                             { allWords.Add((string)reader["word"]); }
                             if (allWords.Count == 0)
-                            { Log.GetLogger().Info("Database is empty"); }
+                            { Log.GetLogger().Debug("Database is empty"); }
                         }
                     }
                 }

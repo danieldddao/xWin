@@ -562,6 +562,7 @@ namespace xWin.Forms
                     autoComplete.KeyboardInputsSubscribe();
                     subscribed = true;
                 }
+                Log.GetLogger().Info("Enabled Word Prediction");
             }
             else
             {
@@ -572,6 +573,7 @@ namespace xWin.Forms
                     autoComplete = new AutoComplete();
                     subscribed = false;
                 }
+                Log.GetLogger().Info("Disabled Word Prediction");
             }
             Log.GetLogger().Debug("Word Prediction option changed to :" + autoComplete.enableWordPrediction);
         }
@@ -586,6 +588,7 @@ namespace xWin.Forms
                     autoComplete.KeyboardInputsSubscribe();
                     subscribed = true;
                 }
+                Log.GetLogger().Info("Enabled Quicktype suggestions");
             }
             else
             {
@@ -596,6 +599,7 @@ namespace xWin.Forms
                     autoComplete = new AutoComplete();
                     subscribed = false;
                 }
+                Log.GetLogger().Info("Disabled Quicktype suggestions");
             }
             Log.GetLogger().Debug("Quicktype option changed to :" + autoComplete.enableQuickType);
         }
