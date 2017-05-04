@@ -136,11 +136,12 @@ namespace xWin.Library
             }
         }
 
-        public void UpdateOrInsertWord(string word)
+        public void UpdateOrInsertWord(string inputWord)
         {
             try
             {
                 systemWrapper.ThrowException();
+                string word = inputWord.Replace("'", "''");
 
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
