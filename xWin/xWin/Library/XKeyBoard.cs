@@ -162,7 +162,7 @@ namespace xWin.Library
                     foreach (Keys k in shortcut)
                     { systemWrapper.SimulateKeyDown((WindowsInput.Native.VirtualKeyCode)k); }
 
-                    for (int i = shortcut.Length - 1; i >= 0; i++)
+                    for (int i = shortcut.Length - 1; i >= 0; i--)
                     { systemWrapper.SimulateKeyUp((WindowsInput.Native.VirtualKeyCode)shortcut[i]); }
                 }
 
