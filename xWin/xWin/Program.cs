@@ -90,8 +90,8 @@ namespace xWin
         [STAThread]
         static void Main(string[] args)
         {
-            //RunFormApplicationForTesting();
-            RunFormApplication();
+            RunFormApplicationForTesting();
+            //RunFormApplication();
 
             /*
             while (true)

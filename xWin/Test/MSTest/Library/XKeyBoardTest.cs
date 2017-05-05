@@ -23,7 +23,7 @@ namespace MSTest.Library
         [TestCleanup]
         public void Cleanup()
         {
-            mockSystemWrapper.VerifyAll();
+            //mockSystemWrapper.VerifyAll();
         }
 
         /*************************************/

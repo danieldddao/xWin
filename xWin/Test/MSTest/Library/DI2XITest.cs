@@ -54,9 +54,9 @@ namespace MSTest.Library
                         else
                             Assert.IsFalse(state.Gamepad.Buttons.HasFlag(DI2XI.ConvertFlags((DI2XI.Buttons)i)), "2");
                     }
-                    if(js.Buttons[6]) { Assert.AreEqual(state.Gamepad.LeftTrigger, (byte)255, "5"); }
+                    if(js.Buttons[6]) { Assert.AreEqual(state.Gamepad.LeftTrigger, (byte)254, "5"); }
                     else { Assert.AreEqual(state.Gamepad.LeftTrigger, (byte)0, "3"); }
-                    if(js.Buttons[7]) { Assert.AreEqual(state.Gamepad.RightTrigger, (byte)255, "6"); }
+                    if(js.Buttons[7]) { Assert.AreEqual(state.Gamepad.RightTrigger, (byte)254, "6"); }
                     else { Assert.AreEqual(state.Gamepad.RightTrigger, (byte)0, "4"); }
                     for (var i = 8; i < 12; ++i)
                     {
