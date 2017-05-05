@@ -36,6 +36,8 @@ namespace xWin.Library
                     if (a != null)
                     {
                         if (a.Keybinds != null)
+                        {
+                            bool ctrl = false, shift = false, menu = false;
                             foreach (var aa in a.Keybinds)
                             {
                                 Keys aaa = (Keys)aa;
@@ -49,9 +51,35 @@ namespace xWin.Library
                                     continue;
                                 //else if (b.Keybinds.Contains(aa))
                                 //    continue;
-                                    
-                                ks.Add(aaa);
+                                switch(aaa)
+                                {
+                                    case Keys.ControlKey:
+                                    case Keys.LControlKey:
+                                    case Keys.RControlKey:
+                                        ctrl = true;
+                                        break;
+                                    case Keys.Menu:
+                                    case Keys.LMenu:
+                                    case Keys.RMenu:
+                                        menu = true;
+                                        break;
+                                    case Keys.ShiftKey:
+                                    case Keys.LShiftKey:
+                                    case Keys.RShiftKey:
+                                        shift = true;
+                                        break;
+                                    default:
+                                        ks.Add(aaa);
+                                        break;
+                                }
+                                if(ctrl)
+                                    ks.Add(Keys.ControlKey);
+                                if (shift)
+                                    ks.Add(Keys.ShiftKey);
+                                if (menu)
+                                    ks.Add(Keys.Menu);
                             }
+                        }
                         if (a.SpecialActions != null)
                             foreach (var aa in a.SpecialActions)
                             {
@@ -274,13 +302,13 @@ namespace xWin.Library
                     region = 0;
                 else
                 {
-                    Console.WriteLine(ps.theta);
+                    
                     //set region offsets
                     ps.theta -= (short)(region_sizes[0] / 2);
                     ps.theta -= start;
 
                     short? t = ps.theta;
-                    Console.WriteLine(ps.theta);
+                    
                     region = 0;
                     while (t >= 0)
                     {
@@ -288,7 +316,7 @@ namespace xWin.Library
                         t = (short)(t - region_sizes[0]);
                     }
 
-                    Console.WriteLine(region);
+                    
                 }
                 return (byte)region;
             }
@@ -320,7 +348,7 @@ namespace xWin.Library
                     return 0;
                 }
                 kmstate.mouse_movement.x = x;
-                kmstate.mouse_movement.y = y;
+                kmstate.mouse_movement.y = -y;
 
                 //Console.WriteLine(kmstate.mouse_movement.x.ToString()+","+ kmstate.mouse_movement.y.ToString());
                 return 1;

@@ -11,10 +11,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xWin.Forms;
 using xWin.Wrapper;
 using static BasicControl.Types;
 using static TypingControl.Types;
 using static xWin.Library.StringSendingImports;
+
 namespace xWin.Library
 {
     public enum Mode
@@ -153,8 +155,12 @@ namespace xWin.Library
             mouse_event(0x1000, 0, 0, 120, 0);
         }
 
-        public static void InteractionLoop(GenericController c, Configuration config, ControllerCalibration cc, int tick, Mode m = Mode.Normal)
+        public static void InteractionLoop()
         {
+            Mode m = Mode.Normal;
+            var config = Program.config;
+            GenericController c = Program.Controller;
+            var cc = Program.cc;
             var i = new Interpreter(config.Basic);
             var ki = new TypingInterpreter(config.Typing);
             System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
@@ -166,7 +172,7 @@ namespace xWin.Library
                 config.Basic.SlowDpi = 5;
 
             uint dpi = config.Basic.Dpi;
-            TimeSpan TickSpeed = new TimeSpan(tick);
+            TimeSpan TickSpeed = new TimeSpan(Program.tick);
             var text = "";
             bool just_toggled = false;
 
@@ -175,12 +181,52 @@ namespace xWin.Library
             bool M_Up = false, M_Down = false, M_Right = false, M_Left = false;
 
             bool LButton = false, RButton = false, MButton = false;
-
+            Thread typingThread = new Thread(delegate ()
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new CharacterWheel(config));
+            });
+            typingThread.Start();
+            //CharacterWheel charWheel = new CharacterWheel(c, config);
 
             //Thread.Sleep(5000);
+            var sw = new SystemWrapper();
             while (true)
             {
                 st.Start();
+                if(Program.update_controller)
+                {
+                    c = Program.Controller;
+                    Program.update_controller = false;
+                }
+                if(Program.update_config)
+                {
+                    config = Program.config;
+                    i = new Interpreter(config.Basic);
+                    ki = new TypingInterpreter(config.Typing);
+                    if (config.Basic.Dpi == 0)
+                        config.Basic.Dpi = 10;
+                    if (config.Basic.FastDpi == 0)
+                        config.Basic.FastDpi = 15;
+                    if (config.Basic.SlowDpi == 0)
+                        config.Basic.SlowDpi = 5;
+
+                    dpi = config.Basic.Dpi;
+                    toggle = new GamepadFlags(config.Togglestop);
+                    Program.update_config = false;
+                }
+                if(Program.update_cc)
+                {
+                    cc = Program.cc;
+                    Console.Beep(5000, 1000);
+                    Program.update_cc = false;
+                }
+                if(Program.update_tick)
+                {
+                    TickSpeed = new TimeSpan(Program.tick);
+                    Program.update_tick = false;
+                }
                 var datas = c.GetState();
                 var bs = datas.Gamepad.Buttons;
                 datas.Gamepad.LeftThumbX = shortbound(datas.Gamepad.LeftThumbX - cc.lx);
@@ -209,6 +255,7 @@ namespace xWin.Library
                 {
                     case Mode.Normal:
                         {
+                            CharacterWheel.visible = false;                            
                             var kms = i.NextState(datas.Gamepad);
                             Console.Write("Released: ");
                             foreach (var l in kms.released)
@@ -360,6 +407,21 @@ namespace xWin.Library
                     case Mode.Typing:
                         {
                             var ts = ki.NextState(datas.Gamepad);
+                            CharacterWheel.t1 = ts.t1;
+                            CharacterWheel.t2 = ts.t2;
+                            CharacterWheel.visible = true;
+                            if (ts.update_ks)
+                            {
+                                CharacterWheel.keySet = ts.ks.Set;
+                            }
+                            if (typingThread.IsAlive)
+                            {
+                                Debug.WriteLine("Thread is alive");
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Thread is dead");
+                            }
                             Console.WriteLine(ts.ks.ToString());
                             Console.Write("Actions: ");
                             foreach (var act in ts.Actions)
@@ -369,7 +431,16 @@ namespace xWin.Library
                                 {
                                     case KeyboardAction.Confirm:
                                         text += ts.Text;
-                                        SendString(ts.Text);
+                                       //sw.SimulateText(ts.Text);
+                                       if (ts.Text.Length == 1)
+                                        {
+                                            char[] cArray = ts.Text.ToCharArray();
+                                            sw.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode) sw.ScanKey(cArray[0]));
+                                        }
+                                       else
+                                        {
+                                            sw.SimulateText(ts.Text);
+                                        }
                                         break;
                                     case KeyboardAction.LeaveTyping:
                                         m = Mode.Normal;

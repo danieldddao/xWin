@@ -402,11 +402,11 @@ namespace xWin.Forms.AutoCompleteForms
                                 //    databaseThread.Start();
                                 //}
                                 db.UpdateOrInsertWord(typedWord); // Update non-empty word into database
-                                Thread.Sleep(100);
+                                //Thread.Sleep(100);
                                 Log.GetLogger().Debug("[Key Down] [1] Updated new word");
                                 typedWord = ""; // reset the word
                             }
-                            Thread.Sleep(100);
+                            //Thread.Sleep(100);
                         }
                         // If key is Back key
                         // this indicates that currently typed word is deleted by 1 character

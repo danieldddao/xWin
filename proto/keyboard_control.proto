@@ -31,6 +31,7 @@ message TypingControl {
     Save = 22;
     Undo = 23;
     Redo = 24;
+    Tab = 25;
     
     //ctrlc = 14;
     //ctrlx = 15;
