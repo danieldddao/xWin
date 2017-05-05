@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -92,6 +93,25 @@ namespace xWin.Library
             catch(Exception e)
             {
                 return e.Message;
+            }
+        }
+
+        public static bool OpenApplication(string path)
+        {
+            try
+            {
+                if (!File.Exists(path))
+                {
+                    Log.GetLogger().Warn("Application doesn't exist " + path);
+                    return false;
+                }
+                Process.Start(path);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.GetLogger().Error("Error When Opening Application: " + path, e);
+                return false;
             }
         }
 
@@ -434,6 +454,13 @@ namespace xWin.Library
                                     }
                                 }
                                 Console.WriteLine();
+
+                                if (kms.exe.Length != 0)
+                                {
+                                    OpenApplication(kms.exe);
+                                    Console.WriteLine(kms.exe);
+                                }
+
                                 if (M_Down)
                                     kms.mouse_movement.y += 32767;
                                 if (M_Up)

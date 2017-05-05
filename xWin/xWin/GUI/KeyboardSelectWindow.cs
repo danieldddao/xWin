@@ -13,7 +13,7 @@ namespace xWin.GUI
 {
     public partial class KeyboardSelectWindow : Form
     {
-        public KeyboardSelectWindow()
+        private KeyboardSelectWindow()
         {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             InitializeComponent();
@@ -199,6 +199,7 @@ namespace xWin.GUI
                         break;
                 }
             }
+            exe = "";
             
         }
         public KeyboardSelectWindow(Actions A) : this()
@@ -249,9 +250,18 @@ namespace xWin.GUI
             {
                 ((CheckBox)(this.Controls.Find(a.ToString(), true)[0])).CheckState = CheckState.Checked;
             }
+            exe = A.Exe == null ? "" : A.Exe;
+            ApplicationTextbox.Text = GetEXE();
         }
         public Actions a;
         public string strrep;
+
+        private string GetEXE()
+        {
+            var ex = exe.Split('\\');
+            return ex[ex.Length - 1];
+        }
+
         private void checkBox11_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -304,8 +314,15 @@ namespace xWin.GUI
             a = new Actions
             {
                 Keybinds = { },
-                SpecialActions = { }
+                SpecialActions = { },
+                Exe = ""
             };
+            strrep = "";
+            if(exe.Length > 0)
+            {
+                a.Exe = exe;
+                strrep += GetEXE();
+            }
             foreach (var box in Keys.Controls.OfType<CheckBox>())
             {
                 addkey(box);
@@ -331,6 +348,24 @@ namespace xWin.GUI
             }
             strrep = strrep.TrimEnd(',');
             this.Close();
+        }
+
+        private string exe; 
+        private void PickApplication_Click(object sender, EventArgs e)
+        {
+            var FD = CustomFileDialog.Get(@"C:\", "Executable Files",".exe");
+            if (FD.ShowDialog() == DialogResult.OK)
+            {
+                exe = FD.FileName;
+                var ex = exe.Split('/');
+                ApplicationTextbox.Text = GetEXE();
+            }
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            exe = "";
+            ApplicationTextbox.Text = "";
         }
     }
 }

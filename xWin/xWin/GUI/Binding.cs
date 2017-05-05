@@ -93,6 +93,7 @@ namespace xWin.GUI
             var d = new KeyboardSelectWindow(a);
             d.ShowDialog();
             a = d.a;
+            a = a;
             KeybindTextBox.Text = d.strrep;
         }
 
@@ -118,6 +119,7 @@ namespace xWin.GUI
             {
                 str += a.ToString();
             }
+            str += a.Exe == null ? "" : a.Exe;
             return str;
         }
     }

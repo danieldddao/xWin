@@ -146,9 +146,14 @@
             this.ScrollRight = new System.Windows.Forms.CheckBox();
             this.ScrollLeft = new System.Windows.Forms.CheckBox();
             this.Confirm = new System.Windows.Forms.Button();
+            this.ApplicationTextbox = new System.Windows.Forms.TextBox();
+            this.PickApplication = new System.Windows.Forms.Button();
+            this.StartApplication = new System.Windows.Forms.GroupBox();
+            this.clear = new System.Windows.Forms.Button();
             this.Keys.SuspendLayout();
             this.Mouse.SuspendLayout();
             this.Other.SuspendLayout();
+            this.StartApplication.SuspendLayout();
             this.SuspendLayout();
             // 
             // Oemtilde
@@ -2095,7 +2100,7 @@
             this.Other.Controls.Add(this.ScrollUp);
             this.Other.Controls.Add(this.ScrollRight);
             this.Other.Controls.Add(this.ScrollLeft);
-            this.Other.Location = new System.Drawing.Point(236, 239);
+            this.Other.Location = new System.Drawing.Point(236, 233);
             this.Other.Name = "Other";
             this.Other.Size = new System.Drawing.Size(235, 207);
             this.Other.TabIndex = 657;
@@ -2206,7 +2211,7 @@
             // 
             // Confirm
             // 
-            this.Confirm.Location = new System.Drawing.Point(573, 345);
+            this.Confirm.Location = new System.Drawing.Point(573, 378);
             this.Confirm.Name = "Confirm";
             this.Confirm.Size = new System.Drawing.Size(75, 23);
             this.Confirm.TabIndex = 658;
@@ -2214,11 +2219,52 @@
             this.Confirm.UseVisualStyleBackColor = true;
             this.Confirm.Click += new System.EventHandler(this.Confirm_Click);
             // 
+            // ApplicationTextbox
+            // 
+            this.ApplicationTextbox.Location = new System.Drawing.Point(6, 32);
+            this.ApplicationTextbox.Name = "ApplicationTextbox";
+            this.ApplicationTextbox.ReadOnly = true;
+            this.ApplicationTextbox.Size = new System.Drawing.Size(100, 20);
+            this.ApplicationTextbox.TabIndex = 659;
+            // 
+            // PickApplication
+            // 
+            this.PickApplication.Location = new System.Drawing.Point(112, 32);
+            this.PickApplication.Name = "PickApplication";
+            this.PickApplication.Size = new System.Drawing.Size(75, 23);
+            this.PickApplication.TabIndex = 660;
+            this.PickApplication.Text = "Browse...";
+            this.PickApplication.UseVisualStyleBackColor = true;
+            this.PickApplication.Click += new System.EventHandler(this.PickApplication_Click);
+            // 
+            // StartApplication
+            // 
+            this.StartApplication.Controls.Add(this.clear);
+            this.StartApplication.Controls.Add(this.ApplicationTextbox);
+            this.StartApplication.Controls.Add(this.PickApplication);
+            this.StartApplication.Location = new System.Drawing.Point(502, 252);
+            this.StartApplication.Name = "StartApplication";
+            this.StartApplication.Size = new System.Drawing.Size(200, 87);
+            this.StartApplication.TabIndex = 661;
+            this.StartApplication.TabStop = false;
+            this.StartApplication.Text = "Start Application";
+            // 
+            // clear
+            // 
+            this.clear.Location = new System.Drawing.Point(71, 58);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(75, 23);
+            this.clear.TabIndex = 661;
+            this.clear.Text = "clear";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
             // KeyboardSelectWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 455);
+            this.Controls.Add(this.StartApplication);
             this.Controls.Add(this.Confirm);
             this.Controls.Add(this.Other);
             this.Controls.Add(this.Mouse);
@@ -2232,6 +2278,8 @@
             this.Mouse.PerformLayout();
             this.Other.ResumeLayout(false);
             this.Other.PerformLayout();
+            this.StartApplication.ResumeLayout(false);
+            this.StartApplication.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2355,5 +2403,9 @@
         private System.Windows.Forms.CheckBox ScrollRight;
         private System.Windows.Forms.CheckBox ScrollLeft;
         private System.Windows.Forms.Button Confirm;
+        private System.Windows.Forms.TextBox ApplicationTextbox;
+        private System.Windows.Forms.Button PickApplication;
+        private System.Windows.Forms.GroupBox StartApplication;
+        private System.Windows.Forms.Button clear;
     }
 }

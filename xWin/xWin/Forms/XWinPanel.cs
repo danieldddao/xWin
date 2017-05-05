@@ -627,6 +627,8 @@ namespace xWin.Forms
         {
             var cw = new ConfigWindow(Program.config, l);
             cw.ShowDialog();
+            ConfigName.Text = cw.c.Name == null ? "" : cw.c.Name;
+            ConfigDescription.Text = cw.c.Description == null ? "" : cw.c.Description;
             Program.config = cw.c;
             Program.update_config = true;
             CharacterWheel.keySet = Program.config.Typing.Base.Set;

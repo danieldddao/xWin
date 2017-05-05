@@ -27,6 +27,7 @@ namespace xWin.Library
 
             public struct coord { public int x; public int y; }; 
             public coord mouse_movement;
+            public string exe;
         }
         
         private readonly StickBehavior LeftStick, RightStick;
@@ -68,6 +69,7 @@ namespace xWin.Library
             kms.special = new Queue<SpecialAction>();
             kms.released = new Queue<Keys>();
             kms.r_special = new Queue<SpecialAction>();
+            kms.exe = "";
             /*
                 Get Stick and Trigger Regions, and put them into the GamepadFlags constructor
             */
@@ -82,8 +84,10 @@ namespace xWin.Library
 
             foreach (GamepadFlags flags in input_mapping.Keys)
             {
-                input_mapping[flags].Act(state & flags, state, kms);
+                input_mapping[flags].Act(state & flags, state, ref kms);
+                //kms.exe;
             }
+            Console.WriteLine(kms.exe);
             return kms;
         }
     }

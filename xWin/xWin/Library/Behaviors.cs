@@ -16,11 +16,13 @@ namespace xWin.Library
             {
                 private readonly List<Keys> ks, release_ks;
                 private readonly List<SpecialAction> sas, release_sas;
+                private string exe;
                 private bool justdone, delayed, firstpress;
                 private Stopwatch sw, delay;
                 private TimeSpan RepeatTime, DelayTime;
                 public AnAction(Actions a, Actions b, TimeSpan t, TimeSpan t2)
                 {
+                    exe = "";
                     ks = new List<Keys>();
                     sas = new List<SpecialAction>();
                     release_ks = new List<Keys>();
@@ -35,6 +37,8 @@ namespace xWin.Library
                         b = new Actions { Keybinds = { }, SpecialActions = { } };
                     if (a != null)
                     {
+
+                        exe = a.Exe == null ? "" : a.Exe;
                         if (a.Keybinds != null)
                         {
                             bool ctrl = false, shift = false, menu = false;
@@ -124,12 +128,14 @@ namespace xWin.Library
                     delay.Reset();
                     sw.Reset();
                 }
-                public void feed(KeyboardMouseState kmstate)
+                public void feed (ref KeyboardMouseState kmstate)
                 {
                     if (!firstpress)
                     {
                         foreach (var k in ks) { kmstate.pressed.Enqueue(k); }
                         firstpress = true;
+                        if(exe.Length != 0)
+                            kmstate.exe = exe;
                         delay.Start();
                     }
                     else if(!delayed)
@@ -197,13 +203,13 @@ namespace xWin.Library
                 }
                 return false;
             }
-            public void Act(bool state, GamepadFlags g, KeyboardMouseState kmstate)
+            public void Act(bool state, GamepadFlags g,ref KeyboardMouseState kmstate)
             {
 
                 if (IsBlacklisted(g))
                 {
-                    if (toggle_press && press_state) { press.feed(kmstate); }
-                    if (toggle_release && release_state) { release.feed(kmstate); }
+                    if (toggle_press && press_state) { press.feed(ref kmstate); }
+                    if (toggle_release && release_state) { release.feed(ref kmstate); }
                     return;
                 }
 
@@ -213,7 +219,7 @@ namespace xWin.Library
                     if (state) /*hold*/
                     {
                         press.Pass();
-                        hold.feed(kmstate);
+                        hold.feed(ref kmstate);
                         release.Pass();
                         stay.Pass();
                     }
@@ -223,7 +229,7 @@ namespace xWin.Library
                         {
                             press.Pass();
                             hold.Pass();
-                            release.feed(kmstate);
+                            release.feed(ref kmstate);
                             stay.Pass();
                         }
                         else
@@ -238,7 +244,7 @@ namespace xWin.Library
                     {
                         if (!toggle_press)
                         {
-                            press.feed(kmstate);
+                            press.feed(ref kmstate);
                             hold.Pass();
                             release.Pass();
                             stay.Pass();
@@ -250,11 +256,11 @@ namespace xWin.Library
                         press.Pass();
                         hold.Pass();
                         release.Pass();
-                        stay.feed(kmstate);
+                        stay.feed(ref kmstate);
                     }
                 }
-                if (toggle_press && press_state) { press.feed(kmstate); }
-                if (toggle_release && release_state) { release.feed(kmstate); }
+                if (toggle_press && press_state) { press.feed(ref kmstate); }
+                if (toggle_release && release_state) { release.feed(ref kmstate); }
 
                 previous_state = state;
             }

@@ -152,6 +152,7 @@ namespace xWin.GUI
             trigger_regions(bc.RightTrigger.Regions, (int)RightTriggerRegions.Value, (uint)TriggerThreshold.Value);
             foreach (var binding in BindingPanel.Controls.OfType<Binding>())
             {
+                //binding.a;
                 if (binding.ButtonBox.Text.Length == 0)
                     continue;
                 if (binding.KeyBox.Text.Length == 0)
@@ -250,32 +251,32 @@ namespace xWin.GUI
             {
                 Actions A = new Actions();
                 if (bb.Value.OnHold == null)
-                    bb.Value.OnHold = new Actions { Keybinds = { }, SpecialActions = { } };
+                    bb.Value.OnHold = new Actions { Keybinds = { }, SpecialActions = { }, Exe = ""};
                 if (bb.Value.OnPress == null)
-                    bb.Value.OnPress = new Actions { Keybinds = { }, SpecialActions = { } };
+                    bb.Value.OnPress = new Actions { Keybinds = { }, SpecialActions = { }, Exe = "" };
                 if (bb.Value.OnRelease == null)
-                    bb.Value.OnRelease = new Actions { Keybinds = { }, SpecialActions = { } };
+                    bb.Value.OnRelease = new Actions { Keybinds = { }, SpecialActions = { }, Exe = "" };
                 if (bb.Value.OnStay == null)
-                    bb.Value.OnStay = new Actions { Keybinds = { }, SpecialActions = { } };
+                    bb.Value.OnStay = new Actions { Keybinds = { }, SpecialActions = { }, Exe = "" };
                 string str = "On Hold";
-                if (bb.Value.OnHold.Keybinds.Count + bb.Value.OnHold.SpecialActions.Count > 0)
+                if (bb.Value.OnHold.Keybinds.Count + bb.Value.OnHold.SpecialActions.Count + bb.Value.OnHold.Exe.Length > 0 )
                 {
                     A = bb.Value.OnHold;
                 }
-                else if (bb.Value.OnPress.Keybinds.Count + bb.Value.OnPress.SpecialActions.Count > 0)
+                else if (bb.Value.OnPress.Keybinds.Count + bb.Value.OnPress.SpecialActions.Count + bb.Value.OnPress.Exe.Length > 0)
                 {
                     A = bb.Value.OnPress;
                     str = "On Press";
                 }
-                else if (bb.Value.OnRelease.Keybinds.Count + bb.Value.OnRelease.SpecialActions.Count > 0)
+                else if (bb.Value.OnStay.Keybinds.Count + bb.Value.OnStay.SpecialActions.Count + bb.Value.OnStay.Exe.Length > 0)
+                {
+                    A = bb.Value.OnStay;
+                    str = "On Stay Released";
+                }
+                else if (bb.Value.OnRelease.Keybinds.Count + bb.Value.OnRelease.SpecialActions.Count + bb.Value.OnRelease.Exe.Length > 0)
                 {
                     A = bb.Value.OnRelease;
                     str = "On Release";
-                }
-                else if (bb.Value.OnStay.Keybinds.Count + bb.Value.OnStay.SpecialActions.Count > 0)
-                {
-                    A = bb.Value.OnStay;
-                    str = "On Stay Release";
                 }
 
                 BindingPanel.Controls.Add(new Binding(new GamepadFlags(bb.Key),A,str, (int)LeftStickRegions.Value, (int)RightStickRegions.Value, (int)LeftTriggerRegions.Value, (int)RightTriggerRegions.Value));

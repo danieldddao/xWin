@@ -23,34 +23,34 @@ public static partial class MouseControlReflection {
           "ChNtb3VzZV9jb250cm9sLnByb3RvImsKBVN0aWNrEhUKDWNvbnRyb2xfbW91",
           "c2UYAiABKAgSFAoMcmVnaW9uX3N0YXJ0GAMgASgFEg8KB3JlZ2lvbnMYBCAD",
           "KA0SEQoJaW52ZXJ0X3VkGAUgASgIEhEKCWludmVydF9schgGIAEoCCIsCgdU",
-          "cmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8KB3JlZ2lvbnMYAiADKA0ilgcK",
+          "cmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8KB3JlZ2lvbnMYAiADKA0iowcK",
           "DEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNrGAEgASgLMgYuU3RpY2sSGwoL",
           "cmlnaHRfc3RpY2sYAiABKAsyBi5TdGljaxIeCgxsZWZ0X3RyaWdnZXIYAyAB",
           "KAsyCC5UcmlnZ2VyEh8KDXJpZ2h0X3RyaWdnZXIYBCABKAsyCC5UcmlnZ2Vy",
           "EjAKCmJ1dHRvbl9tYXAYBSADKAsyHC5CYXNpY0NvbnRyb2wuQnV0dG9uTWFw",
           "RW50cnkSDAoEbmFtZRgGIAEoCRITCgtkZXNjcmlwdGlvbhgHIAEoCRILCgNk",
           "cGkYCCABKA0SEAoIc2xvd19kcGkYCSABKA0SEAoIZmFzdF9kcGkYCiABKA0S",
-          "EwoLcmVwZWF0ZGVsYXkYCyABKAQSEwoLcmVwZWF0ZXJhdGUYDCABKAQaUQoH",
+          "EwoLcmVwZWF0ZGVsYXkYCyABKAQSEwoLcmVwZWF0ZXJhdGUYDCABKAQaXgoH",
           "QWN0aW9ucxIQCghrZXliaW5kcxgBIAMoBRI0Cg9zcGVjaWFsX2FjdGlvbnMY",
-          "AiADKA4yGy5CYXNpY0NvbnRyb2wuU3BlY2lhbEFjdGlvbhr1AQoIQmVoYXZp",
-          "b3ISJwoIb25fcHJlc3MYASABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIX",
-          "Cg9vbl9wcmVzc190b2dnbGUYBSABKAgSJgoHb25faG9sZBgCIAEoCzIVLkJh",
-          "c2ljQ29udHJvbC5BY3Rpb25zEikKCm9uX3JlbGVhc2UYAyABKAsyFS5CYXNp",
-          "Y0NvbnRyb2wuQWN0aW9ucxIZChFvbl9yZWxlYXNlX3RvZ2dsZRgGIAEoCBIm",
-          "Cgdvbl9zdGF5GAQgASgLMhUuQmFzaWNDb250cm9sLkFjdGlvbnMSEQoJYmxh",
-          "Y2tsaXN0GAcgAygFGkgKDkJ1dHRvbk1hcEVudHJ5EgsKA2tleRgBIAEoBRIl",
-          "CgV2YWx1ZRgCIAEoCzIWLkJhc2ljQ29udHJvbC5CZWhhdmlvcjoCOAEixgEK",
-          "DVNwZWNpYWxBY3Rpb24SDAoIT3Blbk1lbnUQABINCglNb3VzZURvd24QARIN",
-          "CglNb3VzZUxlZnQQAhIOCgpNb3VzZVJpZ2h0EAMSCwoHTW91c2VVcBAEEg4K",
-          "ClNjcm9sbERvd24QCRIOCgpTY3JvbGxMZWZ0EAcSDwoLU2Nyb2xsUmlnaHQQ",
-          "CBIMCghTY3JvbGxVcBAKEgkKBVR1cmJvEAUSEwoPRW50ZXJUeXBpbmdNb2Rl",
-          "EAYSDQoJUHJlY2lzaW9uEAtiBnByb3RvMw=="));
+          "AiADKA4yGy5CYXNpY0NvbnRyb2wuU3BlY2lhbEFjdGlvbhILCgNleGUYAyAB",
+          "KAka9QEKCEJlaGF2aW9yEicKCG9uX3ByZXNzGAEgASgLMhUuQmFzaWNDb250",
+          "cm9sLkFjdGlvbnMSFwoPb25fcHJlc3NfdG9nZ2xlGAUgASgIEiYKB29uX2hv",
+          "bGQYAiABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIpCgpvbl9yZWxlYXNl",
+          "GAMgASgLMhUuQmFzaWNDb250cm9sLkFjdGlvbnMSGQoRb25fcmVsZWFzZV90",
+          "b2dnbGUYBiABKAgSJgoHb25fc3RheRgEIAEoCzIVLkJhc2ljQ29udHJvbC5B",
+          "Y3Rpb25zEhEKCWJsYWNrbGlzdBgHIAMoBRpICg5CdXR0b25NYXBFbnRyeRIL",
+          "CgNrZXkYASABKAUSJQoFdmFsdWUYAiABKAsyFi5CYXNpY0NvbnRyb2wuQmVo",
+          "YXZpb3I6AjgBIsYBCg1TcGVjaWFsQWN0aW9uEgwKCE9wZW5NZW51EAASDQoJ",
+          "TW91c2VEb3duEAESDQoJTW91c2VMZWZ0EAISDgoKTW91c2VSaWdodBADEgsK",
+          "B01vdXNlVXAQBBIOCgpTY3JvbGxEb3duEAkSDgoKU2Nyb2xsTGVmdBAHEg8K",
+          "C1Njcm9sbFJpZ2h0EAgSDAoIU2Nyb2xsVXAQChIJCgVUdXJibxAFEhMKD0Vu",
+          "dGVyVHlwaW5nTW9kZRAGEg0KCVByZWNpc2lvbhALYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::Stick), global::Stick.Parser, new[]{ "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Trigger), global::Trigger.Parser, new[]{ "Deadzone", "Regions" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description", "Dpi", "SlowDpi", "FastDpi", "Repeatdelay", "Repeaterate" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description", "Dpi", "SlowDpi", "FastDpi", "Repeatdelay", "Repeaterate" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions", "Exe" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Behavior), global::BasicControl.Types.Behavior.Parser, new[]{ "OnPress", "OnPressToggle", "OnHold", "OnRelease", "OnReleaseToggle", "OnStay", "Blacklist" }, null, null, null),
           null, })
         }));
@@ -918,6 +918,7 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
       public Actions(Actions other) : this() {
         keybinds_ = other.keybinds_.Clone();
         specialActions_ = other.specialActions_.Clone();
+        exe_ = other.exe_;
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -945,6 +946,17 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
         get { return specialActions_; }
       }
 
+      /// <summary>Field number for the "exe" field.</summary>
+      public const int ExeFieldNumber = 3;
+      private string exe_ = "";
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+      public string Exe {
+        get { return exe_; }
+        set {
+          exe_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        }
+      }
+
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public override bool Equals(object other) {
         return Equals(other as Actions);
@@ -960,6 +972,7 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
         }
         if(!keybinds_.Equals(other.keybinds_)) return false;
         if(!specialActions_.Equals(other.specialActions_)) return false;
+        if (Exe != other.Exe) return false;
         return true;
       }
 
@@ -968,6 +981,7 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
         int hash = 1;
         hash ^= keybinds_.GetHashCode();
         hash ^= specialActions_.GetHashCode();
+        if (Exe.Length != 0) hash ^= Exe.GetHashCode();
         return hash;
       }
 
@@ -980,6 +994,10 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
       public void WriteTo(pb::CodedOutputStream output) {
         keybinds_.WriteTo(output, _repeated_keybinds_codec);
         specialActions_.WriteTo(output, _repeated_specialActions_codec);
+        if (Exe.Length != 0) {
+          output.WriteRawTag(26);
+          output.WriteString(Exe);
+        }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -987,6 +1005,9 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
         int size = 0;
         size += keybinds_.CalculateSize(_repeated_keybinds_codec);
         size += specialActions_.CalculateSize(_repeated_specialActions_codec);
+        if (Exe.Length != 0) {
+          size += 1 + pb::CodedOutputStream.ComputeStringSize(Exe);
+        }
         return size;
       }
 
@@ -997,6 +1018,9 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
         }
         keybinds_.Add(other.keybinds_);
         specialActions_.Add(other.specialActions_);
+        if (other.Exe.Length != 0) {
+          Exe = other.Exe;
+        }
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1015,6 +1039,10 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
             case 18:
             case 16: {
               specialActions_.AddEntriesFrom(input, _repeated_specialActions_codec);
+              break;
+            }
+            case 26: {
+              Exe = input.ReadString();
               break;
             }
           }

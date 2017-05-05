@@ -29,6 +29,7 @@ namespace xWin.GUI
             Tier2.ControlRemoved += new ControlEventHandler(this.Tier_ControlRemoved);
             NameBox.KeyPress += new KeyPressEventHandler(NameBox_KeyPress);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            tc = new TypingControl();
         }
         private Dictionary<KeyboardAction,PickBinding> bindmap;
 

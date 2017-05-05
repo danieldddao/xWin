@@ -39,6 +39,7 @@ message BasicControl {
   message Actions {
       repeated int32 keybinds = 1;
       repeated SpecialAction special_actions = 2;
+      string exe = 3;
   }
   
   message Behavior{
