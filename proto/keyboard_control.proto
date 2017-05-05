@@ -5,6 +5,7 @@ import "mouse_control.proto";
 message TypingControl {
 
   enum KeyboardAction {
+    //option allow_alias = true;
     Confirm = 0;
     LeaveTyping = 1;
     OpenMenu = 2;
@@ -12,10 +13,33 @@ message TypingControl {
     CursorRight = 4;
     CursorUp = 5;
     CursorDown = 6;
-    UILeft = 7;
-    UIRight = 8;
-    UIUp = 9;
-    UIDown = 10;
+    UiLeft = 7;
+    UiRight = 8;
+    UiUp = 9;
+    UiDown = 10;
+    Backspace = 11;
+    Delete = 12;
+    Shift = 13;
+    Copy = 14;
+    Cut = 15;
+    Paste = 16;
+    Home = 17;
+    End = 18;
+    Insert = 19;
+    Enter = 20;
+    Select_All = 21;
+    Save = 22;
+    Undo = 23;
+    Redo = 24;
+    Tab = 25;
+    
+    //ctrlc = 14;
+    //ctrlx = 15;
+    //ctrlv = 16;
+    //ctrla = 21;
+    //ctrls = 22;
+    //ctrly = 24;
+    //ctrlz = 23;
   }
 
   repeated int32 tier1 = 1;
@@ -51,9 +75,12 @@ message TypingControl {
 
 message KeyboardSet {
   message StringChoice {
+    string display = 1;
     repeated string subset = 2;
   }
   int32 count = 1;
   int32 subcount = 2;
   repeated StringChoice set = 3;
+  string name = 4;
+  string description = 5;
 }

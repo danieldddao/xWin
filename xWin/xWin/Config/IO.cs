@@ -10,6 +10,9 @@ namespace xWin.Config
 {
     public class IO<T> where T : IMessage<T>, new()
     {
+        public const string CONFIGURATION_EXT = ".cfg";
+        public const string TYPINGCONTROL_EXT = ".tctrl";
+        public const string KEYBOARDSET_EXT = ".chars";
         public List<string> SearchPaths;
         public readonly string ext;
         private MessageParser<T> parser;
@@ -17,24 +20,22 @@ namespace xWin.Config
         {
             SearchPaths = paths;
             this.ext = ext;
-            var parser = new MessageParser<T>(() => new T());
+            parser = new MessageParser<T>(() => new T());
         }
         
         public T ReadFromFile(string name)
         {
-            foreach (var s in SearchPaths)
+            Console.WriteLine(name);
+            if (File.Exists(name))
             {
-                var path = s + "/" + name + ext;
-                if (File.Exists(path))
+                using (Stream input = File.OpenRead(name))
                 {
-                    using (Stream input = File.OpenRead(path))
-                    {
-                        return parser.ParseFrom(input);
-                    }
+                    var c =  parser.ParseFrom(input);
+                    return c;
                 }
             }
             throw new FileNotFoundException();
-        }
+    }
 
         public void WriteToFile(T buffer, string name, string folder="")
         {
@@ -43,6 +44,12 @@ namespace xWin.Config
             {
                 buffer.WriteTo(output);
             }
+        }
+
+        public bool CheckExists(string name, string folder = "")
+        {
+            if (folder.Length == 0) { folder = SearchPaths[0]; }
+            return File.Exists(folder + @"\" + name + ext);
         }
     }
 }

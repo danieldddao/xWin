@@ -46,9 +46,11 @@
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Gma.System.MouseKeyHook, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MouseKeyHook.5.4.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
@@ -56,12 +58,12 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.7.8.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.7.8\lib\net45\Moq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Google.Protobuf, Version=3.2.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.2.0\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.7.8.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.8\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -138,6 +140,79 @@
     <Compile Include="Config\KeyboardControl.cs" />
     <Compile Include="Config\IO.cs" />
     <Compile Include="Config\SaveFormat.cs" />
+    <Compile Include="Forms\CharacterWheel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CharacterWheel.designer.cs">
+      <DependentUpon>CharacterWheel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Binding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Binding.Designer.cs">
+      <DependentUpon>Binding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ButtonSelectWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ButtonSelectWindow.Designer.cs">
+      <DependentUpon>ButtonSelectWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigWindow.Designer.cs">
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CustomFileDialog.cs" />
+    <Compile Include="GUI\KeyboardSelectWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\KeyboardSelectWindow.Designer.cs">
+      <DependentUpon>KeyboardSelectWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\KeySetBinding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\KeySetBinding.Designer.cs">
+      <DependentUpon>KeySetBinding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\KeysetWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\KeysetWindow.Designer.cs">
+      <DependentUpon>KeysetWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\PickBinding.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\PickBinding.Designer.cs">
+      <DependentUpon>PickBinding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\StringListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\StringListControl.Designer.cs">
+      <DependentUpon>StringListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TierSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\TierSelector.Designer.cs">
+      <DependentUpon>TierSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TypingConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\TypingConfigWindow.Designer.cs">
+      <DependentUpon>TypingConfigWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ButtonMaps\ShortcutMapping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +271,7 @@
     <Compile Include="Library\Buttons.cs" />
     <Compile Include="Library\DI2XI.cs" />
     <Compile Include="Library\GamepadFlags.cs" />
+    <Compile Include="Library\GeneralInteraction.cs" />
     <Compile Include="Library\Interpreter.cs" />
     <Compile Include="Forms\KeyboardWindow.cs">
       <SubType>Form</SubType>
@@ -204,6 +280,7 @@
       <DependentUpon>KeyboardWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\PolarStick.cs" />
+    <Compile Include="Library\StringSendingImports.cs" />
     <Compile Include="Library\TypingInterpreter.cs" />
     <Compile Include="Library\XAction.cs" />
     <Compile Include="Library\Log.cs" />
@@ -249,6 +326,9 @@
     <EmbeddedResource Include="Forms\ButtonOptions.resx">
       <DependentUpon>ButtonOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CharacterWheel.resx">
+      <DependentUpon>CharacterWheel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ControllerOptions.resx">
       <DependentUpon>ControllerOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +350,39 @@
     <EmbeddedResource Include="Forms\KeyboardWindow.resx">
       <DependentUpon>KeyboardWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Binding.resx">
+      <DependentUpon>Binding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ButtonSelectWindow.resx">
+      <DependentUpon>ButtonSelectWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigWindow.resx">
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\KeyboardSelectWindow.resx">
+      <DependentUpon>KeyboardSelectWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\KeySetBinding.resx">
+      <DependentUpon>KeySetBinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\KeysetWindow.resx">
+      <DependentUpon>KeysetWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\PickBinding.resx">
+      <DependentUpon>PickBinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\StringListControl.resx">
+      <DependentUpon>StringListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\TierSelector.resx">
+      <DependentUpon>TierSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\TypingConfigWindow.resx">
+      <DependentUpon>TypingConfigWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -277,6 +390,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\xboxDPadDown.png" />
     <None Include="Resources\xboxDPadLeft.png" />
     <None Include="Resources\xboxDPadRight.png" />
@@ -286,6 +400,8 @@
     <None Include="Resources\buttonBackground.jpg" />
     <None Include="Resources\wordpredictiontips.gif" />
     <None Include="Resources\quicktypetips.gif" />
+    <None Include="Resources\blackCircle.png" />
+    <None Include="Resources\button_highlight_invert.png" />
     <Content Include="Resources\XWin.ico" />
     <Content Include="Resources\XWin1.ico" />
     <Content Include="Resources\XWin2.ico" />

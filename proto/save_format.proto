@@ -9,4 +9,5 @@ message Configuration
   TypingControl typing = 2;
   string name = 3;
   string description = 4;
+  int32 togglestop = 5;
 }

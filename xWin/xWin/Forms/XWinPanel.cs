@@ -16,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using xWin.Forms.AutoCompleteForms;
+using xWin.GUI;
 using xWin.Library;
 
 namespace xWin.Forms
@@ -42,10 +43,16 @@ namespace xWin.Forms
         private bool minimizeToSystemTray = false;
         private string notifications = "";
 
-        public XWinPanel()
+        public XWinPanel(List<string> l)
         {
             InitializeComponent();
 
+            Thread thread = new Thread(WI.InteractionLoop);
+            thread.Start();
+            this.l = l;
+            ConfigName.Text = Program.config.Name == null ? "" : Program.config.Name;
+            ConfigDescription.Text = Program.config.Description == null ? "" : Program.config.Description;
+            /*
             // Initialize 4 controllers
             XCon1 = new XController(new SharpDX.XInput.Controller(UserIndex.One));
             OpXCon1 = new ControllerOptions(XCon1);
@@ -57,34 +64,13 @@ namespace xWin.Forms
             OpXCon3 = new ControllerOptions(XCon3);
 
             XCon4 = new XController(new SharpDX.XInput.Controller(UserIndex.Four));
-            OpXCon4 = new ControllerOptions(XCon4);
-        }
-
-        /* For Testing */
-        public XWinPanel(IXController con1, IXController con2, IXController con3, IXController con4)
-        {
-            InitializeComponent();
-
-            // Initialize 4 controllers
-            XCon1 = con1;
-            OpXCon1 = new ControllerOptions(XCon1);
-
-            XCon2 = con2;
-            OpXCon2 = new ControllerOptions(XCon2);
-
-            XCon3 = con3;
-            OpXCon3 = new ControllerOptions(XCon3);
-
-            XCon4 = con4;
-            OpXCon4 = new ControllerOptions(XCon4);
-
-            timer1.Interval = 5000;
+            OpXCon4 = new ControllerOptions(XCon4);*/
         }
 
         /* Update Controllers status when loading main panel */
         private void XWinPanel_Load(object sender, EventArgs e)
         {
-            UpdateControllers();
+           // UpdateControllers();
 
             autoComplete = new AutoComplete();
 
@@ -162,7 +148,7 @@ namespace xWin.Forms
         {
             if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); } // Unsubscribe to unread keyboard inputs
         }
-
+        /*
         private void UpdateControllers()
         {
             // Check status of each controller and update the button accordingly
@@ -243,7 +229,7 @@ namespace xWin.Forms
                 XCon4.IsPreviouslyConnected = false;
             }
         }
-
+        */
         private void Controller1_Click(object sender, EventArgs e)
         {
             if (XCon1.IsConnected())
@@ -369,57 +355,7 @@ namespace xWin.Forms
                 Log.GetLogger().Error("Error when executing buttons for controller " + controller, e);
             }
         }
-
-        /* Update Controllers status every 0.1 sec */
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            UpdateControllers();
-            if (!XCon1Thread.IsAlive && XCon1.IsConnected())
-            {
-                XCon1Thread = new Thread(delegate ()
-                {
-                    ExecuteButtonsForController(XCon1);
-                });
-                XCon1Thread.Name = "XCon1";
-                XCon1Thread.IsBackground = true;
-                XCon1Thread.SetApartmentState(ApartmentState.STA);
-                XCon1Thread.Start();
-            }
-            if (!XCon2Thread.IsAlive && XCon2.IsConnected())
-            {
-                XCon2Thread = new Thread(delegate ()
-                {
-                    ExecuteButtonsForController(XCon2);
-                });
-                XCon2Thread.Name = "XCon2";
-                XCon2Thread.IsBackground = true;
-                XCon2Thread.SetApartmentState(ApartmentState.STA);
-                XCon2Thread.Start();
-            }
-            if (!XCon3Thread.IsAlive && XCon3.IsConnected())
-            {
-                XCon3Thread = new Thread(delegate ()
-                {
-                    ExecuteButtonsForController(XCon3);
-                });
-                XCon3Thread.Name = "XCon3";
-                XCon3Thread.IsBackground = true;
-                XCon3Thread.SetApartmentState(ApartmentState.STA);
-                XCon3Thread.Start();
-            }
-            if (!XCon4Thread.IsAlive && XCon4.IsConnected())
-            {
-                XCon4Thread = new Thread(delegate ()
-                {
-                    ExecuteButtonsForController(XCon4);
-                });
-                XCon4Thread.Name = "XCon4";
-                XCon4Thread.IsBackground = true;
-                XCon4Thread.SetApartmentState(ApartmentState.STA);
-                XCon4Thread.Start();
-            }
-        }
-
+        
         /*
          * For Logging
          */
@@ -797,7 +733,7 @@ namespace xWin.Forms
         {
             try
             {
-                switch (NotificationsDropdownList.SelectedItem)
+                switch (NotificationsDropdownList.SelectedItem.ToString())
                 {
                     case "Notify All":
                         notifications = "all";
@@ -821,6 +757,45 @@ namespace xWin.Forms
             {
                 Log.GetLogger().Error(ex);
             }
+        }
+
+        private short lxc, lyc, rxc, ryc;
+        private List<string> l;
+        private void EditConfig_Click(object sender, EventArgs e)
+        {
+            var cw = new ConfigWindow(Program.config, l);
+            cw.ShowDialog();
+            Program.config = cw.c;
+            Program.update_config = true;
+            CharacterWheel.keySet = Program.config.Typing.Base.Set;
+        }
+
+        private void CalibrateLeft_Click(object sender, EventArgs e)
+        {
+            var s = Program.Controller.GetState();
+            lxc = s.Gamepad.LeftThumbX;
+            lyc = s.Gamepad.LeftThumbY;
+            LXCenter.Text = lxc.ToString();
+            LYCenter.Text = lyc.ToString();
+        }
+
+        private void CalibrateRight_Click(object sender, EventArgs e)
+        {
+            var s = Program.Controller.GetState();
+            rxc = s.Gamepad.RightThumbX;
+            ryc = s.Gamepad.RightThumbY;
+            RXCenter.Text = rxc.ToString();
+            RYCenter.Text = ryc.ToString();
+        }
+
+        private void updateCC_Click(object sender, EventArgs e)
+        {
+            var cc = Program.cc;
+            cc.lx = lxc;
+            cc.ly = lyc;
+            cc.rx = rxc;
+            cc.ry = ryc;
+            Program.update_cc = true;
         }
     }
 }

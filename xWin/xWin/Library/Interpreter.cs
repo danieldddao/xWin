@@ -46,7 +46,7 @@ namespace xWin.Library
             input_mapping = new Dictionary<GamepadFlags, ButtonBehavior>();
             foreach (GamepadFlags s in c.ButtonMap.Keys)
             {
-                input_mapping[s] = new ButtonBehavior(c.ButtonMap[(int)s]);
+                input_mapping[s] = new ButtonBehavior(c.ButtonMap[(int)s],new TimeSpan((long)c.Repeaterate), new TimeSpan((long)c.Repeatdelay));
             }
             LeftStick = GetStickBehavior(c.LeftStick);
             RightStick = GetStickBehavior(c.RightStick);

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 message Stick {
-  uint32 deadzone = 1;//how far must the stick go to count as moved
+  //uint32 deadzone = 1;//how far must the stick go to count as moved
   bool control_mouse = 2;
   int32 region_start = 3;//the arc length clockwise from the topmost point of the stick circumference. This is the location of the Center of the 0th region.
   repeated uint32 regions = 4;
@@ -64,4 +64,10 @@ message BasicControl {
   
   string name = 6;
   string description = 7;
+  
+  uint32 dpi = 8;
+  uint32 slow_dpi = 9;
+  uint32 fast_dpi = 10;
+  uint64 repeatdelay = 11;
+  uint64 repeaterate = 12;
 }

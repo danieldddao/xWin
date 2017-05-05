@@ -20,35 +20,37 @@ public static partial class MouseControlReflection {
   static MouseControlReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChNtb3VzZV9jb250cm9sLnByb3RvIn0KBVN0aWNrEhAKCGRlYWR6b25lGAEg",
-          "ASgNEhUKDWNvbnRyb2xfbW91c2UYAiABKAgSFAoMcmVnaW9uX3N0YXJ0GAMg",
-          "ASgFEg8KB3JlZ2lvbnMYBCADKA0SEQoJaW52ZXJ0X3VkGAUgASgIEhEKCWlu",
-          "dmVydF9schgGIAEoCCIsCgdUcmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8K",
-          "B3JlZ2lvbnMYAiADKA0iuwYKDEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNr",
-          "GAEgASgLMgYuU3RpY2sSGwoLcmlnaHRfc3RpY2sYAiABKAsyBi5TdGljaxIe",
-          "CgxsZWZ0X3RyaWdnZXIYAyABKAsyCC5UcmlnZ2VyEh8KDXJpZ2h0X3RyaWdn",
-          "ZXIYBCABKAsyCC5UcmlnZ2VyEjAKCmJ1dHRvbl9tYXAYBSADKAsyHC5CYXNp",
-          "Y0NvbnRyb2wuQnV0dG9uTWFwRW50cnkSDAoEbmFtZRgGIAEoCRITCgtkZXNj",
-          "cmlwdGlvbhgHIAEoCRpRCgdBY3Rpb25zEhAKCGtleWJpbmRzGAEgAygFEjQK",
-          "D3NwZWNpYWxfYWN0aW9ucxgCIAMoDjIbLkJhc2ljQ29udHJvbC5TcGVjaWFs",
-          "QWN0aW9uGvUBCghCZWhhdmlvchInCghvbl9wcmVzcxgBIAEoCzIVLkJhc2lj",
-          "Q29udHJvbC5BY3Rpb25zEhcKD29uX3ByZXNzX3RvZ2dsZRgFIAEoCBImCgdv",
-          "bl9ob2xkGAIgASgLMhUuQmFzaWNDb250cm9sLkFjdGlvbnMSKQoKb25fcmVs",
-          "ZWFzZRgDIAEoCzIVLkJhc2ljQ29udHJvbC5BY3Rpb25zEhkKEW9uX3JlbGVh",
-          "c2VfdG9nZ2xlGAYgASgIEiYKB29uX3N0YXkYBCABKAsyFS5CYXNpY0NvbnRy",
-          "b2wuQWN0aW9ucxIRCglibGFja2xpc3QYByADKAUaSAoOQnV0dG9uTWFwRW50",
-          "cnkSCwoDa2V5GAEgASgFEiUKBXZhbHVlGAIgASgLMhYuQmFzaWNDb250cm9s",
-          "LkJlaGF2aW9yOgI4ASLGAQoNU3BlY2lhbEFjdGlvbhIMCghPcGVuTWVudRAA",
-          "Eg0KCU1vdXNlRG93bhABEg0KCU1vdXNlTGVmdBACEg4KCk1vdXNlUmlnaHQQ",
-          "AxILCgdNb3VzZVVwEAQSDgoKU2Nyb2xsRG93bhAJEg4KClNjcm9sbExlZnQQ",
-          "BxIPCgtTY3JvbGxSaWdodBAIEgwKCFNjcm9sbFVwEAoSCQoFVHVyYm8QBRIT",
-          "Cg9FbnRlclR5cGluZ01vZGUQBhINCglQcmVjaXNpb24QC2IGcHJvdG8z"));
+          "ChNtb3VzZV9jb250cm9sLnByb3RvImsKBVN0aWNrEhUKDWNvbnRyb2xfbW91",
+          "c2UYAiABKAgSFAoMcmVnaW9uX3N0YXJ0GAMgASgFEg8KB3JlZ2lvbnMYBCAD",
+          "KA0SEQoJaW52ZXJ0X3VkGAUgASgIEhEKCWludmVydF9schgGIAEoCCIsCgdU",
+          "cmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8KB3JlZ2lvbnMYAiADKA0ilgcK",
+          "DEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNrGAEgASgLMgYuU3RpY2sSGwoL",
+          "cmlnaHRfc3RpY2sYAiABKAsyBi5TdGljaxIeCgxsZWZ0X3RyaWdnZXIYAyAB",
+          "KAsyCC5UcmlnZ2VyEh8KDXJpZ2h0X3RyaWdnZXIYBCABKAsyCC5UcmlnZ2Vy",
+          "EjAKCmJ1dHRvbl9tYXAYBSADKAsyHC5CYXNpY0NvbnRyb2wuQnV0dG9uTWFw",
+          "RW50cnkSDAoEbmFtZRgGIAEoCRITCgtkZXNjcmlwdGlvbhgHIAEoCRILCgNk",
+          "cGkYCCABKA0SEAoIc2xvd19kcGkYCSABKA0SEAoIZmFzdF9kcGkYCiABKA0S",
+          "EwoLcmVwZWF0ZGVsYXkYCyABKAQSEwoLcmVwZWF0ZXJhdGUYDCABKAQaUQoH",
+          "QWN0aW9ucxIQCghrZXliaW5kcxgBIAMoBRI0Cg9zcGVjaWFsX2FjdGlvbnMY",
+          "AiADKA4yGy5CYXNpY0NvbnRyb2wuU3BlY2lhbEFjdGlvbhr1AQoIQmVoYXZp",
+          "b3ISJwoIb25fcHJlc3MYASABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIX",
+          "Cg9vbl9wcmVzc190b2dnbGUYBSABKAgSJgoHb25faG9sZBgCIAEoCzIVLkJh",
+          "c2ljQ29udHJvbC5BY3Rpb25zEikKCm9uX3JlbGVhc2UYAyABKAsyFS5CYXNp",
+          "Y0NvbnRyb2wuQWN0aW9ucxIZChFvbl9yZWxlYXNlX3RvZ2dsZRgGIAEoCBIm",
+          "Cgdvbl9zdGF5GAQgASgLMhUuQmFzaWNDb250cm9sLkFjdGlvbnMSEQoJYmxh",
+          "Y2tsaXN0GAcgAygFGkgKDkJ1dHRvbk1hcEVudHJ5EgsKA2tleRgBIAEoBRIl",
+          "CgV2YWx1ZRgCIAEoCzIWLkJhc2ljQ29udHJvbC5CZWhhdmlvcjoCOAEixgEK",
+          "DVNwZWNpYWxBY3Rpb24SDAoIT3Blbk1lbnUQABINCglNb3VzZURvd24QARIN",
+          "CglNb3VzZUxlZnQQAhIOCgpNb3VzZVJpZ2h0EAMSCwoHTW91c2VVcBAEEg4K",
+          "ClNjcm9sbERvd24QCRIOCgpTY3JvbGxMZWZ0EAcSDwoLU2Nyb2xsUmlnaHQQ",
+          "CBIMCghTY3JvbGxVcBAKEgkKBVR1cmJvEAUSEwoPRW50ZXJUeXBpbmdNb2Rl",
+          "EAYSDQoJUHJlY2lzaW9uEAtiBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::Stick), global::Stick.Parser, new[]{ "Deadzone", "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Stick), global::Stick.Parser, new[]{ "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Trigger), global::Trigger.Parser, new[]{ "Deadzone", "Regions" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description", "Dpi", "SlowDpi", "FastDpi", "Repeatdelay", "Repeaterate" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Behavior), global::BasicControl.Types.Behavior.Parser, new[]{ "OnPress", "OnPressToggle", "OnHold", "OnRelease", "OnReleaseToggle", "OnStay", "Blacklist" }, null, null, null),
           null, })
         }));
@@ -81,7 +83,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public Stick(Stick other) : this() {
-    deadzone_ = other.deadzone_;
     controlMouse_ = other.controlMouse_;
     regionStart_ = other.regionStart_;
     regions_ = other.regions_.Clone();
@@ -94,23 +95,12 @@ public sealed partial class Stick : pb::IMessage<Stick> {
     return new Stick(this);
   }
 
-  /// <summary>Field number for the "deadzone" field.</summary>
-  public const int DeadzoneFieldNumber = 1;
-  private uint deadzone_;
-  /// <summary>
-  ///how far must the stick go to count as moved
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public uint Deadzone {
-    get { return deadzone_; }
-    set {
-      deadzone_ = value;
-    }
-  }
-
   /// <summary>Field number for the "control_mouse" field.</summary>
   public const int ControlMouseFieldNumber = 2;
   private bool controlMouse_;
+  /// <summary>
+  ///uint32 deadzone = 1;//how far must the stick go to count as moved
+  /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public bool ControlMouse {
     get { return controlMouse_; }
@@ -178,7 +168,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (Deadzone != other.Deadzone) return false;
     if (ControlMouse != other.ControlMouse) return false;
     if (RegionStart != other.RegionStart) return false;
     if(!regions_.Equals(other.regions_)) return false;
@@ -190,7 +179,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    if (Deadzone != 0) hash ^= Deadzone.GetHashCode();
     if (ControlMouse != false) hash ^= ControlMouse.GetHashCode();
     if (RegionStart != 0) hash ^= RegionStart.GetHashCode();
     hash ^= regions_.GetHashCode();
@@ -206,10 +194,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (Deadzone != 0) {
-      output.WriteRawTag(8);
-      output.WriteUInt32(Deadzone);
-    }
     if (ControlMouse != false) {
       output.WriteRawTag(16);
       output.WriteBool(ControlMouse);
@@ -232,9 +216,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    if (Deadzone != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Deadzone);
-    }
     if (ControlMouse != false) {
       size += 1 + 1;
     }
@@ -255,9 +236,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
   public void MergeFrom(Stick other) {
     if (other == null) {
       return;
-    }
-    if (other.Deadzone != 0) {
-      Deadzone = other.Deadzone;
     }
     if (other.ControlMouse != false) {
       ControlMouse = other.ControlMouse;
@@ -282,10 +260,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
         default:
           input.SkipLastField();
           break;
-        case 8: {
-          Deadzone = input.ReadUInt32();
-          break;
-        }
         case 16: {
           ControlMouse = input.ReadBool();
           break;
@@ -485,6 +459,11 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     buttonMap_ = other.buttonMap_.Clone();
     name_ = other.name_;
     description_ = other.description_;
+    dpi_ = other.dpi_;
+    slowDpi_ = other.slowDpi_;
+    fastDpi_ = other.fastDpi_;
+    repeatdelay_ = other.repeatdelay_;
+    repeaterate_ = other.repeaterate_;
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -571,6 +550,61 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     }
   }
 
+  /// <summary>Field number for the "dpi" field.</summary>
+  public const int DpiFieldNumber = 8;
+  private uint dpi_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public uint Dpi {
+    get { return dpi_; }
+    set {
+      dpi_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "slow_dpi" field.</summary>
+  public const int SlowDpiFieldNumber = 9;
+  private uint slowDpi_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public uint SlowDpi {
+    get { return slowDpi_; }
+    set {
+      slowDpi_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "fast_dpi" field.</summary>
+  public const int FastDpiFieldNumber = 10;
+  private uint fastDpi_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public uint FastDpi {
+    get { return fastDpi_; }
+    set {
+      fastDpi_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "repeatdelay" field.</summary>
+  public const int RepeatdelayFieldNumber = 11;
+  private ulong repeatdelay_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public ulong Repeatdelay {
+    get { return repeatdelay_; }
+    set {
+      repeatdelay_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "repeaterate" field.</summary>
+  public const int RepeaterateFieldNumber = 12;
+  private ulong repeaterate_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public ulong Repeaterate {
+    get { return repeaterate_; }
+    set {
+      repeaterate_ = value;
+    }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
     return Equals(other as BasicControl);
@@ -591,6 +625,11 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     if (!ButtonMap.Equals(other.ButtonMap)) return false;
     if (Name != other.Name) return false;
     if (Description != other.Description) return false;
+    if (Dpi != other.Dpi) return false;
+    if (SlowDpi != other.SlowDpi) return false;
+    if (FastDpi != other.FastDpi) return false;
+    if (Repeatdelay != other.Repeatdelay) return false;
+    if (Repeaterate != other.Repeaterate) return false;
     return true;
   }
 
@@ -604,6 +643,11 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     hash ^= ButtonMap.GetHashCode();
     if (Name.Length != 0) hash ^= Name.GetHashCode();
     if (Description.Length != 0) hash ^= Description.GetHashCode();
+    if (Dpi != 0) hash ^= Dpi.GetHashCode();
+    if (SlowDpi != 0) hash ^= SlowDpi.GetHashCode();
+    if (FastDpi != 0) hash ^= FastDpi.GetHashCode();
+    if (Repeatdelay != 0UL) hash ^= Repeatdelay.GetHashCode();
+    if (Repeaterate != 0UL) hash ^= Repeaterate.GetHashCode();
     return hash;
   }
 
@@ -639,6 +683,26 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
       output.WriteRawTag(58);
       output.WriteString(Description);
     }
+    if (Dpi != 0) {
+      output.WriteRawTag(64);
+      output.WriteUInt32(Dpi);
+    }
+    if (SlowDpi != 0) {
+      output.WriteRawTag(72);
+      output.WriteUInt32(SlowDpi);
+    }
+    if (FastDpi != 0) {
+      output.WriteRawTag(80);
+      output.WriteUInt32(FastDpi);
+    }
+    if (Repeatdelay != 0UL) {
+      output.WriteRawTag(88);
+      output.WriteUInt64(Repeatdelay);
+    }
+    if (Repeaterate != 0UL) {
+      output.WriteRawTag(96);
+      output.WriteUInt64(Repeaterate);
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -662,6 +726,21 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     }
     if (Description.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeStringSize(Description);
+    }
+    if (Dpi != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Dpi);
+    }
+    if (SlowDpi != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt32Size(SlowDpi);
+    }
+    if (FastDpi != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt32Size(FastDpi);
+    }
+    if (Repeatdelay != 0UL) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Repeatdelay);
+    }
+    if (Repeaterate != 0UL) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Repeaterate);
     }
     return size;
   }
@@ -701,6 +780,21 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
     }
     if (other.Description.Length != 0) {
       Description = other.Description;
+    }
+    if (other.Dpi != 0) {
+      Dpi = other.Dpi;
+    }
+    if (other.SlowDpi != 0) {
+      SlowDpi = other.SlowDpi;
+    }
+    if (other.FastDpi != 0) {
+      FastDpi = other.FastDpi;
+    }
+    if (other.Repeatdelay != 0UL) {
+      Repeatdelay = other.Repeatdelay;
+    }
+    if (other.Repeaterate != 0UL) {
+      Repeaterate = other.Repeaterate;
     }
   }
 
@@ -750,6 +844,26 @@ public sealed partial class BasicControl : pb::IMessage<BasicControl> {
         }
         case 58: {
           Description = input.ReadString();
+          break;
+        }
+        case 64: {
+          Dpi = input.ReadUInt32();
+          break;
+        }
+        case 72: {
+          SlowDpi = input.ReadUInt32();
+          break;
+        }
+        case 80: {
+          FastDpi = input.ReadUInt32();
+          break;
+        }
+        case 88: {
+          Repeatdelay = input.ReadUInt64();
+          break;
+        }
+        case 96: {
+          Repeaterate = input.ReadUInt64();
           break;
         }
       }
