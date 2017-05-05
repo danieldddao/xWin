@@ -14,8 +14,8 @@ namespace MSTest.Library
     [TestClass]
     public class GamepadFlagsTests
     {
-        GamepadFlags ABflags, Aflags, Bflags;
-        GamepadFlags RTR1flags, LTR1flags, LTRTR1flags;
+        GamepadFlags ABflags, Aflags, Bflags, mask;
+        GamepadFlags RTR1flags, LTR1flags, LTRTR1flags, triggermask;
         GamepadFlags RSR1flags, LSR1flags, LSRSR1flags;
         GamepadFlags ALTR1flags;
         [TestInitialize]
@@ -40,11 +40,15 @@ namespace MSTest.Library
             RTR1flags = new GamepadFlags(GamepadButtonFlags.None, false, false, false, false, 0, 1);
             LTRTR1flags = new GamepadFlags(GamepadButtonFlags.None, false, false, false, false, 1, 1);
 
+            triggermask = new GamepadFlags(GamepadButtonFlags.None, false, false, false, false, 3, 3);
+
             LSR1flags = new GamepadFlags(GamepadButtonFlags.None, false, false, false, false, 0, 0, 1);
             RSR1flags = new GamepadFlags(GamepadButtonFlags.None, false, false, false, false, 0, 0, 0, 1);
             LSRSR1flags = new GamepadFlags(GamepadButtonFlags.None, false, false, false, false, 0, 0, 1, 1);
 
             ALTR1flags = new GamepadFlags(GamepadButtonFlags.A, false, false, false, false, 1);
+
+            mask = new GamepadFlags(-1);
         }
 
         [TestCleanup]
@@ -184,6 +188,40 @@ namespace MSTest.Library
             Assert.AreEqual(983040, (int)g, string.Format("{0} {1}", (GamepadFlags)983040, g));
             g = new GamepadFlags(0, 1, 0, 1, 1);
             Assert.AreEqual(286392320, (int)g, string.Format("\n\n{0} \n{1}", (GamepadFlags)286392320, g));
+        }
+
+
+        [TestMethod]
+        public void ORopButtonsTest()
+        {
+            Assert.AreEqual((int)(Aflags | Aflags), (int)Aflags);
+            Assert.AreEqual((int)(Aflags | Bflags), (int)ABflags);
+            Assert.AreEqual((int)(Bflags | Aflags), (int)ABflags);
+            Assert.AreEqual((int)(Bflags | ABflags), (int)ABflags);
+            Assert.AreEqual((int)(Aflags | ABflags), (int)ABflags);
+            Assert.AreEqual((int)(ABflags | Aflags), (int)ABflags);
+            Assert.AreEqual((int)(ABflags | Bflags), (int)ABflags);
+        }
+
+        [TestMethod]
+        public void ORopTriggerRegionsTest()
+        {
+            Assert.AreEqual((int)(LTR1flags | RTR1flags), (int)triggermask);
+            Assert.AreEqual((int)(LTR1flags | LTRTR1flags), (int)triggermask);
+            Assert.AreEqual((int)(RTR1flags | LTRTR1flags), (int)triggermask);
+            Assert.AreEqual((int)(RTR1flags | LTR1flags), (int)triggermask);
+            Assert.AreEqual((int)(LTRTR1flags | LTR1flags), (int)triggermask);
+            Assert.AreEqual((int)(LTRTR1flags | RTR1flags), (int)triggermask);
+        }
+        
+        [TestMethod]
+        public void STARopTest()
+        {
+            Assert.AreEqual((int)(Aflags * mask), (int)Aflags);
+            Assert.AreEqual((int)(LTR1flags * mask), (int)LTR1flags);
+            Assert.AreEqual((int)(RTR1flags * mask), (int)RTR1flags);
+            Assert.AreEqual((int)(LSR1flags * mask), (int)LSR1flags);
+            Assert.AreEqual((int)(RSR1flags * mask), (int)RSR1flags);
         }
     }
 }

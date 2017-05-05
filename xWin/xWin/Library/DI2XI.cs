@@ -139,5 +139,6 @@ namespace xWin.Library
             joystick.Acquire();
             return joystick;
         }
+        
     }
 }

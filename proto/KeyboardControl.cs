@@ -21,7 +21,7 @@ public static partial class KeyboardControlReflection {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
           "ChZrZXlib2FyZF9jb250cm9sLnByb3RvGhNtb3VzZV9jb250cm9sLnByb3Rv",
-          "ItgGCg1UeXBpbmdDb250cm9sEg0KBXRpZXIxGAEgAygFEg0KBXRpZXIyGAIg",
+          "IvQHCg1UeXBpbmdDb250cm9sEg0KBXRpZXIxGAEgAygFEg0KBXRpZXIyGAIg",
           "AygFEi4KCGJpbmRpbmdzGAMgAygLMhwuVHlwaW5nQ29udHJvbC5CaW5kaW5n",
           "c0VudHJ5EhoKBGJhc2UYBCABKAsyDC5LZXlib2FyZFNldBI7Cg9rZXlib2Fy",
           "ZF9zZWxlY3QYBSADKAsyIi5UeXBpbmdDb250cm9sLktleWJvYXJkU2VsZWN0",
@@ -34,21 +34,26 @@ public static partial class KeyboardControlReflection {
           "dHJvbC5BY3RpdmVXaGVuGlcKDUJpbmRpbmdzRW50cnkSCwoDa2V5GAEgASgF",
           "EjUKBXZhbHVlGAIgASgLMiYuVHlwaW5nQ29udHJvbC5LZXlib2FyZEFjdGlv",
           "bkNvbnRhaW5lcjoCOAEaQwoTS2V5Ym9hcmRTZWxlY3RFbnRyeRILCgNrZXkY",
-          "ASABKAUSGwoFdmFsdWUYAiABKAsyDC5LZXlib2FyZFNldDoCOAEiqgEKDktl",
+          "ASABKAUSGwoFdmFsdWUYAiABKAsyDC5LZXlib2FyZFNldDoCOAEixgIKDktl",
           "eWJvYXJkQWN0aW9uEgsKB0NvbmZpcm0QABIPCgtMZWF2ZVR5cGluZxABEgwK",
           "CE9wZW5NZW51EAISDgoKQ3Vyc29yTGVmdBADEg8KC0N1cnNvclJpZ2h0EAQS",
-          "DAoIQ3Vyc29yVXAQBRIOCgpDdXJzb3JEb3duEAYSCgoGVUlMZWZ0EAcSCwoH",
-          "VUlSaWdodBAIEggKBFVJVXAQCRIKCgZVSURvd24QCiI9CgpBY3RpdmVXaGVu",
-          "EgsKB1ByZXNzZWQQABIICgRIZWxkEAESDAoIUmVsZWFzZWQQAhIKCgZTdGF5",
-          "ZWQQAyJ2CgtLZXlib2FyZFNldBINCgVjb3VudBgBIAEoBRIQCghzdWJjb3Vu",
-          "dBgCIAEoBRImCgNzZXQYAyADKAsyGS5LZXlib2FyZFNldC5TdHJpbmdDaG9p",
-          "Y2UaHgoMU3RyaW5nQ2hvaWNlEg4KBnN1YnNldBgCIAMoCWIGcHJvdG8z"));
+          "DAoIQ3Vyc29yVXAQBRIOCgpDdXJzb3JEb3duEAYSCgoGVWlMZWZ0EAcSCwoH",
+          "VWlSaWdodBAIEggKBFVpVXAQCRIKCgZVaURvd24QChINCglCYWNrc3BhY2UQ",
+          "CxIKCgZEZWxldGUQDBIJCgVTaGlmdBANEggKBENvcHkQDhIHCgNDdXQQDxIJ",
+          "CgVQYXN0ZRAQEggKBEhvbWUQERIHCgNFbmQQEhIKCgZJbnNlcnQQExIJCgVF",
+          "bnRlchAUEg4KClNlbGVjdF9BbGwQFRIICgRTYXZlEBYSCAoEVW5kbxAXEggK",
+          "BFJlZG8QGCI9CgpBY3RpdmVXaGVuEgsKB1ByZXNzZWQQABIICgRIZWxkEAES",
+          "DAoIUmVsZWFzZWQQAhIKCgZTdGF5ZWQQAyKqAQoLS2V5Ym9hcmRTZXQSDQoF",
+          "Y291bnQYASABKAUSEAoIc3ViY291bnQYAiABKAUSJgoDc2V0GAMgAygLMhku",
+          "S2V5Ym9hcmRTZXQuU3RyaW5nQ2hvaWNlEgwKBG5hbWUYBCABKAkSEwoLZGVz",
+          "Y3JpcHRpb24YBSABKAkaLwoMU3RyaW5nQ2hvaWNlEg8KB2Rpc3BsYXkYASAB",
+          "KAkSDgoGc3Vic2V0GAIgAygJYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::MouseControlReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
           new pbr::GeneratedClrTypeInfo(typeof(global::TypingControl), global::TypingControl.Parser, new[]{ "Tier1", "Tier2", "Bindings", "Base", "KeyboardSelect", "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "Name", "Description" }, null, new[]{ typeof(global::TypingControl.Types.KeyboardAction), typeof(global::TypingControl.Types.ActiveWhen) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::TypingControl.Types.KeyboardActionContainer), global::TypingControl.Types.KeyboardActionContainer.Parser, new[]{ "Binding", "WhenActive" }, null, null, null),
           null, null, }),
-          new pbr::GeneratedClrTypeInfo(typeof(global::KeyboardSet), global::KeyboardSet.Parser, new[]{ "Count", "Subcount", "Set" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::KeyboardSet.Types.StringChoice), global::KeyboardSet.Types.StringChoice.Parser, new[]{ "Subset" }, null, null, null)})
+          new pbr::GeneratedClrTypeInfo(typeof(global::KeyboardSet), global::KeyboardSet.Parser, new[]{ "Count", "Subcount", "Set", "Name", "Description" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::KeyboardSet.Types.StringChoice), global::KeyboardSet.Types.StringChoice.Parser, new[]{ "Display", "Subset" }, null, null, null)})
         }));
   }
   #endregion
@@ -455,6 +460,9 @@ public sealed partial class TypingControl : pb::IMessage<TypingControl> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public static partial class Types {
     public enum KeyboardAction {
+      /// <summary>
+      ///option allow_alias = true;
+      /// </summary>
       [pbr::OriginalName("Confirm")] Confirm = 0,
       [pbr::OriginalName("LeaveTyping")] LeaveTyping = 1,
       [pbr::OriginalName("OpenMenu")] OpenMenu = 2,
@@ -462,10 +470,24 @@ public sealed partial class TypingControl : pb::IMessage<TypingControl> {
       [pbr::OriginalName("CursorRight")] CursorRight = 4,
       [pbr::OriginalName("CursorUp")] CursorUp = 5,
       [pbr::OriginalName("CursorDown")] CursorDown = 6,
-      [pbr::OriginalName("UILeft")] Uileft = 7,
-      [pbr::OriginalName("UIRight")] Uiright = 8,
-      [pbr::OriginalName("UIUp")] Uiup = 9,
-      [pbr::OriginalName("UIDown")] Uidown = 10,
+      [pbr::OriginalName("UiLeft")] UiLeft = 7,
+      [pbr::OriginalName("UiRight")] UiRight = 8,
+      [pbr::OriginalName("UiUp")] UiUp = 9,
+      [pbr::OriginalName("UiDown")] UiDown = 10,
+      [pbr::OriginalName("Backspace")] Backspace = 11,
+      [pbr::OriginalName("Delete")] Delete = 12,
+      [pbr::OriginalName("Shift")] Shift = 13,
+      [pbr::OriginalName("Copy")] Copy = 14,
+      [pbr::OriginalName("Cut")] Cut = 15,
+      [pbr::OriginalName("Paste")] Paste = 16,
+      [pbr::OriginalName("Home")] Home = 17,
+      [pbr::OriginalName("End")] End = 18,
+      [pbr::OriginalName("Insert")] Insert = 19,
+      [pbr::OriginalName("Enter")] Enter = 20,
+      [pbr::OriginalName("Select_All")] SelectAll = 21,
+      [pbr::OriginalName("Save")] Save = 22,
+      [pbr::OriginalName("Undo")] Undo = 23,
+      [pbr::OriginalName("Redo")] Redo = 24,
     }
 
     public enum ActiveWhen {
@@ -652,6 +674,8 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
     count_ = other.count_;
     subcount_ = other.subcount_;
     set_ = other.set_.Clone();
+    name_ = other.name_;
+    description_ = other.description_;
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -691,6 +715,28 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
     get { return set_; }
   }
 
+  /// <summary>Field number for the "name" field.</summary>
+  public const int NameFieldNumber = 4;
+  private string name_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Name {
+    get { return name_; }
+    set {
+      name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "description" field.</summary>
+  public const int DescriptionFieldNumber = 5;
+  private string description_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public string Description {
+    get { return description_; }
+    set {
+      description_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
     return Equals(other as KeyboardSet);
@@ -707,6 +753,8 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
     if (Count != other.Count) return false;
     if (Subcount != other.Subcount) return false;
     if(!set_.Equals(other.set_)) return false;
+    if (Name != other.Name) return false;
+    if (Description != other.Description) return false;
     return true;
   }
 
@@ -716,6 +764,8 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
     if (Count != 0) hash ^= Count.GetHashCode();
     if (Subcount != 0) hash ^= Subcount.GetHashCode();
     hash ^= set_.GetHashCode();
+    if (Name.Length != 0) hash ^= Name.GetHashCode();
+    if (Description.Length != 0) hash ^= Description.GetHashCode();
     return hash;
   }
 
@@ -735,6 +785,14 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
       output.WriteInt32(Subcount);
     }
     set_.WriteTo(output, _repeated_set_codec);
+    if (Name.Length != 0) {
+      output.WriteRawTag(34);
+      output.WriteString(Name);
+    }
+    if (Description.Length != 0) {
+      output.WriteRawTag(42);
+      output.WriteString(Description);
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -747,6 +805,12 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
       size += 1 + pb::CodedOutputStream.ComputeInt32Size(Subcount);
     }
     size += set_.CalculateSize(_repeated_set_codec);
+    if (Name.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+    }
+    if (Description.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(Description);
+    }
     return size;
   }
 
@@ -762,6 +826,12 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
       Subcount = other.Subcount;
     }
     set_.Add(other.set_);
+    if (other.Name.Length != 0) {
+      Name = other.Name;
+    }
+    if (other.Description.Length != 0) {
+      Description = other.Description;
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -782,6 +852,14 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
         }
         case 26: {
           set_.AddEntriesFrom(input, _repeated_set_codec);
+          break;
+        }
+        case 34: {
+          Name = input.ReadString();
+          break;
+        }
+        case 42: {
+          Description = input.ReadString();
           break;
         }
       }
@@ -816,12 +894,24 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public StringChoice(StringChoice other) : this() {
+        display_ = other.display_;
         subset_ = other.subset_.Clone();
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public StringChoice Clone() {
         return new StringChoice(this);
+      }
+
+      /// <summary>Field number for the "display" field.</summary>
+      public const int DisplayFieldNumber = 1;
+      private string display_ = "";
+      [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+      public string Display {
+        get { return display_; }
+        set {
+          display_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        }
       }
 
       /// <summary>Field number for the "subset" field.</summary>
@@ -847,6 +937,7 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
         if (ReferenceEquals(other, this)) {
           return true;
         }
+        if (Display != other.Display) return false;
         if(!subset_.Equals(other.subset_)) return false;
         return true;
       }
@@ -854,6 +945,7 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public override int GetHashCode() {
         int hash = 1;
+        if (Display.Length != 0) hash ^= Display.GetHashCode();
         hash ^= subset_.GetHashCode();
         return hash;
       }
@@ -865,12 +957,19 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public void WriteTo(pb::CodedOutputStream output) {
+        if (Display.Length != 0) {
+          output.WriteRawTag(10);
+          output.WriteString(Display);
+        }
         subset_.WriteTo(output, _repeated_subset_codec);
       }
 
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
       public int CalculateSize() {
         int size = 0;
+        if (Display.Length != 0) {
+          size += 1 + pb::CodedOutputStream.ComputeStringSize(Display);
+        }
         size += subset_.CalculateSize(_repeated_subset_codec);
         return size;
       }
@@ -879,6 +978,9 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
       public void MergeFrom(StringChoice other) {
         if (other == null) {
           return;
+        }
+        if (other.Display.Length != 0) {
+          Display = other.Display;
         }
         subset_.Add(other.subset_);
       }
@@ -891,6 +993,10 @@ public sealed partial class KeyboardSet : pb::IMessage<KeyboardSet> {
             default:
               input.SkipLastField();
               break;
+            case 10: {
+              Display = input.ReadString();
+              break;
+            }
             case 18: {
               subset_.AddEntriesFrom(input, _repeated_subset_codec);
               break;
