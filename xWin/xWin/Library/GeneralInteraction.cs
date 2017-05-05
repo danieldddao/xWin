@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xWin.Forms;
 using xWin.Wrapper;
 using static BasicControl.Types;
 using static TypingControl.Types;
@@ -179,7 +180,14 @@ namespace xWin.Library
             bool M_Up = false, M_Down = false, M_Right = false, M_Left = false;
 
             bool LButton = false, RButton = false, MButton = false;
-
+            Thread typingThread = new Thread(delegate ()
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new CharacterWheel(config));
+            });
+            typingThread.Start();
+            //CharacterWheel charWheel = new CharacterWheel(c, config);
 
             //Thread.Sleep(5000);
             while (true)
@@ -245,6 +253,7 @@ namespace xWin.Library
                 {
                     case Mode.Normal:
                         {
+                            CharacterWheel.visible = false;                            
                             var kms = i.NextState(datas.Gamepad);
                             Console.Write("Released: ");
                             foreach (var l in kms.released)
@@ -396,6 +405,21 @@ namespace xWin.Library
                     case Mode.Typing:
                         {
                             var ts = ki.NextState(datas.Gamepad);
+                            CharacterWheel.t1 = ts.t1;
+                            CharacterWheel.t2 = ts.t2;
+                            CharacterWheel.visible = true;
+                            if (ts.update_ks)
+                            {
+                                CharacterWheel.keySet = ts.ks.Set;
+                            }
+                            if (typingThread.IsAlive)
+                            {
+                                Debug.WriteLine("Thread is alive");
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Thread is dead");
+                            }
                             Console.WriteLine(ts.ks.ToString());
                             Console.Write("Actions: ");
                             foreach (var act in ts.Actions)

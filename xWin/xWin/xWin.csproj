@@ -139,6 +139,12 @@
     <Compile Include="Config\KeyboardControl.cs" />
     <Compile Include="Config\IO.cs" />
     <Compile Include="Config\SaveFormat.cs" />
+    <Compile Include="Forms\CharacterWheel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CharacterWheel.designer.cs">
+      <DependentUpon>CharacterWheel.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Binding.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -319,6 +325,9 @@
     <EmbeddedResource Include="Forms\ButtonOptions.resx">
       <DependentUpon>ButtonOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CharacterWheel.resx">
+      <DependentUpon>CharacterWheel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ControllerOptions.resx">
       <DependentUpon>ControllerOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -391,6 +400,8 @@
     <None Include="Resources\buttonBackground.jpg" />
     <None Include="Resources\wordpredictiontips.gif" />
     <None Include="Resources\quicktypetips.gif" />
+    <None Include="Resources\blackCircle.png" />
+    <None Include="Resources\button_highlight_invert.png" />
     <Content Include="Resources\XWin.ico" />
     <Content Include="Resources\XWin1.ico" />
     <Content Include="Resources\XWin2.ico" />

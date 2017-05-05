@@ -63,9 +63,29 @@ namespace xWin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blackCircle {
+            get {
+                object obj = ResourceManager.GetObject("blackCircle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap button_highlight {
             get {
                 object obj = ResourceManager.GetObject("button_highlight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_highlight_invert {
+            get {
+                object obj = ResourceManager.GetObject("button_highlight_invert", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
