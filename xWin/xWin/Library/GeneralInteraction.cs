@@ -33,7 +33,7 @@ namespace xWin.Library
         public static void MoveCursor(short x, short y, int dpi = 10)
         {
             Console.WriteLine(x.ToString() + "," + y.ToString()+","+dpi.ToString());
-            if (x != 0 && y != 0)
+            if (x != 0 || y != 0)
             {
                 var t = Math.Atan2(x, y);
 
@@ -56,6 +56,28 @@ namespace xWin.Library
 
         [DllImport("user32.dll")]
         private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+        public static string GetActiveProgram()
+        {
+            try
+            {
+                IntPtr active_window = GetForegroundWindow();
+                //return active_window.ToString();
+                uint procID = 0;
+                GetWindowThreadProcessId(active_window, out procID);
+                return Process.GetProcessById((int)procID).MainModule.ToString();
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
+        }
 
         public static void LDown()
         {
@@ -155,6 +177,7 @@ namespace xWin.Library
             bool LButton = false, RButton = false, MButton = false;
             Thread typingThread = new Thread(delegate () {; });
 
+            Thread.Sleep(5000);
             while (true)
             {
                 st.Start();
@@ -165,7 +188,6 @@ namespace xWin.Library
                 datas.Gamepad.RightThumbX = shortbound(datas.Gamepad.RightThumbX - cc.rx);
                 datas.Gamepad.RightThumbY = shortbound(datas.Gamepad.RightThumbY - cc.ry);
                 //var wrapper = new SystemWrapper();
-                
                 if (just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
                 {
                     just_toggled = true;
@@ -308,7 +330,15 @@ namespace xWin.Library
                                 }
                             }
                             Console.WriteLine();
-                            MoveCursor((short)kms.mouse_movement.x, (short)kms.mouse_movement.y, (int)dpi);
+                            if (M_Down)
+                                kms.mouse_movement.y += 32767;
+                            if (M_Up)
+                                kms.mouse_movement.y -= 32767;
+                            if (M_Right)
+                                kms.mouse_movement.x += 32767;
+                            if (M_Left)
+                                kms.mouse_movement.x -= 32767;
+                            MoveCursor(shortbound(kms.mouse_movement.x), shortbound(kms.mouse_movement.y), (int)dpi);
                             if (!just_toggled && new GamepadFlags(datas.Gamepad.Buttons) & toggle)
                             {
                                 m = Mode.Stopped;
@@ -492,7 +522,8 @@ namespace xWin.Library
                             break;
                         }
                 }
-
+                //Console.WriteLine(GetActiveProgram());
+                Console.WriteLine(st.Elapsed.ToString());
                 while (st.Elapsed < TickSpeed) {  }
                 st.Stop();
                 st.Reset();

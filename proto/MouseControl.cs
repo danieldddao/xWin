@@ -20,35 +20,35 @@ public static partial class MouseControlReflection {
   static MouseControlReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChNtb3VzZV9jb250cm9sLnByb3RvIn0KBVN0aWNrEhAKCGRlYWR6b25lGAEg",
-          "ASgNEhUKDWNvbnRyb2xfbW91c2UYAiABKAgSFAoMcmVnaW9uX3N0YXJ0GAMg",
-          "ASgFEg8KB3JlZ2lvbnMYBCADKA0SEQoJaW52ZXJ0X3VkGAUgASgIEhEKCWlu",
-          "dmVydF9schgGIAEoCCIsCgdUcmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8K",
-          "B3JlZ2lvbnMYAiADKA0ilgcKDEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNr",
-          "GAEgASgLMgYuU3RpY2sSGwoLcmlnaHRfc3RpY2sYAiABKAsyBi5TdGljaxIe",
-          "CgxsZWZ0X3RyaWdnZXIYAyABKAsyCC5UcmlnZ2VyEh8KDXJpZ2h0X3RyaWdn",
-          "ZXIYBCABKAsyCC5UcmlnZ2VyEjAKCmJ1dHRvbl9tYXAYBSADKAsyHC5CYXNp",
-          "Y0NvbnRyb2wuQnV0dG9uTWFwRW50cnkSDAoEbmFtZRgGIAEoCRITCgtkZXNj",
-          "cmlwdGlvbhgHIAEoCRILCgNkcGkYCCABKA0SEAoIc2xvd19kcGkYCSABKA0S",
-          "EAoIZmFzdF9kcGkYCiABKA0SEwoLcmVwZWF0ZGVsYXkYCyABKAQSEwoLcmVw",
-          "ZWF0ZXJhdGUYDCABKAQaUQoHQWN0aW9ucxIQCghrZXliaW5kcxgBIAMoBRI0",
-          "Cg9zcGVjaWFsX2FjdGlvbnMYAiADKA4yGy5CYXNpY0NvbnRyb2wuU3BlY2lh",
-          "bEFjdGlvbhr1AQoIQmVoYXZpb3ISJwoIb25fcHJlc3MYASABKAsyFS5CYXNp",
-          "Y0NvbnRyb2wuQWN0aW9ucxIXCg9vbl9wcmVzc190b2dnbGUYBSABKAgSJgoH",
-          "b25faG9sZBgCIAEoCzIVLkJhc2ljQ29udHJvbC5BY3Rpb25zEikKCm9uX3Jl",
-          "bGVhc2UYAyABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIZChFvbl9yZWxl",
-          "YXNlX3RvZ2dsZRgGIAEoCBImCgdvbl9zdGF5GAQgASgLMhUuQmFzaWNDb250",
-          "cm9sLkFjdGlvbnMSEQoJYmxhY2tsaXN0GAcgAygFGkgKDkJ1dHRvbk1hcEVu",
-          "dHJ5EgsKA2tleRgBIAEoBRIlCgV2YWx1ZRgCIAEoCzIWLkJhc2ljQ29udHJv",
-          "bC5CZWhhdmlvcjoCOAEixgEKDVNwZWNpYWxBY3Rpb24SDAoIT3Blbk1lbnUQ",
-          "ABINCglNb3VzZURvd24QARINCglNb3VzZUxlZnQQAhIOCgpNb3VzZVJpZ2h0",
-          "EAMSCwoHTW91c2VVcBAEEg4KClNjcm9sbERvd24QCRIOCgpTY3JvbGxMZWZ0",
-          "EAcSDwoLU2Nyb2xsUmlnaHQQCBIMCghTY3JvbGxVcBAKEgkKBVR1cmJvEAUS",
-          "EwoPRW50ZXJUeXBpbmdNb2RlEAYSDQoJUHJlY2lzaW9uEAtiBnByb3RvMw=="));
+          "ChNtb3VzZV9jb250cm9sLnByb3RvImsKBVN0aWNrEhUKDWNvbnRyb2xfbW91",
+          "c2UYAiABKAgSFAoMcmVnaW9uX3N0YXJ0GAMgASgFEg8KB3JlZ2lvbnMYBCAD",
+          "KA0SEQoJaW52ZXJ0X3VkGAUgASgIEhEKCWludmVydF9schgGIAEoCCIsCgdU",
+          "cmlnZ2VyEhAKCGRlYWR6b25lGAEgASgNEg8KB3JlZ2lvbnMYAiADKA0ilgcK",
+          "DEJhc2ljQ29udHJvbBIaCgpsZWZ0X3N0aWNrGAEgASgLMgYuU3RpY2sSGwoL",
+          "cmlnaHRfc3RpY2sYAiABKAsyBi5TdGljaxIeCgxsZWZ0X3RyaWdnZXIYAyAB",
+          "KAsyCC5UcmlnZ2VyEh8KDXJpZ2h0X3RyaWdnZXIYBCABKAsyCC5UcmlnZ2Vy",
+          "EjAKCmJ1dHRvbl9tYXAYBSADKAsyHC5CYXNpY0NvbnRyb2wuQnV0dG9uTWFw",
+          "RW50cnkSDAoEbmFtZRgGIAEoCRITCgtkZXNjcmlwdGlvbhgHIAEoCRILCgNk",
+          "cGkYCCABKA0SEAoIc2xvd19kcGkYCSABKA0SEAoIZmFzdF9kcGkYCiABKA0S",
+          "EwoLcmVwZWF0ZGVsYXkYCyABKAQSEwoLcmVwZWF0ZXJhdGUYDCABKAQaUQoH",
+          "QWN0aW9ucxIQCghrZXliaW5kcxgBIAMoBRI0Cg9zcGVjaWFsX2FjdGlvbnMY",
+          "AiADKA4yGy5CYXNpY0NvbnRyb2wuU3BlY2lhbEFjdGlvbhr1AQoIQmVoYXZp",
+          "b3ISJwoIb25fcHJlc3MYASABKAsyFS5CYXNpY0NvbnRyb2wuQWN0aW9ucxIX",
+          "Cg9vbl9wcmVzc190b2dnbGUYBSABKAgSJgoHb25faG9sZBgCIAEoCzIVLkJh",
+          "c2ljQ29udHJvbC5BY3Rpb25zEikKCm9uX3JlbGVhc2UYAyABKAsyFS5CYXNp",
+          "Y0NvbnRyb2wuQWN0aW9ucxIZChFvbl9yZWxlYXNlX3RvZ2dsZRgGIAEoCBIm",
+          "Cgdvbl9zdGF5GAQgASgLMhUuQmFzaWNDb250cm9sLkFjdGlvbnMSEQoJYmxh",
+          "Y2tsaXN0GAcgAygFGkgKDkJ1dHRvbk1hcEVudHJ5EgsKA2tleRgBIAEoBRIl",
+          "CgV2YWx1ZRgCIAEoCzIWLkJhc2ljQ29udHJvbC5CZWhhdmlvcjoCOAEixgEK",
+          "DVNwZWNpYWxBY3Rpb24SDAoIT3Blbk1lbnUQABINCglNb3VzZURvd24QARIN",
+          "CglNb3VzZUxlZnQQAhIOCgpNb3VzZVJpZ2h0EAMSCwoHTW91c2VVcBAEEg4K",
+          "ClNjcm9sbERvd24QCRIOCgpTY3JvbGxMZWZ0EAcSDwoLU2Nyb2xsUmlnaHQQ",
+          "CBIMCghTY3JvbGxVcBAKEgkKBVR1cmJvEAUSEwoPRW50ZXJUeXBpbmdNb2Rl",
+          "EAYSDQoJUHJlY2lzaW9uEAtiBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::Stick), global::Stick.Parser, new[]{ "Deadzone", "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::Stick), global::Stick.Parser, new[]{ "ControlMouse", "RegionStart", "Regions", "InvertUd", "InvertLr" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::Trigger), global::Trigger.Parser, new[]{ "Deadzone", "Regions" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl), global::BasicControl.Parser, new[]{ "LeftStick", "RightStick", "LeftTrigger", "RightTrigger", "ButtonMap", "Name", "Description", "Dpi", "SlowDpi", "FastDpi", "Repeatdelay", "Repeaterate" }, null, new[]{ typeof(global::BasicControl.Types.SpecialAction) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Actions), global::BasicControl.Types.Actions.Parser, new[]{ "Keybinds", "SpecialActions" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::BasicControl.Types.Behavior), global::BasicControl.Types.Behavior.Parser, new[]{ "OnPress", "OnPressToggle", "OnHold", "OnRelease", "OnReleaseToggle", "OnStay", "Blacklist" }, null, null, null),
@@ -83,7 +83,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public Stick(Stick other) : this() {
-    deadzone_ = other.deadzone_;
     controlMouse_ = other.controlMouse_;
     regionStart_ = other.regionStart_;
     regions_ = other.regions_.Clone();
@@ -96,23 +95,12 @@ public sealed partial class Stick : pb::IMessage<Stick> {
     return new Stick(this);
   }
 
-  /// <summary>Field number for the "deadzone" field.</summary>
-  public const int DeadzoneFieldNumber = 1;
-  private uint deadzone_;
-  /// <summary>
-  ///how far must the stick go to count as moved
-  /// </summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public uint Deadzone {
-    get { return deadzone_; }
-    set {
-      deadzone_ = value;
-    }
-  }
-
   /// <summary>Field number for the "control_mouse" field.</summary>
   public const int ControlMouseFieldNumber = 2;
   private bool controlMouse_;
+  /// <summary>
+  ///uint32 deadzone = 1;//how far must the stick go to count as moved
+  /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public bool ControlMouse {
     get { return controlMouse_; }
@@ -180,7 +168,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (Deadzone != other.Deadzone) return false;
     if (ControlMouse != other.ControlMouse) return false;
     if (RegionStart != other.RegionStart) return false;
     if(!regions_.Equals(other.regions_)) return false;
@@ -192,7 +179,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    if (Deadzone != 0) hash ^= Deadzone.GetHashCode();
     if (ControlMouse != false) hash ^= ControlMouse.GetHashCode();
     if (RegionStart != 0) hash ^= RegionStart.GetHashCode();
     hash ^= regions_.GetHashCode();
@@ -208,10 +194,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (Deadzone != 0) {
-      output.WriteRawTag(8);
-      output.WriteUInt32(Deadzone);
-    }
     if (ControlMouse != false) {
       output.WriteRawTag(16);
       output.WriteBool(ControlMouse);
@@ -234,9 +216,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    if (Deadzone != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Deadzone);
-    }
     if (ControlMouse != false) {
       size += 1 + 1;
     }
@@ -257,9 +236,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
   public void MergeFrom(Stick other) {
     if (other == null) {
       return;
-    }
-    if (other.Deadzone != 0) {
-      Deadzone = other.Deadzone;
     }
     if (other.ControlMouse != false) {
       ControlMouse = other.ControlMouse;
@@ -284,10 +260,6 @@ public sealed partial class Stick : pb::IMessage<Stick> {
         default:
           input.SkipLastField();
           break;
-        case 8: {
-          Deadzone = input.ReadUInt32();
-          break;
-        }
         case 16: {
           ControlMouse = input.ReadBool();
           break;
