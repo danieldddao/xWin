@@ -23,23 +23,6 @@ namespace xWin.Forms
 {
     public partial class XWinPanel : Form, log4net.Appender.IAppender
     {
-        IXController XCon1;
-        ControllerOptions OpXCon1;
-
-        IXController XCon2;
-        ControllerOptions OpXCon2;
-
-        IXController XCon3;
-        ControllerOptions OpXCon3;
-
-        IXController XCon4;
-        ControllerOptions OpXCon4;
-
-        Thread XCon1Thread = new Thread(delegate () {; });
-        Thread XCon2Thread = new Thread(delegate () {; });
-        Thread XCon3Thread = new Thread(delegate () {; });
-        Thread XCon4Thread = new Thread(delegate () {; });
-
         private bool minimizeToSystemTray = false;
         private string notifications = "";
 
@@ -52,19 +35,21 @@ namespace xWin.Forms
             this.l = l;
             ConfigName.Text = Program.config.Name == null ? "" : Program.config.Name;
             ConfigDescription.Text = Program.config.Description == null ? "" : Program.config.Description;
-            /*
-            // Initialize 4 controllers
-            XCon1 = new XController(new SharpDX.XInput.Controller(UserIndex.One));
-            OpXCon1 = new ControllerOptions(XCon1);
+            this.FormClosing += XWinPanel_FormClosing1;
+            LXCenter.Text = Program.cc.lx.ToString();
+            LYCenter.Text = Program.cc.ly.ToString();
+            RXCenter.Text = Program.cc.rx.ToString();
+            RYCenter.Text = Program.cc.ry.ToString();
+            DeadzonePicker.Value = Program.cc.deadzone;
+            T_DeadzonePicker.Value = Program.cc.t_deadzone;
+            MouseMode.Checked = Program.dynamicmode;
+        }
 
-            XCon2 = new XController(new SharpDX.XInput.Controller(UserIndex.Two));
-            OpXCon2 = new ControllerOptions(XCon2);
+        private void XWinPanel_FormClosing1(object sender, FormClosingEventArgs e)
+        {
 
-            XCon3 = new XController(new SharpDX.XInput.Controller(UserIndex.Three));
-            OpXCon3 = new ControllerOptions(XCon3);
-
-            XCon4 = new XController(new SharpDX.XInput.Controller(UserIndex.Four));
-            OpXCon4 = new ControllerOptions(XCon4);*/
+            e.Cancel = true;
+            MinimizeApplication();
         }
 
         /* Update Controllers status when loading main panel */
@@ -147,6 +132,8 @@ namespace xWin.Forms
         private void XWinPanel_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); } // Unsubscribe to unread keyboard inputs
+
+            systemTrayNotifyIcon.Visible = false;
         }
         /*
         private void UpdateControllers()
@@ -230,131 +217,6 @@ namespace xWin.Forms
             }
         }
         */
-        private void Controller1_Click(object sender, EventArgs e)
-        {
-            if (XCon1.IsConnected())
-            {
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
-                OpXCon1.ShowDialog();
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
-                Log.GetLogger().Info("Opened Controller 1's Dialog");
-            }
-        }
-
-        private void Controller2_Click(object sender, EventArgs e)
-        {
-            if (XCon2.IsConnected())
-            {
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
-                OpXCon2.ShowDialog();
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
-                Log.GetLogger().Info("Opened Controller 2's Dialog");
-            }
-        }
-
-        private void Controller3_Click(object sender, EventArgs e)
-        {
-            if (XCon3.IsConnected())
-            {
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
-                OpXCon3.ShowDialog();
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
-                Log.GetLogger().Info("Opened Controller 3's Dialog");
-            }
-        }
-
-        private void Controller4_Click(object sender, EventArgs e)
-        {
-            if (XCon4.IsConnected())
-            {
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
-                OpXCon4.ShowDialog();
-                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
-                Log.GetLogger().Info("Opened Controller 4's Dialog");
-            }
-        }
-
-        public void ExecuteButtonsForController(IXController controller)
-        {
-            Thread keyboardThread = new Thread(delegate () {; });
-            bool buttonPressA = false;
-            bool buttonPressB = false;
-            List<GamepadButtonFlags> list = new List<GamepadButtonFlags>();
-
-            try
-            {
-                while (true)
-                {
-                    list = controller.GetCurrentlyPressedButtons();
-                    //Log.GetLogger().Debug("list of currently pressed buttons : " + list);
-                    // If the list has only 1 button pressed
-                    if (list.Count == 1)
-                    {
-                        GamepadButtonFlags b = list.First<GamepadButtonFlags>(); // get the currently pressed button
-                        controller.GetKeyBoardForButton(b).Execute(); // Execute action for the button 
-                        Log.GetLogger().Info("Executed button " + b + " for controller " + controller);
-                    }
-                    Thread.Sleep(15);
-
-                    if (controller.IsConnected())
-                    {
-                        controller.UpdateState();
-                        controller.MoveCursor();
-                        if (controller.ButtonsPressed()["A"])
-                        {
-                            if (!buttonPressA)
-                            {
-                                buttonPressA = true;
-                                controller.LeftDown();
-                            }
-                        }
-                        else
-                        {
-                            if (buttonPressA) controller.LeftUp();
-                            buttonPressA = false;
-                        }
-                        if (controller.ButtonsPressed()["B"])
-                        {
-                            if (!buttonPressB)
-                            {
-                                buttonPressB = true;
-                                controller.RightDown();
-                            }
-                        }
-                        else
-                        {
-                            if (buttonPressB) controller.RightUp();
-                            buttonPressB = false;
-                        }
-                        if (controller.ButtonsPressed()["Y"] && !keyboardThread.IsAlive)
-                        {
-                            keyboardThread = new Thread(delegate ()
-                            {
-                                Application.EnableVisualStyles();
-                                Application.SetCompatibleTextRenderingDefault(false);
-                                Application.Run(new KeyboardWindow(controller));
-                            });
-                            keyboardThread.Name = "keyboard";
-                            keyboardThread.IsBackground = true;
-                            keyboardThread.SetApartmentState(ApartmentState.STA);
-                            keyboardThread.Start();
-                        }
-                        if (controller.GetRightCart()["Y"] > 9000 || controller.GetRightCart()["Y"] < -9000)
-                        {
-                            float percentage = (float)controller.GetRightCart()["Y"] / 32767;
-                            Console.WriteLine(percentage);
-                            int WHEEL_DATA = (int)(percentage * 120);
-                            controller.MouseWheel(WHEEL_DATA);
-                        }
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                Log.GetLogger().Error("Error when executing buttons for controller " + controller, e);
-            }
-        }
         
         /*
          * For Logging
@@ -795,7 +657,11 @@ namespace xWin.Forms
             cc.ly = lyc;
             cc.rx = rxc;
             cc.ry = ryc;
+            cc.deadzone = (uint)DeadzonePicker.Value;
+            cc.t_deadzone = (uint)T_DeadzonePicker.Value;
+            Program.dynamicmode = MouseMode.Checked;
             Program.update_cc = true;
         }
+        
     }
 }

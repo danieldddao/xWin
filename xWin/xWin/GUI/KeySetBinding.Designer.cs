@@ -31,9 +31,9 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.textbox = new System.Windows.Forms.TextBox();
             this.ConfigSelector = new System.Windows.Forms.Button();
+            this.active = new System.Windows.Forms.ComboBox();
             this.keysetbox = new System.Windows.Forms.TextBox();
             this.KeySetSet = new System.Windows.Forms.Button();
-            this.active = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,7 @@
             // 
             this.textbox.Location = new System.Drawing.Point(3, 3);
             this.textbox.Name = "textbox";
+            this.textbox.ReadOnly = true;
             this.textbox.Size = new System.Drawing.Size(100, 20);
             this.textbox.TabIndex = 2;
             // 
@@ -66,24 +67,6 @@
             this.ConfigSelector.Text = "+";
             this.ConfigSelector.UseVisualStyleBackColor = true;
             this.ConfigSelector.Click += new System.EventHandler(this.ConfigSelector_Click);
-            // 
-            // keysetbox
-            // 
-            this.keysetbox.Location = new System.Drawing.Point(265, 3);
-            this.keysetbox.Name = "keysetbox";
-            this.keysetbox.Size = new System.Drawing.Size(100, 20);
-            this.keysetbox.TabIndex = 4;
-            this.keysetbox.TextChanged += new System.EventHandler(this.keysetbox_TextChanged);
-            // 
-            // KeySetSet
-            // 
-            this.KeySetSet.Location = new System.Drawing.Point(371, 3);
-            this.KeySetSet.Name = "KeySetSet";
-            this.KeySetSet.Size = new System.Drawing.Size(23, 23);
-            this.KeySetSet.TabIndex = 3;
-            this.KeySetSet.Text = "K";
-            this.KeySetSet.UseVisualStyleBackColor = true;
-            this.KeySetSet.Click += new System.EventHandler(this.KeySetSet_Click);
             // 
             // active
             // 
@@ -98,6 +81,25 @@
             this.active.Size = new System.Drawing.Size(121, 21);
             this.active.TabIndex = 5;
             this.active.Text = "Pressed";
+            // 
+            // keysetbox
+            // 
+            this.keysetbox.Location = new System.Drawing.Point(265, 3);
+            this.keysetbox.Name = "keysetbox";
+            this.keysetbox.ReadOnly = true;
+            this.keysetbox.Size = new System.Drawing.Size(100, 20);
+            this.keysetbox.TabIndex = 4;
+            this.keysetbox.TextChanged += new System.EventHandler(this.keysetbox_TextChanged);
+            // 
+            // KeySetSet
+            // 
+            this.KeySetSet.Location = new System.Drawing.Point(371, 3);
+            this.KeySetSet.Name = "KeySetSet";
+            this.KeySetSet.Size = new System.Drawing.Size(23, 23);
+            this.KeySetSet.TabIndex = 3;
+            this.KeySetSet.Text = "K";
+            this.KeySetSet.UseVisualStyleBackColor = true;
+            this.KeySetSet.Click += new System.EventHandler(this.KeySetSet_Click);
             // 
             // KeySetBinding
             // 

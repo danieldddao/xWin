@@ -21,7 +21,7 @@ public static partial class KeyboardControlReflection {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
           "ChZrZXlib2FyZF9jb250cm9sLnByb3RvGhNtb3VzZV9jb250cm9sLnByb3Rv",
-          "IvQHCg1UeXBpbmdDb250cm9sEg0KBXRpZXIxGAEgAygFEg0KBXRpZXIyGAIg",
+          "Iv0HCg1UeXBpbmdDb250cm9sEg0KBXRpZXIxGAEgAygFEg0KBXRpZXIyGAIg",
           "AygFEi4KCGJpbmRpbmdzGAMgAygLMhwuVHlwaW5nQ29udHJvbC5CaW5kaW5n",
           "c0VudHJ5EhoKBGJhc2UYBCABKAsyDC5LZXlib2FyZFNldBI7Cg9rZXlib2Fy",
           "ZF9zZWxlY3QYBSADKAsyIi5UeXBpbmdDb250cm9sLktleWJvYXJkU2VsZWN0",
@@ -34,7 +34,7 @@ public static partial class KeyboardControlReflection {
           "dHJvbC5BY3RpdmVXaGVuGlcKDUJpbmRpbmdzRW50cnkSCwoDa2V5GAEgASgF",
           "EjUKBXZhbHVlGAIgASgLMiYuVHlwaW5nQ29udHJvbC5LZXlib2FyZEFjdGlv",
           "bkNvbnRhaW5lcjoCOAEaQwoTS2V5Ym9hcmRTZWxlY3RFbnRyeRILCgNrZXkY",
-          "ASABKAUSGwoFdmFsdWUYAiABKAsyDC5LZXlib2FyZFNldDoCOAEixgIKDktl",
+          "ASABKAUSGwoFdmFsdWUYAiABKAsyDC5LZXlib2FyZFNldDoCOAEizwIKDktl",
           "eWJvYXJkQWN0aW9uEgsKB0NvbmZpcm0QABIPCgtMZWF2ZVR5cGluZxABEgwK",
           "CE9wZW5NZW51EAISDgoKQ3Vyc29yTGVmdBADEg8KC0N1cnNvclJpZ2h0EAQS",
           "DAoIQ3Vyc29yVXAQBRIOCgpDdXJzb3JEb3duEAYSCgoGVWlMZWZ0EAcSCwoH",
@@ -42,12 +42,12 @@ public static partial class KeyboardControlReflection {
           "CxIKCgZEZWxldGUQDBIJCgVTaGlmdBANEggKBENvcHkQDhIHCgNDdXQQDxIJ",
           "CgVQYXN0ZRAQEggKBEhvbWUQERIHCgNFbmQQEhIKCgZJbnNlcnQQExIJCgVF",
           "bnRlchAUEg4KClNlbGVjdF9BbGwQFRIICgRTYXZlEBYSCAoEVW5kbxAXEggK",
-          "BFJlZG8QGCI9CgpBY3RpdmVXaGVuEgsKB1ByZXNzZWQQABIICgRIZWxkEAES",
-          "DAoIUmVsZWFzZWQQAhIKCgZTdGF5ZWQQAyKqAQoLS2V5Ym9hcmRTZXQSDQoF",
-          "Y291bnQYASABKAUSEAoIc3ViY291bnQYAiABKAUSJgoDc2V0GAMgAygLMhku",
-          "S2V5Ym9hcmRTZXQuU3RyaW5nQ2hvaWNlEgwKBG5hbWUYBCABKAkSEwoLZGVz",
-          "Y3JpcHRpb24YBSABKAkaLwoMU3RyaW5nQ2hvaWNlEg8KB2Rpc3BsYXkYASAB",
-          "KAkSDgoGc3Vic2V0GAIgAygJYgZwcm90bzM="));
+          "BFJlZG8QGBIHCgNUYWIQGSI9CgpBY3RpdmVXaGVuEgsKB1ByZXNzZWQQABII",
+          "CgRIZWxkEAESDAoIUmVsZWFzZWQQAhIKCgZTdGF5ZWQQAyKqAQoLS2V5Ym9h",
+          "cmRTZXQSDQoFY291bnQYASABKAUSEAoIc3ViY291bnQYAiABKAUSJgoDc2V0",
+          "GAMgAygLMhkuS2V5Ym9hcmRTZXQuU3RyaW5nQ2hvaWNlEgwKBG5hbWUYBCAB",
+          "KAkSEwoLZGVzY3JpcHRpb24YBSABKAkaLwoMU3RyaW5nQ2hvaWNlEg8KB2Rp",
+          "c3BsYXkYASABKAkSDgoGc3Vic2V0GAIgAygJYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::MouseControlReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -488,6 +488,7 @@ public sealed partial class TypingControl : pb::IMessage<TypingControl> {
       [pbr::OriginalName("Save")] Save = 22,
       [pbr::OriginalName("Undo")] Undo = 23,
       [pbr::OriginalName("Redo")] Redo = 24,
+      [pbr::OriginalName("Tab")] Tab = 25,
     }
 
     public enum ActiveWhen {

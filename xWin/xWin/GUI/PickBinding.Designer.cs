@@ -41,6 +41,7 @@
             this.TextField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TextField.Location = new System.Drawing.Point(89, 3);
             this.TextField.Name = "TextField";
+            this.TextField.ReadOnly = true;
             this.TextField.Size = new System.Drawing.Size(100, 20);
             this.TextField.TabIndex = 0;
             // 

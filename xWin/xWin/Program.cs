@@ -54,20 +54,10 @@ namespace xWin
                 controller = new XBXController(XCon1);
             else
                 controller = new DIController(DI2XI.setup_stick());
-
-            var cc = new ControllerCalibration();
-            State datas = controller.GetState();
-            //cc.lx = datas.Gamepad.LeftThumbX;
-            //cc.ly = datas.Gamepad.LeftThumbY;
-            //cc.rx = datas.Gamepad.RightThumbX;
-            //cc.ry = datas.Gamepad.RightThumbY;
-            
+                        
             cc.deadzone = 7000;
 
-
             Program.Controller = controller;
-            Program.cc = cc;
-            Program.tick = 2000;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             log4net.Config.XmlConfigurator.Configure();
@@ -89,6 +79,8 @@ namespace xWin
         public static int tick;
         public static bool update_tick;
 
+        public static bool dynamicmode;
+
         private static void initialize_datas()
         {
             update_controller = false;
@@ -101,6 +93,8 @@ namespace xWin
             cc.rx = 0;
             cc.ry = 0;
             cc.deadzone = 5000;
+            cc.t_deadzone = 5000;
+            tick = 2000;
         }
 
         [STAThread]

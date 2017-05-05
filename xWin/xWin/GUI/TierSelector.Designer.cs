@@ -54,6 +54,7 @@
             // 
             this.textbox.Location = new System.Drawing.Point(3, 3);
             this.textbox.Name = "textbox";
+            this.textbox.ReadOnly = true;
             this.textbox.Size = new System.Drawing.Size(100, 20);
             this.textbox.TabIndex = 0;
             this.textbox.TextChanged += new System.EventHandler(this.textbox_TextChanged);

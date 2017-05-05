@@ -29,34 +29,34 @@ namespace xWin.GUI
                         box.Text = "`";
                         break;
 
-                    case "Oem1":
+                    case "D1":
                         box.Text = "1";
                         break;
-                    case "Oem2":
+                    case "D2":
                         box.Text = "2";
                         break;
-                    case "Oem3":
+                    case "D3":
                         box.Text = "3";
                         break;
-                    case "Oem4":
+                    case "D4":
                         box.Text = "4";
                         break;
-                    case "Oem5":
+                    case "D5":
                         box.Text = "5";
                         break;
-                    case "Oem6":
+                    case "D6":
                         box.Text = "6";
                         break;
-                    case "Oem7":
+                    case "D7":
                         box.Text = "7";
                         break;
-                    case "Oem8":
+                    case "D8":
                         box.Text = "8";
                         break;
-                    case "Oem9":
+                    case "D9":
                         box.Text = "9";
                         break;
-                    case "Oem0":
+                    case "D0":
                         box.Text = "0";
                         break;
                     case "OemMinus":
@@ -191,6 +191,9 @@ namespace xWin.GUI
                     case "Divide":
                         box.Text = "/";
                         break;
+                    case "Back":
+                        box.Text = "Backspace";
+                        break;
                     default:
                         box.Text = box.Name;
                         break;
@@ -208,7 +211,39 @@ namespace xWin.GUI
                 }*/
             foreach(var a in A.Keybinds)
             {
-               ((CheckBox)(this.Controls.Find(((Keys)a).ToString(), true)[0])).CheckState = CheckState.Checked;
+                switch(a)
+                {
+                    case 0:
+                        break;
+                    case 34:
+                        ((CheckBox)(this.Controls.Find("PageDown", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    case 20:
+                        ((CheckBox)(this.Controls.Find("CapsLock", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    case 13:
+                        ((CheckBox)(this.Controls.Find("Enter", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    case 221:
+                        ((CheckBox)(this.Controls.Find("OemCloseBrackets", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    case 220:
+                        ((CheckBox)(this.Controls.Find("OemPipe", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    case 186:
+                        ((CheckBox)(this.Controls.Find("OemSemicolon", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    case 219:
+                        ((CheckBox)(this.Controls.Find("OemOpenBrackets", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    case 222:
+                        ((CheckBox)(this.Controls.Find("OemQuotes", true)[0])).CheckState = CheckState.Checked;
+                        break;
+                    default:
+                        ((CheckBox)(this.Controls.Find(((Keys)a).ToString(), true)[0])).CheckState = CheckState.Checked;
+                        break;
+
+                }
             }
             foreach(var a in A.SpecialActions)
             {
