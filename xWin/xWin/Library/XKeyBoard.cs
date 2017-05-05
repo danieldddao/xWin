@@ -157,11 +157,14 @@ namespace xWin.Library
         {
             try
             {
-                foreach (Keys k in shortcut)
-                { systemWrapper.SimulateKeyDown((WindowsInput.Native.VirtualKeyCode) k); }
+                if (shortcut.Length > 0)
+                {
+                    foreach (Keys k in shortcut)
+                    { systemWrapper.SimulateKeyDown((WindowsInput.Native.VirtualKeyCode)k); }
 
-                foreach (Keys k in shortcut)
-                { systemWrapper.SimulateKeyUp((WindowsInput.Native.VirtualKeyCode)k); }
+                    for (int i = shortcut.Length - 1; i >= 0; i--)
+                    { systemWrapper.SimulateKeyUp((WindowsInput.Native.VirtualKeyCode)shortcut[i]); }
+                }
 
                 return true;
             }
@@ -232,7 +235,7 @@ namespace xWin.Library
                             if (ShortcutToPress != null)
                             {
                                 PressShortcut(ShortcutToPress);
-                                Log.GetLogger().Info("Executed Shortcut " + ShortcutToPress);
+                                Log.GetLogger().Info("Executed Shortcut " + string.Join("+ ", ShortcutToPress));
                             }
                             break;
                         }

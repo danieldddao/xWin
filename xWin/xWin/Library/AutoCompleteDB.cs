@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using xWin.Wrapper;
 
@@ -11,7 +12,7 @@ namespace xWin.Library
 {
     public class AutoCompleteDB
     {
-        ISystemWrapper systemWrapper = new SystemWrapper(); // for testing Exceptions
+        ISystemWrapper systemWrapper; // for testing Exceptions
 
         private string[] commonlyUsedWords = {
                                                "the", "be", "to", "of", "and", "a", "in", "that", "have",
@@ -30,16 +31,16 @@ namespace xWin.Library
 
         public AutoCompleteDB() 
         {
-            CreateDB();
             systemWrapper = new SystemWrapper();
+            CreateDB();
         }
 
         public AutoCompleteDB(string db, string[] words, ISystemWrapper systemWrapper)
         {
             dbFile = db;
             commonlyUsedWords = words;
-            CreateDB();
             this.systemWrapper = systemWrapper;
+            CreateDB();
         }
 
         public void CreateDB() 
@@ -61,9 +62,20 @@ namespace xWin.Library
                         int status = cmd.ExecuteNonQuery();
                         Log.GetLogger().Debug("Create Table's status= " + status);
 
-                        // Insert commonly used words into the newly created database
                         if (status == 0)
                         {
+                            // Create index
+                            query = "CREATE INDEX IF NOT EXISTS dictionary_index ON Dictionary(word, typed_count);";
+                            using (SQLiteCommand cmdi = new SQLiteCommand(query, dbConnection))
+                            {
+                                status = cmdi.ExecuteNonQuery();
+                                if (status == 0)
+                                { Log.GetLogger().Debug("Successfully created index into Dictionary table"); }
+                                else
+                                { Log.GetLogger().Debug("Failed to created index into Dictionary table"); }
+                            }
+
+                            // Insert commonly used words into the newly created database
                             foreach (string word in commonlyUsedWords)
                             {
                                 query = "INSERT INTO Dictionary(word) values('" + word.ToLower() + "');";
@@ -78,6 +90,7 @@ namespace xWin.Library
                             }
                         }
                     }
+
                 }
                 Log.GetLogger().Debug("Finished initialized AutoCompleteDB Object");
             }
@@ -107,7 +120,7 @@ namespace xWin.Library
                                 while (reader.Read())
                                 { topThree.Add((string)reader["word"]); }
                                 if (topThree.Count == 0)
-                                { Log.GetLogger().Info("Couldn't find " + subword + " in the database"); }
+                                { Log.GetLogger().Debug("Couldn't find " + subword + " in the database"); }
                             }
                         }
                     }
@@ -118,16 +131,17 @@ namespace xWin.Library
             }
             catch (Exception e ) 
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
                 return topThree;
             }
         }
 
-        public void UpdateOrInsertWord(string word)
+        public void UpdateOrInsertWord(string inputWord)
         {
             try
             {
                 systemWrapper.ThrowException();
+                string word = inputWord.Replace("'", "''");
 
                 using (SQLiteConnection dbConnection = new SQLiteConnection("Data Source=" + dbFile + ";Version=3;"))
                 {
@@ -140,7 +154,7 @@ namespace xWin.Library
                             // If word exists in database, update its typed_count
                             if (reader.Read())
                             {
-                                Log.GetLogger().Info("Word '" + word + "' exists in database, Updating typed_count...");
+                                Log.GetLogger().Debug("Word '" + word + "' exists in database, Updating typed_count...");
                                 query = "UPDATE Dictionary SET typed_count = typed_count + 1 WHERE word = '" + word.ToLower() + "';";
                                 using (SQLiteCommand cmdu = new SQLiteCommand(query, dbConnection))
                                 {
@@ -151,10 +165,10 @@ namespace xWin.Library
                                     { Log.GetLogger().Error("Failed to update word: '" + word + "' in Dictionary table"); }
                                 }
                             }
-                            // If word doesn't exist in database, insert it into Dictionary table
-                            else
+                            // If word is not empty and doesn't exist in database, insert it into Dictionary table
+                            else if (word != "")
                             {
-                                Log.GetLogger().Info("Word '" + word + "' doesn't exist in database, Inserting it to database...");
+                                Log.GetLogger().Debug("Word '" + word + "' doesn't exist in database, Inserting it to database...");
                                 query = "INSERT INTO Dictionary (word) values ('" + word.ToLower() + "');";
                                 using (SQLiteCommand cmdi = new SQLiteCommand(query, dbConnection))
                                 {
@@ -171,7 +185,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
             }
         }
 
@@ -193,7 +207,7 @@ namespace xWin.Library
                             while (reader.Read())
                             { allWords.Add((string)reader["word"]); }
                             if (allWords.Count == 0)
-                            { Log.GetLogger().Info("Database is empty"); }
+                            { Log.GetLogger().Debug("Database is empty"); }
                         }
                     }
                 }
@@ -228,7 +242,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
                 return status;
             }
         }
@@ -251,7 +265,7 @@ namespace xWin.Library
             }
             catch (Exception e)
             {
-                Log.GetLogger().Error(e);
+                Log.GetLogger().Debug(e);
             }
         }
     }

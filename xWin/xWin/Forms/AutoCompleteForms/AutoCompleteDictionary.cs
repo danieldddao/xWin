@@ -45,10 +45,12 @@ namespace xWin.Forms.AutoCompleteForms
         {
             try
             {
+
                 foreach (ListViewItem item in DictionaryListView.SelectedItems)
                 {
+                    Library.Log.GetLogger().Debug("removing " + item.SubItems[0].Text + " from database");
                     Library.AutoCompleteDB db = new Library.AutoCompleteDB();
-                    string word = item.SubItems[0].Text;
+                    string word = item.SubItems[1].Text;
                     bool status = db.RemoveWord(word);
                     if (status)
                     {
