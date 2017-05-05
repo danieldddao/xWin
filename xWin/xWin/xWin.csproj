@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -396,7 +397,6 @@
     <None Include="Resources\xboxDPadUp.png" />
     <None Include="Resources\xboxLeftShield.png" />
     <None Include="Resources\xboxRightShield.png" />
-    <None Include="Resources\button_background.png" />
     <None Include="Resources\buttonBackground.jpg" />
     <None Include="Resources\wordpredictiontips.gif" />
     <None Include="Resources\quicktypetips.gif" />

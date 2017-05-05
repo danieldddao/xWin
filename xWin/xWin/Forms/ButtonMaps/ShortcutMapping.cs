@@ -123,7 +123,7 @@ namespace xWin.Forms.ButtonMaps
         {
             this.Close();
             Unsubscribe();
-            Log.GetLogger().Info("shortcut " + shortcut + " was saved");
+            Log.GetLogger().Info("shortcut " + string.Join("+ ", shortcut.ToArray()) + " was saved");
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace xWin.Forms.ButtonMaps
             shortcut = new List<Keys>();
             this.Close();
             Unsubscribe();
-            Log.GetLogger().Info("shortcut " + shortcut + " was cancelled");
+            Log.GetLogger().Debug("shortcut " + string.Join("+ ", shortcut.ToArray()) + " was cancelled");
         }
 
     }

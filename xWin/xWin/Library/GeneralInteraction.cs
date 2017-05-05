@@ -16,6 +16,7 @@ using xWin.Wrapper;
 using static BasicControl.Types;
 using static TypingControl.Types;
 using static xWin.Library.StringSendingImports;
+
 namespace xWin.Library
 {
     public enum Mode
@@ -190,6 +191,7 @@ namespace xWin.Library
             //CharacterWheel charWheel = new CharacterWheel(c, config);
 
             //Thread.Sleep(5000);
+            var sw = new SystemWrapper();
             while (true)
             {
                 st.Start();
@@ -429,7 +431,16 @@ namespace xWin.Library
                                 {
                                     case KeyboardAction.Confirm:
                                         text += ts.Text;
-                                        SendString(ts.Text);
+                                       //sw.SimulateText(ts.Text);
+                                       if (ts.Text.Length == 1)
+                                        {
+                                            char[] cArray = ts.Text.ToCharArray();
+                                            sw.SimulateKeyPress((WindowsInput.Native.VirtualKeyCode) sw.ScanKey(cArray[0]));
+                                        }
+                                       else
+                                        {
+                                            sw.SimulateText(ts.Text);
+                                        }
                                         break;
                                     case KeyboardAction.LeaveTyping:
                                         m = Mode.Normal;

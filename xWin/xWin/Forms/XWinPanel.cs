@@ -70,10 +70,22 @@ namespace xWin.Forms
         /* Update Controllers status when loading main panel */
         private void XWinPanel_Load(object sender, EventArgs e)
         {
-            //UpdateControllers();
+           // UpdateControllers();
+
+            autoComplete = new AutoComplete();
+
             //if (autoComplete.enableWordPrediction || autoComplete.enableQuickType) { autoComplete.KeyboardInputsSubscribe(); } // Subscribe to read keyboard inputs
             if (autoComplete.enableWordPrediction) { wordPredictionCheckBox.Checked = true; }
             if (autoComplete.enableQuickType) { quickTypeCheckBox.Checked = true; }
+            
+            if (KeyLoc.GetValue("XWinMinimizeToSystemTray") == null)
+            {
+                MinimizeCheckBox.Checked = false;
+            }
+            else
+            {
+                MinimizeCheckBox.Checked = true;
+            }
 
             if (KeyLoc.GetValue("XWinStartUp") == null)
             {
@@ -98,6 +110,24 @@ namespace xWin.Forms
                 MinimizeApplication();
             }
 
+            if (KeyLoc.GetValue("XWinWordPrediction") == null)
+            {
+                wordPredictionCheckBox.Checked = false;
+            }
+            else
+            {
+                wordPredictionCheckBox.Checked = true;
+            }
+
+            if (KeyLoc.GetValue("XWinQuickType") == null)
+            {
+                quickTypeCheckBox.Checked = false;
+            }
+            else
+            {
+                quickTypeCheckBox.Checked = true;
+            }
+
             if (KeyLoc.GetValue("XWinDebugMode") == null)
             {
                 // If the value doesn't exist, the debug mode is disabled
@@ -116,7 +146,7 @@ namespace xWin.Forms
 
         private void XWinPanel_FormClosed(object sender, FormClosedEventArgs e)
         {
-            autoComplete.KeyboardInputsUnsubscribe(); // Unsubscribe to unread keyboard inputs
+            if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); } // Unsubscribe to unread keyboard inputs
         }
         /*
         private void UpdateControllers()
@@ -204,9 +234,9 @@ namespace xWin.Forms
         {
             if (XCon1.IsConnected())
             {
-                autoComplete.KeyboardInputsUnsubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
                 OpXCon1.ShowDialog();
-                autoComplete.KeyboardInputsSubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
                 Log.GetLogger().Info("Opened Controller 1's Dialog");
             }
         }
@@ -215,9 +245,9 @@ namespace xWin.Forms
         {
             if (XCon2.IsConnected())
             {
-                autoComplete.KeyboardInputsUnsubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
                 OpXCon2.ShowDialog();
-                autoComplete.KeyboardInputsSubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
                 Log.GetLogger().Info("Opened Controller 2's Dialog");
             }
         }
@@ -226,9 +256,9 @@ namespace xWin.Forms
         {
             if (XCon3.IsConnected())
             {
-                autoComplete.KeyboardInputsUnsubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
                 OpXCon3.ShowDialog();
-                autoComplete.KeyboardInputsSubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
                 Log.GetLogger().Info("Opened Controller 3's Dialog");
             }
         }
@@ -237,9 +267,9 @@ namespace xWin.Forms
         {
             if (XCon4.IsConnected())
             {
-                autoComplete.KeyboardInputsUnsubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
                 OpXCon4.ShowDialog();
-                autoComplete.KeyboardInputsSubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
                 Log.GetLogger().Info("Opened Controller 4's Dialog");
             }
         }
@@ -470,9 +500,9 @@ namespace xWin.Forms
             try
             {
                 EmailError emailError = new EmailError();
-                autoComplete.KeyboardInputsUnsubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
                 emailError.ShowDialog();
-                autoComplete.KeyboardInputsSubscribe();
+                if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
             }
             catch (Exception ex)
             {
@@ -483,30 +513,33 @@ namespace xWin.Forms
         /*
          * Code for AutoComplete feature
          */
-        AutoComplete autoComplete = new AutoComplete();
-        bool subscribed = false; // indicate whether reading keyboard inputs is subscribed
+        AutoComplete autoComplete;
 
         private void wordPredictionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (wordPredictionCheckBox.Checked)
             {
                 autoComplete.enableWordPrediction = true;
-                if (!subscribed)
+                if (!autoComplete.enableQuickType) // if quicktype is disabled
                 {
                     autoComplete.KeyboardInputsSubscribe();
-                    subscribed = true;
                 }
+                KeyLoc.SetValue("XWinWordPrediction", true);
+                Log.GetLogger().Info("Enabled Word Prediction");
             }
             else
             {
                 autoComplete.enableWordPrediction = false;
-                if (!quickTypeCheckBox.Checked)
+                if (!autoComplete.enableQuickType) // if quicktype is already disabled
                 {
                     autoComplete.KeyboardInputsUnsubscribe();
-                    subscribed = false;
+                    autoComplete.typedWord = "";
+                    autoComplete.predictiveSubWord = "";
                 }
+                KeyLoc.DeleteValue("XWinWordPrediction", false);
+                Log.GetLogger().Info("Disabled Word Prediction");
             }
-            Log.GetLogger().Debug("Word Prediction option changed:" + autoComplete.enableWordPrediction);
+            Log.GetLogger().Debug("Word Prediction option changed to :" + autoComplete.enableWordPrediction);
         }
 
         private void quickTypeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -514,30 +547,36 @@ namespace xWin.Forms
             if (quickTypeCheckBox.Checked)
             {
                 autoComplete.enableQuickType = true;
-                if (!subscribed)
+                if (!autoComplete.enableWordPrediction) // if word prediction is disabled
                 {
                     autoComplete.KeyboardInputsSubscribe();
-                    subscribed = true;
                 }
+                KeyLoc.SetValue("XWinQuickType", true);
+                Log.GetLogger().Info("Enabled Quicktype suggestions");
             }
             else
             {
                 autoComplete.enableQuickType = false;
-                if (!wordPredictionCheckBox.Checked)
+                if (!autoComplete.enableWordPrediction) // if word prediction is disabled
                 {
                     autoComplete.KeyboardInputsUnsubscribe();
-                    subscribed = false;
+                    autoComplete.typedWord = "";
+                    autoComplete.predictiveSubWord = "";
                 }
+                autoComplete.Hide();
+                autoComplete.StopTimer();
+                KeyLoc.DeleteValue("XWinQuickType", false);
+                Log.GetLogger().Info("Disabled Quicktype suggestions");
             }
-            Log.GetLogger().Debug("Quicktype option changed:" + autoComplete.enableQuickType);
+            Log.GetLogger().Debug("Quicktype option changed to :" + autoComplete.enableQuickType);
         }
 
         private void buttonViewDictionary_Click(object sender, EventArgs e)
         {
             AutoCompleteDictionary dictionary = new AutoCompleteDictionary();
-            autoComplete.KeyboardInputsUnsubscribe();
+            if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsUnsubscribe(); }
             dictionary.ShowDialog();
-            autoComplete.KeyboardInputsSubscribe();
+            if (autoComplete.enableQuickType || autoComplete.enableWordPrediction) { autoComplete.KeyboardInputsSubscribe(); }
         }
 
         private void wordPredictionTipsButton_Click(object sender, EventArgs e)
@@ -555,14 +594,19 @@ namespace xWin.Forms
         private void customizeQuickTypeBar_Click(object sender, EventArgs e)
         {
             QuickTypeBarCustomization qtbar = new QuickTypeBarCustomization(autoComplete.suggestion1Shortcut, autoComplete.suggestion2Shortcut, autoComplete.suggestion3Shortcut, autoComplete.usingShortcuts, autoComplete.quickTypeTimerInterval);
-            autoComplete.KeyboardInputsUnsubscribe();
+            if (autoComplete.enableQuickType || autoComplete.enableWordPrediction)
+            { autoComplete.KeyboardInputsUnsubscribe(); }
+
             qtbar.ShowDialog();
-            autoComplete.suggestion1Shortcut = qtbar.qtButton1Shortcut;
-            autoComplete.suggestion2Shortcut = qtbar.qtButton2Shortcut;
-            autoComplete.suggestion3Shortcut = qtbar.qtButton3Shortcut;
+            if (qtbar.qtButton1Shortcut.Count > 0) { autoComplete.suggestion1Shortcut = qtbar.qtButton1Shortcut; }
+            if (qtbar.qtButton2Shortcut.Count > 0) { autoComplete.suggestion2Shortcut = qtbar.qtButton2Shortcut; }
+            if (qtbar.qtButton3Shortcut.Count > 0) { autoComplete.suggestion3Shortcut = qtbar.qtButton3Shortcut; }
             autoComplete.usingShortcuts = qtbar.usingShortcuts;
             autoComplete.quickTypeTimerInterval = qtbar.quickTypeTimerInterval;
-            autoComplete.KeyboardInputsSubscribe();
+
+            if (autoComplete.enableQuickType || autoComplete.enableWordPrediction)
+            { autoComplete.KeyboardInputsSubscribe(); }
+
             Log.GetLogger().Info("Successfully updated the shortcuts for quicktype bar");
             Log.GetLogger().Info("Suggestion 1's shortcut: (" + autoComplete.suggestion1Shortcut.Count + ") " + string.Join("+ ", autoComplete.suggestion1Shortcut.ToArray()));
             Log.GetLogger().Info("Suggestion 2's shortcut: (" + autoComplete.suggestion2Shortcut.Count + ")" + string.Join("+ ", autoComplete.suggestion2Shortcut.ToArray()));
@@ -574,10 +618,12 @@ namespace xWin.Forms
             if (MinimizeCheckBox.Checked)
             {
                 minimizeToSystemTray = true;
+                KeyLoc.SetValue("XWinMinimizeToSystemTray", true);
             }
             else
             {
                 minimizeToSystemTray = false;
+                KeyLoc.DeleteValue("XWinMinimizeToSystemTray", false);
             }
         }
 
@@ -588,7 +634,7 @@ namespace xWin.Forms
                 systemTrayNotifyIcon.BalloonTipText = "XWin Application is minimized...";
                 systemTrayNotifyIcon.BalloonTipTitle = "XWin";
                 systemTrayNotifyIcon.BalloonTipIcon = ToolTipIcon.Info;
-                systemTrayNotifyIcon.ShowBalloonTip(500);
+                systemTrayNotifyIcon.ShowBalloonTip(100);
                 this.ShowInTaskbar = false;
                 systemTrayNotifyIcon.Visible = true;
                 this.Hide();
@@ -721,6 +767,7 @@ namespace xWin.Forms
             cw.ShowDialog();
             Program.config = cw.c;
             Program.update_config = true;
+            CharacterWheel.keySet = Program.config.Typing.Base.Set;
         }
 
         private void CalibrateLeft_Click(object sender, EventArgs e)

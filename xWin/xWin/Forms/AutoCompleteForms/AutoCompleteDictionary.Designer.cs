@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutoCompleteDictionary));
             this.DictionaryListView = new System.Windows.Forms.ListView();
             this.wordHeaderHide = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.WordHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.removeWordsButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.addWordButton = new System.Windows.Forms.Button();
-            this.WordHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // DictionaryListView
@@ -42,6 +42,7 @@
             this.DictionaryListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.wordHeaderHide,
             this.WordHeader});
+            this.DictionaryListView.FullRowSelect = true;
             this.DictionaryListView.GridLines = true;
             this.DictionaryListView.Location = new System.Drawing.Point(0, 0);
             this.DictionaryListView.Name = "DictionaryListView";
@@ -54,6 +55,12 @@
             // 
             this.wordHeaderHide.Text = "Word";
             this.wordHeaderHide.Width = 0;
+            // 
+            // WordHeader
+            // 
+            this.WordHeader.Text = "Word";
+            this.WordHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.WordHeader.Width = 150;
             // 
             // removeWordsButton
             // 
@@ -90,12 +97,6 @@
             this.addWordButton.Text = "Add Word To Dictionary";
             this.addWordButton.UseVisualStyleBackColor = true;
             this.addWordButton.Click += new System.EventHandler(this.addWordButton_Click);
-            // 
-            // WordHeader
-            // 
-            this.WordHeader.Text = "Word";
-            this.WordHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.WordHeader.Width = 150;
             // 
             // AutoCompleteDictionary
             // 
